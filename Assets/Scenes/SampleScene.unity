@@ -3107,7 +3107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  characterPrefab: {fileID: 6249990382705574353, guid: 3d81ed8f245b5f241afba6bc1f40d5a4, type: 3}
+  characterPrefab: {fileID: 6249990382705574353, guid: c28e9839759f3bb4387b5323455173d3, type: 3}
 --- !u!212 &1946225444
 SpriteRenderer:
   m_ObjectHideFlags: 0
