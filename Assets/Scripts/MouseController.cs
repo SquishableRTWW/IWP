@@ -15,6 +15,8 @@ public class MouseController : MonoBehaviour
     public GameObject characterPrefab;
     private CharacterBehaviour character;
 
+    private bool isMoving = false;
+
     private void Start()
     {
         pathfinder = new Pathfinder();
@@ -22,7 +24,7 @@ public class MouseController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
         var focusedTiledHit = GetFocusedOnTile();
 
@@ -32,7 +34,22 @@ public class MouseController : MonoBehaviour
             transform.position = overlayTile.transform.position;
             gameObject.GetComponent<SpriteRenderer>().sortingOrder = overlayTile.GetComponent<SpriteRenderer>().sortingOrder;
 
-            if (Input.GetMouseButton(0))
+            if (inRangeTiles.Contains(overlayTile) && !isMoving)
+            {
+                path = pathfinder.FindPath(character.activeTile, overlayTile, inRangeTiles);
+
+                foreach (var item in inRangeTiles)
+                {
+                    item.ShowTile();
+                }
+
+                for (int i = 0; i < path.Count; i++)
+                {
+                    path[i].ShowTileInPath();
+                }
+            }
+
+            if (Input.GetMouseButtonDown(0))
             {
                 //overlayTile.ShowTile();
 
@@ -44,12 +61,12 @@ public class MouseController : MonoBehaviour
                 }
                 else
                 {
-                    path = pathfinder.FindPath(character.activeTile, overlayTile, inRangeTiles);
+                    isMoving = true;
                 }
             }
         }
 
-        if (path.Count > 0)
+        if (path.Count > 0 && isMoving)
         {
             MoveAlongPath();
         }
@@ -86,6 +103,7 @@ public class MouseController : MonoBehaviour
         if (path.Count == 0)
         {
             GetInRangeTiles();
+            isMoving = false;
         }
     }
 

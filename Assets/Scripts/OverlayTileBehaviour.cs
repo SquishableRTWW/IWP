@@ -23,4 +23,9 @@ public class OverlayTileBehaviour : MonoBehaviour
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
     }
+
+    public void ShowTileInPath()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 1, 0, 1);
+    }
 }
