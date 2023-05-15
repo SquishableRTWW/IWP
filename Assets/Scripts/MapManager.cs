@@ -57,6 +57,10 @@ public class MapManager : MonoBehaviour
                 }
             }
         }
+
+        // Add character(s) to the map
+
+        // Add enemies to the map
     }
 
     public List<OverlayTileBehaviour> GetNeighbourTiles(OverlayTileBehaviour currentOverlayTile, List<OverlayTileBehaviour> searchableTiles)
