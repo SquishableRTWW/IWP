@@ -97,4 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb678657734f8741b4135adf7b491b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxFuel: 7
+  currentFuel: 7
   activeTile: {fileID: 0}

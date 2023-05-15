@@ -79,7 +79,7 @@ public class MouseController : MonoBehaviour
             tile.HideTile();
         }
 
-        inRangeTiles = moveRangeFinder.GetTilesInRange(character.activeTile, 3);
+        inRangeTiles = moveRangeFinder.GetTilesInRange(character.activeTile, character.currentFuel);
 
         foreach (var tile in inRangeTiles)
         {
@@ -94,10 +94,11 @@ public class MouseController : MonoBehaviour
         character.transform.position = Vector2.MoveTowards(character.transform.position, path[0].transform.position, step);
         character.transform.position = new Vector3(character.transform.position.x, character.transform.position.y, zIndex);
 
-        if (Vector2.Distance(character.transform.position, path[0].transform.position) < 0.001f)
+        if (Vector2.Distance(character.transform.position, path[0].transform.position) < 0.001f && character.currentFuel > 0)
         {
             PositionCharacter(path[0]);
             path.RemoveAt(0);
+            character.currentFuel -= 1;
         }
 
         if (path.Count == 0)
