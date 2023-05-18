@@ -7,6 +7,7 @@ public class CharacterBehaviour : MonoBehaviour
     public int maxFuel;
     public int currentFuel;
     public int overheatAmount;
+    public int HP;
     public bool finishedMove;
 
     public Vector3Int gridLocation;
