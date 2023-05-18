@@ -136,7 +136,17 @@ public class MapManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Display Message to tell if all characters have moved
+        InfoText.text = "All units have moved!";
+        // Check if all characters have moved
+        foreach (var item in playerCharacters)
+        {
+            if (item.finishedMove == false)
+            {
+                InfoText.text = ".......";
+                break;
+            }
+        }
     }
 
     private void PositionCharacter(CharacterBehaviour character, OverlayTileBehaviour overlayTile)

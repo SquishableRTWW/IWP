@@ -84,11 +84,10 @@ public class MouseController : MonoBehaviour
                         {
                             // Set selected character as the clicked one
                             character = objectHit.GetComponent<CharacterBehaviour>();
-                            //if (character.finishedMove == false)
-                            //{
-                            //    GetInRangeTiles();
-                            //}
-                            moveButton.gameObject.SetActive(true);
+                            if (character.finishedMove == false)
+                            {
+                                moveButton.gameObject.SetActive(true);
+                            }
                         }
                     }
                     else
@@ -202,5 +201,8 @@ public class MouseController : MonoBehaviour
         {
             item.HideTile();
         }
+
+        // Clear the A* path of any remnants
+        path.Clear();
     }
 }
