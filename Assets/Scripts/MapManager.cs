@@ -36,7 +36,6 @@ public class MapManager : MonoBehaviour
 
         BoundsInt bounds = tilemap.cellBounds;
         map = new Dictionary<Vector2Int, OverlayTileBehaviour>();
-        //playerCharacters = new List<CharacterBehaviour>();
         int characterCount = 0;
 
 
