@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MouseController : MonoBehaviour
 {
@@ -15,7 +16,12 @@ public class MouseController : MonoBehaviour
     public GameObject characterPrefab;
     [SerializeField] private CharacterBehaviour character;
 
+    // Buttons from GUI
+    [SerializeField] private Button moveButton;
+    [SerializeField] private Button cancelButton;
+
     private bool isMoving = false;
+    public bool movementSelected = false;
 
     private void Start()
     {
@@ -37,20 +43,23 @@ public class MouseController : MonoBehaviour
             // Logic to pathfind and show tiles should the character be able to move
             if (character != null && inRangeTiles.Contains(overlayTile) && !isMoving && !character.finishedMove)
             {
-                path = pathfinder.FindPath(character.activeTile, overlayTile, inRangeTiles);
-
-                GetInRangeTiles();
-
-                for (int i = 0; i < path.Count; i++)
+                if (movementSelected == true)
                 {
-                    path[i].ShowTileInPath();
+                    path = pathfinder.FindPath(character.activeTile, overlayTile, inRangeTiles);
+
+                    GetInRangeTiles();
+
+                    for (int i = 0; i < path.Count; i++)
+                    {
+                        path[i].ShowTileInPath();
+                    }
                 }
             }
 
             if (Input.GetMouseButtonDown(0))
             {
 
-                if (character != null)
+                if (path.Count > 0)
                 {
                     isMoving = true;
                 }
@@ -75,11 +84,11 @@ public class MouseController : MonoBehaviour
                         {
                             // Set selected character as the clicked one
                             character = objectHit.GetComponent<CharacterBehaviour>();
-                            if (character.finishedMove == false)
-                            {
-                                GetInRangeTiles();
-                            }
-                            //Debug.Log("Character hit");
+                            //if (character.finishedMove == false)
+                            //{
+                            //    GetInRangeTiles();
+                            //}
+                            moveButton.gameObject.SetActive(true);
                         }
                     }
                     else
@@ -146,6 +155,7 @@ public class MouseController : MonoBehaviour
                 tile.HideTile();
             }
             isMoving = false;
+            DeselectMovement();
             character = null;
         }
     }
@@ -170,5 +180,27 @@ public class MouseController : MonoBehaviour
         }
 
         return null;
+    }
+
+    //Method to on and off the movement selection
+    public void SelectMovement()
+    {
+        movementSelected = true;
+        cancelButton.gameObject.SetActive(true);
+        GetInRangeTiles();
+    }
+    public void DeselectMovement()
+    {
+        // Reset the boolean
+        movementSelected = false;
+        // Make buttons disappear
+        moveButton.gameObject.SetActive(false);
+        cancelButton.gameObject.SetActive(false);
+
+        // Hide all the tiles (If not they will be stuck)
+        foreach (var item in inRangeTiles)
+        {
+            item.HideTile();
+        }
     }
 }
