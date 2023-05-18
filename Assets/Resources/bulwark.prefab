@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 662111912407306559}
   - component: {fileID: 2466153948806981081}
   m_Layer: 0
-  m_Name: stinger
+  m_Name: bulwark
   m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,7 +101,9 @@ MonoBehaviour:
   maxFuel: 10
   currentFuel: 10
   overheatAmount: 3
+  HP: 40
   finishedMove: 0
+  characterName: Bulwark
   gridLocation: {x: 0, y: 2, z: 2}
   activeTile: {fileID: 0}
 --- !u!61 &2466153948806981081

@@ -10,6 +10,8 @@ public class CharacterBehaviour : MonoBehaviour
     public int HP;
     public bool finishedMove;
 
+    public string characterName;
+
     public Vector3Int gridLocation;
     public Vector2Int grid2DLocation { get { return new Vector2Int(gridLocation.x, gridLocation.y); } }
 

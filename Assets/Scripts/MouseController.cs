@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,9 +17,10 @@ public class MouseController : MonoBehaviour
     public GameObject characterPrefab;
     [SerializeField] private CharacterBehaviour character;
 
-    // Buttons from GUI
+    // GUI Elements
     [SerializeField] private Button moveButton;
     [SerializeField] private Button cancelButton;
+    [SerializeField] private Canvas characterSheet;
 
     private bool isMoving = false;
     public bool movementSelected = false;
@@ -84,10 +86,16 @@ public class MouseController : MonoBehaviour
                         {
                             // Set selected character as the clicked one
                             character = objectHit.GetComponent<CharacterBehaviour>();
+                            // Part of movement logic
                             if (character.finishedMove == false)
                             {
                                 moveButton.gameObject.SetActive(true);
                             }
+                            // Update Character sheet UI
+                            characterSheet.gameObject.SetActive(true);
+                            characterSheet.gameObject.GetComponentInChildren<Image>().sprite = character.GetComponent<SpriteRenderer>().sprite;
+                            characterSheet.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = character.characterName + "\nHP: " 
+                                + character.HP + "\nMax F: " + character.maxFuel + "\nCurr F: " + character.currentFuel;
                         }
                     }
                     else
@@ -204,5 +212,8 @@ public class MouseController : MonoBehaviour
 
         // Clear the A* path of any remnants
         path.Clear();
+
+        //Hide the character sheet
+        characterSheet.gameObject.SetActive(false);
     }
 }

@@ -3192,7 +3192,7 @@ GameObject:
   - component: {fileID: 689175170}
   - component: {fileID: 689175169}
   m_Layer: 5
-  m_Name: Name
+  m_Name: Stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3215,8 +3215,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 450.5, y: 220.61}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 440.8293, y: 168.88}
+  m_SizeDelta: {x: 219.3415, y: 153.4641}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &689175169
 MonoBehaviour:
@@ -3238,7 +3238,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Name
+  m_text: Stats
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3785,7 +3785,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 307, y: 212}
+  m_AnchoredPosition: {x: 287, y: 212}
   m_SizeDelta: {x: 71.6862, y: 67.2155}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1505733388
@@ -4313,7 +4313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1758484536
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4566,6 +4566,7 @@ MonoBehaviour:
   character: {fileID: 0}
   moveButton: {fileID: 1050614134}
   cancelButton: {fileID: 1918347219}
+  characterSheet: {fileID: 1758484539}
   movementSelected: 0
 --- !u!212 &1946225444
 SpriteRenderer:

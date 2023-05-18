@@ -101,7 +101,9 @@ MonoBehaviour:
   maxFuel: 15
   currentFuel: 15
   overheatAmount: 5
+  HP: 12
   finishedMove: 0
+  characterName: Sand Walker
   gridLocation: {x: 0, y: 0, z: 2}
   activeTile: {fileID: 0}
 --- !u!61 &8041033709081620668

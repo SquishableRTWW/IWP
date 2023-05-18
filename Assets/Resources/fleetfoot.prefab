@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 662111912407306559}
   - component: {fileID: 8454299592945121024}
   m_Layer: 0
-  m_Name: normalTank
+  m_Name: fleetfoot
   m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,8 +101,9 @@ MonoBehaviour:
   maxFuel: 20
   currentFuel: 20
   overheatAmount: 6
-  HP: 0
+  HP: 20
   finishedMove: 0
+  characterName: Fleetfoot
   gridLocation: {x: 1, y: 2, z: 0}
   activeTile: {fileID: 0}
 --- !u!61 &8454299592945121024
