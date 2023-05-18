@@ -6,11 +6,18 @@ public class CharacterBehaviour : MonoBehaviour
 {
     public int maxFuel;
     public int currentFuel;
+    public int overheatAmount;
+    public bool finishedMove;
+
+    public Vector3Int gridLocation;
+    public Vector2Int grid2DLocation { get { return new Vector2Int(gridLocation.x, gridLocation.y); } }
+
     public OverlayTileBehaviour activeTile;
     // Start is called before the first frame update
     void Start()
     {
         currentFuel = maxFuel;
+        finishedMove = false;
     }
 
     // Update is called once per frame

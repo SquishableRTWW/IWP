@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using TMPro;
 
 public class MapManager : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class MapManager : MonoBehaviour
     public GameObject overlayContainer;
 
     public Dictionary<Vector2Int, OverlayTileBehaviour> map;
+    public List<CharacterBehaviour> playerCharacters;
+
+    [SerializeField] TextMeshProUGUI InfoText;
 
     // Start is called before the first frame update
     void Awake()
@@ -32,6 +36,8 @@ public class MapManager : MonoBehaviour
 
         BoundsInt bounds = tilemap.cellBounds;
         map = new Dictionary<Vector2Int, OverlayTileBehaviour>();
+        //playerCharacters = new List<CharacterBehaviour>();
+        int characterCount = 0;
 
 
         // Loop through all the tiles on the map
@@ -53,12 +59,18 @@ public class MapManager : MonoBehaviour
                         overlayTile.GetComponent<SpriteRenderer>().sortingOrder = tilemap.GetComponent<TilemapRenderer>().sortingOrder;
                         overlayTile.gridLocation = tileLocation;
                         map.Add(tileKey, overlayTile);
+
+                        if (characterCount < playerCharacters.Count && playerCharacters[characterCount].grid2DLocation == overlayTile.grid2DLocation)
+                        {
+                            playerCharacters[characterCount] = Instantiate(playerCharacters[characterCount]);
+                            PositionCharacter(playerCharacters[characterCount], overlayTile);
+                            //playerCharacters.Remove(playerCharacters[characterCount]);
+                            characterCount++;
+                        }
                     }
                 }
             }
         }
-
-        // Add character(s) to the map
 
         // Add enemies to the map
     }
@@ -125,5 +137,25 @@ public class MapManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void PositionCharacter(CharacterBehaviour character, OverlayTileBehaviour overlayTile)
+    {
+        character.transform.position = new Vector3(overlayTile.transform.position.x, overlayTile.transform.position.y + 0.0001f, overlayTile.transform.position.z);
+        character.GetComponent<SpriteRenderer>().sortingOrder = overlayTile.GetComponent<SpriteRenderer>().sortingOrder + 1;
+        character.activeTile = overlayTile;
+    }
+
+    public void turnEnded()
+    {
+        foreach (var item in playerCharacters)
+        {
+            item.finishedMove = false;
+        }
+
+        InfoText.text = "Turn Ended!";
+
+        //Temp code for swapping turns
+
     }
 }

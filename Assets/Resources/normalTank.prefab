@@ -97,4 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb678657734f8741b4135adf7b491b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxFuel: 0
+  currentFuel: 0
+  overheatAmount: 0
+  finishedMove: 0
+  gridLocation: {x: 0, y: 0, z: 0}
   activeTile: {fileID: 0}

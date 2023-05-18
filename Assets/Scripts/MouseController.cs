@@ -13,7 +13,7 @@ public class MouseController : MonoBehaviour
     private MoveRangeFinder moveRangeFinder;
 
     public GameObject characterPrefab;
-    private CharacterBehaviour character;
+    [SerializeField] private CharacterBehaviour character;
 
     private bool isMoving = false;
 
@@ -34,14 +34,12 @@ public class MouseController : MonoBehaviour
             transform.position = overlayTile.transform.position;
             gameObject.GetComponent<SpriteRenderer>().sortingOrder = overlayTile.GetComponent<SpriteRenderer>().sortingOrder;
 
-            if (inRangeTiles.Contains(overlayTile) && !isMoving)
+            // Logic to pathfind and show tiles should the character be able to move
+            if (character != null && inRangeTiles.Contains(overlayTile) && !isMoving && !character.finishedMove)
             {
                 path = pathfinder.FindPath(character.activeTile, overlayTile, inRangeTiles);
 
-                foreach (var item in inRangeTiles)
-                {
-                    item.ShowTile();
-                }
+                GetInRangeTiles();
 
                 for (int i = 0; i < path.Count; i++)
                 {
@@ -51,17 +49,43 @@ public class MouseController : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                //overlayTile.ShowTile();
 
-                if (character == null)
-                {
-                    character = Instantiate(characterPrefab).GetComponent<CharacterBehaviour>();
-                    PositionCharacter(overlayTile);
-                    GetInRangeTiles();
-                }
-                else
+                if (character != null)
                 {
                     isMoving = true;
+                }
+
+                //character = Instantiate(characterPrefab).GetComponent<CharacterBehaviour>();
+                //PositionCharacter(overlayTile);
+                //GetInRangeTiles();
+
+                // Check to see if clicked on a character:
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 mousePos2d = new Vector2(mousePos.x, mousePos.y);
+
+                RaycastHit2D[] hits = Physics2D.RaycastAll(mousePos2d, Vector2.zero);
+                foreach (RaycastHit2D hit in hits)
+                {
+                    GameObject objectHit = hit.collider.gameObject;
+
+                    // Check if the collider is a trigger
+                    if (hit.collider.isTrigger)
+                    {
+                        if (objectHit.CompareTag("Character"))
+                        {
+                            // Set selected character as the clicked one
+                            character = objectHit.GetComponent<CharacterBehaviour>();
+                            if (character.finishedMove == false)
+                            {
+                                GetInRangeTiles();
+                            }
+                            //Debug.Log("Character hit");
+                        }
+                    }
+                    else
+                    {
+                        // Do nothing
+                    }
                 }
             }
         }
@@ -83,12 +107,25 @@ public class MouseController : MonoBehaviour
 
         foreach (var tile in inRangeTiles)
         {
-            tile.ShowTile();
+            if (inRangeTiles.IndexOf(tile) > (4 + Mathf.Pow(2, character.overheatAmount)))
+            {
+                tile.ShowOverheatTile();
+            }
+            else
+            {
+                tile.ShowTile();
+            }
         }
     }
 
     private void MoveAlongPath()
     {
+        List<int> overheatValue = new List<int>();
+        if (path.Count > character.overheatAmount && overheatValue.Count == 0)
+        {
+            character.finishedMove = true;
+            overheatValue.Add(path.Count);
+        }
         var step = speed * Time.deltaTime;
         var zIndex = path[0].transform.position.z;
         character.transform.position = Vector2.MoveTowards(character.transform.position, path[0].transform.position, step);
@@ -103,8 +140,13 @@ public class MouseController : MonoBehaviour
 
         if (path.Count == 0)
         {
-            GetInRangeTiles();
+            character.finishedMove = true;
+            foreach (var tile in inRangeTiles)
+            {
+                tile.HideTile();
+            }
             isMoving = false;
+            character = null;
         }
     }
 
@@ -124,7 +166,7 @@ public class MouseController : MonoBehaviour
 
         if (hits.Length > 0)
         {
-            return hits.OrderByDescending(i => i.collider.transform.position.z).First();
+            return hits.Where(hit => hit.collider.CompareTag("OverlayTile")).OrderByDescending(i => i.collider.transform.position.z).First();
         }
 
         return null;

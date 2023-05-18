@@ -28,4 +28,9 @@ public class OverlayTileBehaviour : MonoBehaviour
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 1, 0, 1);
     }
+
+    public void ShowOverheatTile()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.55f, 0.10f, 0.80f);
+    }
 }
