@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5415452994204066204}
   - component: {fileID: 4145981761660499727}
+  - component: {fileID: 6366672729822257980}
   m_Layer: 0
   m_Name: GrenadeLauncher
   m_TagString: Untagged
@@ -39,7 +40,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4887933816371469328}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -84,3 +85,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6366672729822257980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4887933816371469328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d82efe8c949229445b26ed18c6cc1b23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponScriptable: {fileID: 11400000, guid: f3f0c5729678b854690dafb9c7f7afaf, type: 2}

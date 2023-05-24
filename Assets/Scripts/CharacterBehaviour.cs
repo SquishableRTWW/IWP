@@ -9,6 +9,7 @@ public class CharacterBehaviour : MonoBehaviour
     public int overheatAmount;
     public int HP;
     public bool finishedMove;
+    public List<WeaponBehaviour> weaponsEquipped;
 
     public string characterName;
 
@@ -21,6 +22,7 @@ public class CharacterBehaviour : MonoBehaviour
     {
         currentFuel = maxFuel;
         finishedMove = false;
+        weaponsEquipped = new List<WeaponBehaviour>();
     }
 
     // Update is called once per frame
