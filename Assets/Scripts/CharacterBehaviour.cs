@@ -22,7 +22,6 @@ public class CharacterBehaviour : MonoBehaviour
     {
         currentFuel = maxFuel;
         finishedMove = false;
-        weaponsEquipped = new List<WeaponBehaviour>();
     }
 
     // Update is called once per frame

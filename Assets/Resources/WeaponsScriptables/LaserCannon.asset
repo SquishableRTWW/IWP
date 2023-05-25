@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a49c1ea012a9ec4488b72041d5b09eb0, type: 3}
   m_Name: LaserCannon
   m_EditorClassIdentifier: 
-  damage: 0
-  range: 0
-  CPCost: 0
-  shotType: 
-  attackPattern: {x: 0, y: 0}
+  damage: 4
+  range: 6
+  CPCost: 2
+  shotType: Linear
+  attackPattern: {x: 1, y: 1}
+  attackSprite: {fileID: 21300000, guid: b00cebcdc310fde4baa97bf73c7f6cbe, type: 3}
+  weaponSprite: {fileID: 21300000, guid: 6de87780a751d9e4a9239c9cd3c8b7a7, type: 3}

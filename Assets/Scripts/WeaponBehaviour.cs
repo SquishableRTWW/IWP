@@ -16,4 +16,13 @@ public class WeaponBehaviour : MonoBehaviour
     {
         
     }
+
+    public Sprite GetAttackSprite()
+    {
+        return weaponScriptable.attackSprite;
+    }
+    public Sprite GetWeaponSprite()
+    {
+        return weaponScriptable.weaponSprite;
+    }
 }

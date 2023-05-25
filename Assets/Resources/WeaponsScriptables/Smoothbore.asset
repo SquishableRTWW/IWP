@@ -17,3 +17,5 @@ MonoBehaviour:
   CPCost: 1
   shotType: Linear
   attackPattern: {x: 1, y: 1}
+  attackSprite: {fileID: 21300000, guid: 62f863dd66888ed49ba29c08d9f6f407, type: 3}
+  weaponSprite: {fileID: 21300000, guid: f976c5981229a074d8f0c8b4cb0f44ed, type: 3}

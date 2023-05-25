@@ -103,6 +103,9 @@ MonoBehaviour:
   overheatAmount: 3
   HP: 40
   finishedMove: 0
+  weaponsEquipped:
+  - {fileID: 6366672729822257980, guid: 97916113d2bed6d4ca625a7602124889, type: 3}
+  - {fileID: 5999144368718459405, guid: 7a2a78215fcf49c46b6deedd224d6ffc, type: 3}
   characterName: Bulwark
   gridLocation: {x: 0, y: 2, z: 2}
   activeTile: {fileID: 0}

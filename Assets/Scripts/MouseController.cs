@@ -21,6 +21,8 @@ public class MouseController : MonoBehaviour
     [SerializeField] private Button moveButton;
     [SerializeField] private Button cancelButton;
     [SerializeField] private Canvas characterSheet;
+    [SerializeField] private Button attack1Button;
+    [SerializeField] private Button attack2Button;
 
     private bool isMoving = false;
     public bool movementSelected = false;
@@ -86,10 +88,17 @@ public class MouseController : MonoBehaviour
                         {
                             // Set selected character as the clicked one
                             character = objectHit.GetComponent<CharacterBehaviour>();
-                            // Part of movement logic
+                            // Logic for showing UI stuffs
                             if (character.finishedMove == false)
                             {
                                 moveButton.gameObject.SetActive(true);
+                                attack1Button.gameObject.SetActive(true);
+                                attack1Button.gameObject.GetComponent<Image>().sprite = character.weaponsEquipped[0].GetAttackSprite();
+                                if (character.weaponsEquipped.Count > 1)
+                                {
+                                    attack2Button.gameObject.SetActive(true);
+                                    attack2Button.gameObject.GetComponent<Image>().sprite = character.weaponsEquipped[1].GetAttackSprite();
+                                }
                             }
                             // Update Character sheet UI
                             characterSheet.gameObject.SetActive(true);
@@ -203,6 +212,8 @@ public class MouseController : MonoBehaviour
         // Make buttons disappear
         moveButton.gameObject.SetActive(false);
         cancelButton.gameObject.SetActive(false);
+        attack1Button.gameObject.SetActive(false);
+        attack2Button.gameObject.SetActive(false);
 
         // Hide all the tiles (If not they will be stuck)
         foreach (var item in inRangeTiles)
