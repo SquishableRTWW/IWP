@@ -94,7 +94,7 @@ public class MouseController : MonoBehaviour
                                 moveButton.gameObject.SetActive(true);
                                 attack1Button.gameObject.SetActive(true);
                                 attack1Button.gameObject.GetComponent<Image>().sprite = character.weaponsEquipped[0].GetAttackSprite();
-                                if (character.weaponsEquipped.Count > 1)
+                                if (character.weaponsEquipped.Count > 1 && character.weaponsEquipped[1] != null)
                                 {
                                     attack2Button.gameObject.SetActive(true);
                                     attack2Button.gameObject.GetComponent<Image>().sprite = character.weaponsEquipped[1].GetAttackSprite();
