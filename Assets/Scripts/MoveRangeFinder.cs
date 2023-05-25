@@ -23,6 +23,7 @@ public class MoveRangeFinder
             }
             inRangeTiles.AddRange(surroundingTiles);
             tileForPreviouStep = surroundingTiles.Distinct().ToList();
+
             rangeCount++;
         }
 
