@@ -175,6 +175,7 @@ public class MapManager : MonoBehaviour
         foreach (var item in playerCharacters)
         {
             item.finishedMove = false;
+            item.isOverheated = false;
         }
 
         InfoText.text = "Turn Ended!";
