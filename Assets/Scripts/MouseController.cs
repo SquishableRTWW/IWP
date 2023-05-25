@@ -261,6 +261,11 @@ public class MouseController : MonoBehaviour
         // Make buttons disappear
         moveButton.gameObject.SetActive(false);
         cancelButton.gameObject.SetActive(false);
+
+        attack1Button.GetComponent<Image>().color = new Color(attack1Button.GetComponent<Image>().color.r, attack1Button.GetComponent<Image>().color.g
+        , attack1Button.GetComponent<Image>().color.b, 0.5f);
+        attack2Button.GetComponent<Image>().color = new Color(attack1Button.GetComponent<Image>().color.r, attack1Button.GetComponent<Image>().color.g
+        , attack1Button.GetComponent<Image>().color.b, 0.5f);
         attack1Button.gameObject.SetActive(false);
         attack2Button.gameObject.SetActive(false);
 
@@ -285,5 +290,24 @@ public class MouseController : MonoBehaviour
 
         // Ensure movement is no longer selected
         movementSelected = false;
+
+        // Lighten up the button that was clicked
+        switch(weaponNumber)
+        {
+            case 0:
+                attack1Button.GetComponent<Image>().color = new Color(attack1Button.GetComponent<Image>().color.r, attack1Button.GetComponent<Image>().color.g
+                    , attack1Button.GetComponent<Image>().color.b, 1);
+                attack2Button.GetComponent<Image>().color = new Color(attack1Button.GetComponent<Image>().color.r, attack1Button.GetComponent<Image>().color.g
+                    , attack1Button.GetComponent<Image>().color.b, 0.5f);
+                break;
+            case 1:
+                attack2Button.GetComponent<Image>().color = new Color(attack1Button.GetComponent<Image>().color.r, attack1Button.GetComponent<Image>().color.g
+                    , attack1Button.GetComponent<Image>().color.b, 1);
+                attack1Button.GetComponent<Image>().color = new Color(attack1Button.GetComponent<Image>().color.r, attack1Button.GetComponent<Image>().color.g
+                    , attack1Button.GetComponent<Image>().color.b, 0.5f);
+                break;
+            default:
+                break;
+        }
     }
 }

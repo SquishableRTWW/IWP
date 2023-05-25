@@ -108,7 +108,7 @@ MonoBehaviour:
   - {fileID: 6366672729822257980, guid: 97916113d2bed6d4ca625a7602124889, type: 3}
   - {fileID: 5999144368718459405, guid: 7a2a78215fcf49c46b6deedd224d6ffc, type: 3}
   characterName: Bulwark
-  gridLocation: {x: -5, y: 2, z: 1}
+  gridLocation: {x: -4, y: -4, z: 1}
   activeTile: {fileID: 0}
 --- !u!61 &2466153948806981081
 BoxCollider2D:
