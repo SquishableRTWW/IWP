@@ -5024,7 +5024,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1946225443}
         m_TargetAssemblyTypeName: MouseController, Assembly-CSharp
-        m_MethodName: DeselectMovement
+        m_MethodName: DeselectAction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

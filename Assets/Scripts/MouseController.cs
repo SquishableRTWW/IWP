@@ -87,6 +87,10 @@ public class MouseController : MonoBehaviour
                 {
                     isMoving = true;
                 }
+                else if (attackTiles.Count > 0 && attackSelected == true)
+                {
+                    DoDamage();
+                }
 
                 // OLD CHARACTER SPAWNING CODE (For reference)
                 //character = Instantiate(characterPrefab).GetComponent<CharacterBehaviour>();
@@ -109,7 +113,7 @@ public class MouseController : MonoBehaviour
                         if (objectHit.CompareTag("Character"))
                         {
                             // Set selected character as the clicked one
-                            DeselectMovement();
+                            DeselectAction();
                             character = objectHit.GetComponent<CharacterBehaviour>();
                             // Logic for showing UI stuffs
                             if (character.finishedMove == false)
@@ -187,9 +191,11 @@ public class MouseController : MonoBehaviour
         }
     }
 
+    // Logic for moving
     private void MoveAlongPath()
     {
         List<int> overheatValue = new List<int>();
+        character.activeTile.hasCharacter = false;
         if (path.Count > character.overheatAmount && overheatValue.Count == 0)
         {
             character.finishedMove = true;
@@ -216,16 +222,49 @@ public class MouseController : MonoBehaviour
                 tile.HideTile();
             }
             isMoving = false;
-            DeselectMovement();
+            DeselectAction();
             character = null;
         }
     }
+
+    // Logic for doing damage
+    private void DoDamage()
+    {
+        List<OverlayTileBehaviour> tilesWithCharacters = new List<OverlayTileBehaviour>();
+        int affectedCount = 0;
+        for (int i = 0; i < attackTiles.Count; i++)
+        {
+            if (attackTiles[i].hasCharacter)
+            {
+                tilesWithCharacters.Add(attackTiles[i]);
+            }
+        }
+        for (int i = 0; i < tilesWithCharacters.Count; ++i)
+        {
+            if (MapManager.Instance.playerCharacters[affectedCount].grid2DLocation == tilesWithCharacters[i].grid2DLocation)
+            {
+                MapManager.Instance.playerCharacters[affectedCount].HP -= character.weaponsEquipped[WeaponSelected].GetWeaponDamage();
+                affectedCount++;
+                tilesWithCharacters.Remove(tilesWithCharacters[i]);
+                i = 0;
+            }
+            else if (i == tilesWithCharacters.Count - 1)
+            {
+                affectedCount++;
+                i = -1;
+            }
+        }
+        DeselectAction();
+    }
+
 
     private void PositionCharacter(OverlayTileBehaviour overlayTile)
     {
         character.transform.position = new Vector3(overlayTile.transform.position.x, overlayTile.transform.position.y + 0.0001f, overlayTile.transform.position.z);
         character.GetComponent<SpriteRenderer>().sortingOrder = overlayTile.GetComponent<SpriteRenderer>().sortingOrder + 1;
         character.activeTile = overlayTile;
+        character.activeTile.hasCharacter = true;
+        character.gridLocation = (character.activeTile.gridLocation);
     }
 
     public RaycastHit2D? GetFocusedOnTile()
@@ -253,7 +292,7 @@ public class MouseController : MonoBehaviour
         GetInRangeTiles();
     }
     // Method to cancel selected action (Function is names movement but this accounts for everything, attacking etc.)
-    public void DeselectMovement()
+    public void DeselectAction()
     {
         // Reset the booleans
         movementSelected = false;
@@ -261,7 +300,6 @@ public class MouseController : MonoBehaviour
         // Make buttons disappear
         moveButton.gameObject.SetActive(false);
         cancelButton.gameObject.SetActive(false);
-
         attack1Button.GetComponent<Image>().color = new Color(attack1Button.GetComponent<Image>().color.r, attack1Button.GetComponent<Image>().color.g
         , attack1Button.GetComponent<Image>().color.b, 0.5f);
         attack2Button.GetComponent<Image>().color = new Color(attack1Button.GetComponent<Image>().color.r, attack1Button.GetComponent<Image>().color.g

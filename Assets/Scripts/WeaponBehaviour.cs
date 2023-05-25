@@ -30,4 +30,8 @@ public class WeaponBehaviour : MonoBehaviour
     {
         return weaponScriptable.range;
     }
+    public int GetWeaponDamage()
+    {
+        return weaponScriptable.damage;
+    }
 }
