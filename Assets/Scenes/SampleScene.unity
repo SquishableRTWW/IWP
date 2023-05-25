@@ -4426,6 +4426,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overlayTilePrefab: {fileID: 143268114319186055, guid: 4375e4c65e10c30478244c5717a1c371, type: 3}
   overlayContainer: {fileID: 972327430}
+  allTiles: []
   playerCharacters:
   - {fileID: 662111912407306559, guid: c28e9839759f3bb4387b5323455173d3, type: 3}
   - {fileID: 662111912407306559, guid: fe2fb311dffa19c4a8858aa7cac4842a, type: 3}

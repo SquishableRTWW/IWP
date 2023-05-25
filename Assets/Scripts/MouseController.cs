@@ -8,8 +8,12 @@ using UnityEngine.UI;
 public class MouseController : MonoBehaviour
 {
     public float speed;
+    // List of tiles for character's movement path
     private List<OverlayTileBehaviour> path = new List<OverlayTileBehaviour>();
+    // List of tiles for character's in-range tiles
     private List<OverlayTileBehaviour> inRangeTiles = new List<OverlayTileBehaviour>();
+    // List of tiles that are part of the attack path
+    private List<OverlayTileBehaviour> attackTiles = new List<OverlayTileBehaviour>();
 
     private Pathfinder pathfinder;
     private MoveRangeFinder moveRangeFinder;
@@ -61,12 +65,18 @@ public class MouseController : MonoBehaviour
                     }
                 }
             }
-            // Logic for constant updating of attack range and area of effect
+            // Logic for constant updating of attack range, area of effect and location
             if (character != null)
             {
                 if (attackSelected == true)
                 {
                     GetAttackRangeTiles();
+                    attackTiles = pathfinder.FindLinearAttackPath(character.activeTile, overlayTile, character.weaponsEquipped[WeaponSelected].GetWeaponRange(), inRangeTiles);
+
+                    for (int i = 0; i < attackTiles.Count; i++)
+                    {
+                        attackTiles[i].ShowAttackTile();
+                    }
                 }
             }
 

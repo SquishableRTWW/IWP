@@ -13,6 +13,7 @@ public class MapManager : MonoBehaviour
     public GameObject overlayContainer;
 
     public Dictionary<Vector2Int, OverlayTileBehaviour> map;
+    public List<OverlayTileBehaviour> allTiles;
     public List<CharacterBehaviour> playerCharacters;
 
     [SerializeField] TextMeshProUGUI InfoText;
@@ -36,6 +37,7 @@ public class MapManager : MonoBehaviour
 
         BoundsInt bounds = tilemap.cellBounds;
         map = new Dictionary<Vector2Int, OverlayTileBehaviour>();
+        allTiles = new List<OverlayTileBehaviour>();
         int characterCount = 0;
 
 
@@ -58,16 +60,29 @@ public class MapManager : MonoBehaviour
                         overlayTile.GetComponent<SpriteRenderer>().sortingOrder = tilemap.GetComponent<TilemapRenderer>().sortingOrder;
                         overlayTile.gridLocation = tileLocation;
                         map.Add(tileKey, overlayTile);
+                        allTiles.Add(overlayTile);
 
-                        if (characterCount < playerCharacters.Count && playerCharacters[characterCount].grid2DLocation == overlayTile.grid2DLocation)
-                        {
-                            playerCharacters[characterCount] = Instantiate(playerCharacters[characterCount]);
-                            PositionCharacter(playerCharacters[characterCount], overlayTile);
-                            //playerCharacters.Remove(playerCharacters[characterCount]);
-                            characterCount++;
-                        }
+                        //if (characterCount < playerCharacters.Count && playerCharacters[characterCount].grid2DLocation == overlayTile.grid2DLocation)
+                        //{
+                        //    playerCharacters[characterCount] = Instantiate(playerCharacters[characterCount]);
+                        //    PositionCharacter(playerCharacters[characterCount], overlayTile);
+                        //    //playerCharacters.Remove(playerCharacters[characterCount]);
+                        //    characterCount++;
+                        //}
                     }
                 }
+            }
+        }
+        for (int i = 0; i < allTiles.Count; i++)
+        {
+            if (characterCount < playerCharacters.Count && playerCharacters[characterCount].grid2DLocation == allTiles[i].grid2DLocation)
+            {
+                playerCharacters[characterCount] = Instantiate(playerCharacters[characterCount]);
+                PositionCharacter(playerCharacters[characterCount], allTiles[i]);
+                playerCharacters[characterCount].activeTile.hasCharacter = true;
+                //playerCharacters.Remove(playerCharacters[characterCount]);
+                characterCount++;
+                i = 0;
             }
         }
 
