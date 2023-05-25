@@ -28,4 +28,29 @@ public class MoveRangeFinder
 
         return inRangeTiles.Distinct().ToList();
     }
+
+
+    public List<OverlayTileBehaviour> GetTilesInAttackRange(OverlayTileBehaviour startingTile, int range)
+    {
+        var inRangeTiles = new List<OverlayTileBehaviour>();
+        int rangeCount = 0;
+
+        inRangeTiles.Add(startingTile);
+        var tileForPreviouStep = new List<OverlayTileBehaviour>();
+        tileForPreviouStep.Add(startingTile);
+
+        while (rangeCount < range)
+        {
+            var surroundingTiles = new List<OverlayTileBehaviour>();
+            foreach (var tile in tileForPreviouStep)
+            {
+                surroundingTiles.AddRange(MapManager.Instance.GetNeighbourTiles(tile, new List<OverlayTileBehaviour>()));
+            }
+            inRangeTiles.AddRange(surroundingTiles);
+            tileForPreviouStep = surroundingTiles.Distinct().ToList();
+            rangeCount++;
+        }
+
+        return inRangeTiles.Distinct().ToList();
+    }
 }

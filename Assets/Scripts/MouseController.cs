@@ -25,7 +25,9 @@ public class MouseController : MonoBehaviour
     [SerializeField] private Button attack2Button;
 
     private bool isMoving = false;
+    private int WeaponSelected = 0;
     public bool movementSelected = false;
+    public bool attackSelected = false;
 
     private void Start()
     {
@@ -59,6 +61,14 @@ public class MouseController : MonoBehaviour
                     }
                 }
             }
+            // Logic for constant updating of attack range and area of effect
+            if (character != null)
+            {
+                if (attackSelected == true)
+                {
+                    GetAttackRangeTiles();
+                }
+            }
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -68,6 +78,7 @@ public class MouseController : MonoBehaviour
                     isMoving = true;
                 }
 
+                // OLD CHARACTER SPAWNING CODE (For reference)
                 //character = Instantiate(characterPrefab).GetComponent<CharacterBehaviour>();
                 //PositionCharacter(overlayTile);
                 //GetInRangeTiles();
@@ -84,20 +95,29 @@ public class MouseController : MonoBehaviour
                     // Check if the collider is a trigger
                     if (hit.collider.isTrigger)
                     {
+                       
                         if (objectHit.CompareTag("Character"))
                         {
                             // Set selected character as the clicked one
+                            DeselectMovement();
                             character = objectHit.GetComponent<CharacterBehaviour>();
                             // Logic for showing UI stuffs
                             if (character.finishedMove == false)
                             {
                                 moveButton.gameObject.SetActive(true);
+                            }
+                            if (character.isOverheated == false)
+                            {
                                 attack1Button.gameObject.SetActive(true);
                                 attack1Button.gameObject.GetComponent<Image>().sprite = character.weaponsEquipped[0].GetAttackSprite();
                                 if (character.weaponsEquipped.Count > 1 && character.weaponsEquipped[1] != null)
                                 {
                                     attack2Button.gameObject.SetActive(true);
                                     attack2Button.gameObject.GetComponent<Image>().sprite = character.weaponsEquipped[1].GetAttackSprite();
+                                }
+                                else
+                                {
+                                    attack2Button.gameObject.SetActive(false);
                                 }
                             }
                             // Update Character sheet UI
@@ -142,6 +162,20 @@ public class MouseController : MonoBehaviour
             }
         }
     }
+    private void GetAttackRangeTiles()
+    {
+        foreach (var tile in inRangeTiles)
+        {
+            tile.HideTile();
+        }
+
+        inRangeTiles = moveRangeFinder.GetTilesInAttackRange(character.activeTile, character.weaponsEquipped[WeaponSelected].GetWeaponRange());
+
+        foreach (var tile in inRangeTiles)
+        {
+            tile.ShowTile();
+        }
+    }
 
     private void MoveAlongPath()
     {
@@ -149,6 +183,7 @@ public class MouseController : MonoBehaviour
         if (path.Count > character.overheatAmount && overheatValue.Count == 0)
         {
             character.finishedMove = true;
+            character.isOverheated = true;
             overheatValue.Add(path.Count);
         }
         var step = speed * Time.deltaTime;
@@ -198,17 +233,21 @@ public class MouseController : MonoBehaviour
         return null;
     }
 
-    //Method to on and off the movement selection
+    //Method to on the movement selection
     public void SelectMovement()
     {
         movementSelected = true;
         cancelButton.gameObject.SetActive(true);
+        attack1Button.gameObject.SetActive(false);
+        attack2Button.gameObject.SetActive(false);
         GetInRangeTiles();
     }
+    // Method to cancel selected action (Function is names movement but this accounts for everything, attacking etc.)
     public void DeselectMovement()
     {
-        // Reset the boolean
+        // Reset the booleans
         movementSelected = false;
+        attackSelected = false;
         // Make buttons disappear
         moveButton.gameObject.SetActive(false);
         cancelButton.gameObject.SetActive(false);
@@ -226,5 +265,15 @@ public class MouseController : MonoBehaviour
 
         //Hide the character sheet
         characterSheet.gameObject.SetActive(false);
+    }
+    // Methods to on the attack selection:
+    public void SelectAttack(int weaponNumber)
+    {
+        WeaponSelected = weaponNumber;
+        attackSelected = true;
+        cancelButton.gameObject.SetActive(true);
+
+        // Ensure movement is no longer selected
+        movementSelected = false;
     }
 }

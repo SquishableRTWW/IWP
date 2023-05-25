@@ -16,6 +16,7 @@ MonoBehaviour:
   range: 6
   CPCost: 2
   shotType: Linear
+  weaponName: Laser Cannon
   attackPattern: {x: 1, y: 1}
   attackSprite: {fileID: 21300000, guid: b00cebcdc310fde4baa97bf73c7f6cbe, type: 3}
   weaponSprite: {fileID: 21300000, guid: 6de87780a751d9e4a9239c9cd3c8b7a7, type: 3}

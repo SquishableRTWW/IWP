@@ -25,4 +25,9 @@ public class WeaponBehaviour : MonoBehaviour
     {
         return weaponScriptable.weaponSprite;
     }
+
+    public int GetWeaponRange()
+    {
+        return weaponScriptable.range;
+    }
 }

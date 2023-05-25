@@ -9,6 +9,7 @@ public class CharacterBehaviour : MonoBehaviour
     public int overheatAmount;
     public int HP;
     public bool finishedMove;
+    public bool isOverheated = false;
     public List<WeaponBehaviour> weaponsEquipped;
 
     public string characterName;

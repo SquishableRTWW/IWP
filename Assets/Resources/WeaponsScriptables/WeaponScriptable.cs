@@ -10,7 +10,7 @@ public class WeaponScriptable : ScriptableObject
     public int CPCost;
     public string shotType;
 
-
+    public string weaponName;
     public Vector2Int attackPattern;
 
     public Sprite attackSprite;
