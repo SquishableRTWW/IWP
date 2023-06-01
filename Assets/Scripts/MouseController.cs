@@ -80,7 +80,8 @@ public class MouseController : MonoBehaviour
                             attackTiles = pathfinder.FindAOEAttackPath(overlayTile, (int)character.weaponsEquipped[WeaponSelected].GetAttackPattern().x, inRangeTiles);
                             break;
                         case "Across":
-                            attackTiles = pathfinder.FindAcrossAttackPath(overlayTile, (int)character.weaponsEquipped[WeaponSelected].GetAttackPattern().x, inRangeTiles);
+                            attackTiles = pathfinder.FindAcrossAttackPath(character.activeTile, overlayTile, (int)character.weaponsEquipped[WeaponSelected].GetAttackPattern().x,
+                                character.weaponsEquipped[WeaponSelected].GetWeaponRange(), inRangeTiles);
                             break;
                         default:
                             attackTiles = pathfinder.FindLinearAttackPath(character.activeTile, overlayTile, character.weaponsEquipped[WeaponSelected].GetWeaponRange(), inRangeTiles);

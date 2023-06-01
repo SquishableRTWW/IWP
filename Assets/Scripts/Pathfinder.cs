@@ -109,19 +109,37 @@ public class Pathfinder
         }
         return finalList;
     }
-    public List<OverlayTileBehaviour> FindAcrossAttackPath(OverlayTileBehaviour mousedTile, int AOERange, List<OverlayTileBehaviour> searchableTiles)
+    public List<OverlayTileBehaviour> FindAcrossAttackPath(OverlayTileBehaviour characterTile, OverlayTileBehaviour mousedTile, int AOERange, int attackRange, List<OverlayTileBehaviour> searchableTiles)
     {
         int rangeCount = 0;
+        bool isAcross = true;
         List<OverlayTileBehaviour> preFinalList = new List<OverlayTileBehaviour>();
         List<OverlayTileBehaviour> finalList = new List<OverlayTileBehaviour>();
         var tileForPreviouStep = new List<OverlayTileBehaviour>();
         tileForPreviouStep.Add(mousedTile);
+
+        int x = (characterTile.grid2DLocation.x - mousedTile.grid2DLocation.x);
+        int y = (characterTile.grid2DLocation.y - mousedTile.grid2DLocation.y);
+
+        Vector2 direction = new Vector2(x, y).normalized;
+        Vector2Int realDirection = new Vector2Int((int)direction.x, (int)direction.y);
+        if (characterTile.grid2DLocation.x <= mousedTile.grid2DLocation.x + (attackRange / 4) && characterTile.grid2DLocation.x >= mousedTile.grid2DLocation.x - (attackRange / 4))
+        {
+            isAcross = true;
+        }
+        else
+        {
+            isAcross = false;
+        }
+
+        Debug.Log((attackRange / 4));
+
         while (rangeCount < (AOERange - 1))
         {
             var surroundingTiles = new List<OverlayTileBehaviour>();
             foreach (var tile in tileForPreviouStep)
             {
-                surroundingTiles.AddRange(GetAdjacentTilesPathFinder(tile, searchableTiles));
+                surroundingTiles.AddRange(GetAdjacentTilesPathFinder(tile, searchableTiles, isAcross));
             }
             preFinalList.AddRange(surroundingTiles);
             tileForPreviouStep = surroundingTiles.Distinct().ToList();
@@ -218,7 +236,7 @@ public class Pathfinder
         return neighbours;
     }
 
-    public List<OverlayTileBehaviour> GetAdjacentTilesPathFinder(OverlayTileBehaviour currentOverlayTile, List<OverlayTileBehaviour> searchableTiles)
+    public List<OverlayTileBehaviour> GetAdjacentTilesPathFinder(OverlayTileBehaviour currentOverlayTile, List<OverlayTileBehaviour> searchableTiles, bool isAcross)
     {
         Dictionary<Vector2Int, OverlayTileBehaviour> tileToSearch = new Dictionary<Vector2Int, OverlayTileBehaviour>();
 
@@ -236,40 +254,46 @@ public class Pathfinder
 
         List<OverlayTileBehaviour> neighbours = new List<OverlayTileBehaviour>();
 
-        // Top neighbour
-        Vector2Int locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x, currentOverlayTile.gridLocation.y + 1);
-        //if (tileToSearch.ContainsKey(locationToCheck))
-        //{
-        //    if (Mathf.Abs(currentOverlayTile.gridLocation.z - tileToSearch[locationToCheck].gridLocation.z) <= 1)
-        //    {
-        //        neighbours.Add(tileToSearch[locationToCheck]);
-        //    }
-        //}
-        //// Bottom neighbour
-        //locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x, currentOverlayTile.gridLocation.y - 1);
-        //if (tileToSearch.ContainsKey(locationToCheck))
-        //{
-        //    if (Mathf.Abs(currentOverlayTile.gridLocation.z - tileToSearch[locationToCheck].gridLocation.z) <= 1)
-        //    {
-        //        neighbours.Add(tileToSearch[locationToCheck]);
-        //    }
-        //}
         // Left neighbour
-        locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x - 1, currentOverlayTile.gridLocation.y);
-        if (tileToSearch.ContainsKey(locationToCheck))
+        Vector2Int locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x, currentOverlayTile.gridLocation.y + 1);
+        if (isAcross)
         {
-            if (Mathf.Abs(currentOverlayTile.gridLocation.z - tileToSearch[locationToCheck].gridLocation.z) <= 1)
+            locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x - 1, currentOverlayTile.gridLocation.y);
+            if (tileToSearch.ContainsKey(locationToCheck))
             {
-                neighbours.Add(tileToSearch[locationToCheck]);
+                if (Mathf.Abs(currentOverlayTile.gridLocation.z - tileToSearch[locationToCheck].gridLocation.z) <= 1)
+                {
+                    neighbours.Add(tileToSearch[locationToCheck]);
+                }
+            }
+            // Right neighbour
+            locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x + 1, currentOverlayTile.gridLocation.y);
+            if (tileToSearch.ContainsKey(locationToCheck))
+            {
+                if (Mathf.Abs(currentOverlayTile.gridLocation.z - tileToSearch[locationToCheck].gridLocation.z) <= 1)
+                {
+                    neighbours.Add(tileToSearch[locationToCheck]);
+                }
             }
         }
-        // Right neighbour
-        locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x + 1, currentOverlayTile.gridLocation.y);
-        if (tileToSearch.ContainsKey(locationToCheck))
+        else
         {
-            if (Mathf.Abs(currentOverlayTile.gridLocation.z - tileToSearch[locationToCheck].gridLocation.z) <= 1)
+            locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x, currentOverlayTile.gridLocation.y + 1);
+            if (tileToSearch.ContainsKey(locationToCheck))
             {
-                neighbours.Add(tileToSearch[locationToCheck]);
+                if (Mathf.Abs(currentOverlayTile.gridLocation.z - tileToSearch[locationToCheck].gridLocation.z) <= 1)
+                {
+                    neighbours.Add(tileToSearch[locationToCheck]);
+                }
+            }
+            // Bottom neighbour
+            locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x, currentOverlayTile.gridLocation.y - 1);
+            if (tileToSearch.ContainsKey(locationToCheck))
+            {
+                if (Mathf.Abs(currentOverlayTile.gridLocation.z - tileToSearch[locationToCheck].gridLocation.z) <= 1)
+                {
+                    neighbours.Add(tileToSearch[locationToCheck]);
+                }
             }
         }
 
