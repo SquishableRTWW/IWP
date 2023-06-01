@@ -34,4 +34,12 @@ public class WeaponBehaviour : MonoBehaviour
     {
         return weaponScriptable.damage;
     }
+    public string GetShotType()
+    {
+        return weaponScriptable.shotType;
+    }
+    public Vector2 GetAttackPattern()
+    {
+        return weaponScriptable.attackPattern;
+    }
 }

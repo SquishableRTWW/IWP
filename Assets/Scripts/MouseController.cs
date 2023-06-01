@@ -71,7 +71,20 @@ public class MouseController : MonoBehaviour
                 if (attackSelected == true)
                 {
                     GetAttackRangeTiles();
-                    attackTiles = pathfinder.FindLinearAttackPath(character.activeTile, overlayTile, character.weaponsEquipped[WeaponSelected].GetWeaponRange(), inRangeTiles);
+                    switch (character.weaponsEquipped[WeaponSelected].GetShotType())
+                    {
+                        case "Linear":
+                            attackTiles = pathfinder.FindLinearAttackPath(character.activeTile, overlayTile, character.weaponsEquipped[WeaponSelected].GetWeaponRange(), inRangeTiles);
+                            break;
+                        case "Lobbing":
+                            attackTiles = pathfinder.FindAOEAttackPath(overlayTile, (int)character.weaponsEquipped[WeaponSelected].GetAttackPattern().x, inRangeTiles);
+                            Debug.Log((int)character.weaponsEquipped[WeaponSelected].GetAttackPattern().x);
+                            break;
+                        default:
+                            attackTiles = pathfinder.FindLinearAttackPath(character.activeTile, overlayTile, character.weaponsEquipped[WeaponSelected].GetWeaponRange(), inRangeTiles);
+                            break;
+                    }
+                    
 
                     for (int i = 0; i < attackTiles.Count; i++)
                     {

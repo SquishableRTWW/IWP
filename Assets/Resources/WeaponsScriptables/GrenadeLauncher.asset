@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GrenadeLauncher
   m_EditorClassIdentifier: 
   damage: 5
-  range: 5
+  range: 8
   CPCost: 2
   shotType: Lobbing
   weaponName: Grenade Launcher
