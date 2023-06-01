@@ -78,7 +78,6 @@ public class MouseController : MonoBehaviour
                             break;
                         case "Lobbing":
                             attackTiles = pathfinder.FindAOEAttackPath(overlayTile, (int)character.weaponsEquipped[WeaponSelected].GetAttackPattern().x, inRangeTiles);
-                            Debug.Log((int)character.weaponsEquipped[WeaponSelected].GetAttackPattern().x);
                             break;
                         default:
                             attackTiles = pathfinder.FindLinearAttackPath(character.activeTile, overlayTile, character.weaponsEquipped[WeaponSelected].GetWeaponRange(), inRangeTiles);
@@ -252,16 +251,16 @@ public class MouseController : MonoBehaviour
                 tilesWithCharacters.Add(attackTiles[i]);
             }
         }
-        for (int i = 0; i < tilesWithCharacters.Count; ++i)
+        for (int i = 0; i < tilesWithCharacters.Count; i++)
         {
             if (MapManager.Instance.playerCharacters[affectedCount].grid2DLocation == tilesWithCharacters[i].grid2DLocation)
             {
                 MapManager.Instance.playerCharacters[affectedCount].HP -= character.weaponsEquipped[WeaponSelected].GetWeaponDamage();
                 affectedCount++;
                 tilesWithCharacters.Remove(tilesWithCharacters[i]);
-                i = 0;
+                i = -1;
             }
-            else if (i == tilesWithCharacters.Count - 1)
+            else
             {
                 affectedCount++;
                 i = -1;
