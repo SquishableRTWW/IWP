@@ -63,7 +63,6 @@ public class Pathfinder
             Vector2Int tilePosition = characterTile.grid2DLocation - realDirection * i;
             vector2IntList.Add(tilePosition);
         }
-        //Debug.Log(vector2IntList.Count);
 
         for (int i = 0; i < searchableTiles.Count; i++)
         {
