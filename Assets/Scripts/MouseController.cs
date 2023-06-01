@@ -79,6 +79,9 @@ public class MouseController : MonoBehaviour
                         case "Lobbing":
                             attackTiles = pathfinder.FindAOEAttackPath(overlayTile, (int)character.weaponsEquipped[WeaponSelected].GetAttackPattern().x, inRangeTiles);
                             break;
+                        case "Across":
+                            attackTiles = pathfinder.FindAcrossAttackPath(overlayTile, (int)character.weaponsEquipped[WeaponSelected].GetAttackPattern().x, inRangeTiles);
+                            break;
                         default:
                             attackTiles = pathfinder.FindLinearAttackPath(character.activeTile, overlayTile, character.weaponsEquipped[WeaponSelected].GetWeaponRange(), inRangeTiles);
                             break;

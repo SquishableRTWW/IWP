@@ -109,6 +109,36 @@ public class Pathfinder
         }
         return finalList;
     }
+    public List<OverlayTileBehaviour> FindAcrossAttackPath(OverlayTileBehaviour mousedTile, int AOERange, List<OverlayTileBehaviour> searchableTiles)
+    {
+        int rangeCount = 0;
+        List<OverlayTileBehaviour> preFinalList = new List<OverlayTileBehaviour>();
+        List<OverlayTileBehaviour> finalList = new List<OverlayTileBehaviour>();
+        var tileForPreviouStep = new List<OverlayTileBehaviour>();
+        tileForPreviouStep.Add(mousedTile);
+        while (rangeCount < (AOERange - 1))
+        {
+            var surroundingTiles = new List<OverlayTileBehaviour>();
+            foreach (var tile in tileForPreviouStep)
+            {
+                surroundingTiles.AddRange(GetAdjacentTilesPathFinder(tile, searchableTiles));
+            }
+            preFinalList.AddRange(surroundingTiles);
+            tileForPreviouStep = surroundingTiles.Distinct().ToList();
+
+            rangeCount++;
+        }
+
+        preFinalList.Add(mousedTile);
+        foreach (var tile in preFinalList)
+        {
+            if (searchableTiles.Contains(tile))
+            {
+                finalList.Add(tile);
+            }
+        }
+        return finalList;
+    }
 
     private List<OverlayTileBehaviour> GetFinishedList(OverlayTileBehaviour start, OverlayTileBehaviour end)
     {

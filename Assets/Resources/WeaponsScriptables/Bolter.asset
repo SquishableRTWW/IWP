@@ -15,8 +15,8 @@ MonoBehaviour:
   damage: 2
   range: 3
   CPCost: 1
-  shotType: Linear
+  shotType: Across
   weaponName: Bolter
-  attackPattern: {x: 3, y: 1}
+  attackPattern: {x: 2, y: 1}
   attackSprite: {fileID: 21300000, guid: 70031417cff77a74fb35458578ced2be, type: 3}
   weaponSprite: {fileID: 21300000, guid: 71b9fbdf6fc1c22449d768e6eed82d9a, type: 3}
