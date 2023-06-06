@@ -102,4 +102,6 @@ public class CameraController : MonoBehaviour
         CancelInvoke("StartCameraShaking");
         thisCam.transform.position = cameraInitialPosition;
     }
+
+    // Methods for zooming into a character upon clicking it
 }

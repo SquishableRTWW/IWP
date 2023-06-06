@@ -342,6 +342,7 @@ public class MouseController : MonoBehaviour
     {
         WeaponSelected = weaponNumber;
         attackSelected = true;
+        moveButton.gameObject.SetActive(false);
         cancelButton.gameObject.SetActive(true);
 
         // Ensure movement is no longer selected
