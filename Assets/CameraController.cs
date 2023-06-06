@@ -7,10 +7,16 @@ public class CameraController : MonoBehaviour
     // For zoom in and out
     [SerializeField] float zoom = 3f;
     private Camera thisCam;
+    // For dragging the camera around
+    [SerializeField] Vector3 origin;
+    [SerializeField] Vector3 difference;
+    [SerializeField] Vector3 ResetCamera;
+    private bool drag = false;
 
     private void Start()
     {
         thisCam = GetComponent<Camera>();
+        ResetCamera = Camera.main.transform.position;
     }
 
     // Update is called once per frame
@@ -42,5 +48,28 @@ public class CameraController : MonoBehaviour
         }
 
         //Debug.Log(thisCam.orthographicSize);
+    }
+    private void LateUpdate()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            difference = (Camera.main.ScreenToWorldPoint(Input.mousePosition)) - Camera.main.transform.position;
+            if (drag == false)
+            {
+                drag = true;
+                origin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            }
+        }
+        else
+        {
+            drag = false;
+        }
+
+        if (drag)
+        {
+            Camera.main.transform.position = origin - difference;
+            // Add constraints
+            Camera.main.transform.position = new Vector3(Mathf.Clamp(Camera.main.transform.position.x, -10, 10), Mathf.Clamp(Camera.main.transform.position.y, -6, 6), transform.position.z);
+        }
     }
 }
