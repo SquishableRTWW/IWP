@@ -3468,6 +3468,9 @@ MonoBehaviour:
   origin: {x: 0, y: 0, z: 0}
   difference: {x: 0, y: 0, z: 0}
   ResetCamera: {x: 0, y: 0, z: 0}
+  cameraInitialPosition: {x: 0, y: 0, z: 0}
+  shakeMagnitude: 0.03
+  shakeTime: 0.3
 --- !u!1 &689175167
 GameObject:
   m_ObjectHideFlags: 0
@@ -5127,6 +5130,7 @@ MonoBehaviour:
   characterSheet: {fileID: 1758484539}
   attack1Button: {fileID: 1430441362}
   attack2Button: {fileID: 124695955}
+  sceneCameraController: {fileID: 519420033}
   movementSelected: 0
   attackSelected: 0
 --- !u!212 &1946225444

@@ -27,6 +27,7 @@ public class MouseController : MonoBehaviour
     [SerializeField] private Canvas characterSheet;
     [SerializeField] private Button attack1Button;
     [SerializeField] private Button attack2Button;
+    [SerializeField] CameraController sceneCameraController;
 
     private bool isMoving = false;
     private int WeaponSelected = 0;
@@ -262,6 +263,7 @@ public class MouseController : MonoBehaviour
                 MapManager.Instance.playerCharacters[affectedCount].HP -= character.weaponsEquipped[WeaponSelected].GetWeaponDamage();
                 affectedCount++;
                 tilesWithCharacters.Remove(tilesWithCharacters[i]);
+                sceneCameraController.CameraShake();
                 i = -1;
             }
             else

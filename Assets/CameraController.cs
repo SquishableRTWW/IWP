@@ -10,8 +10,11 @@ public class CameraController : MonoBehaviour
     // For dragging the camera around
     [SerializeField] Vector3 origin;
     [SerializeField] Vector3 difference;
-    [SerializeField] Vector3 ResetCamera;
+    [SerializeField] Vector3 ResetCamera; // For if I ever want to add cam reset in the future
     private bool drag = false;
+    // For camera shaking effect
+    [SerializeField] Vector3 cameraInitialPosition;
+    [SerializeField] float shakeMagnitude = 0.05f, shakeTime = 0.5f;
 
     private void Start()
     {
@@ -19,7 +22,7 @@ public class CameraController : MonoBehaviour
         ResetCamera = Camera.main.transform.position;
     }
 
-    // Update is called once per frame
+    // Update method for zoom
     void Update()
     {
         // Zooming in and out
@@ -49,6 +52,8 @@ public class CameraController : MonoBehaviour
 
         //Debug.Log(thisCam.orthographicSize);
     }
+
+    // Update method for dragging camera
     private void LateUpdate()
     {
         if (Input.GetMouseButton(1))
@@ -71,5 +76,30 @@ public class CameraController : MonoBehaviour
             // Add constraints
             Camera.main.transform.position = new Vector3(Mathf.Clamp(Camera.main.transform.position.x, -10, 10), Mathf.Clamp(Camera.main.transform.position.y, -6, 6), transform.position.z);
         }
+    }
+
+    // Methods for camera shake upon damage
+    public void CameraShake()
+    {
+        cameraInitialPosition = thisCam.transform.position;
+        InvokeRepeating("StartCameraShaking", 0f, 0.005f);
+        Invoke("StopCameraShaking", shakeTime);
+    }
+    void StartCameraShaking()
+    {
+        // Shaking offsets
+        float cameraShakingOffsetX = Random.value * shakeMagnitude * 2 - shakeMagnitude;
+        float cameraShakingOffsetY = Random.value * shakeMagnitude * 2 - shakeMagnitude;
+
+        // Shaky shaky
+        Vector3 cameraIntermediatePosition = thisCam.transform.position;
+        cameraIntermediatePosition.x += cameraShakingOffsetX;
+        cameraIntermediatePosition.y += cameraShakingOffsetY;
+        thisCam.transform.position = cameraIntermediatePosition;
+    }
+    void StopCameraShaking()
+    {
+        CancelInvoke("StartCameraShaking");
+        thisCam.transform.position = cameraInitialPosition;
     }
 }

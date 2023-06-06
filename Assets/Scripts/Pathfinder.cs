@@ -132,7 +132,7 @@ public class Pathfinder
             isAcross = false;
         }
 
-        Debug.Log((attackRange / 4));
+        //Debug.Log((attackRange / 4));
 
         while (rangeCount < (AOERange - 1))
         {
