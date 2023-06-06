@@ -106,6 +106,7 @@ MonoBehaviour:
   isOverheated: 0
   weaponsEquipped:
   - {fileID: 3220143395159419079, guid: 0fa7b8ffac65f0e44b34a978a25a4163, type: 3}
+  explosionEffect: {fileID: 5382249522824878518, guid: 2081e722bab54e4479758e91d6b6afaf, type: 3}
   characterName: Sand Walker
   gridLocation: {x: -5, y: 2, z: 2}
   activeTile: {fileID: 0}

@@ -258,6 +258,10 @@ public class MouseController : MonoBehaviour
         }
         for (int i = 0; i < tilesWithCharacters.Count; i++)
         {
+            if (MapManager.Instance.playerCharacters[affectedCount] == null)
+            {
+                continue;
+            }
             if (MapManager.Instance.playerCharacters[affectedCount].grid2DLocation == tilesWithCharacters[i].grid2DLocation)
             {
                 MapManager.Instance.playerCharacters[affectedCount].HP -= character.weaponsEquipped[WeaponSelected].GetWeaponDamage();
