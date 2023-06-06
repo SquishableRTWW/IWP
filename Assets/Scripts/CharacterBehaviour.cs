@@ -14,13 +14,13 @@ public class CharacterBehaviour : MonoBehaviour
 
     [SerializeField] GameObject explosionEffect;
     private GameObject realExplosion;
-
     public string characterName;
-
     public Vector3Int gridLocation;
     public Vector2Int grid2DLocation { get { return new Vector2Int(gridLocation.x, gridLocation.y); } }
-
     public OverlayTileBehaviour activeTile;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,8 +45,16 @@ public class CharacterBehaviour : MonoBehaviour
 
     private IEnumerator DestroyCharacter()
     {
+        activeTile.hasCharacter = false;
         yield return new WaitForSeconds(0.4f);
         Destroy(realExplosion);
-        Destroy(gameObject);
+        for (int i = 0; i < MapManager.Instance.playerCharacters.Count; i++)
+        {
+            if (MapManager.Instance.playerCharacters[i].characterName == characterName)
+            {
+                MapManager.Instance.playerCharacters.Remove(MapManager.Instance.playerCharacters[i]);
+                Destroy(gameObject);
+            }
+        }
     }
 }
