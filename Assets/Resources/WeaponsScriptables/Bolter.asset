@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bolter
   m_EditorClassIdentifier: 
   damage: 2
-  range: 9
+  range: 4
   CPCost: 1
   shotType: Across
   weaponName: Bolter
