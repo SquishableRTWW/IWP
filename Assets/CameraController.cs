@@ -15,11 +15,14 @@ public class CameraController : MonoBehaviour
     // For camera shaking effect
     [SerializeField] Vector3 cameraInitialPosition;
     [SerializeField] float shakeMagnitude = 0.05f, shakeTime = 0.5f;
+    // For zooming into character
+    [SerializeField] float zoomDuration = 1f;
 
     private void Start()
     {
         thisCam = GetComponent<Camera>();
         ResetCamera = Camera.main.transform.position;
+        cameraInitialPosition = Camera.main.transform.position;
     }
 
     // Update method for zoom
@@ -104,4 +107,30 @@ public class CameraController : MonoBehaviour
     }
 
     // Methods for zooming into a character upon clicking it
+    public IEnumerator ZoomAtCharacter(Vector3 characterPosition)
+    {
+        float elapsedTime = 0f;
+        Vector3 initCamPos = thisCam.transform.position;
+
+        while (elapsedTime < zoomDuration)
+        {
+            float t = elapsedTime / zoomDuration;
+
+            float newX = Mathf.Lerp(initCamPos.x, characterPosition.x, t);
+            float newY = Mathf.Lerp(initCamPos.y, characterPosition.y, t);
+            thisCam.transform.position = new Vector3(newX, newY, thisCam.transform.position.z);
+            if (thisCam.orthographicSize >= 3f)
+            {
+                thisCam.orthographicSize -= 0.005f;
+            }
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        Debug.Log("Zoom done");
+        // Change camera position
+        //Vector3 positionToGo = new Vector3(characterPosition.x, characterPosition.y, thisCam.transform.position.z);
+        //thisCam.transform.position = positionToGo;
+    }
 }

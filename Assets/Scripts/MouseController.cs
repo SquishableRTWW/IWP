@@ -132,6 +132,8 @@ public class MouseController : MonoBehaviour
                             // Set selected character as the clicked one
                             DeselectAction();
                             character = objectHit.GetComponent<CharacterBehaviour>();
+                            // Zoom into character
+                            StartCoroutine(sceneCameraController.ZoomAtCharacter(character.transform.position));
                             // Logic for showing UI stuffs
                             if (character.finishedMove == false)
                             {
