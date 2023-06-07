@@ -45,6 +45,7 @@ public class MouseController : MonoBehaviour
     {
         var focusedTiledHit = GetFocusedOnTile();
 
+
         if (focusedTiledHit.HasValue)
         {
             OverlayTileBehaviour overlayTile = focusedTiledHit.Value.collider.gameObject.GetComponent<OverlayTileBehaviour>();
@@ -125,7 +126,7 @@ public class MouseController : MonoBehaviour
                     GameObject objectHit = hit.collider.gameObject;
 
                     // Check if the collider is a trigger
-                    if (hit.collider.isTrigger)
+                    if (hit.collider.isTrigger && !attackSelected && !movementSelected)
                     {
                        
                         if (objectHit.CompareTag("Character"))
@@ -349,30 +350,33 @@ public class MouseController : MonoBehaviour
     public void SelectAttack(int weaponNumber)
     {
         WeaponSelected = weaponNumber;
-        attackSelected = true;
-        moveButton.gameObject.SetActive(false);
-        cancelButton.gameObject.SetActive(true);
-
-        // Ensure movement is no longer selected
-        movementSelected = false;
-
-        // Lighten up the button that was clicked
-        switch(weaponNumber)
+        if (character != null && Manager.Instance.GetCP() >= character.weaponsEquipped[WeaponSelected].GetCPCost())
         {
-            case 0:
-                attack1Button.GetComponent<Image>().color = new Color(attack1Button.GetComponent<Image>().color.r, attack1Button.GetComponent<Image>().color.g
-                    , attack1Button.GetComponent<Image>().color.b, 1);
-                attack2Button.GetComponent<Image>().color = new Color(attack1Button.GetComponent<Image>().color.r, attack1Button.GetComponent<Image>().color.g
-                    , attack1Button.GetComponent<Image>().color.b, 0.5f);
-                break;
-            case 1:
-                attack2Button.GetComponent<Image>().color = new Color(attack1Button.GetComponent<Image>().color.r, attack1Button.GetComponent<Image>().color.g
-                    , attack1Button.GetComponent<Image>().color.b, 1);
-                attack1Button.GetComponent<Image>().color = new Color(attack1Button.GetComponent<Image>().color.r, attack1Button.GetComponent<Image>().color.g
-                    , attack1Button.GetComponent<Image>().color.b, 0.5f);
-                break;
-            default:
-                break;
+            attackSelected = true;
+            moveButton.gameObject.SetActive(false);
+            cancelButton.gameObject.SetActive(true);
+
+            // Ensure movement is no longer selected
+            movementSelected = false;
+
+            // Lighten up the button that was clicked
+            switch (weaponNumber)
+            {
+                case 0:
+                    attack1Button.GetComponent<Image>().color = new Color(attack1Button.GetComponent<Image>().color.r, attack1Button.GetComponent<Image>().color.g
+                        , attack1Button.GetComponent<Image>().color.b, 1);
+                    attack2Button.GetComponent<Image>().color = new Color(attack1Button.GetComponent<Image>().color.r, attack1Button.GetComponent<Image>().color.g
+                        , attack1Button.GetComponent<Image>().color.b, 0.5f);
+                    break;
+                case 1:
+                    attack2Button.GetComponent<Image>().color = new Color(attack1Button.GetComponent<Image>().color.r, attack1Button.GetComponent<Image>().color.g
+                        , attack1Button.GetComponent<Image>().color.b, 1);
+                    attack1Button.GetComponent<Image>().color = new Color(attack1Button.GetComponent<Image>().color.r, attack1Button.GetComponent<Image>().color.g
+                        , attack1Button.GetComponent<Image>().color.b, 0.5f);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

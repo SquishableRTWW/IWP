@@ -16,8 +16,10 @@ public class Manager : MonoBehaviour
     [SerializeField] TextMeshProUGUI infoText;
     [SerializeField] TextMeshProUGUI CPText;
     [SerializeField] float timeLimit;
+    [SerializeField] float originalTime;
     [SerializeField] int CP;
     public bool isInCombat = true;
+    public bool playerTurn = true;
     [SerializeField] TimerBar TimerSlider;
 
     private void Awake()
@@ -34,7 +36,7 @@ public class Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timeLimit = 20f;
+        timeLimit = originalTime;
         TimerSlider.SetMaxTime(timeLimit);
         CP = 2;
     }
@@ -44,7 +46,10 @@ public class Manager : MonoBehaviour
     {
         if (isInCombat)
         {
-            timeLimit -= Time.deltaTime;
+            if (playerTurn)
+            {
+                timeLimit -= Time.deltaTime;
+            }
             timerText.text = string.Format("{0:0.00}", timeLimit);
             CPText.text = "CP Left: " + CP.ToString();
             TimerSlider.SetTime(timeLimit);
@@ -52,21 +57,40 @@ public class Manager : MonoBehaviour
         if (timeLimit <= 0)
         {
             // Insert function call to start enemy AI here;
+            playerTurn = false;
             StartCoroutine(TempEnemyTurn());
-            timeLimit = 20f;
+            timeLimit = originalTime;
+
         }
     }
 
     public IEnumerator TempEnemyTurn()
     {
-        infoText.text = "Turn Ended, wait 3 seconds";
-        MapManager.Instance.turnEnded();
+        infoText.text = "Enemy turn. Wait 3 S";
         yield return new WaitForSeconds(3f);
+        MapManager.Instance.turnEnded();
+        CP = 2;
+        timeLimit = originalTime;
+        playerTurn = true;
+        mouseController.DeselectAction();
+    }
+    public void EndTurn()
+    {
+        playerTurn = false;
+        StartCoroutine(TempEnemyTurn());
     }
 
     public void ChangeCP(int amount)
     {
         CP -= amount;
+    }
+    public int GetCP()
+    {
+        return CP;
+    }
+    public void SetTimeLimit(float newLimit)
+    {
+        timeLimit = newLimit;
     }
 
     public float GetTimeLimit()

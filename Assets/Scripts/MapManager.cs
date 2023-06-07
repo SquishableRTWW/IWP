@@ -155,11 +155,15 @@ public class MapManager : MonoBehaviour
         // Check if all characters have moved
         foreach (var item in playerCharacters)
         {
-            if (item.finishedMove == false && Manager.Instance.GetTimeLimit() > 0)
+            if (item.finishedMove == false && Manager.Instance.playerTurn)
             {
                 InfoText.text = ".......";
                 break;
             }
+        }
+        if (Manager.Instance.GetCP() <= 0 && Manager.Instance.playerTurn == true)
+        {
+            InfoText.text = "You have run out of CP.";
         }
     }
 
@@ -172,6 +176,7 @@ public class MapManager : MonoBehaviour
 
     public void turnEnded()
     {
+        Manager.Instance.playerTurn = false;
         foreach (var item in playerCharacters)
         {
             item.finishedMove = false;
