@@ -155,7 +155,7 @@ public class MouseController : MonoBehaviour
                             }
                             // Update Character sheet UI
                             characterSheet.gameObject.SetActive(true);
-                            characterSheet.gameObject.GetComponentInChildren<Image>().sprite = character.GetComponent<SpriteRenderer>().sprite;
+                            characterSheet.gameObject.transform.Find("SpriteImage").GetComponent<Image>().sprite = character.GetComponent<SpriteRenderer>().sprite;
                             characterSheet.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = character.characterName + "\nHP: " 
                                 + character.HP + "\nMax F: " + character.maxFuel + "\nCurr F: " + character.currentFuel;
                         }
