@@ -8,9 +8,11 @@ public class CharacterBehaviour : MonoBehaviour
     public int currentFuel;
     public int overheatAmount;
     public int HP;
+    public int maxHP;
     public bool finishedMove;
     public bool isOverheated = false;
     public List<WeaponBehaviour> weaponsEquipped;
+    public HealthBar healthBar;
 
     [SerializeField] GameObject explosionEffect;
     private GameObject realExplosion;
@@ -25,6 +27,8 @@ public class CharacterBehaviour : MonoBehaviour
     void Start()
     {
         currentFuel = maxFuel;
+        HP = maxHP;
+        healthBar.SetMaxHealth(maxHP);
         finishedMove = false;
         realExplosion = null;
     }
@@ -40,6 +44,14 @@ public class CharacterBehaviour : MonoBehaviour
                 realExplosion.GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + 1;
             }
             StartCoroutine(DestroyCharacter());
+        }
+        if (HP >= maxHP)
+        {
+            healthBar.gameObject.SetActive(false);
+        }
+        else
+        {
+            healthBar.gameObject.SetActive(true);
         }
     }
 
