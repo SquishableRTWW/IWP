@@ -155,7 +155,7 @@ public class MapManager : MonoBehaviour
         // Check if all characters have moved
         foreach (var item in playerCharacters)
         {
-            if (item.finishedMove == false)
+            if (item.finishedMove == false && Manager.Instance.GetTimeLimit() > 0)
             {
                 InfoText.text = ".......";
                 break;

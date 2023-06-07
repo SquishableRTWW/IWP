@@ -107,6 +107,7 @@ public class MouseController : MonoBehaviour
                 else if (attackTiles.Count > 0 && attackSelected == true)
                 {
                     DoDamage();
+                    Manager.Instance.ChangeCP(character.weaponsEquipped[WeaponSelected].GetCPCost());
                 }
 
                 // OLD CHARACTER SPAWNING CODE (For reference)

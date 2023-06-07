@@ -42,4 +42,8 @@ public class WeaponBehaviour : MonoBehaviour
     {
         return weaponScriptable.attackPattern;
     }
+    public int GetCPCost()
+    {
+        return weaponScriptable.CPCost;
+    }
 }
