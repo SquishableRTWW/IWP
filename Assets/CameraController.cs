@@ -119,10 +119,10 @@ public class CameraController : MonoBehaviour
             float newX = Mathf.Lerp(initCamPos.x, characterPosition.x, t);
             float newY = Mathf.Lerp(initCamPos.y, characterPosition.y, t);
             thisCam.transform.position = new Vector3(newX, newY, thisCam.transform.position.z);
-            if (thisCam.orthographicSize >= 4f)
-            {
-                thisCam.orthographicSize -= 0.008f;
-            }
+            //if (thisCam.orthographicSize >= 4f)
+            //{
+            //    thisCam.orthographicSize -= 0.008f;
+            //}
 
             elapsedTime += Time.deltaTime;
             yield return null;

@@ -14,7 +14,9 @@ public class MapManager : MonoBehaviour
 
     public Dictionary<Vector2Int, OverlayTileBehaviour> map;
     public List<OverlayTileBehaviour> allTiles;
+
     public List<CharacterBehaviour> playerCharacters;
+    public List<EnemyBehaviour> enemyList;
 
     [SerializeField] TextMeshProUGUI InfoText;
 
@@ -39,6 +41,7 @@ public class MapManager : MonoBehaviour
         map = new Dictionary<Vector2Int, OverlayTileBehaviour>();
         allTiles = new List<OverlayTileBehaviour>();
         int characterCount = 0;
+        int enemyCount = 0;
 
 
         // Loop through all the tiles on the map
@@ -73,6 +76,8 @@ public class MapManager : MonoBehaviour
                 }
             }
         }
+
+        // Add characters to map:
         for (int i = 0; i < allTiles.Count; i++)
         {
             if (characterCount < playerCharacters.Count && playerCharacters[characterCount].grid2DLocation == allTiles[i].grid2DLocation)
@@ -87,6 +92,18 @@ public class MapManager : MonoBehaviour
         }
 
         // Add enemies to the map
+        for (int i = 0; i < allTiles.Count; i++)
+        {
+            if (enemyCount < enemyList.Count && enemyList[enemyCount].grid2DLocation == allTiles[i].grid2DLocation)
+            {
+                enemyList[enemyCount] = Instantiate(enemyList[enemyCount]);
+                PositionCharacter(enemyList[enemyCount], allTiles[i]);
+                enemyList[enemyCount].activeTile.hasCharacter = true;
+                //playerCharacters.Remove(playerCharacters[characterCount]);
+                enemyCount++;
+                i = 0;
+            }
+        }
     }
 
     public List<OverlayTileBehaviour> GetNeighbourTiles(OverlayTileBehaviour currentOverlayTile, List<OverlayTileBehaviour> searchableTiles)
@@ -172,6 +189,12 @@ public class MapManager : MonoBehaviour
         character.transform.position = new Vector3(overlayTile.transform.position.x, overlayTile.transform.position.y + 0.0001f, overlayTile.transform.position.z);
         character.GetComponent<SpriteRenderer>().sortingOrder = overlayTile.GetComponent<SpriteRenderer>().sortingOrder + 1;
         character.activeTile = overlayTile;
+    }
+    private void PositionCharacter(EnemyBehaviour enemy, OverlayTileBehaviour overlayTile)
+    {
+        enemy.transform.position = new Vector3(overlayTile.transform.position.x, overlayTile.transform.position.y + 0.0001f, overlayTile.transform.position.z);
+        enemy.GetComponent<SpriteRenderer>().sortingOrder = overlayTile.GetComponent<SpriteRenderer>().sortingOrder + 1;
+        enemy.activeTile = overlayTile;
     }
 
     public void turnEnded()
