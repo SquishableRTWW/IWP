@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using TMPro;
+using System.Linq;
 
 public class MapManager : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class MapManager : MonoBehaviour
 
     public List<CharacterBehaviour> playerCharacters;
     public List<EnemyBehaviour> enemyList;
+    public List<EnemyBehaviour> enemies;
+
+    public int level;
 
     [SerializeField] TextMeshProUGUI InfoText;
 
@@ -40,6 +44,8 @@ public class MapManager : MonoBehaviour
         BoundsInt bounds = tilemap.cellBounds;
         map = new Dictionary<Vector2Int, OverlayTileBehaviour>();
         allTiles = new List<OverlayTileBehaviour>();
+        level = 1;
+
         int characterCount = 0;
         int enemyCount = 0;
 
@@ -91,19 +97,93 @@ public class MapManager : MonoBehaviour
             }
         }
 
-        // Add enemies to the map
-        for (int i = 0; i < allTiles.Count; i++)
+        // Randomly adding enemies to the map depending on the level:
+        for (int i = 0; i < 1 + level; i++)
         {
-            if (enemyCount < enemyList.Count && enemyList[enemyCount].grid2DLocation == allTiles[i].grid2DLocation)
+            int enemyTypeToSpawn = Random.Range(0, enemies.Count);
+            int enemyX = 0, enemyY = 0;
+
+
+            switch (enemyTypeToSpawn)
             {
-                enemyList[enemyCount] = Instantiate(enemyList[enemyCount]);
-                PositionCharacter(enemyList[enemyCount], allTiles[i]);
-                enemyList[enemyCount].activeTile.hasCharacter = true;
-                //playerCharacters.Remove(playerCharacters[characterCount]);
-                enemyCount++;
-                i = 0;
+                case 0:
+                    bool Checking = true;
+                    bool noTileError = true;
+                    enemyList.Add(enemies[0]);
+
+                    while (Checking)
+                    {
+                        enemyX = Random.Range(-7, 7);
+                        enemyY = Random.Range(-7, 7);
+                        int childCount = 0;
+
+                        // Check x and y coords coincides with an overlay tile
+                        foreach (Transform child in overlayContainer.transform)
+                        {
+                            if (child.gameObject.GetComponent<OverlayTileBehaviour>().grid2DLocation == new Vector2Int(enemyX, enemyY))
+                            {
+                                break;
+                            }
+                            childCount++;
+                            if (childCount + 1 == allTiles.Count)
+                            {
+                                noTileError = false;
+                            }
+                            else
+                            {
+                                noTileError = true;
+                            }
+                        }
+
+                        // Check no clash with player's characters
+                        for (int j = 0; j < playerCharacters.Count; j++)
+                        {
+                            if (playerCharacters[j].grid2DLocation == new Vector2Int(enemyX, enemyY))
+                            {
+                                break;
+                            }
+                            if (j + 1 == allTiles.Count)
+                            {
+                                noTileError = false;
+                            }
+                            else
+                            {
+                                noTileError = true;
+                            }
+                        }
+
+                        // If no error then ok
+                        if (noTileError == true)
+                        {
+                            Checking = false;
+                        }
+                    }
+
+                    Vector3Int enemyLocation = new Vector3Int(enemyX, enemyY, 2);
+                    enemyList[i].gridLocation = enemyLocation;
+                    enemyList[enemyCount] = Instantiate(enemyList[enemyCount]);
+                    PositionCharacter(enemyList[enemyCount], allTiles[i]);
+                    enemyList[enemyCount].activeTile.hasCharacter = true;
+                    break;
+
+                default:
+                    break;
             }
         }
+
+        // Add enemies to the map
+        //for (int i = 0; i < allTiles.Count; i++)
+        //{
+        //    if (enemyCount < enemyList.Count && enemyList[enemyCount].grid2DLocation == allTiles[i].grid2DLocation)
+        //    {
+        //        enemyList[enemyCount] = Instantiate(enemyList[enemyCount]);
+        //        PositionCharacter(enemyList[enemyCount], allTiles[i]);
+        //        enemyList[enemyCount].activeTile.hasCharacter = true;
+        //        //playerCharacters.Remove(playerCharacters[characterCount]);
+        //        enemyCount++;
+        //        i = 0;
+        //    }
+        //}
     }
 
     public List<OverlayTileBehaviour> GetNeighbourTiles(OverlayTileBehaviour currentOverlayTile, List<OverlayTileBehaviour> searchableTiles)

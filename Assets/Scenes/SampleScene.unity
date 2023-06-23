@@ -5108,8 +5108,10 @@ MonoBehaviour:
   - {fileID: 662111912407306559, guid: c28e9839759f3bb4387b5323455173d3, type: 3}
   - {fileID: 662111912407306559, guid: fe2fb311dffa19c4a8858aa7cac4842a, type: 3}
   - {fileID: 662111912407306559, guid: 3d81ed8f245b5f241afba6bc1f40d5a4, type: 3}
-  enemyList:
+  enemyList: []
+  enemies:
   - {fileID: 2190785381938542591, guid: 36e00a5e38356bf45924c160d6a33b37, type: 3}
+  level: 0
   InfoText: {fileID: 835828726}
 --- !u!1 &1697824198
 GameObject:
