@@ -46,6 +46,57 @@ public class Pathfinder
 
         return new List<OverlayTileBehaviour>();
     }
+    public List<OverlayTileBehaviour> FindPathForEnemy(OverlayTileBehaviour start, OverlayTileBehaviour end, List<OverlayTileBehaviour> searchableTiles, int movementRange)
+    {
+        List<OverlayTileBehaviour> openList = new List<OverlayTileBehaviour>();
+        List<OverlayTileBehaviour> closedList = new List<OverlayTileBehaviour>();
+        List<OverlayTileBehaviour> enemyPathToSend = new List<OverlayTileBehaviour>();
+        List<OverlayTileBehaviour> tempList = new List<OverlayTileBehaviour>();
+
+        openList.Add(start);
+
+        while (openList.Count > 0)
+        {
+            OverlayTileBehaviour currentOverlayTile = openList.OrderBy(x => x.F).First();
+
+            openList.Remove(currentOverlayTile);
+            closedList.Add(currentOverlayTile);
+
+            if (currentOverlayTile == end)
+            {
+                // Finalise the path
+                tempList = GetFinishedList(start, end);
+                for (int i = 0; i < movementRange; i++)
+                {
+                    if (tempList.Count >= movementRange)
+                    {
+                        enemyPathToSend.Add(tempList[i]);
+                    }
+                }
+                return enemyPathToSend;
+            }
+
+            var neighbourTiles = MapManager.Instance.GetNeighbourTiles(currentOverlayTile, searchableTiles);
+            foreach (var neighbour in neighbourTiles)
+            {
+                if (neighbour.isBlocked || closedList.Contains(neighbour))
+                {
+                    continue;
+                }
+
+                neighbour.G = GetManhattenDistance(start, neighbour);
+                neighbour.H = GetManhattenDistance(end, neighbour);
+                neighbour.previous = currentOverlayTile;
+                if (!openList.Contains(neighbour))
+                {
+                    openList.Add(neighbour);
+                }
+            }
+
+        }
+
+        return new List<OverlayTileBehaviour>();
+    }
 
     public List<OverlayTileBehaviour> FindLinearAttackPath(OverlayTileBehaviour characterTile, OverlayTileBehaviour end, int range, List<OverlayTileBehaviour> searchableTiles)
     {

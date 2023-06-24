@@ -169,7 +169,7 @@ public class MapManager : MonoBehaviour
                         {
                             enemyList[i] = Instantiate(enemyList[i]);
                             PositionCharacter(enemyList[i], allTiles[k]);
-                            enemyList[i].activeTile.hasCharacter = true;
+                            enemyList[i].activeTile.hasEnemy = true;
                             //playerCharacters.Remove(playerCharacters[characterCount]);
                             //i++;
                             //k = 0;

@@ -11,6 +11,7 @@ public class OverlayTileBehaviour : MonoBehaviour
 
     public bool isBlocked;
     public bool hasCharacter;
+    public bool hasEnemy;
     public OverlayTileBehaviour previous;
     public Vector3Int gridLocation;
     public Vector2Int grid2DLocation { get { return new Vector2Int(gridLocation.x, gridLocation.y); } }
