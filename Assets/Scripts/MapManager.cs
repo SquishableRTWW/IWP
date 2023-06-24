@@ -44,7 +44,7 @@ public class MapManager : MonoBehaviour
         BoundsInt bounds = tilemap.cellBounds;
         map = new Dictionary<Vector2Int, OverlayTileBehaviour>();
         allTiles = new List<OverlayTileBehaviour>();
-        level = 1;
+        level = 2;
 
         int characterCount = 0;
 
@@ -112,7 +112,7 @@ public class MapManager : MonoBehaviour
 
                     while (Checking)
                     {
-                        enemyX = Random.Range(-7, 7);
+                        enemyX = Random.Range(6, 7);
                         enemyY = Random.Range(-7, 7);
                         int childCount = 0;
 
