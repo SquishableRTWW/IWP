@@ -47,7 +47,6 @@ public class MapManager : MonoBehaviour
         level = 1;
 
         int characterCount = 0;
-        int enemyCount = 0;
 
 
         // Loop through all the tiles on the map
@@ -161,9 +160,21 @@ public class MapManager : MonoBehaviour
 
                     Vector3Int enemyLocation = new Vector3Int(enemyX, enemyY, 2);
                     enemyList[i].gridLocation = enemyLocation;
-                    enemyList[enemyCount] = Instantiate(enemyList[enemyCount]);
-                    PositionCharacter(enemyList[enemyCount], allTiles[i]);
-                    enemyList[enemyCount].activeTile.hasCharacter = true;
+                    //enemyList[i] = Instantiate(enemyList[i]);
+                    //PositionCharacter(enemyList[i], allTiles[i]);
+                    //enemyList[i].activeTile.hasCharacter = true;
+                    for (int k = 0; k < allTiles.Count; k++)
+                    {
+                        if (i < enemyList.Count && enemyList[i].grid2DLocation == allTiles[k].grid2DLocation)
+                        {
+                            enemyList[i] = Instantiate(enemyList[i]);
+                            PositionCharacter(enemyList[i], allTiles[k]);
+                            enemyList[i].activeTile.hasCharacter = true;
+                            //playerCharacters.Remove(playerCharacters[characterCount]);
+                            //i++;
+                            //k = 0;
+                        }
+                    }
                     break;
 
                 default:
@@ -172,16 +183,15 @@ public class MapManager : MonoBehaviour
         }
 
         // Add enemies to the map
-        //for (int i = 0; i < allTiles.Count; i++)
+        //for (int k = 0; k < allTiles.Count; k++)
         //{
-        //    if (enemyCount < enemyList.Count && enemyList[enemyCount].grid2DLocation == allTiles[i].grid2DLocation)
+        //    if (i < enemyList.Count && enemyList[i].grid2DLocation == allTiles[k].grid2DLocation)
         //    {
-        //        enemyList[enemyCount] = Instantiate(enemyList[enemyCount]);
-        //        PositionCharacter(enemyList[enemyCount], allTiles[i]);
-        //        enemyList[enemyCount].activeTile.hasCharacter = true;
+        //        enemyList[i] = Instantiate(enemyList[i]);
+        //        PositionCharacter(enemyList[i], allTiles[k]);
+        //        enemyList[i].activeTile.hasCharacter = true;
         //        //playerCharacters.Remove(playerCharacters[characterCount]);
-        //        enemyCount++;
-        //        i = 0;
+        //        k = 0;
         //    }
         //}
     }
