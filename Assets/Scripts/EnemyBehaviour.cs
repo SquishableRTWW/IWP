@@ -51,14 +51,14 @@ public class EnemyBehaviour : MonoBehaviour
 
     private IEnumerator DestroyCharacter()
     {
-        activeTile.hasCharacter = false;
+        activeTile.hasEnemy = false;
         yield return new WaitForSeconds(0.4f);
         Destroy(realExplosion);
-        for (int i = 0; i < MapManager.Instance.playerCharacters.Count; i++)
+        for (int i = 0; i < MapManager.Instance.enemyList.Count; i++)
         {
-            if (MapManager.Instance.playerCharacters[i].characterName == characterName)
+            if (MapManager.Instance.enemyList[i].characterName == characterName)
             {
-                MapManager.Instance.playerCharacters.Remove(MapManager.Instance.playerCharacters[i]);
+                MapManager.Instance.enemyList.Remove(MapManager.Instance.enemyList[i]);
                 Destroy(gameObject);
             }
         }
