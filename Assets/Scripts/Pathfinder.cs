@@ -29,7 +29,7 @@ public class Pathfinder
             var neighbourTiles = MapManager.Instance.GetNeighbourTiles(currentOverlayTile, searchableTiles);
             foreach (var neighbour in neighbourTiles)
             {
-                if (neighbour.isBlocked || closedList.Contains(neighbour))
+                if (neighbour.isBlocked || closedList.Contains(neighbour) || neighbour.hasCharacter || neighbour.hasEnemy)
                 {
                     continue;
                 }
@@ -79,7 +79,7 @@ public class Pathfinder
             var neighbourTiles = MapManager.Instance.GetNeighbourTiles(currentOverlayTile, searchableTiles);
             foreach (var neighbour in neighbourTiles)
             {
-                if (neighbour.isBlocked || closedList.Contains(neighbour))
+                if (neighbour.isBlocked || closedList.Contains(neighbour) || neighbour.hasEnemy)
                 {
                     continue;
                 }

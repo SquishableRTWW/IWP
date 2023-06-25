@@ -3299,6 +3299,7 @@ MonoBehaviour:
   isInCombat: 1
   playerTurn: 1
   TimerSlider: {fileID: 1957878056}
+  camera: {fileID: 519420033}
 --- !u!4 &226394952
 Transform:
   m_ObjectHideFlags: 0

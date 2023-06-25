@@ -25,6 +25,7 @@ public class Manager : MonoBehaviour
     private Pathfinder pathfinder;
     private MoveRangeFinder moveRangeFinder;
     public List<List<OverlayTileBehaviour>> enemyPath;
+    public CameraController camera;
 
     private void Awake()
     {
@@ -93,6 +94,8 @@ public class Manager : MonoBehaviour
         {
             EnemyBehaviour enemy = MapManager.Instance.enemyList[i];
             List<OverlayTileBehaviour> path = enemyPath[i];
+            //StartCoroutine(camera.ZoomAtCharacter(enemy.transform.position));
+            yield return new WaitForSeconds(1.0f);
 
             while (path.Count > 0)
             {
@@ -103,11 +106,10 @@ public class Manager : MonoBehaviour
                 i = enemyToMove - 1;
 
                 PositionCharacter(enemy, nextTile);
-                if (path.Count > 0)
-                {
-                    path.RemoveAt(0);
-                }
-                else
+
+                path.RemoveAt(0);
+
+                if (path.Count == 0)
                 {
                     enemyToMove++;
                     i = enemyToMove - 1;
@@ -188,7 +190,7 @@ public class Manager : MonoBehaviour
     {
         character.activeTile.hasEnemy = false;
 
-        float speed = 3f;
+        float speed = 1.5f;
         var step = speed * Time.deltaTime;
         var zIndex = targetTile.transform.position.z;
 

@@ -151,6 +151,23 @@ public class MapManager : MonoBehaviour
                             }
                         }
 
+                        // Check no clash with other enemies
+                        for (int j = 0; j < enemyList.Count; j++)
+                        {
+                            if (enemyList[j].grid2DLocation == new Vector2Int(enemyX, enemyY))
+                            {
+                                break;
+                            }
+                            if (j + 1 == allTiles.Count)
+                            {
+                                noTileError = false;
+                            }
+                            else
+                            {
+                                noTileError = true;
+                            }
+                        }
+
                         // If no error then ok
                         if (noTileError == true)
                         {
@@ -258,7 +275,7 @@ public class MapManager : MonoBehaviour
     void Update()
     {
         // Display Message to tell if all characters have moved
-        InfoText.text = "All units have moved!";
+        InfoText.text = ".......";
         // Check if all characters have moved
         foreach (var item in playerCharacters)
         {
@@ -268,9 +285,31 @@ public class MapManager : MonoBehaviour
                 break;
             }
         }
+
+        for (int i = 0; i < playerCharacters.Count; i++)
+        {
+            if (!playerCharacters[i].finishedMove)
+            {
+                if (i == playerCharacters.Count - 1)
+                {
+                    break;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            InfoText.text = "All units have moved!";
+        }
+
         if (Manager.Instance.GetCP() <= 0 && Manager.Instance.playerTurn == true)
         {
             InfoText.text = "You have run out of CP.";
+        }
+
+        if (Manager.Instance.playerTurn == false)
+        {
+            InfoText.text = "Enemys' turn...";
         }
     }
 

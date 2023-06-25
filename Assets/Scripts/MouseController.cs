@@ -98,7 +98,7 @@ public class MouseController : MonoBehaviour
                 }
             }
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && Manager.Instance.playerTurn)
             {
 
                 if (path.Count > 0)
@@ -255,24 +255,24 @@ public class MouseController : MonoBehaviour
         int affectedCount = 0;
         for (int i = 0; i < attackTiles.Count; i++)
         {
-            if (attackTiles[i].hasCharacter)
+            if (attackTiles[i].hasEnemy)
             {
                 tilesWithCharacters.Add(attackTiles[i]);
             }
         }
         for (int i = 0; i < tilesWithCharacters.Count; i++)
         {
-            if (MapManager.Instance.playerCharacters[affectedCount] == null)
+            if (MapManager.Instance.enemyList[affectedCount] == null)
             {
                 continue;
             }
-            if (MapManager.Instance.playerCharacters[affectedCount].grid2DLocation == tilesWithCharacters[i].grid2DLocation)
+            if (MapManager.Instance.enemyList[affectedCount].grid2DLocation == tilesWithCharacters[i].grid2DLocation)
             {
-                MapManager.Instance.playerCharacters[affectedCount].HP -= character.weaponsEquipped[WeaponSelected].GetWeaponDamage();
-                MapManager.Instance.playerCharacters[affectedCount].healthBar.SetHealth(MapManager.Instance.playerCharacters[affectedCount].HP);
+                MapManager.Instance.enemyList[affectedCount].HP -= character.weaponsEquipped[WeaponSelected].GetWeaponDamage();
+                MapManager.Instance.enemyList[affectedCount].healthBar.SetHealth(MapManager.Instance.enemyList[affectedCount].HP);
                 affectedCount++;
                 tilesWithCharacters.Remove(tilesWithCharacters[i]);
-                sceneCameraController.CameraShake();
+                //sceneCameraController.CameraShake();
                 i = -1;
             }
             else
