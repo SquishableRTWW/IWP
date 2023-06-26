@@ -103,11 +103,11 @@ public class Manager : MonoBehaviour
 
     private IEnumerator MoveEnemiesSequentially()
     {
-        int enemyToMove = 0;
         for (int i = 0; i < enemyPath.Count; i++)
         {
             EnemyBehaviour enemy = MapManager.Instance.enemyList[i];
             List<OverlayTileBehaviour> path = enemyPath[i];
+
             //StartCoroutine(camera.ZoomAtCharacter(enemy.transform.position));
             yield return new WaitForSeconds(1.0f);
 
@@ -115,25 +115,36 @@ public class Manager : MonoBehaviour
             {
                 OverlayTileBehaviour nextTile = path[0];
                 MoveAlongEnemyPath(enemy, nextTile);
-
-                yield return new WaitUntil(() => Vector2.Distance(enemy.transform.position, nextTile.transform.position) < 0.001f);
-                i = enemyToMove - 1;
+                yield return new WaitUntil(() => Vector2.Distance(enemy.transform.position, nextTile.transform.position) <= 0f);
 
                 PositionCharacter(enemy, nextTile);
 
+                //Debug.Log("E: " + i + "Count:" + path.Count);
                 path.RemoveAt(0);
-
-                if (path.Count == 0)
-                {
-                    enemyToMove++;
-                    i = enemyToMove - 1;
-                }
             }
+            //for (int j = 0; j < path.Count; j++)
+            //{
+            //    OverlayTileBehaviour nextTile = path[j];
+            //    MoveAlongEnemyPath(enemy, nextTile);
+
+            //    yield return new WaitUntil(() => Vector2.Distance(enemy.transform.position, nextTile.transform.position) < 0.001f);
+            //    i = enemyToMove - 1;
+
+            //    PositionCharacter(enemy, nextTile);
+
+            //    if (j == path.Count - 1)
+            //    {
+            //        enemyToMove++;
+            //        i = enemyToMove - 1;
+            //        path.Clear();
+            //    }
+            //}
 
             if (i == enemyPath.Count - 1)
             {
                 playerTurn = true;
             }
+            
         }
     }
 
@@ -143,7 +154,6 @@ public class Manager : MonoBehaviour
         MapManager.Instance.turnEnded();
         mouseController.DeselectAction();
 
-        // enemy movement code is in update.
         // MOVEMENT AI logic
         for (int i = 0; i < MapManager.Instance.enemyList.Count; i++)
         {
@@ -168,9 +178,14 @@ public class Manager : MonoBehaviour
                 // A check can be inserted here to see if all the characters are dead
             }
 
-            // Find the path towards the decided target
-            enemyPath[i] = (pathfinder.FindPathForEnemy(MapManager.Instance.enemyList[i].activeTile, nearestCharacterTile, MapManager.Instance.allTiles,
-            MapManager.Instance.enemyList[i].movementRange));
+            // Find the path towards the decided target if not in range
+            if (MapManager.Instance.enemyList[i].InAttackRange(nearestCharacterTile) == false)
+            {
+                enemyPath[i] = (pathfinder.FindPathForEnemy(MapManager.Instance.enemyList[i].activeTile, nearestCharacterTile, MapManager.Instance.allTiles,
+                MapManager.Instance.enemyList[i].movementRange));
+            }
+            // Else attack
+
         }
         CP = 2;
         timeLimit = originalTime;

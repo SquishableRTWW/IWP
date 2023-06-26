@@ -275,13 +275,13 @@ public class MapManager : MonoBehaviour
     void Update()
     {
         // Display Message to tell if all characters have moved
-        InfoText.text = ".......";
+        //InfoText.text = ".......";
         // Check if all characters have moved
         foreach (var item in playerCharacters)
         {
             if (item.finishedMove == false && Manager.Instance.playerTurn)
             {
-                InfoText.text = ".......";
+                InfoText.text = "YOUR TURN";
                 break;
             }
         }
@@ -290,26 +290,25 @@ public class MapManager : MonoBehaviour
         {
             if (!playerCharacters[i].finishedMove)
             {
+                break;
+            }
+            else
+            {
                 if (i == playerCharacters.Count - 1)
                 {
-                    break;
-                }
-                else
-                {
-                    continue;
+                    InfoText.text = "ALL UNITS MOVED!";
                 }
             }
-            InfoText.text = "All units have moved!";
         }
 
         if (Manager.Instance.GetCP() <= 0 && Manager.Instance.playerTurn == true)
         {
-            InfoText.text = "You have run out of CP.";
+            InfoText.text = "NO MORE CP";
         }
 
         if (Manager.Instance.playerTurn == false)
         {
-            InfoText.text = "Enemys' turn...";
+            InfoText.text = "ENEMIES's TURN";
         }
     }
 

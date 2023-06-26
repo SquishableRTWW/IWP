@@ -17,6 +17,9 @@ public class EnemyBehaviour : MonoBehaviour
     public Vector2Int grid2DLocation { get { return new Vector2Int(gridLocation.x, gridLocation.y); } }
     public OverlayTileBehaviour activeTile;
 
+    private Pathfinder pathfinder;
+    private MoveRangeFinder rangeFinder;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +28,8 @@ public class EnemyBehaviour : MonoBehaviour
         movementRange = enemyScriptable.movementRange;
         healthBar.SetMaxHealth(maxHP);
         realExplosion = null;
+        pathfinder = new Pathfinder();
+        rangeFinder = new MoveRangeFinder();
     }
 
     // Update is called once per frame
@@ -65,4 +70,26 @@ public class EnemyBehaviour : MonoBehaviour
     }
 
     // AI methods here:========================================================================================
+    public bool InAttackRange(OverlayTileBehaviour targetTile)
+    {
+        switch (enemyScriptable.weapon.GetShotType())
+        {
+            case "Linear":
+                List<OverlayTileBehaviour> rangeTiles = rangeFinder.GetTilesInAttackRange(targetTile, enemyScriptable.weapon.GetWeaponRange());
+                List<OverlayTileBehaviour> targetTiles = pathfinder.FindLinearAttackPath(activeTile, targetTile, enemyScriptable.weapon.GetWeaponRange(), rangeTiles);
+                if (targetTiles.Contains(targetTile))
+                {
+                    Debug.Log("Target is in range");
+                    return true;
+                }
+                break;
+            case "Lobbing":
+                break;
+            default:
+                break;
+        }
+
+        Debug.Log("Target not in Range");
+        return false;
+    }
 }
