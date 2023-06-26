@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2786216518086623056}
   - component: {fileID: 2135289690162243842}
   - component: {fileID: 143268114319186055}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: overlayTile
   m_TagString: OverlayTile
   m_Icon: {fileID: 0}
@@ -130,5 +130,7 @@ MonoBehaviour:
   G: 0
   H: 0
   isBlocked: 0
+  hasCharacter: 0
+  hasEnemy: 0
   previous: {fileID: 0}
   gridLocation: {x: 0, y: 0, z: 0}

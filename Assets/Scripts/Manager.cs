@@ -20,6 +20,7 @@ public class Manager : MonoBehaviour
     [SerializeField] float timeLimit;
     [SerializeField] float originalTime;
     [SerializeField] int CP;
+    [SerializeField] int maxCP;
     public bool isInCombat = true;
     public bool playerTurn = true;
     [SerializeField] TimerBar TimerSlider;
@@ -49,6 +50,7 @@ public class Manager : MonoBehaviour
         timeLimit = originalTime;
         TimerSlider.SetMaxTime(timeLimit);
         CP = 2;
+        maxCP = 2;
 
         int CPUIOffset = 0;
         for (int i = 0; i < CP; i++)
@@ -84,15 +86,13 @@ public class Manager : MonoBehaviour
             playerTurn = false;
             TempEnemyTurn();
             timeLimit = originalTime;
-
+            //Give back the CP
+            AddCPImage();
         }
 
         if (!playerTurn)
         {
             StartMovingEnemies();
-
-            //Give back the CP
-            AddCPImage();
         }
     }
 
@@ -179,6 +179,8 @@ public class Manager : MonoBehaviour
     {
         playerTurn = false;
         TempEnemyTurn();
+        //Give back the CP
+        AddCPImage();
     }
 
     public void ChangeCP(int amount)
@@ -209,8 +211,9 @@ public class Manager : MonoBehaviour
     }
     public void AddCPImage()
     {
+        int amount = CP - maxCP;
         int CPUIOffset = 0;
-        for (int i = 0; i < CP; i++)
+        for (int i = 0; i < amount; i++)
         {
             Image CPImage = Instantiate(CPUI);
             CPImage.transform.SetParent(CPUIField.transform);

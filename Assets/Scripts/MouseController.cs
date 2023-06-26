@@ -33,6 +33,7 @@ public class MouseController : MonoBehaviour
     private int WeaponSelected = 0;
     public bool movementSelected = false;
     public bool attackSelected = false;
+    public LayerMask layerMask;
 
     private void Start()
     {
@@ -300,7 +301,7 @@ public class MouseController : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 mousePos2d = new Vector2(mousePos.x, mousePos.y);
 
-        RaycastHit2D[] hits = Physics2D.RaycastAll(mousePos2d, Vector2.zero);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(mousePos2d, Vector2.zero, 999f, layerMask);
 
         if (hits.Length > 0)
         {

@@ -3298,6 +3298,7 @@ MonoBehaviour:
   timeLimit: 20
   originalTime: 40
   CP: 2
+  maxCP: 0
   isInCombat: 1
   playerTurn: 1
   TimerSlider: {fileID: 1957878056}
@@ -5899,6 +5900,9 @@ MonoBehaviour:
   sceneCameraController: {fileID: 519420033}
   movementSelected: 0
   attackSelected: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!212 &1946225444
 SpriteRenderer:
   m_ObjectHideFlags: 0
