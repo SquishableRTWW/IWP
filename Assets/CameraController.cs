@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] Vector3 cameraInitialPosition;
     [SerializeField] float shakeMagnitude = 0.05f, shakeTime = 0.5f;
     // For zooming into character
-    [SerializeField] float zoomDuration = 0.6f;
+    [SerializeField] float zoomDuration = 0.3f;
 
     private void Start()
     {
@@ -125,6 +125,7 @@ public class CameraController : MonoBehaviour
             //}
 
             elapsedTime += Time.deltaTime;
+            //yield return new WaitUntil(() => thisCam.transform.position.x == characterPosition.x && thisCam.transform.position.y == characterPosition.y);
             yield return null;
         }
 

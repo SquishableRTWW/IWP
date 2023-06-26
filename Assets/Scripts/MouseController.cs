@@ -109,6 +109,7 @@ public class MouseController : MonoBehaviour
                 {
                     DoDamage();
                     Manager.Instance.ChangeCP(character.weaponsEquipped[WeaponSelected].GetCPCost());
+                    Manager.Instance.DeleteCPImage(character.weaponsEquipped[WeaponSelected].GetCPCost());
                 }
 
                 // OLD CHARACTER SPAWNING CODE (For reference)

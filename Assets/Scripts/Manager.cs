@@ -15,6 +15,8 @@ public class Manager : MonoBehaviour
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] TextMeshProUGUI infoText;
     [SerializeField] TextMeshProUGUI CPText;
+    public Canvas CPUIField;
+    [SerializeField] Image CPUI;
     [SerializeField] float timeLimit;
     [SerializeField] float originalTime;
     [SerializeField] int CP;
@@ -25,7 +27,7 @@ public class Manager : MonoBehaviour
     private Pathfinder pathfinder;
     private MoveRangeFinder moveRangeFinder;
     public List<List<OverlayTileBehaviour>> enemyPath;
-    public CameraController camera;
+    public new CameraController camera;
 
     private void Awake()
     {
@@ -47,6 +49,15 @@ public class Manager : MonoBehaviour
         timeLimit = originalTime;
         TimerSlider.SetMaxTime(timeLimit);
         CP = 2;
+
+        int CPUIOffset = 0;
+        for (int i = 0; i < CP; i++)
+        {
+            Image CPImage = Instantiate(CPUI);
+            CPImage.transform.SetParent(CPUIField.transform);
+            CPImage.transform.position = new Vector3(CPUIField.transform.position.x + CPUIOffset, CPUIField.transform.position.y, 0);
+            CPUIOffset -= 70;
+        }
     }
 
     // Update is called once per frame
@@ -79,6 +90,9 @@ public class Manager : MonoBehaviour
         if (!playerTurn)
         {
             StartMovingEnemies();
+
+            //Give back the CP
+            AddCPImage();
         }
     }
 
@@ -183,6 +197,26 @@ public class Manager : MonoBehaviour
     public float GetTimeLimit()
     {
         return timeLimit;
+    }
+
+    public void DeleteCPImage(int CPImageCount)
+    {
+        for (int i = 0; i < CPImageCount; i++)
+        {
+            GameObject toDestroy = CPUIField.transform.GetChild(i).gameObject;
+            Destroy(toDestroy);
+        }
+    }
+    public void AddCPImage()
+    {
+        int CPUIOffset = 0;
+        for (int i = 0; i < CP; i++)
+        {
+            Image CPImage = Instantiate(CPUI);
+            CPImage.transform.SetParent(CPUIField.transform);
+            CPImage.transform.position = new Vector3(CPUIField.transform.position.x + CPUIOffset - 200f, CPUIField.transform.position.y, 0);
+            CPUIOffset += 70;
+        }
     }
 
     // Code for helping enemies to move

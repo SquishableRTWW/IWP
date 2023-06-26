@@ -18,4 +18,16 @@ public class TimerBar : MonoBehaviour
     {
         slider.value = time;
     }
+
+    private void Update()
+    {
+        if (slider.value <= 20)
+        {
+            fill.GetComponent<Image>().color = new Color(1, 0.67f, 0, 1);
+        }
+        if (slider.value <= 10)
+        {
+            fill.GetComponent<Image>().color = new Color(1, 0, 0, 1);
+        }
+    }
 }
