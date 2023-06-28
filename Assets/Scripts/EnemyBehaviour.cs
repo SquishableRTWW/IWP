@@ -75,12 +75,21 @@ public class EnemyBehaviour : MonoBehaviour
         switch (enemyScriptable.weapon.GetShotType())
         {
             case "Linear":
-                List<OverlayTileBehaviour> rangeTiles = rangeFinder.GetTilesInAttackRange(targetTile, enemyScriptable.weapon.GetWeaponRange());
-                List<OverlayTileBehaviour> targetTiles = pathfinder.FindLinearAttackPath(activeTile, targetTile, enemyScriptable.weapon.GetWeaponRange(), rangeTiles);
-                if (targetTiles.Contains(targetTile))
+                //List<OverlayTileBehaviour> rangeTiles = rangeFinder.GetTilesInAttackRange(targetTile, enemyScriptable.weapon.GetWeaponRange());
+                List<OverlayTileBehaviour> targetTiles = pathfinder.FindLinearAttackPath(activeTile,
+                targetTile, enemyScriptable.weapon.GetWeaponRange(), MapManager.Instance.allTiles);
+                if (targetTiles.Count > 1)
                 {
-                    Debug.Log("Target is in range");
-                    return true;
+                    Debug.Log("Target is in sight");
+                    if (targetTiles.Contains(targetTile))
+                    {
+                        Debug.Log("Target is also in range");
+                        return true;
+                    }
+                    else
+                    {
+                        Debug.Log("But not in range");
+                    }
                 }
                 break;
             case "Lobbing":
@@ -89,7 +98,7 @@ public class EnemyBehaviour : MonoBehaviour
                 break;
         }
 
-        Debug.Log("Target not in Range");
+        Debug.Log("Target not in Sight");
         return false;
     }
 }
