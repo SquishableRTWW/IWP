@@ -133,10 +133,15 @@ public class Pathfinder
     public List<OverlayTileBehaviour> FindAOEAttackPath(OverlayTileBehaviour mousedTile, int AOERange, List<OverlayTileBehaviour> searchableTiles)
     {
         int rangeCount = 0;
+
         List<OverlayTileBehaviour> preFinalList = new List<OverlayTileBehaviour>();
         List<OverlayTileBehaviour> finalList = new List<OverlayTileBehaviour>();
+
+        // List to keep track of already checked neighbouring tiles so there is no duplicates
+
         var tileForPreviouStep = new List<OverlayTileBehaviour>();
         tileForPreviouStep.Add(mousedTile);
+
         while (rangeCount < (AOERange - 1))
         {
             var surroundingTiles = new List<OverlayTileBehaviour>();
@@ -144,7 +149,7 @@ public class Pathfinder
             {
                 surroundingTiles.AddRange(GetNeighbourTilesPathFinder(tile, searchableTiles));
             }
-            preFinalList.AddRange(surroundingTiles);
+            preFinalList.AddRange(surroundingTiles.Distinct());
             tileForPreviouStep = surroundingTiles.Distinct().ToList();
 
             rangeCount++;

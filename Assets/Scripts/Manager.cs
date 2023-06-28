@@ -103,7 +103,7 @@ public class Manager : MonoBehaviour
 
     private IEnumerator MoveEnemiesSequentially()
     {
-        for (int i = 0; i < enemyPath.Count; i++)
+        for (int i = 0; i < MapManager.Instance.enemyList.Count; i++)
         {
             EnemyBehaviour enemy = MapManager.Instance.enemyList[i];
             List<OverlayTileBehaviour> path = enemyPath[i];
@@ -187,6 +187,7 @@ public class Manager : MonoBehaviour
             // Else attack
 
         }
+        AddCPImage();
         CP = 2;
         timeLimit = originalTime;
     }
@@ -195,7 +196,7 @@ public class Manager : MonoBehaviour
         playerTurn = false;
         TempEnemyTurn();
         //Give back the CP
-        AddCPImage();
+        
     }
 
     public void ChangeCP(int amount)
@@ -226,7 +227,7 @@ public class Manager : MonoBehaviour
     }
     public void AddCPImage()
     {
-        int amount = CP - maxCP;
+        int amount = maxCP - CP;
         int CPUIOffset = 0;
         for (int i = 0; i < amount; i++)
         {

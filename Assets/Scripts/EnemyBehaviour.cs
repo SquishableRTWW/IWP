@@ -61,7 +61,7 @@ public class EnemyBehaviour : MonoBehaviour
         Destroy(realExplosion);
         for (int i = 0; i < MapManager.Instance.enemyList.Count; i++)
         {
-            if (MapManager.Instance.enemyList[i].characterName == characterName)
+            if (MapManager.Instance.enemyList[i].grid2DLocation == grid2DLocation)
             {
                 MapManager.Instance.enemyList.Remove(MapManager.Instance.enemyList[i]);
                 Destroy(gameObject);

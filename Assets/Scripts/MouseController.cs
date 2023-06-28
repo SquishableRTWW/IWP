@@ -262,17 +262,19 @@ public class MouseController : MonoBehaviour
                 tilesWithCharacters.Add(attackTiles[i]);
             }
         }
+        Debug.Log("Enemies to hit: " + tilesWithCharacters.Count);
         for (int i = 0; i < tilesWithCharacters.Count; i++)
         {
             if (MapManager.Instance.enemyList[affectedCount] == null)
             {
+                i = -1;
                 continue;
             }
             if (MapManager.Instance.enemyList[affectedCount].grid2DLocation == tilesWithCharacters[i].grid2DLocation)
             {
                 MapManager.Instance.enemyList[affectedCount].HP -= character.weaponsEquipped[WeaponSelected].GetWeaponDamage();
                 MapManager.Instance.enemyList[affectedCount].healthBar.SetHealth(MapManager.Instance.enemyList[affectedCount].HP);
-                affectedCount++;
+                affectedCount = 0;
                 tilesWithCharacters.Remove(tilesWithCharacters[i]);
                 //sceneCameraController.CameraShake();
                 i = -1;
