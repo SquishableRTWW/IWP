@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] Vector3 cameraInitialPosition;
     [SerializeField] float shakeMagnitude = 0.05f, shakeTime = 0.5f;
     // For zooming into character
-    [SerializeField] float zoomDuration = 0.3f;
+    [SerializeField] float zoomDuration = 0.1f;
 
     private void Start()
     {

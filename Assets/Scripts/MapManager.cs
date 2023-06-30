@@ -137,17 +137,15 @@ public class MapManager : MonoBehaviour
                         // Check no clash with player's characters
                         for (int j = 0; j < playerCharacters.Count; j++)
                         {
-                            if (playerCharacters[j].grid2DLocation == new Vector2Int(enemyX, enemyY))
-                            {
-                                break;
-                            }
-                            if (j + 1 == allTiles.Count)
-                            {
-                                noTileError = false;
-                            }
-                            else
+                            if (j + 1 == enemyList.Count)
                             {
                                 noTileError = true;
+                                break;
+                            }
+                            if (playerCharacters[j].grid2DLocation == new Vector2Int(enemyX, enemyY))
+                            {
+                                noTileError = false;
+                                Debug.Log("Spawn clash; resetting");
                             }
                         }
 
@@ -156,15 +154,13 @@ public class MapManager : MonoBehaviour
                         {
                             if (enemyList[j].grid2DLocation == new Vector2Int(enemyX, enemyY))
                             {
-                                break;
-                            }
-                            if (j + 1 == allTiles.Count)
-                            {
                                 noTileError = false;
+                                Debug.Log("Spawn clash; resetting");
                             }
-                            else
+                            if (j + 1 == enemyList.Count)
                             {
                                 noTileError = true;
+                                break;
                             }
                         }
 

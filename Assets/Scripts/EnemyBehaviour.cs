@@ -81,8 +81,16 @@ public class EnemyBehaviour : MonoBehaviour
                 if (targetTiles.Count > 1)
                 {
                     Debug.Log("Target is in sight");
+                    foreach (var tile in targetTiles)
+                    {
+                        tile.ShowOverheatTile();
+                    }
                     if (targetTiles.Contains(targetTile))
                     {
+                        foreach (var tile in targetTiles)
+                        {
+                            tile.ShowAttackTile();
+                        }
                         Debug.Log("Target is also in range");
                         return true;
                     }
