@@ -251,7 +251,7 @@ public class MouseController : MonoBehaviour
     }
 
     // Logic for doing damage
-    private void DoDamage()
+    public void DoDamage()
     {
         List<OverlayTileBehaviour> tilesWithCharacters = new List<OverlayTileBehaviour>();
         int affectedCount = 0;

@@ -9,6 +9,7 @@ public class EnemyBehaviour : MonoBehaviour
     public int maxHP;
     public int movementRange;
     public HealthBar healthBar;
+    public bool hasAttacked;
 
     [SerializeField] GameObject explosionEffect;
     private GameObject realExplosion;
@@ -27,6 +28,7 @@ public class EnemyBehaviour : MonoBehaviour
         HP = maxHP;
         movementRange = enemyScriptable.movementRange;
         healthBar.SetMaxHealth(maxHP);
+        hasAttacked = false;
         realExplosion = null;
         pathfinder = new Pathfinder();
         rangeFinder = new MoveRangeFinder();
@@ -75,22 +77,12 @@ public class EnemyBehaviour : MonoBehaviour
         switch (enemyScriptable.weapon.GetShotType())
         {
             case "Linear":
-                //List<OverlayTileBehaviour> rangeTiles = rangeFinder.GetTilesInAttackRange(targetTile, enemyScriptable.weapon.GetWeaponRange());
-                List<OverlayTileBehaviour> targetTiles = pathfinder.FindLinearAttackPath(activeTile,
-                targetTile, enemyScriptable.weapon.GetWeaponRange(), MapManager.Instance.allTiles);
+                List<OverlayTileBehaviour> targetTiles = rangeFinder.GetTilesInAttackRange(activeTile, enemyScriptable.weapon.GetWeaponRange());
                 if (targetTiles.Count > 1)
                 {
                     Debug.Log("Target is in sight");
-                    foreach (var tile in targetTiles)
-                    {
-                        tile.ShowOverheatTile();
-                    }
                     if (targetTiles.Contains(targetTile))
                     {
-                        foreach (var tile in targetTiles)
-                        {
-                            tile.ShowAttackTile();
-                        }
                         Debug.Log("Target is also in range");
                         return true;
                     }

@@ -75,6 +75,10 @@ public class Manager : MonoBehaviour
             if (playerTurn)
             {
                 timeLimit -= Time.deltaTime;
+                foreach (var enemy in MapManager.Instance.enemyList)
+                {
+                    enemy.hasAttacked = false;
+                }
             }
             timerText.text = string.Format("{0:0.00}", timeLimit);
             CPText.text = "CP Left: " + CP.ToString();
@@ -185,12 +189,25 @@ public class Manager : MonoBehaviour
                 MapManager.Instance.enemyList[i].movementRange));
             }
             // Else attack
+            else
+            {
+                foreach (CharacterBehaviour character in MapManager.Instance.playerCharacters)
+                {
+                    if (character.grid2DLocation == nearestCharacterTile.grid2DLocation && !MapManager.Instance.enemyList[i].hasAttacked)
+                    {
+                        DoDamageToCharacter(character, MapManager.Instance.enemyList[i].enemyScriptable.weapon.GetWeaponDamage());
+                        MapManager.Instance.enemyList[i].hasAttacked = true;
+                    }
+                }
+            }
 
         }
         AddCPImage();
         CP = 2;
         timeLimit = originalTime;
     }
+
+
     public void EndTurn()
     {
         playerTurn = false;
@@ -236,6 +253,12 @@ public class Manager : MonoBehaviour
             CPImage.transform.position = new Vector3(CPUIField.transform.position.x + CPUIOffset - 200f, CPUIField.transform.position.y, 0);
             CPUIOffset += 70;
         }
+    }
+
+    public void DoDamageToCharacter(CharacterBehaviour character, int damage)
+    {
+        character.HP -= damage;
+        character.healthBar.SetHealth(character.HP);
     }
 
     // Code for helping enemies to move
