@@ -257,7 +257,7 @@ public class Manager : MonoBehaviour
 
     public void DoDamageToCharacter(CharacterBehaviour character, int damage)
     {
-        character.HP -= damage;
+        character.HP -= damage - character.defence;
         character.healthBar.SetHealth(character.HP);
     }
 

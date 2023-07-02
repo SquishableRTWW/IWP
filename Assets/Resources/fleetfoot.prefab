@@ -361,6 +361,8 @@ MonoBehaviour:
   isOverheated: 0
   weaponsEquipped:
   - {fileID: 5634200892605953027, guid: b4107d631b66bbe41959bd0da1ff217a, type: 3}
+  equipmentList:
+  - {fileID: 0}
   healthBar: {fileID: 2788597774748779722}
   explosionEffect: {fileID: 5382249522824878518, guid: 2081e722bab54e4479758e91d6b6afaf, type: 3}
   characterName: Fleetfoot

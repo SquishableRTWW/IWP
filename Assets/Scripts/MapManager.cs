@@ -194,19 +194,6 @@ public class MapManager : MonoBehaviour
                     break;
             }
         }
-
-        // Add enemies to the map
-        //for (int k = 0; k < allTiles.Count; k++)
-        //{
-        //    if (i < enemyList.Count && enemyList[i].grid2DLocation == allTiles[k].grid2DLocation)
-        //    {
-        //        enemyList[i] = Instantiate(enemyList[i]);
-        //        PositionCharacter(enemyList[i], allTiles[k]);
-        //        enemyList[i].activeTile.hasCharacter = true;
-        //        //playerCharacters.Remove(playerCharacters[characterCount]);
-        //        k = 0;
-        //    }
-        //}
     }
 
     public List<OverlayTileBehaviour> GetNeighbourTiles(OverlayTileBehaviour currentOverlayTile, List<OverlayTileBehaviour> searchableTiles)

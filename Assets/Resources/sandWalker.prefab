@@ -415,10 +415,13 @@ MonoBehaviour:
   overheatAmount: 5
   HP: 12
   maxHP: 12
+  defence: 0
   finishedMove: 0
   isOverheated: 0
   weaponsEquipped:
   - {fileID: 3220143395159419079, guid: 0fa7b8ffac65f0e44b34a978a25a4163, type: 3}
+  equipmentList:
+  - {fileID: 11400000, guid: 69f026e0c387ca5419af4c2d51174c18, type: 2}
   healthBar: {fileID: 3265798537142198243}
   explosionEffect: {fileID: 5382249522824878518, guid: 2081e722bab54e4479758e91d6b6afaf, type: 3}
   characterName: Sand Walker

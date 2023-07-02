@@ -9,6 +9,7 @@ public class CharacterBehaviour : MonoBehaviour
     public int overheatAmount;
     public int HP;
     public int maxHP;
+    public int defence;
     public bool finishedMove;
     public bool isOverheated = false;
     public List<WeaponBehaviour> weaponsEquipped;
@@ -30,6 +31,7 @@ public class CharacterBehaviour : MonoBehaviour
         currentFuel = maxFuel;
         HP = maxHP;
         healthBar.SetMaxHealth(maxHP);
+        defence = 0;
         finishedMove = false;
         realExplosion = null;
     }
@@ -37,6 +39,20 @@ public class CharacterBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Equipment check
+        foreach (EquipmentScriptable equipment in equipmentList)
+        {
+            switch (equipment.equipmentName)
+            {
+                case "Steel Plating":
+                    defence = 1;
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
         if (HP <= 0)
         {
             if (realExplosion == null)

@@ -420,6 +420,8 @@ MonoBehaviour:
   weaponsEquipped:
   - {fileID: 6366672729822257980, guid: 97916113d2bed6d4ca625a7602124889, type: 3}
   - {fileID: 5999144368718459405, guid: 7a2a78215fcf49c46b6deedd224d6ffc, type: 3}
+  equipmentList:
+  - {fileID: 0}
   healthBar: {fileID: 4478707585213457633}
   explosionEffect: {fileID: 5382249522824878518, guid: 2081e722bab54e4479758e91d6b6afaf, type: 3}
   characterName: Bulwark
