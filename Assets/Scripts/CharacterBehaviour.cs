@@ -12,6 +12,7 @@ public class CharacterBehaviour : MonoBehaviour
     public bool finishedMove;
     public bool isOverheated = false;
     public List<WeaponBehaviour> weaponsEquipped;
+    public List<EquipmentScriptable> equipmentList;
     public HealthBar healthBar;
 
     [SerializeField] GameObject explosionEffect;
