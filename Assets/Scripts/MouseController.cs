@@ -60,6 +60,17 @@ public class MouseController : MonoBehaviour
                 {
                     path = pathfinder.FindPath(character.activeTile, overlayTile, inRangeTiles);
 
+                    // Change sprite direction
+                    if (overlayTile.transform.position.x >= character.transform.position.x)
+                    {
+                        character.GetComponent<SpriteRenderer>().sprite = character.normalSprite;
+                    }
+                    else
+                    {
+                        character.GetComponent<SpriteRenderer>().sprite = character.reverseSprite;
+                        Debug.Log("Reversed ssprite");
+                    }
+
                     GetInRangeTiles();
 
                     for (int i = 0; i < path.Count; i++)
@@ -174,6 +185,7 @@ public class MouseController : MonoBehaviour
 
         if (path.Count > 0 && isMoving)
         {
+
             MoveAlongPath();
         }
     }

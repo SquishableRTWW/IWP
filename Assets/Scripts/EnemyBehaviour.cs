@@ -13,6 +13,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     [SerializeField] GameObject explosionEffect;
     private GameObject realExplosion;
+    public Sprite normalSprite;
+    public Sprite reverseSprite;
     public string characterName;
     public Vector3Int gridLocation;
     public Vector2Int grid2DLocation { get { return new Vector2Int(gridLocation.x, gridLocation.y); } }

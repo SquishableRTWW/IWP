@@ -187,6 +187,15 @@ public class Manager : MonoBehaviour
             {
                 enemyPath[i] = (pathfinder.FindPathForEnemy(MapManager.Instance.enemyList[i].activeTile, nearestCharacterTile, MapManager.Instance.allTiles,
                 MapManager.Instance.enemyList[i].movementRange));
+                // Change sprite direction
+                if (nearestCharacterTile.transform.position.x <= MapManager.Instance.enemyList[i].transform.position.x)
+                {
+                    MapManager.Instance.enemyList[i].GetComponent<SpriteRenderer>().sprite = MapManager.Instance.enemyList[i].reverseSprite;
+                }
+                else
+                {
+                    MapManager.Instance.enemyList[i].GetComponent<SpriteRenderer>().sprite = MapManager.Instance.enemyList[i].normalSprite;
+                }
             }
             // Else attack
             else
