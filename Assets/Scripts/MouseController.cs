@@ -272,7 +272,7 @@ public class MouseController : MonoBehaviour
             }
             if (MapManager.Instance.enemyList[affectedCount].grid2DLocation == tilesWithCharacters[i].grid2DLocation)
             {
-                MapManager.Instance.enemyList[affectedCount].HP -= character.weaponsEquipped[WeaponSelected].GetWeaponDamage();
+                MapManager.Instance.enemyList[affectedCount].HP -= character.weaponsEquipped[WeaponSelected].GetWeaponDamage() + character.attackIncrease;
                 MapManager.Instance.enemyList[affectedCount].healthBar.SetHealth(MapManager.Instance.enemyList[affectedCount].HP);
                 affectedCount = 0;
                 tilesWithCharacters.Remove(tilesWithCharacters[i]);

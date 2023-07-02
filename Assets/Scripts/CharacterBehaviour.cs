@@ -10,6 +10,8 @@ public class CharacterBehaviour : MonoBehaviour
     public int HP;
     public int maxHP;
     public int defence;
+    public int attackIncrease;
+
     public bool finishedMove;
     public bool isOverheated = false;
     public List<WeaponBehaviour> weaponsEquipped;
@@ -39,18 +41,24 @@ public class CharacterBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Equipment check
-        foreach (EquipmentScriptable equipment in equipmentList)
+        // Equipment check for stat buffs
+        if (equipmentList[0] != null)
         {
-            switch (equipment.equipmentName)
+            foreach (EquipmentScriptable equipment in equipmentList)
             {
-                case "Steel Plating":
-                    defence = 1;
-                    break;
-                default:
-                    break;
-            }
+                switch (equipment.equipmentName)
+                {
+                    case "Steel Plating":
+                        defence = 1;
+                        break;
+                    case "Pop Shells":
+                        attackIncrease = 1;
+                        break;
+                    default:
+                        break;
+                }
 
+            }
         }
 
         if (HP <= 0)
