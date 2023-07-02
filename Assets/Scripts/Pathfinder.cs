@@ -121,6 +121,12 @@ public class Pathfinder
             {
                 list.Add(searchableTiles[i]);
                 vector2IntList.Remove(vector2IntList[0]);
+
+                // Stop at first enemy found
+                if (searchableTiles[i].hasEnemy)
+                {
+                    break;
+                }
             }
             if (vector2IntList.Count < 1)
             {
@@ -129,6 +135,38 @@ public class Pathfinder
         }
         return list;
     }
+    public List<OverlayTileBehaviour> FindSingleLazerAttackPath(OverlayTileBehaviour characterTile, OverlayTileBehaviour end, int range, List<OverlayTileBehaviour> searchableTiles)
+    {
+        int x = (characterTile.grid2DLocation.x - end.grid2DLocation.x);
+        int y = (characterTile.grid2DLocation.y - end.grid2DLocation.y);
+
+        Vector2 direction = new Vector2(x, y).normalized;
+
+        List<Vector2Int> vector2IntList = new List<Vector2Int>();
+        List<OverlayTileBehaviour> list = new List<OverlayTileBehaviour>();
+        Vector2Int realDirection = new Vector2Int((int)direction.x, (int)direction.y);
+
+        for (int i = 1; i < range + 1; i++)
+        {
+            Vector2Int tilePosition = characterTile.grid2DLocation - realDirection * i;
+            vector2IntList.Add(tilePosition);
+        }
+
+        for (int i = 0; i < searchableTiles.Count; i++)
+        {
+            if (searchableTiles[i].grid2DLocation == vector2IntList[0])
+            {
+                list.Add(searchableTiles[i]);
+                vector2IntList.Remove(vector2IntList[0]);
+            }
+            if (vector2IntList.Count < 1)
+            {
+                break;
+            }
+        }
+        return list;
+    }
+
 
     public List<OverlayTileBehaviour> FindAOEAttackPath(OverlayTileBehaviour mousedTile, int AOERange, List<OverlayTileBehaviour> searchableTiles)
     {
