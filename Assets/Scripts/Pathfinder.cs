@@ -79,7 +79,11 @@ public class Pathfinder
             var neighbourTiles = MapManager.Instance.GetNeighbourTiles(currentOverlayTile, searchableTiles);
             foreach (var neighbour in neighbourTiles)
             {
-                if (neighbour.isBlocked || closedList.Contains(neighbour) || neighbour.hasEnemy)
+                if (neighbour.isBlocked || closedList.Contains(neighbour))
+                {
+                    continue;
+                }
+                if(neighbour.hasEnemy)
                 {
                     continue;
                 }

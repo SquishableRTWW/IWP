@@ -78,6 +78,7 @@ public class Manager : MonoBehaviour
                 foreach (var enemy in MapManager.Instance.enemyList)
                 {
                     enemy.hasAttacked = false;
+                    enemy.shouldAttack = false;
                 }
             }
             timerText.text = string.Format("{0:0.00}", timeLimit);
@@ -93,6 +94,13 @@ public class Manager : MonoBehaviour
             //Give back the CP
             AddCPImage();
         }
+
+        // NOTE FOR ME:
+        // HOW THE ENEMY AI SEQUENCES WORKS RIGHT NOW:
+        // 1. TempEnemyTurn() loops through all enemies, what they should target, if they should attack and not move/move etc
+        // 2. StartMovingEnemies() coroutine to one by one, move each enemy/attack with each enemy until all enemies have been done
+        // 3. Turn ends at which function? (Need to check)
+
 
         if (!playerTurn)
         {
@@ -117,16 +125,41 @@ public class Manager : MonoBehaviour
                 //StartCoroutine(camera.ZoomAtCharacter(enemy.transform.position));
                 yield return new WaitForSeconds(1.0f);
 
-                while (path.Count > 0)
+                if (!MapManager.Instance.enemyList[i].shouldAttack)
                 {
-                    OverlayTileBehaviour nextTile = path[0];
-                    MoveAlongEnemyPath(enemy, nextTile);
-                    yield return new WaitUntil(() => Vector2.Distance(enemy.transform.position, nextTile.transform.position) <= 0.0f);
+                    while (path.Count > 0 && MapManager.Instance.enemyList[i].shouldAttack == false)
+                    {
+                        OverlayTileBehaviour nextTile = path[0];
+                        MoveAlongEnemyPath(enemy, nextTile);
+                        yield return new WaitUntil(() => Vector2.Distance(enemy.transform.position, nextTile.transform.position) <= 0.0f);
 
-                    PositionCharacter(enemy, nextTile);
+                        PositionCharacter(enemy, nextTile);
+                        if (MapManager.Instance.enemyList[i].InAttackRange(MapManager.Instance.enemyList[i].targetTile) == true)
+                        {
+                            MapManager.Instance.enemyList[i].shouldAttack = true;
+                        }
 
-                    //Debug.Log("E: " + i + "Count:" + path.Count);
-                    path.RemoveAt(0);
+                        //Debug.Log("E: " + i + "Count:" + path.Count);
+                        path.RemoveAt(0);
+                        if (MapManager.Instance.enemyList[i].shouldAttack == true)
+                        {
+                            path.Clear();
+                        }
+                    }
+                }
+
+                if (MapManager.Instance.enemyList[i].shouldAttack)
+                {
+                    foreach (CharacterBehaviour character in MapManager.Instance.playerCharacters)
+                    {
+                        if (character.grid2DLocation == MapManager.Instance.enemyList[i].targetTile.grid2DLocation && !MapManager.Instance.enemyList[i].hasAttacked)
+                        {
+                            StartCoroutine(MapManager.Instance.enemyList[i].DoAttackAnimation());
+                            DoDamageToCharacter(character, MapManager.Instance.enemyList[i].enemyScriptable.weapon.GetWeaponDamage());
+                            MapManager.Instance.enemyList[i].hasAttacked = true;
+                            MapManager.Instance.enemyList[i].shouldAttack = false;
+                        }
+                    }
                 }
 
                 if (i == enemyPath.Count - 1)
@@ -159,6 +192,7 @@ public class Manager : MonoBehaviour
                     {
                         nearestDistance = distance;
                         nearestCharacterTile = tile;
+                        MapManager.Instance.enemyList[i].targetTile = tile;
                     }
                 }
             }
@@ -184,18 +218,10 @@ public class Manager : MonoBehaviour
                     MapManager.Instance.enemyList[i].directionIndicator = 1;
                 }
             }
-            // Else attack
+            // Else declare that the enemy should attack
             else
             {
-                foreach (CharacterBehaviour character in MapManager.Instance.playerCharacters)
-                {
-                    if (character.grid2DLocation == nearestCharacterTile.grid2DLocation && !MapManager.Instance.enemyList[i].hasAttacked)
-                    {
-                        StartCoroutine(MapManager.Instance.enemyList[i].DoAttackAnimation());
-                        DoDamageToCharacter(character, MapManager.Instance.enemyList[i].enemyScriptable.weapon.GetWeaponDamage());
-                        MapManager.Instance.enemyList[i].hasAttacked = true;
-                    }
-                }
+                MapManager.Instance.enemyList[i].shouldAttack = true;
             }
         }
         AddCPImage();

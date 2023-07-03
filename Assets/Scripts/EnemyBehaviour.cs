@@ -4,22 +4,27 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
+    // Stats
+    public string characterName;
     public EnemyScriptable enemyScriptable;
     public int HP;
     public int maxHP;
     public int movementRange;
     public HealthBar healthBar;
-    public bool hasAttacked;
-
+    // Effects and animations
     [SerializeField] GameObject explosionEffect;
     private GameObject realExplosion;
     public Sprite normalSprite;
     public Sprite reverseSprite;
-    public string characterName;
-    public Vector3Int gridLocation;
+    // For combat
+    public OverlayTileBehaviour targetTile;
     public GameObject shootingEffect;
     public int directionIndicator;
     private GameObject realShooting;
+    public bool shouldAttack;
+    public bool hasAttacked;
+    // Location on gridmap
+    public Vector3Int gridLocation;
     public Vector2Int grid2DLocation { get { return new Vector2Int(gridLocation.x, gridLocation.y); } }
     public OverlayTileBehaviour activeTile;
 
