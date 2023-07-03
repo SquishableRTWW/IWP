@@ -77,6 +77,7 @@ public class EnemyBehaviour : MonoBehaviour
             if (MapManager.Instance.enemyList[i].grid2DLocation == grid2DLocation)
             {
                 MapManager.Instance.enemyList.Remove(MapManager.Instance.enemyList[i]);
+                Manager.Instance.enemyPath.Remove(Manager.Instance.enemyPath[i]);
                 Destroy(gameObject);
             }
         }
