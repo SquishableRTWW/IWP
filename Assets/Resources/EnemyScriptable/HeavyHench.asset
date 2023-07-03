@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4392287566880544dbf9d33c8028dd72, type: 3}
   m_Name: HeavyHench
   m_EditorClassIdentifier: 
-  HP: 15
+  HP: 7
   enemyName: Heavy Hench
   movementRange: 3
   weapon: {fileID: 5634200892605953027, guid: b4107d631b66bbe41959bd0da1ff217a, type: 3}

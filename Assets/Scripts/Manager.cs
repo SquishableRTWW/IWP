@@ -271,6 +271,7 @@ public class Manager : MonoBehaviour
     {
         character.HP -= damage - character.defence;
         character.healthBar.SetHealth(character.HP);
+        camera.CameraShake();
     }
 
     // Code for helping enemies to move
