@@ -410,6 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb678657734f8741b4135adf7b491b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: Sand Walker
   maxFuel: 15
   currentFuel: 15
   overheatAmount: 5
@@ -417,6 +418,7 @@ MonoBehaviour:
   maxHP: 12
   defence: 0
   attackIncrease: 0
+  directionIndicator: 0
   finishedMove: 0
   isOverheated: 0
   weaponsEquipped:
@@ -425,9 +427,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 69f026e0c387ca5419af4c2d51174c18, type: 2}
   healthBar: {fileID: 3265798537142198243}
   explosionEffect: {fileID: 5382249522824878518, guid: 2081e722bab54e4479758e91d6b6afaf, type: 3}
+  shootingEffect: {fileID: 5382249522824878518, guid: 7f0b9a85958198348b827626e6b702c3, type: 3}
+  lobbingEffect: {fileID: 0}
   normalSprite: {fileID: 21300000, guid: f558541d590ba5245833fbd661947918, type: 3}
   reverseSprite: {fileID: 21300000, guid: 58d122f9798bcde41be805df8fb3f084, type: 3}
-  characterName: Sand Walker
   gridLocation: {x: -5, y: 2, z: 2}
   activeTile: {fileID: 0}
 --- !u!61 &8041033709081620668

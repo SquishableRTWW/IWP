@@ -64,10 +64,12 @@ public class MouseController : MonoBehaviour
                     if (overlayTile.transform.position.x >= character.transform.position.x)
                     {
                         character.GetComponent<SpriteRenderer>().sprite = character.normalSprite;
+                        character.directionIndicator = 1;
                     }
                     else
                     {
                         character.GetComponent<SpriteRenderer>().sprite = character.reverseSprite;
+                        character.directionIndicator = 0;
                         Debug.Log("Reversed ssprite");
                     }
 
@@ -119,6 +121,30 @@ public class MouseController : MonoBehaviour
                 }
                 else if (attackTiles.Count > 0 && attackSelected == true)
                 {
+                    // Change sprite direction
+                    if (overlayTile.transform.position.x >= character.transform.position.x)
+                    {
+                        character.GetComponent<SpriteRenderer>().sprite = character.normalSprite;
+                        character.directionIndicator = 1;
+                    }
+                    else
+                    {
+                        character.GetComponent<SpriteRenderer>().sprite = character.reverseSprite;
+                        character.directionIndicator = 0;
+                        Debug.Log("Reversed ssprite");
+                    }
+                    // Play attack animation
+                    switch (character.weaponsEquipped[WeaponSelected].GetShotType())
+                    {
+                        case "Across":
+                            StartCoroutine(character.DoAttackAnimation(character.shootingEffect));
+                            break;
+                        case "Linear":
+                            break;
+                        default:
+                            break;
+                    }
+                    
                     DoDamage();
                     Manager.Instance.ChangeCP(character.weaponsEquipped[WeaponSelected].GetCPCost());
                     Manager.Instance.DeleteCPImage(character.weaponsEquipped[WeaponSelected].GetCPCost());

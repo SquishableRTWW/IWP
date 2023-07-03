@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CharacterBehaviour : MonoBehaviour
 {
+    // Stats
+    public string characterName;
     public int maxFuel;
     public int currentFuel;
     public int overheatAmount;
@@ -11,18 +13,24 @@ public class CharacterBehaviour : MonoBehaviour
     public int maxHP;
     public int defence;
     public int attackIncrease;
-
+    public int directionIndicator;
+    // Combat related
     public bool finishedMove;
     public bool isOverheated = false;
     public List<WeaponBehaviour> weaponsEquipped;
     public List<EquipmentScriptable> equipmentList;
     public HealthBar healthBar;
-
+    // Animation effects
     [SerializeField] GameObject explosionEffect;
     private GameObject realExplosion;
+    public GameObject shootingEffect;
+    private GameObject realShooting;
+    public GameObject lobbingEffect;
+    private GameObject realLobbing;
+    //Sprite stuff
     public Sprite normalSprite;
     public Sprite reverseSprite;
-    public string characterName;
+    // Location on the gridmap
     public Vector3Int gridLocation;
     public Vector2Int grid2DLocation { get { return new Vector2Int(gridLocation.x, gridLocation.y); } }
     public OverlayTileBehaviour activeTile;
@@ -38,6 +46,7 @@ public class CharacterBehaviour : MonoBehaviour
         defence = 0;
         finishedMove = false;
         realExplosion = null;
+        directionIndicator = 1;
     }
 
     // Update is called once per frame
@@ -95,5 +104,21 @@ public class CharacterBehaviour : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    public IEnumerator DoAttackAnimation(GameObject effect)
+    {
+        if (realShooting == null && shootingEffect != null)
+        {
+            realShooting = Instantiate(shootingEffect,
+            new Vector3(gameObject.transform.position.x + (0.3f * directionIndicator), gameObject.transform.position.y + 0.2f, gameObject.transform.position.z), 
+            Quaternion.identity);
+
+            realShooting.GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + 1;
+            //realShooting.transform.rotation.Set(0f, 0f, 1f, -180f * directionIndicator);
+        }
+
+        yield return new WaitForSeconds(0.75f);
+        Destroy(realShooting);
     }
 }
