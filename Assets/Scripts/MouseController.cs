@@ -92,6 +92,9 @@ public class MouseController : MonoBehaviour
                         case "Linear":
                             attackTiles = pathfinder.FindLinearAttackPath(character.activeTile, overlayTile, character.weaponsEquipped[WeaponSelected].GetWeaponRange(), inRangeTiles);
                             break;
+                        case "Laser1":
+                            attackTiles = pathfinder.FindSingleLazerAttackPath(character.activeTile, overlayTile, character.weaponsEquipped[WeaponSelected].GetWeaponRange(), inRangeTiles);
+                            break;
                         case "Lobbing":
                             attackTiles = pathfinder.FindAOEAttackPath(overlayTile, (int)character.weaponsEquipped[WeaponSelected].GetAttackPattern().x, inRangeTiles);
                             break;
@@ -134,16 +137,8 @@ public class MouseController : MonoBehaviour
                         Debug.Log("Reversed ssprite");
                     }
                     // Play attack animation
-                    switch (character.weaponsEquipped[WeaponSelected].GetShotType())
-                    {
-                        case "Across":
-                            StartCoroutine(character.DoAttackAnimation(character.shootingEffect));
-                            break;
-                        case "Linear":
-                            break;
-                        default:
-                            break;
-                    }
+                    character.shootingEffect = character.weaponsEquipped[WeaponSelected].GetAnimation();
+                    StartCoroutine(character.DoAttackAnimation(character.shootingEffect));
                     
                     DoDamage();
                     Manager.Instance.ChangeCP(character.weaponsEquipped[WeaponSelected].GetCPCost());

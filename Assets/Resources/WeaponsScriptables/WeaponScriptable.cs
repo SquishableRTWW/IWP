@@ -15,4 +15,6 @@ public class WeaponScriptable : ScriptableObject
 
     public Sprite attackSprite;
     public Sprite weaponSprite;
+
+    public GameObject animation;
 }

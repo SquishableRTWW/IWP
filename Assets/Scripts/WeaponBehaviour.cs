@@ -46,4 +46,8 @@ public class WeaponBehaviour : MonoBehaviour
     {
         return weaponScriptable.CPCost;
     }
+    public GameObject GetAnimation()
+    {
+        return weaponScriptable.animation;
+    }
 }

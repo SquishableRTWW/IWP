@@ -352,6 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb678657734f8741b4135adf7b491b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: Fleetfoot
   maxFuel: 20
   currentFuel: 20
   overheatAmount: 6
@@ -359,6 +360,7 @@ MonoBehaviour:
   maxHP: 20
   defence: 0
   attackIncrease: 0
+  directionIndicator: 0
   finishedMove: 0
   isOverheated: 0
   weaponsEquipped:
@@ -367,9 +369,10 @@ MonoBehaviour:
   - {fileID: 0}
   healthBar: {fileID: 2788597774748779722}
   explosionEffect: {fileID: 5382249522824878518, guid: 2081e722bab54e4479758e91d6b6afaf, type: 3}
+  shootingEffect: {fileID: 5382249522824878518, guid: f612569e7edcb084ab7d846704a7c061, type: 3}
+  lobbingEffect: {fileID: 0}
   normalSprite: {fileID: 21300000, guid: 08f32aa4c0916c84582a34e774425a20, type: 3}
   reverseSprite: {fileID: 21300000, guid: 07c9e16e42ba25a4da4f03b0ef5ac1bf, type: 3}
-  characterName: Fleetfoot
   gridLocation: {x: -8, y: 2, z: 1}
   activeTile: {fileID: 0}
 --- !u!61 &8454299592945121024
