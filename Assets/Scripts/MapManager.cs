@@ -137,15 +137,15 @@ public class MapManager : MonoBehaviour
                         // Check no clash with player's characters
                         for (int j = 0; j < playerCharacters.Count; j++)
                         {
-                            if (j + 1 == enemyList.Count)
-                            {
-                                noTileError = true;
-                                break;
-                            }
                             if (playerCharacters[j].grid2DLocation == new Vector2Int(enemyX, enemyY))
                             {
                                 noTileError = false;
                                 Debug.Log("Spawn clash; resetting");
+                            }
+                            else if (j + 1 == enemyList.Count)
+                            {
+                                noTileError = true;
+                                break;
                             }
                         }
 
@@ -156,11 +156,11 @@ public class MapManager : MonoBehaviour
                             {
                                 noTileError = false;
                                 Debug.Log("Spawn clash; resetting");
+                                break;
                             }
-                            if (j + 1 == enemyList.Count)
+                            else if (j + 1 == enemyList.Count)
                             {
                                 noTileError = true;
-                                break;
                             }
                         }
 
