@@ -109,46 +109,31 @@ public class Manager : MonoBehaviour
     {
         for (int i = 0; i < MapManager.Instance.enemyList.Count; i++)
         {
-            EnemyBehaviour enemy = MapManager.Instance.enemyList[i];
-            List<OverlayTileBehaviour> path = enemyPath[i];
-
-            //StartCoroutine(camera.ZoomAtCharacter(enemy.transform.position));
-            yield return new WaitForSeconds(1.0f);
-
-            while (path.Count > 0)
+            if (MapManager.Instance.enemyList[i] != null)
             {
-                OverlayTileBehaviour nextTile = path[0];
-                MoveAlongEnemyPath(enemy, nextTile);
-                yield return new WaitUntil(() => Vector2.Distance(enemy.transform.position, nextTile.transform.position) <= 0f);
+                EnemyBehaviour enemy = MapManager.Instance.enemyList[i];
+                List<OverlayTileBehaviour> path = enemyPath[i];
 
-                PositionCharacter(enemy, nextTile);
+                //StartCoroutine(camera.ZoomAtCharacter(enemy.transform.position));
+                yield return new WaitForSeconds(1.0f);
 
-                //Debug.Log("E: " + i + "Count:" + path.Count);
-                path.RemoveAt(0);
+                while (path.Count > 0)
+                {
+                    OverlayTileBehaviour nextTile = path[0];
+                    MoveAlongEnemyPath(enemy, nextTile);
+                    yield return new WaitUntil(() => Vector2.Distance(enemy.transform.position, nextTile.transform.position) <= 0.0f);
+
+                    PositionCharacter(enemy, nextTile);
+
+                    //Debug.Log("E: " + i + "Count:" + path.Count);
+                    path.RemoveAt(0);
+                }
+
+                if (i == enemyPath.Count - 1)
+                {
+                    playerTurn = true;
+                }
             }
-            //for (int j = 0; j < path.Count; j++)
-            //{
-            //    OverlayTileBehaviour nextTile = path[j];
-            //    MoveAlongEnemyPath(enemy, nextTile);
-
-            //    yield return new WaitUntil(() => Vector2.Distance(enemy.transform.position, nextTile.transform.position) < 0.001f);
-            //    i = enemyToMove - 1;
-
-            //    PositionCharacter(enemy, nextTile);
-
-            //    if (j == path.Count - 1)
-            //    {
-            //        enemyToMove++;
-            //        i = enemyToMove - 1;
-            //        path.Clear();
-            //    }
-            //}
-
-            if (i == enemyPath.Count - 1)
-            {
-                playerTurn = true;
-            }
-            
         }
     }
 
@@ -212,7 +197,6 @@ public class Manager : MonoBehaviour
                     }
                 }
             }
-
         }
         AddCPImage();
         CP = 2;

@@ -102,15 +102,15 @@ public class EnemyBehaviour : MonoBehaviour
                 List<OverlayTileBehaviour> targetTiles = rangeFinder.GetTilesInAttackRange(activeTile, enemyScriptable.weapon.GetWeaponRange());
                 if (targetTiles.Count > 1)
                 {
-                    Debug.Log("Target is in sight");
+                    //Debug.Log("Target is in sight");
                     if (targetTiles.Contains(targetTile))
                     {
-                        Debug.Log("Target is also in range");
+                        //Debug.Log("Target is also in range");
                         return true;
                     }
                     else
                     {
-                        Debug.Log("But not in range");
+                        //Debug.Log("But not in range");
                     }
                 }
                 break;
