@@ -191,10 +191,12 @@ public class Manager : MonoBehaviour
                 if (nearestCharacterTile.transform.position.x <= MapManager.Instance.enemyList[i].transform.position.x)
                 {
                     MapManager.Instance.enemyList[i].GetComponent<SpriteRenderer>().sprite = MapManager.Instance.enemyList[i].reverseSprite;
+                    MapManager.Instance.enemyList[i].directionIndicator = 0;
                 }
                 else
                 {
                     MapManager.Instance.enemyList[i].GetComponent<SpriteRenderer>().sprite = MapManager.Instance.enemyList[i].normalSprite;
+                    MapManager.Instance.enemyList[i].directionIndicator = 1;
                 }
             }
             // Else attack
@@ -204,6 +206,7 @@ public class Manager : MonoBehaviour
                 {
                     if (character.grid2DLocation == nearestCharacterTile.grid2DLocation && !MapManager.Instance.enemyList[i].hasAttacked)
                     {
+                        StartCoroutine(MapManager.Instance.enemyList[i].DoAttackAnimation());
                         DoDamageToCharacter(character, MapManager.Instance.enemyList[i].enemyScriptable.weapon.GetWeaponDamage());
                         MapManager.Instance.enemyList[i].hasAttacked = true;
                     }

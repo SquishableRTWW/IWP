@@ -286,6 +286,8 @@ MonoBehaviour:
   reverseSprite: {fileID: 21300000, guid: 24a3f721116e3bd4ea02f575ee3964ee, type: 3}
   characterName: Heavy Hench
   gridLocation: {x: 2, y: -7, z: 2}
+  shootingEffect: {fileID: 5382249522824878518, guid: 7f0b9a85958198348b827626e6b702c3, type: 3}
+  directionIndicator: 0
   activeTile: {fileID: 0}
 --- !u!1 &7174179808038824675
 GameObject:

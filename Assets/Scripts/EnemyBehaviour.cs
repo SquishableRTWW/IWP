@@ -17,6 +17,9 @@ public class EnemyBehaviour : MonoBehaviour
     public Sprite reverseSprite;
     public string characterName;
     public Vector3Int gridLocation;
+    public GameObject shootingEffect;
+    public int directionIndicator;
+    private GameObject realShooting;
     public Vector2Int grid2DLocation { get { return new Vector2Int(gridLocation.x, gridLocation.y); } }
     public OverlayTileBehaviour activeTile;
 
@@ -34,6 +37,7 @@ public class EnemyBehaviour : MonoBehaviour
         realExplosion = null;
         pathfinder = new Pathfinder();
         rangeFinder = new MoveRangeFinder();
+        directionIndicator = 1;
     }
 
     // Update is called once per frame
@@ -71,6 +75,22 @@ public class EnemyBehaviour : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    public IEnumerator DoAttackAnimation()
+    {
+        if (realShooting == null && shootingEffect != null)
+        {
+            realShooting = Instantiate(shootingEffect,
+            new Vector3(gameObject.transform.position.x + (0.3f * directionIndicator), gameObject.transform.position.y + 0.2f, gameObject.transform.position.z),
+            Quaternion.identity);
+
+            realShooting.GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + 1;
+            //realShooting.transform.rotation.Set(0f, 0f, 1f, -180f * directionIndicator);
+        }
+
+        yield return new WaitForSeconds(0.75f);
+        Destroy(realShooting);
     }
 
     // AI methods here:========================================================================================
