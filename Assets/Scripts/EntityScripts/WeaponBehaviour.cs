@@ -34,6 +34,10 @@ public class WeaponBehaviour : MonoBehaviour
     {
         return weaponScriptable.damage;
     }
+    public string GetWeaponName()
+    {
+        return weaponScriptable.weaponName;
+    }
     public string GetShotType()
     {
         return weaponScriptable.shotType;

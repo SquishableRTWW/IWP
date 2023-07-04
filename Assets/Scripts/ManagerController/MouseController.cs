@@ -194,6 +194,43 @@ public class MouseController : MonoBehaviour
                             characterSheet.gameObject.transform.Find("SpriteImage").GetComponent<Image>().sprite = character.GetComponent<SpriteRenderer>().sprite;
                             characterSheet.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = character.characterName + "\nHP: " 
                                 + character.HP + "\nMax F: " + character.maxFuel + "\nCurr F: " + character.currentFuel;
+
+                            // Change tool tip message for each weapon
+                            for (int w = 0; w < character.weaponsEquipped.Count; w++)
+                            {
+                                Button AB;
+                                if (w == 0)
+                                {
+                                    AB = attack1Button;
+                                }
+                                else if (w == 1)
+                                {
+                                    AB = attack2Button;
+                                }
+                                else
+                                {
+                                    AB = attack1Button;
+                                }
+                                switch (character.weaponsEquipped[w].GetWeaponName())
+                                {
+                                    case "Bolter":
+                                        AB.GetComponent<ToolTip>().message = "A short range weapon that fires in a row of 3\n" + "DMG: 2\n" + "CP: 1";
+                                        break;
+                                    case "Grenade Launcher":
+                                        AB.GetComponent<ToolTip>().message = "A long range weapon that bombards a large area\n" + "DMG: 4\n" + "CP: 2";
+                                        break;
+                                    case "Smoothbore":
+                                        AB.GetComponent<ToolTip>().message = "A long range weapon that shoots in a straight line. Hits only first target.\n" + "DMG: 3\n" + "CP: 1";
+                                        break;
+                                    case "Laser Cannon":
+                                        AB.GetComponent<ToolTip>().message = "A medium range weapon that straight down a line, hitting all targets.\n" + "DMG: 4\n" + "CP: 2";
+                                        break;
+                                    default:
+                                        AB.GetComponent<ToolTip>().message = "Weapon error";
+                                        break;
+                                }
+
+                            }
                         }
                     }
                     else
