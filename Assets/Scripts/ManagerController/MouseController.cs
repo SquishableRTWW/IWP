@@ -28,6 +28,8 @@ public class MouseController : MonoBehaviour
     [SerializeField] private Button attack1Button;
     [SerializeField] private Button attack2Button;
     [SerializeField] CameraController sceneCameraController;
+    public HealthBar characterSheetHealthbar;
+    public FuelBar characterSheetFuelbar;
 
     private bool isMoving = false;
     private int WeaponSelected = 0;
@@ -192,8 +194,10 @@ public class MouseController : MonoBehaviour
                             // Update Character sheet UI
                             characterSheet.gameObject.SetActive(true);
                             characterSheet.gameObject.transform.Find("SpriteImage").GetComponent<Image>().sprite = character.GetComponent<SpriteRenderer>().sprite;
-                            characterSheet.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = character.characterName + "\nHP: " 
-                                + character.HP + "\nMax F: " + character.maxFuel + "\nCurr F: " + character.currentFuel;
+                            characterSheet.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = character.characterName + "\n\nHP " + "\nFUEL " + "      " + character.currentFuel + "/" + character.maxFuel;
+                            characterSheetHealthbar.SetHealth(character.HP);
+                            characterSheetFuelbar.SetMaxFuel(character.maxFuel);
+                            characterSheetFuelbar.SetFuel(character.currentFuel);
 
                             // Change tool tip message for each weapon
                             for (int w = 0; w < character.weaponsEquipped.Count; w++)
