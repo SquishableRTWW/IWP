@@ -21,8 +21,12 @@ public class Manager : MonoBehaviour
     [SerializeField] float originalTime;
     [SerializeField] int CP;
     [SerializeField] int maxCP;
+
+    // Booleans for phases of the game; Might be referenced outside of Manager like
+    // in the prep phase manager.
     public bool isInCombat = true;
     public bool playerTurn = true;
+
     [SerializeField] TimerBar TimerSlider;
 
     private Pathfinder pathfinder;
@@ -65,11 +69,22 @@ public class Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Check to see if there are any enemies left
+        if (MapManager.Instance.enemyList.Count <= 0)
+        {
+            // If there are no enemies left, end the level
+            isInCombat = false;
+            // And move on to either event or preparation phase
+
+        }
+
+        // If statement to update the enemy paths when new enemies are made or destroyed
         if (enemyPath.Count < MapManager.Instance.enemyList.Count)
         {
             enemyPath.Add(new List<OverlayTileBehaviour>());
         }
 
+        // Game logic for when level is being played
         if (isInCombat)
         {
             if (playerTurn)
@@ -85,9 +100,16 @@ public class Manager : MonoBehaviour
             CPText.text = "CP Left: " + CP.ToString();
             TimerSlider.SetTime(timeLimit);
         }
+        // Game logic for during the event phase (if any)
+        // Game logic for during the preparation phase
+        else
+        {
+
+        }
+
+        // If level time limit is over?
         if (timeLimit <= 0)
         {
-            // Insert function call to start enemy AI here;
             playerTurn = false;
             TempEnemyTurn();
             timeLimit = originalTime;
@@ -99,8 +121,7 @@ public class Manager : MonoBehaviour
         // HOW THE ENEMY AI SEQUENCES WORKS RIGHT NOW:
         // 1. TempEnemyTurn() loops through all enemies, what they should target, if they should attack and not move/move etc
         // 2. StartMovingEnemies() coroutine to one by one, move each enemy/attack with each enemy until all enemies have been done
-        // 3. Turn ends at which function? (Need to check)
-
+        // 3. Turn ends at the end of MoveEnemiesSequentially(). TempEnemyTurn is the precursor. 
 
         if (!playerTurn)
         {
