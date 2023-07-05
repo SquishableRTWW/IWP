@@ -16,6 +16,8 @@ public class EnemyBehaviour : MonoBehaviour
     private GameObject realExplosion;
     public Sprite normalSprite;
     public Sprite reverseSprite;
+    [SerializeField] private GameObject floatingTextPrefab;
+
     // For combat
     public OverlayTileBehaviour targetTile;
     public GameObject shootingEffect;
@@ -97,6 +99,19 @@ public class EnemyBehaviour : MonoBehaviour
 
         yield return new WaitForSeconds(0.75f);
         Destroy(realShooting);
+    }
+
+    // Method to show the floating damage text.
+    public IEnumerator ShowDamage(string text)
+    {
+        if (floatingTextPrefab)
+        {
+            GameObject prefab = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
+            prefab.GetComponentInChildren<TextMesh>().text = text;
+
+            yield return new WaitForSeconds(0.6f);
+            Destroy(prefab);
+        }
     }
 
     // AI methods here:========================================================================================
