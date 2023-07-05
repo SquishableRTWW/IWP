@@ -27,6 +27,7 @@ public class CharacterBehaviour : MonoBehaviour
     private GameObject realShooting;
     public GameObject lobbingEffect;
     private GameObject realLobbing;
+    [SerializeField] GameObject floatingTextPrefab;
     //Sprite stuff
     public Sprite normalSprite;
     public Sprite reverseSprite;
@@ -120,5 +121,19 @@ public class CharacterBehaviour : MonoBehaviour
 
         yield return new WaitForSeconds(0.75f);
         Destroy(realShooting);
+    }
+
+    // Method to show the floating damage text.
+    public IEnumerator ShowDamage(string text)
+    {
+        if (floatingTextPrefab)
+        {
+            GameObject prefab = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
+            prefab.GetComponentInChildren<TextMesh>().color = new Color(0f, 1f, 0f, 1f);
+            prefab.GetComponentInChildren<TextMesh>().text = text;
+
+            yield return new WaitForSeconds(0.6f);
+            Destroy(prefab);
+        }
     }
 }

@@ -156,6 +156,7 @@ public class Manager : MonoBehaviour
                         {
                             StartCoroutine(MapManager.Instance.enemyList[i].DoAttackAnimation());
                             DoDamageToCharacter(character, MapManager.Instance.enemyList[i].enemyScriptable.weapon.GetWeaponDamage());
+                            StartCoroutine(character.ShowDamage(MapManager.Instance.enemyList[i].enemyScriptable.weapon.GetWeaponDamage().ToString()));
                             MapManager.Instance.enemyList[i].hasAttacked = true;
                             MapManager.Instance.enemyList[i].shouldAttack = false;
                         }

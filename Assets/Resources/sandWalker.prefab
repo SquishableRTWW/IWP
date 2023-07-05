@@ -429,6 +429,7 @@ MonoBehaviour:
   explosionEffect: {fileID: 5382249522824878518, guid: 2081e722bab54e4479758e91d6b6afaf, type: 3}
   shootingEffect: {fileID: 5382249522824878518, guid: 7f0b9a85958198348b827626e6b702c3, type: 3}
   lobbingEffect: {fileID: 0}
+  floatingTextPrefab: {fileID: 2314985102620632716, guid: 8e3446554d1108b4fb78d1ff4405697b, type: 3}
   normalSprite: {fileID: 21300000, guid: f558541d590ba5245833fbd661947918, type: 3}
   reverseSprite: {fileID: 21300000, guid: 58d122f9798bcde41be805df8fb3f084, type: 3}
   gridLocation: {x: -5, y: 2, z: 2}
