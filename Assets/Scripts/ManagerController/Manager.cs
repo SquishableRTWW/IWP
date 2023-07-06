@@ -16,6 +16,8 @@ public class Manager : MonoBehaviour
     [SerializeField] TextMeshProUGUI infoText;
     [SerializeField] TextMeshProUGUI CPText;
     public Canvas CPUIField;
+    public Canvas combatCanvas;
+
     [SerializeField] Image CPUI;
     [SerializeField] float timeLimit;
     [SerializeField] float originalTime;
@@ -75,7 +77,7 @@ public class Manager : MonoBehaviour
             // If there are no enemies left, end the level
             isInCombat = false;
             // And move on to either event or preparation phase
-
+            combatCanvas.gameObject.SetActive(false);
         }
 
         // If statement to update the enemy paths when new enemies are made or destroyed
@@ -87,6 +89,7 @@ public class Manager : MonoBehaviour
         // Game logic for when level is being played
         if (isInCombat)
         {
+            combatCanvas.gameObject.SetActive(true);
             if (playerTurn)
             {
                 timeLimit -= Time.deltaTime;

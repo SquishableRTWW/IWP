@@ -138,13 +138,28 @@ public class MouseController : MonoBehaviour
                         character.directionIndicator = 0;
                         Debug.Log("Reversed ssprite");
                     }
-                    // Play attack animation
-                    character.shootingEffect = character.weaponsEquipped[WeaponSelected].GetAnimation();
-                    StartCoroutine(character.DoAttackAnimation(character.shootingEffect));
-                    
-                    DoDamage();
-                    Manager.Instance.ChangeCP(character.weaponsEquipped[WeaponSelected].GetCPCost());
-                    Manager.Instance.DeleteCPImage(character.weaponsEquipped[WeaponSelected].GetCPCost());
+
+                    bool hasEnemy = false;
+                    foreach (OverlayTileBehaviour tile in attackTiles)
+                    {
+                        if (tile.hasEnemy)
+                        {
+                            hasEnemy = true;
+                        }
+                    }
+                    if (hasEnemy)
+                    {
+                        // Play attack animation
+                        character.shootingEffect = character.weaponsEquipped[WeaponSelected].GetAnimation();
+                        StartCoroutine(character.DoAttackAnimation(character.shootingEffect));
+                        DoDamage();
+                        Manager.Instance.ChangeCP(character.weaponsEquipped[WeaponSelected].GetCPCost());
+                        Manager.Instance.DeleteCPImage(character.weaponsEquipped[WeaponSelected].GetCPCost());
+                    }
+                    else
+                    {
+                        DeselectAction();
+                    }
                 }
 
                 // OLD CHARACTER SPAWNING CODE (For reference)

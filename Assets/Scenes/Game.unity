@@ -3455,6 +3455,7 @@ MonoBehaviour:
   infoText: {fileID: 835828726}
   CPText: {fileID: 188442223}
   CPUIField: {fileID: 1743690420}
+  combatCanvas: {fileID: 314789680}
   CPUI: {fileID: 276184333839186212, guid: eb662d5e59bdd594ebd3676072877ef3, type: 3}
   timeLimit: 20
   originalTime: 40
