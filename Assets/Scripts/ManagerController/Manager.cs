@@ -21,7 +21,8 @@ public class Manager : MonoBehaviour
     [SerializeField] Image CPUI;
     [SerializeField] float timeLimit;
     [SerializeField] float originalTime;
-    [SerializeField] int CP;
+    public int fuelPool;
+    public int CP;
     [SerializeField] int maxCP;
 
     // Booleans for phases of the game; Might be referenced outside of Manager like
@@ -69,6 +70,8 @@ public class Manager : MonoBehaviour
             CPImage.transform.position = new Vector3(CPUIField.transform.position.x + CPUIOffset, CPUIField.transform.position.y, 0);
             CPUIOffset -= 70;
         }
+
+        isInCombat = false;
     }
 
     // Update is called once per frame
@@ -81,6 +84,12 @@ public class Manager : MonoBehaviour
             isInCombat = false;
             // And move on to either event or preparation phase
             combatCanvas.gameObject.SetActive(false);
+
+            //Empty all the fuel in characters:
+            foreach (CharacterBehaviour character in MapManager.Instance.playerCharacters)
+            {
+                character.currentFuel = 0;
+            }
         }
 
         // If statement to update the enemy paths when new enemies are made or destroyed
@@ -264,6 +273,12 @@ public class Manager : MonoBehaviour
         TempEnemyTurn();
         //Give back the CP
         
+    }
+
+    public void StartCombat()
+    {
+        isInCombat = true;
+        playerTurn = true;
     }
 
     public void ChangeCP(int amount)
