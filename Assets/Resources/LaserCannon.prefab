@@ -106,6 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ogItemPos: {x: 0, y: 0}
   isInSlot: 0
+  itemType: Weapon
 --- !u!225 &5965667530923865432
 CanvasGroup:
   m_ObjectHideFlags: 0

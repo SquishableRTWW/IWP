@@ -15,7 +15,11 @@ public class PrepPhaseManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI characterName;
     [SerializeField] FuelBar characterFuelbar;
     [SerializeField] FuelBar poolFuelBar;
-    
+    [SerializeField] GameObject slotContainer;
+
+    [SerializeField] List<ItemSlot> weaponSlots;
+    [SerializeField] List<ItemSlot> equipmentSlots;
+
 
     // Start is called before the first frame update
     void Start()
@@ -35,8 +39,9 @@ public class PrepPhaseManager : MonoBehaviour
         characterName.text = characterSelected.characterName;
         characterFuelbar.SetBarLimit(characterSelected.maxFuel);
         poolFuelBar.SetBarLimit(Manager.Instance.fuelPool);
-        characterFuelbar.SetFuel(characterSelected.currentFuel);
+        //characterFuelbar.SetFuel(characterSelected.currentFuel);
         poolFuelBar.SetFuel(Manager.Instance.fuelPool);
+        UpdateEquipSlots();
     }
     private void Update()
     {
@@ -67,6 +72,7 @@ public class PrepPhaseManager : MonoBehaviour
             characterName.text = characterSelected.characterName;
             characterFuelbar.SetBarLimit(characterSelected.maxFuel);
             characterFuelbar.SetFuel(characterSelected.currentFuel);
+            UpdateEquipSlots();
         }
     }
 
@@ -116,5 +122,15 @@ public class PrepPhaseManager : MonoBehaviour
         characterSelected.currentFuel = 0;
         characterFuelbar.SetFuel(characterSelected.currentFuel);
         poolFuelBar.SetFuel(Manager.Instance.fuelPool);
+    }
+
+    public void UpdateEquipSlots()
+    {
+        for (int i = 0; i < characterSelected.weaponsEquipped.Count; i++)
+        {
+            GameObject weapon = Instantiate(characterSelected.weaponsEquipped[i], weaponSlots[i].transform.position, Quaternion.identity);
+            weapon.GetComponent<RectTransform>().anchoredPosition = weaponSlots[i].GetComponent<RectTransform>().anchoredPosition;
+            Debug.Log("Weapon Updated");
+        }
     }
 }

@@ -89,23 +89,23 @@ public class MouseController : MonoBehaviour
                 if (attackSelected == true)
                 {
                     GetAttackRangeTiles();
-                    switch (character.weaponsEquipped[WeaponSelected].GetShotType())
+                    switch (character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetShotType())
                     {
                         case "Linear":
-                            attackTiles = pathfinder.FindLinearAttackPath(character.activeTile, overlayTile, character.weaponsEquipped[WeaponSelected].GetWeaponRange(), inRangeTiles);
+                            attackTiles = pathfinder.FindLinearAttackPath(character.activeTile, overlayTile, character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetWeaponRange(), inRangeTiles);
                             break;
                         case "Laser1":
-                            attackTiles = pathfinder.FindSingleLazerAttackPath(character.activeTile, overlayTile, character.weaponsEquipped[WeaponSelected].GetWeaponRange(), inRangeTiles);
+                            attackTiles = pathfinder.FindSingleLazerAttackPath(character.activeTile, overlayTile, character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetWeaponRange(), inRangeTiles);
                             break;
                         case "Lobbing":
-                            attackTiles = pathfinder.FindAOEAttackPath(overlayTile, (int)character.weaponsEquipped[WeaponSelected].GetAttackPattern().x, inRangeTiles);
+                            attackTiles = pathfinder.FindAOEAttackPath(overlayTile, (int)character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetAttackPattern().x, inRangeTiles);
                             break;
                         case "Across":
-                            attackTiles = pathfinder.FindAcrossAttackPath(character.activeTile, overlayTile, (int)character.weaponsEquipped[WeaponSelected].GetAttackPattern().x,
-                                character.weaponsEquipped[WeaponSelected].GetWeaponRange(), inRangeTiles);
+                            attackTiles = pathfinder.FindAcrossAttackPath(character.activeTile, overlayTile, (int)character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetAttackPattern().x,
+                                character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetWeaponRange(), inRangeTiles);
                             break;
                         default:
-                            attackTiles = pathfinder.FindLinearAttackPath(character.activeTile, overlayTile, character.weaponsEquipped[WeaponSelected].GetWeaponRange(), inRangeTiles);
+                            attackTiles = pathfinder.FindLinearAttackPath(character.activeTile, overlayTile, character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetWeaponRange(), inRangeTiles);
                             break;
                     }
                     
@@ -150,11 +150,11 @@ public class MouseController : MonoBehaviour
                     if (hasEnemy)
                     {
                         // Play attack animation
-                        character.shootingEffect = character.weaponsEquipped[WeaponSelected].GetAnimation();
+                        character.shootingEffect = character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetAnimation();
                         StartCoroutine(character.DoAttackAnimation(character.shootingEffect));
                         DoDamage();
-                        Manager.Instance.ChangeCP(character.weaponsEquipped[WeaponSelected].GetCPCost());
-                        Manager.Instance.DeleteCPImage(character.weaponsEquipped[WeaponSelected].GetCPCost());
+                        Manager.Instance.ChangeCP(character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetCPCost());
+                        Manager.Instance.DeleteCPImage(character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetCPCost());
                     }
                     else
                     {
@@ -195,11 +195,11 @@ public class MouseController : MonoBehaviour
                             if (character.isOverheated == false)
                             {
                                 attack1Button.gameObject.SetActive(true);
-                                attack1Button.gameObject.GetComponent<Image>().sprite = character.weaponsEquipped[0].GetAttackSprite();
+                                attack1Button.gameObject.GetComponent<Image>().sprite = character.weaponsEquipped[0].GetComponent<WeaponBehaviour>().GetAttackSprite();
                                 if (character.weaponsEquipped.Count > 1 && character.weaponsEquipped[1] != null)
                                 {
                                     attack2Button.gameObject.SetActive(true);
-                                    attack2Button.gameObject.GetComponent<Image>().sprite = character.weaponsEquipped[1].GetAttackSprite();
+                                    attack2Button.gameObject.GetComponent<Image>().sprite = character.weaponsEquipped[1].GetComponent<WeaponBehaviour>().GetAttackSprite();
                                 }
                                 else
                                 {
@@ -231,7 +231,7 @@ public class MouseController : MonoBehaviour
                                 {
                                     AB = attack1Button;
                                 }
-                                switch (character.weaponsEquipped[w].GetWeaponName())
+                                switch (character.weaponsEquipped[w].GetComponent<WeaponBehaviour>().GetWeaponName())
                                 {
                                     case "Bolter":
                                         AB.GetComponent<ToolTip>().message = "A short range weapon that fires in a row of 3\n" + "DMG: 2\n" + "CP: 1";
@@ -296,7 +296,7 @@ public class MouseController : MonoBehaviour
             tile.HideTile();
         }
 
-        inRangeTiles = moveRangeFinder.GetTilesInAttackRange(character.activeTile, character.weaponsEquipped[WeaponSelected].GetWeaponRange());
+        inRangeTiles = moveRangeFinder.GetTilesInAttackRange(character.activeTile, character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetWeaponRange());
 
         foreach (var tile in inRangeTiles)
         {
@@ -362,7 +362,7 @@ public class MouseController : MonoBehaviour
             }
             if (MapManager.Instance.enemyList[affectedCount].grid2DLocation == tilesWithCharacters[i].grid2DLocation)
             {
-                int damageDealt = character.weaponsEquipped[WeaponSelected].GetWeaponDamage() + character.attackIncrease;
+                int damageDealt = character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetWeaponDamage() + character.attackIncrease;
                 MapManager.Instance.enemyList[affectedCount].HP -= damageDealt;
                 MapManager.Instance.enemyList[affectedCount].healthBar.SetHealth(MapManager.Instance.enemyList[affectedCount].HP);
                 StartCoroutine(MapManager.Instance.enemyList[affectedCount].ShowDamage(damageDealt.ToString()));
@@ -446,7 +446,7 @@ public class MouseController : MonoBehaviour
     public void SelectAttack(int weaponNumber)
     {
         WeaponSelected = weaponNumber;
-        if (character != null && Manager.Instance.GetCP() >= character.weaponsEquipped[WeaponSelected].GetCPCost())
+        if (character != null && Manager.Instance.GetCP() >= character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetCPCost())
         {
             attackSelected = true;
             moveButton.gameObject.SetActive(false);

@@ -17,7 +17,7 @@ public class CharacterBehaviour : MonoBehaviour
     // Combat related
     public bool finishedMove;
     public bool isOverheated = false;
-    public List<WeaponBehaviour> weaponsEquipped;
+    public List<GameObject> weaponsEquipped;
     public List<EquipmentScriptable> equipmentList;
     public HealthBar healthBar;
     // Animation effects

@@ -10,6 +10,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public Vector2 ogItemPos;
     public bool isInSlot;
+    public string itemType;
 
     private void Awake()
     {
