@@ -354,7 +354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Fleetfoot
   maxFuel: 20
-  currentFuel: 20
+  currentFuel: 0
   overheatAmount: 6
   HP: 20
   maxHP: 20

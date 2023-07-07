@@ -412,7 +412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Bulwark
   maxFuel: 10
-  currentFuel: 10
+  currentFuel: 0
   overheatAmount: 3
   HP: 40
   maxHP: 40

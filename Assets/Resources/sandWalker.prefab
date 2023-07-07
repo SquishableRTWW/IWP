@@ -412,7 +412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Sand Walker
   maxFuel: 15
-  currentFuel: 15
+  currentFuel: 0
   overheatAmount: 5
   HP: 12
   maxHP: 12

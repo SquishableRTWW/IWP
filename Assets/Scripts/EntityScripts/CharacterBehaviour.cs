@@ -41,7 +41,7 @@ public class CharacterBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentFuel = maxFuel;
+        //currentFuel = maxFuel;
         HP = maxHP;
         healthBar.SetMaxHealth(maxHP);
         defence = 0;
