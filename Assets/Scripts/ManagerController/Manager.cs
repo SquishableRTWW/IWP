@@ -21,6 +21,7 @@ public class Manager : MonoBehaviour
     [SerializeField] Image CPUI;
     [SerializeField] float timeLimit;
     [SerializeField] float originalTime;
+    public int maxfuelPool;
     public int fuelPool;
     public int CP;
     [SerializeField] int maxCP;
@@ -61,6 +62,8 @@ public class Manager : MonoBehaviour
         TimerSlider.SetMaxTime(timeLimit);
         CP = 2;
         maxCP = 2;
+        maxfuelPool = 15;
+        fuelPool = maxfuelPool;
 
         int CPUIOffset = 0;
         for (int i = 0; i < CP; i++)

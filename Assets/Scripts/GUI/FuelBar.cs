@@ -18,4 +18,9 @@ public class FuelBar : MonoBehaviour
     {
         slider.value = fuel;
     }
+
+    public void SetBarLimit(int amount)
+    {
+        slider.maxValue = amount;
+    }
 }

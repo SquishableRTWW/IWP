@@ -48,6 +48,7 @@ public class CharacterBehaviour : MonoBehaviour
         finishedMove = false;
         realExplosion = null;
         directionIndicator = 1;
+        currentFuel = 0;
     }
 
     // Update is called once per frame

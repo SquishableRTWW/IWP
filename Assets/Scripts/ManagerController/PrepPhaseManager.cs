@@ -13,6 +13,8 @@ public class PrepPhaseManager : MonoBehaviour
     [SerializeField] List<Button> changeButtons;
     [SerializeField] Image characterImage;
     [SerializeField] TextMeshProUGUI characterName;
+    [SerializeField] FuelBar characterFuelbar;
+    [SerializeField] FuelBar poolFuelBar;
     
 
     // Start is called before the first frame update
@@ -25,11 +27,16 @@ public class PrepPhaseManager : MonoBehaviour
         for (int i = 0; i < MapManager.Instance.playerCharacters.Count; i++)
         {
             changeButtons[i].GetComponent<Image>().sprite = MapManager.Instance.playerCharacters[i].GetComponent<SpriteRenderer>().sprite;
-            changeButtons[i].GetComponent<Image>().color = new Color(0, 0, 0, 0.6f);
+            changeButtons[i].GetComponent<Image>().color = new Color(1, 1, 1, 0.6f);
         }
 
+        // Set stats
         characterImage.sprite = characterSelected.GetComponent<SpriteRenderer>().sprite;
         characterName.text = characterSelected.characterName;
+        characterFuelbar.SetBarLimit(characterSelected.maxFuel);
+        poolFuelBar.SetBarLimit(Manager.Instance.fuelPool);
+        characterFuelbar.SetFuel(characterSelected.currentFuel);
+        poolFuelBar.SetFuel(Manager.Instance.fuelPool);
     }
     private void Update()
     {
@@ -48,19 +55,29 @@ public class PrepPhaseManager : MonoBehaviour
         if (MapManager.Instance.playerCharacters.Count > i)
         {
             characterSelected = MapManager.Instance.playerCharacters[i];
-            changeButtons[i].GetComponent<Image>().color = new Color(0, 0, 0, 1);
 
-            characterImage.sprite = MapManager.Instance.playerCharacters[i].GetComponent<SpriteRenderer>().sprite;
-            characterName.text = MapManager.Instance.playerCharacters[i].characterName;
+            // Re-highlight button pressed
+            foreach (Button button in changeButtons)
+            {
+                button.GetComponent<Image>().color = new Color(1, 1, 1, 0.6f);
+            }
+            changeButtons[i].GetComponent<Image>().color = new Color(1, 1, 1, 1);
+
+            characterImage.sprite = characterSelected.GetComponent<SpriteRenderer>().sprite;
+            characterName.text = characterSelected.characterName;
+            characterFuelbar.SetBarLimit(characterSelected.maxFuel);
+            characterFuelbar.SetFuel(characterSelected.currentFuel);
         }
     }
 
     public void AssignFuel(int amount)
     {
-        if (characterSelected.currentFuel < characterSelected.maxFuel)
+        if (characterSelected.currentFuel < characterSelected.maxFuel && Manager.Instance.fuelPool > 0)
         {
             characterSelected.currentFuel += amount;
             Manager.Instance.fuelPool -= amount;
+            characterFuelbar.SetFuel(characterSelected.currentFuel);
+            poolFuelBar.SetFuel(Manager.Instance.fuelPool);
         }
     }
     public void DeassignFuel(int amount)
@@ -68,7 +85,12 @@ public class PrepPhaseManager : MonoBehaviour
         if (characterSelected.currentFuel > 0)
         {
             characterSelected.currentFuel -= amount;
-            Manager.Instance.fuelPool += amount;
+            if (Manager.Instance.fuelPool < Manager.Instance.maxfuelPool)
+            {
+                Manager.Instance.fuelPool += amount;
+            }
+            characterFuelbar.SetFuel(characterSelected.currentFuel);
+            poolFuelBar.SetFuel(Manager.Instance.fuelPool);
         }
     }
 
@@ -76,11 +98,23 @@ public class PrepPhaseManager : MonoBehaviour
     {
         characterSelected.currentFuel = characterSelected.maxFuel;
         Manager.Instance.fuelPool -= characterSelected.maxFuel;
+        characterFuelbar.SetFuel(characterSelected.currentFuel);
+        poolFuelBar.SetFuel(Manager.Instance.fuelPool);
     }
     public void MaxDeassignFuel()
     {
-        int difference = characterSelected.maxFuel - characterSelected.currentFuel;
+        int difference = 0 - characterSelected.currentFuel;
+        if (Manager.Instance.fuelPool <= Manager.Instance.maxfuelPool - characterSelected.currentFuel)
+        {
+            Manager.Instance.fuelPool += difference;
+        }
+        else
+        {
+            Manager.Instance.fuelPool += Manager.Instance.maxfuelPool - characterSelected.currentFuel;
+        }
+
         characterSelected.currentFuel = 0;
-        Manager.Instance.fuelPool += difference;
+        characterFuelbar.SetFuel(characterSelected.currentFuel);
+        poolFuelBar.SetFuel(Manager.Instance.fuelPool);
     }
 }
