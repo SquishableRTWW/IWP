@@ -36,6 +36,9 @@ public class Manager : MonoBehaviour
     public List<List<OverlayTileBehaviour>> enemyPath;
     public new CameraController camera;
 
+    // List of weapons and equipment player owns:
+    public List<GameObject> playerItemList;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)

@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 5634200892605953027}
   - component: {fileID: 1230906477339490465}
   - component: {fileID: 325419256932987155}
+  - component: {fileID: -2758152871231786500}
+  - component: {fileID: 847153715507035854}
   m_Layer: 0
   m_Name: Smoothbore
   m_TagString: Untagged
@@ -90,3 +92,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-2758152871231786500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4683432593260380843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91d6185044203b4fac2316a061338c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!225 &847153715507035854
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4683432593260380843}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
