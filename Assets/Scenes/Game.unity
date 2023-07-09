@@ -7957,8 +7957,8 @@ MonoBehaviour:
   - {fileID: 8488935043075467113, guid: ebf4b48702754c04e9dd80d54872b9d5, type: 3}
   tier2Maps:
   - {fileID: 8488935043075467113, guid: 1432a2caa8d960b4f86a90d28d06aed3, type: 3}
-  - {fileID: 8488935043075467113, guid: 1432a2caa8d960b4f86a90d28d06aed3, type: 3}
-  - {fileID: 8488935043075467113, guid: 1432a2caa8d960b4f86a90d28d06aed3, type: 3}
+  - {fileID: 8488935043075467113, guid: 7c9cad6a60b08a54984bb98ea22ee6a1, type: 3}
+  - {fileID: 8488935043075467113, guid: bbe2ead768de3884da8292d3e1b8f67f, type: 3}
   level: 0
   levelTier: 1
   InfoText: {fileID: 835828726}
