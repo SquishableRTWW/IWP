@@ -19,8 +19,14 @@ public class MapManager : MonoBehaviour
     public List<CharacterBehaviour> playerCharacters;
     public List<EnemyBehaviour> enemyList;
     public List<EnemyBehaviour> enemies;
+    // List of levels
+    public List<GameObject> tier1Maps;
+    public List<GameObject> tier2Maps;
 
     public int level;
+    public int levelTier;
+    private Tilemap pre_tilemap;
+    private Tilemap tilemap;
 
     [SerializeField] TextMeshProUGUI InfoText;
 
@@ -39,7 +45,27 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
-        var tilemap = gameObject.GetComponentInChildren<Tilemap>();
+        // Randomly generate a map based on tier
+        int randomLevel = Random.Range(0, 2);
+        switch (levelTier)
+        {
+            case 1:
+                pre_tilemap = Instantiate(tier1Maps[randomLevel].GetComponent<Tilemap>());
+                pre_tilemap.transform.SetParent(this.gameObject.transform);
+                tilemap = gameObject.GetComponentInChildren<Tilemap>();
+                break;
+            case 2:
+                pre_tilemap = Instantiate(tier2Maps[randomLevel].GetComponent<Tilemap>());
+                pre_tilemap.transform.SetParent(this.gameObject.transform);
+                tilemap = gameObject.GetComponentInChildren<Tilemap>();
+                break;
+            default:
+                pre_tilemap = Instantiate(tier1Maps[randomLevel].GetComponent<Tilemap>());
+                pre_tilemap.transform.SetParent(this.gameObject.transform);
+                tilemap = gameObject.GetComponentInChildren<Tilemap>();
+                break;
+        }
+        
 
         BoundsInt bounds = tilemap.cellBounds;
         map = new Dictionary<Vector2Int, OverlayTileBehaviour>();
