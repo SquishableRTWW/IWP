@@ -60,7 +60,11 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                 {
                     if (PrepPhaseManager.Instance.characterSelected.weaponsEquipped[i] == null)
                     {
-                        PrepPhaseManager.Instance.characterSelected.weaponsEquipped[i] = eventData.pointerDrag;
+                        GameObject weaponToEquip = new GameObject();
+                        weaponToEquip.AddComponent<WeaponBehaviour>();
+                        weaponToEquip.GetComponent<WeaponBehaviour>().weaponScriptable = eventData.pointerDrag.GetComponent<WeaponBehaviour>().weaponScriptable;
+
+                        PrepPhaseManager.Instance.characterSelected.weaponsEquipped[i] = weaponToEquip;
                     }
                 }
                 // Remove a copy of it from the inventory
