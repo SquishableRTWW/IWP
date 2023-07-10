@@ -93,7 +93,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ogItemPos: {x: 0, y: 0}
   isInSlot: 0
-  itemType: Weapon
+  itemType: Equipment
+  prevSlot: {fileID: 0}
 --- !u!225 &5965667530923865432
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -119,3 +120,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equipmentScriptable: {fileID: 11400000, guid: 69f026e0c387ca5419af4c2d51174c18, type: 2}
+  isInInventory: 0

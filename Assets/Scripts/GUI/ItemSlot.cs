@@ -17,31 +17,36 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             // Snap the item's position
             eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
             // Set its slot boolean to true
-            eventData.pointerDrag.GetComponent<DragDrop>().isInSlot = true;
+            if (slotType == "Item" || slotType == eventData.pointerDrag.GetComponent<DragDrop>().itemType)
+            {
+                eventData.pointerDrag.GetComponent<DragDrop>().isInSlot = true;
+            }
 
             // If item is going into inventory==============================================================================================================================
-            if (slotType == "Item" && eventData.pointerDrag.GetComponent<DragDrop>().prevSlot.GetComponent<ItemSlot>().slotType != "Item")
+            if (slotType == "Item" && eventData.pointerDrag.GetComponent<DragDrop>().prevSlot.GetComponent<ItemSlot>().slotType != "Item" && eventData.pointerDrag.GetComponent<WeaponBehaviour>())
             {
                 Debug.Log("Shit");
                 Manager.Instance.playerItemList.Add(eventData.pointerDrag);
                 eventData.pointerDrag.GetComponent<WeaponBehaviour>().isInInventory = true;
-                foreach (GameObject weapon in PrepPhaseManager.Instance.characterSelected.weaponsEquipped)
+                for (int i = 0; i < PrepPhaseManager.Instance.characterSelected.weaponsEquipped.Count; i++)
                 {
-                    if (weapon.GetComponent<WeaponBehaviour>().GetWeaponName() == eventData.pointerDrag.GetComponent<WeaponBehaviour>().GetWeaponName())
+                    if (PrepPhaseManager.Instance.characterSelected.weaponsEquipped[i].GetComponent<WeaponBehaviour>().GetWeaponName() == eventData.pointerDrag.GetComponent<WeaponBehaviour>().GetWeaponName())
                     {
-                        PrepPhaseManager.Instance.characterSelected.weaponsEquipped.Remove(weapon);
+                        PrepPhaseManager.Instance.characterSelected.weaponsEquipped[i] = null;
+                        break;
                     }
                 }
             }
-            if (slotType == "Item" && eventData.pointerDrag.GetComponent<DragDrop>().prevSlot.GetComponent<ItemSlot>().slotType != "Item")
+            if (slotType == "Item" && eventData.pointerDrag.GetComponent<DragDrop>().prevSlot.GetComponent<ItemSlot>().slotType != "Item" && eventData.pointerDrag.GetComponent<EquipmentBehaviour>())
             {
                 Manager.Instance.playerItemList.Add(eventData.pointerDrag);
                 eventData.pointerDrag.GetComponent<EquipmentBehaviour>().isInInventory = true;
-                foreach (GameObject equipment in PrepPhaseManager.Instance.characterSelected.equipmentList)
+                for (int i = 0; i < PrepPhaseManager.Instance.characterSelected.equipmentList.Count; i++)
                 {
-                    if (equipment.GetComponent<EquipmentBehaviour>().equipmentScriptable.equipmentName == eventData.pointerDrag.GetComponent<EquipmentBehaviour>().equipmentScriptable.equipmentName)
+                    if (PrepPhaseManager.Instance.characterSelected.equipmentList[i].GetComponent<EquipmentBehaviour>().equipmentScriptable.equipmentName == eventData.pointerDrag.GetComponent<EquipmentBehaviour>().equipmentScriptable.equipmentName)
                     {
-                        PrepPhaseManager.Instance.characterSelected.equipmentList.Remove(equipment);
+                        PrepPhaseManager.Instance.characterSelected.equipmentList[i] = null;
+                        break;
                     }
                 }
             }
@@ -49,16 +54,22 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             // If item is going into weapon or equipment slot
             if (eventData.pointerDrag.GetComponent<WeaponBehaviour>() != null && slotType == "Weapon")
             {
-                Debug.Log("Poop");
                 // WEAPON
                 eventData.pointerDrag.GetComponent<WeaponBehaviour>().isInInventory = false;
-                PrepPhaseManager.Instance.characterSelected.weaponsEquipped.Add(eventData.pointerDrag);
+                for (int i = 0; i < PrepPhaseManager.Instance.characterSelected.weaponsEquipped.Count; i++)
+                {
+                    if (PrepPhaseManager.Instance.characterSelected.weaponsEquipped[i] == null)
+                    {
+                        PrepPhaseManager.Instance.characterSelected.weaponsEquipped[i] = eventData.pointerDrag;
+                    }
+                }
                 // Remove a copy of it from the inventory
                 foreach (GameObject item in Manager.Instance.playerItemList)
                 {
-                    if (item.name == eventData.pointerDrag.name)
+                    if (item != null && (item.name == eventData.pointerDrag.name))
                     {
                         Manager.Instance.playerItemList.Remove(item);
+                        break;
                     }
                 }
             }
@@ -66,12 +77,19 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             {
                 // EQUIPMENT
                 eventData.pointerDrag.GetComponent<EquipmentBehaviour>().isInInventory = false;
-                PrepPhaseManager.Instance.characterSelected.equipmentList.Add(eventData.pointerDrag);
+                for (int i = 0; i < PrepPhaseManager.Instance.characterSelected.equipmentList.Count; i++)
+                {
+                    if (PrepPhaseManager.Instance.characterSelected.equipmentList[i] == null)
+                    {
+                        PrepPhaseManager.Instance.characterSelected.equipmentList[i] = eventData.pointerDrag;
+                    }
+                }
                 foreach (GameObject item in Manager.Instance.playerItemList)
                 {
-                    if (item.name == eventData.pointerDrag.name)
+                    if (item != null && (item.name == eventData.pointerDrag.name))
                     {
                         Manager.Instance.playerItemList.Remove(item);
+                        break;
                     }
                 }
             }

@@ -39,24 +39,21 @@ public class PrepPhaseManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (MapManager.Instance.playerCharacters.Count > 0)
-        {
-            characterSelected = MapManager.Instance.playerCharacters[0];
-        }
         for (int i = 0; i < MapManager.Instance.playerCharacters.Count; i++)
         {
             changeButtons[i].GetComponent<Image>().sprite = MapManager.Instance.playerCharacters[i].GetComponent<SpriteRenderer>().sprite;
             changeButtons[i].GetComponent<Image>().color = new Color(1, 1, 1, 0.6f);
         }
 
-        // Set stats
-        characterImage.sprite = characterSelected.GetComponent<SpriteRenderer>().sprite;
-        characterName.text = characterSelected.characterName;
-        characterFuelbar.SetBarLimit(characterSelected.maxFuel);
-        poolFuelBar.SetBarLimit(Manager.Instance.fuelPool);
-        //characterFuelbar.SetFuel(characterSelected.currentFuel);
-        poolFuelBar.SetFuel(Manager.Instance.fuelPool);
-        UpdateEquipSlots();
+        //ChangeSelectedCharacter(0);
+        //// Set stats
+        //characterImage.sprite = characterSelected.GetComponent<SpriteRenderer>().sprite;
+        //characterName.text = characterSelected.characterName;
+        //characterFuelbar.SetBarLimit(characterSelected.maxFuel);
+        //poolFuelBar.SetBarLimit(Manager.Instance.fuelPool);
+        ////characterFuelbar.SetFuel(characterSelected.currentFuel);
+        //poolFuelBar.SetFuel(Manager.Instance.fuelPool);
+        //UpdateEquipSlots();
     }
     private void Update()
     {
@@ -93,7 +90,7 @@ public class PrepPhaseManager : MonoBehaviour
 
     public void AssignFuel(int amount)
     {
-        if (characterSelected.currentFuel < characterSelected.maxFuel && Manager.Instance.fuelPool > 0)
+        if (characterSelected != null && characterSelected.currentFuel < characterSelected.maxFuel && Manager.Instance.fuelPool > 0)
         {
             characterSelected.currentFuel += amount;
             Manager.Instance.fuelPool -= amount;
@@ -103,7 +100,7 @@ public class PrepPhaseManager : MonoBehaviour
     }
     public void DeassignFuel(int amount)
     {
-        if (characterSelected.currentFuel > 0)
+        if (characterSelected != null && characterSelected.currentFuel > 0)
         {
             characterSelected.currentFuel -= amount;
             if (Manager.Instance.fuelPool < Manager.Instance.maxfuelPool)
@@ -117,26 +114,32 @@ public class PrepPhaseManager : MonoBehaviour
 
     public void MaxAssignFuel()
     {
-        characterSelected.currentFuel = characterSelected.maxFuel;
-        Manager.Instance.fuelPool -= characterSelected.maxFuel;
-        characterFuelbar.SetFuel(characterSelected.currentFuel);
-        poolFuelBar.SetFuel(Manager.Instance.fuelPool);
+        if (characterSelected != null)
+        {
+            characterSelected.currentFuel = characterSelected.maxFuel;
+            Manager.Instance.fuelPool -= characterSelected.maxFuel;
+            characterFuelbar.SetFuel(characterSelected.currentFuel);
+            poolFuelBar.SetFuel(Manager.Instance.fuelPool);
+        }
     }
     public void MaxDeassignFuel()
     {
-        int difference = 0 - characterSelected.currentFuel;
-        if (Manager.Instance.fuelPool <= Manager.Instance.maxfuelPool - characterSelected.currentFuel)
+        if (characterSelected != null)
         {
-            Manager.Instance.fuelPool += difference;
-        }
-        else
-        {
-            Manager.Instance.fuelPool += Manager.Instance.maxfuelPool - characterSelected.currentFuel;
-        }
+            int difference = 0 - characterSelected.currentFuel;
+            if (Manager.Instance.fuelPool <= Manager.Instance.maxfuelPool - characterSelected.currentFuel)
+            {
+                Manager.Instance.fuelPool += difference;
+            }
+            else
+            {
+                Manager.Instance.fuelPool += Manager.Instance.maxfuelPool - characterSelected.currentFuel;
+            }
 
-        characterSelected.currentFuel = 0;
-        characterFuelbar.SetFuel(characterSelected.currentFuel);
-        poolFuelBar.SetFuel(Manager.Instance.fuelPool);
+            characterSelected.currentFuel = 0;
+            characterFuelbar.SetFuel(characterSelected.currentFuel);
+            poolFuelBar.SetFuel(Manager.Instance.fuelPool);
+        }
     }
 
     public void UpdateEquipSlots()
@@ -153,7 +156,7 @@ public class PrepPhaseManager : MonoBehaviour
             }
             if (child.gameObject.GetComponent<EquipmentBehaviour>() != null)
             {
-                if (!child.gameObject.GetComponent<EquipmentBehaviour>())
+                if (!child.gameObject.GetComponent<EquipmentBehaviour>().isInInventory)
                 {
                     Destroy(child.gameObject);
                 }
