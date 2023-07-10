@@ -126,9 +126,19 @@ public class PrepPhaseManager : MonoBehaviour
 
     public void UpdateEquipSlots()
     {
+        // Remove all previously shown equip slots
+        foreach(Transform child in slotContainer.transform)
+        {
+            if (child.gameObject.GetComponent<WeaponBehaviour>() != null)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
         for (int i = 0; i < characterSelected.weaponsEquipped.Count; i++)
         {
             GameObject weapon = Instantiate(characterSelected.weaponsEquipped[i], weaponSlots[i].transform.position, Quaternion.identity);
+            weapon.transform.SetParent(slotContainer.transform);
             weapon.GetComponent<RectTransform>().anchoredPosition = weaponSlots[i].GetComponent<RectTransform>().anchoredPosition;
             Debug.Log("Weapon Updated");
         }
