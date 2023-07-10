@@ -14,6 +14,14 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         // NOTE: Pointer Drag refers to the gameObject
         if (eventData.pointerDrag != null)
         {
+            // If there is an item inside, swap them:
+            if (itemInside != null)
+            {
+                GameObject replacementItem = Instantiate(itemInside, gameObject.transform.position, Quaternion.identity);
+                replacementItem.GetComponent<RectTransform>().anchoredPosition = eventData.pointerDrag.GetComponent<DragDrop>().ogItemPos;
+                itemInside = null;
+            }
+
             // Snap the item's position
             eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
             // Set its slot boolean to true
@@ -99,6 +107,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             }
 
             eventData.pointerDrag.GetComponent<DragDrop>().prevSlot = gameObject;
+            itemInside = eventData.pointerDrag;
         }
     }
 }
