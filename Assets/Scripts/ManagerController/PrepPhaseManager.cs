@@ -6,7 +6,10 @@ using TMPro;
 
 public class PrepPhaseManager : MonoBehaviour
 {
-    [SerializeField] CharacterBehaviour characterSelected;
+    private static PrepPhaseManager _instance;
+    public static PrepPhaseManager Instance { get { return _instance; } }
+
+    public CharacterBehaviour characterSelected;
 
     // GUI Components
     [SerializeField] Canvas prepCanvas;
@@ -19,6 +22,18 @@ public class PrepPhaseManager : MonoBehaviour
 
     [SerializeField] List<ItemSlot> weaponSlots;
     [SerializeField] List<ItemSlot> equipmentSlots;
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
 
 
     // Start is called before the first frame update
@@ -131,11 +146,17 @@ public class PrepPhaseManager : MonoBehaviour
         {
             if (child.gameObject.GetComponent<WeaponBehaviour>() != null)
             {
-                Destroy(child.gameObject);
+                if (!child.gameObject.GetComponent<WeaponBehaviour>().isInInventory)
+                {
+                    Destroy(child.gameObject);
+                }
             }
             if (child.gameObject.GetComponent<EquipmentBehaviour>() != null)
             {
-                Destroy(child.gameObject);
+                if (!child.gameObject.GetComponent<EquipmentBehaviour>())
+                {
+                    Destroy(child.gameObject);
+                }
             }
         }
         // Show all weapons equipped on character
@@ -144,6 +165,8 @@ public class PrepPhaseManager : MonoBehaviour
             GameObject weapon = Instantiate(characterSelected.weaponsEquipped[i], weaponSlots[i].transform.position, Quaternion.identity);
             weapon.transform.SetParent(slotContainer.transform);
             weapon.GetComponent<RectTransform>().anchoredPosition = weaponSlots[i].GetComponent<RectTransform>().anchoredPosition;
+            weapon.GetComponent<DragDrop>().prevSlot = weaponSlots[i].gameObject;
+            weapon.GetComponent<WeaponBehaviour>().isInInventory = false;
             //Debug.Log("Weapon Updated");
         }
         // Show all equipment equipped on character
@@ -154,6 +177,8 @@ public class PrepPhaseManager : MonoBehaviour
                 GameObject equipment = Instantiate(characterSelected.equipmentList[i], equipmentSlots[i].transform.position, Quaternion.identity);
                 equipment.transform.SetParent(slotContainer.transform);
                 equipment.GetComponent<RectTransform>().anchoredPosition = equipmentSlots[i].GetComponent<RectTransform>().anchoredPosition;
+                equipment.GetComponent<DragDrop>().prevSlot = equipmentSlots[i].gameObject;
+                equipment.GetComponent<EquipmentBehaviour>().isInInventory = false;
                 //Debug.Log("Equipment Updated");
             }
         }

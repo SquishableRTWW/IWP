@@ -5,6 +5,7 @@ using UnityEngine;
 public class EquipmentBehaviour : MonoBehaviour
 {
     public EquipmentScriptable equipmentScriptable;
+    public bool isInInventory;
 
     // Start is called before the first frame update
     void Start()

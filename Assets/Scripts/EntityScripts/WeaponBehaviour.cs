@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponBehaviour : MonoBehaviour
 {
     [SerializeField] private WeaponScriptable weaponScriptable;
+    public bool isInInventory;
     // Start is called before the first frame update
     void Start()
     {
