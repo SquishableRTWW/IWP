@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 325419256932987155}
   - component: {fileID: -2758152871231786500}
   - component: {fileID: 847153715507035854}
+  - component: {fileID: 8434042998646437959}
+  - component: {fileID: 2270555833223974186}
   m_Layer: 0
   m_Name: Smoothbore
   m_TagString: Untagged
@@ -119,3 +121,61 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &8434042998646437959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4683432593260380843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5869cd2b93545e439cd17db22fb63dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: test\ntest
+--- !u!114 &2270555833223974186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4683432593260380843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8434042998646437959}
+          m_TargetAssemblyTypeName: ToolTip, Assembly-CSharp
+          m_MethodName: ShowItemToolTip
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Testing
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8434042998646437959}
+          m_TargetAssemblyTypeName: ToolTip, Assembly-CSharp
+          m_MethodName: HideItemToolTip
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: test\ntest
+            m_BoolArgument: 0
+          m_CallState: 2

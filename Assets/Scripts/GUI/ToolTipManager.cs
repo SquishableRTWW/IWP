@@ -24,6 +24,7 @@ public class ToolTipManager : MonoBehaviour
     void Start()
     {
         gameObject.SetActive(false);
+        //gameObject.GetComponentInParent<Canvas>().sortingOrder = 5;
     }
 
     // Update is called once per frame

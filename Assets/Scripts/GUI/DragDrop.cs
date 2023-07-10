@@ -22,6 +22,12 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     // At the start of the drag
     public void OnBeginDrag(PointerEventData eventData)
     {
+        //Check if it was in a slot
+        if (isInSlot)
+        {
+
+        }
+
         //Debug.Log("Dragging started");
         // Note the original position of the item
         ogItemPos = GetComponent<RectTransform>().anchoredPosition;
@@ -48,6 +54,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         if (!isInSlot)
         {
             rectTransform.anchoredPosition = ogItemPos;
+            isInSlot = true;
         }
 
         canvasGroup.alpha = 1f;

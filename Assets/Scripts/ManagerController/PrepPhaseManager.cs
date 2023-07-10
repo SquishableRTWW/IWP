@@ -133,14 +133,29 @@ public class PrepPhaseManager : MonoBehaviour
             {
                 Destroy(child.gameObject);
             }
+            if (child.gameObject.GetComponent<EquipmentBehaviour>() != null)
+            {
+                Destroy(child.gameObject);
+            }
         }
-
+        // Show all weapons equipped on character
         for (int i = 0; i < characterSelected.weaponsEquipped.Count; i++)
         {
             GameObject weapon = Instantiate(characterSelected.weaponsEquipped[i], weaponSlots[i].transform.position, Quaternion.identity);
             weapon.transform.SetParent(slotContainer.transform);
             weapon.GetComponent<RectTransform>().anchoredPosition = weaponSlots[i].GetComponent<RectTransform>().anchoredPosition;
-            Debug.Log("Weapon Updated");
+            //Debug.Log("Weapon Updated");
+        }
+        // Show all equipment equipped on character
+        for (int i = 0; i < characterSelected.equipmentList.Count; i++)
+        {
+            if (characterSelected.equipmentList[i] != null)
+            {
+                GameObject equipment = Instantiate(characterSelected.equipmentList[i], equipmentSlots[i].transform.position, Quaternion.identity);
+                equipment.transform.SetParent(slotContainer.transform);
+                equipment.GetComponent<RectTransform>().anchoredPosition = equipmentSlots[i].GetComponent<RectTransform>().anchoredPosition;
+                //Debug.Log("Equipment Updated");
+            }
         }
     }
 }

@@ -18,8 +18,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
             // Set its slot boolean to true
             eventData.pointerDrag.GetComponent<DragDrop>().isInSlot = true;
-            // Set the itemslot's item to this gameobject.
-            itemInside = eventData.pointerDrag;
+            //eventData.pointerDrag.transform.SetParent(gameObject.transform);
         }
     }
 }

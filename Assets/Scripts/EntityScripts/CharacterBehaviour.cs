@@ -18,7 +18,7 @@ public class CharacterBehaviour : MonoBehaviour
     public bool finishedMove;
     public bool isOverheated = false;
     public List<GameObject> weaponsEquipped;
-    public List<EquipmentScriptable> equipmentList;
+    public List<GameObject> equipmentList;
     public HealthBar healthBar;
     // Animation effects
     [SerializeField] GameObject explosionEffect;
@@ -57,9 +57,9 @@ public class CharacterBehaviour : MonoBehaviour
         // Equipment check for stat buffs
         if (equipmentList[0] != null)
         {
-            foreach (EquipmentScriptable equipment in equipmentList)
+            foreach (GameObject equipment in equipmentList)
             {
-                switch (equipment.equipmentName)
+                switch (equipment.GetComponent<EquipmentBehaviour>().equipmentScriptable.equipmentName)
                 {
                     case "Steel Plating":
                         defence = 1;
