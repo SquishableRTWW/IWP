@@ -60,65 +60,68 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             }
             //==================================================================================================================================================================
             // If item is going into weapon or equipment slot
-            if (eventData.pointerDrag.GetComponent<WeaponBehaviour>() != null && slotType == "Weapon")
+            if (eventData.pointerDrag.GetComponent<DragDrop>().prevSlot != this)
             {
-                // WEAPON
-                eventData.pointerDrag.GetComponent<WeaponBehaviour>().isInInventory = false;
-                for (int i = 0; i < PrepPhaseManager.Instance.characterSelected.weaponsEquipped.Count; i++)
+                if (eventData.pointerDrag.GetComponent<WeaponBehaviour>() != null && slotType == "Weapon")
                 {
-                    if (PrepPhaseManager.Instance.characterSelected.weaponsEquipped[i] == null)
+                    // WEAPON
+                    eventData.pointerDrag.GetComponent<WeaponBehaviour>().isInInventory = false;
+                    for (int i = 0; i < PrepPhaseManager.Instance.characterSelected.weaponsEquipped.Count; i++)
                     {
-                        //GameObject weaponToEquip = new GameObject();
-                        //weaponToEquip.AddComponent<WeaponBehaviour>();
-                        //weaponToEquip.GetComponent<WeaponBehaviour>().weaponScriptable = eventData.pointerDrag.GetComponent<WeaponBehaviour>().weaponScriptable;
-                        //PrepPhaseManager.Instance.characterSelected.weaponsEquipped[i] = weaponToEquip;
+                        if (PrepPhaseManager.Instance.characterSelected.weaponsEquipped[i] == null)
+                        {
+                            //GameObject weaponToEquip = new GameObject();
+                            //weaponToEquip.AddComponent<WeaponBehaviour>();
+                            //weaponToEquip.GetComponent<WeaponBehaviour>().weaponScriptable = eventData.pointerDrag.GetComponent<WeaponBehaviour>().weaponScriptable;
+                            //PrepPhaseManager.Instance.characterSelected.weaponsEquipped[i] = weaponToEquip;
 
-                        foreach (GameObject item in PrepPhaseManager.Instance.itemsInGame)
-                        {
-                            if (item.GetComponent<WeaponBehaviour>() != null && item.GetComponent<WeaponBehaviour>().GetWeaponName() == eventData.pointerDrag.GetComponent<WeaponBehaviour>().GetWeaponName())
+                            foreach (GameObject item in PrepPhaseManager.Instance.itemsInGame)
                             {
-                                GameObject itemPrefab = item;
-                                PrepPhaseManager.Instance.characterSelected.weaponsEquipped[i] = itemPrefab;
-                                break;
+                                if (item.GetComponent<WeaponBehaviour>() != null && item.GetComponent<WeaponBehaviour>().GetWeaponName() == eventData.pointerDrag.GetComponent<WeaponBehaviour>().GetWeaponName())
+                                {
+                                    GameObject itemPrefab = item;
+                                    PrepPhaseManager.Instance.characterSelected.weaponsEquipped[i] = itemPrefab;
+                                    break;
+                                }
                             }
                         }
                     }
-                }
-                // Remove a copy of it from the inventory
-                foreach (GameObject item in Manager.Instance.playerItemList)
-                {
-                    if (item != null && (item.name == eventData.pointerDrag.name))
+                    // Remove a copy of it from the inventory
+                    foreach (GameObject item in Manager.Instance.playerItemList)
                     {
-                        Manager.Instance.playerItemList.Remove(item);
-                        break;
-                    }
-                }
-            }
-            if (eventData.pointerDrag.GetComponent<EquipmentBehaviour>() != null && slotType == "Equipment")
-            {
-                // EQUIPMENT
-                eventData.pointerDrag.GetComponent<EquipmentBehaviour>().isInInventory = false;
-                for (int i = 0; i < PrepPhaseManager.Instance.characterSelected.equipmentList.Count; i++)
-                {
-                    if (PrepPhaseManager.Instance.characterSelected.equipmentList[i] == null)
-                    {
-                        foreach (GameObject item in PrepPhaseManager.Instance.itemsInGame)
+                        if (item != null && (item.name == eventData.pointerDrag.name))
                         {
-                            if (item.GetComponent<EquipmentBehaviour>() != null && item.GetComponent<EquipmentBehaviour>().equipmentScriptable.equipmentName == eventData.pointerDrag.GetComponent<EquipmentBehaviour>().equipmentScriptable.equipmentName)
-                            {
-                                GameObject itemPrefab = item;
-                                PrepPhaseManager.Instance.characterSelected.equipmentList[i] = itemPrefab;
-                                break;
-                            }
+                            Manager.Instance.playerItemList.Remove(item);
+                            break;
                         }
                     }
                 }
-                foreach (GameObject item in Manager.Instance.playerItemList)
+                if (eventData.pointerDrag.GetComponent<EquipmentBehaviour>() != null && slotType == "Equipment")
                 {
-                    if (item != null && (item.name == eventData.pointerDrag.name))
+                    // EQUIPMENT
+                    eventData.pointerDrag.GetComponent<EquipmentBehaviour>().isInInventory = false;
+                    for (int i = 0; i < PrepPhaseManager.Instance.characterSelected.equipmentList.Count; i++)
                     {
-                        Manager.Instance.playerItemList.Remove(item);
-                        break;
+                        if (PrepPhaseManager.Instance.characterSelected.equipmentList[i] == null)
+                        {
+                            foreach (GameObject item in PrepPhaseManager.Instance.itemsInGame)
+                            {
+                                if (item.GetComponent<EquipmentBehaviour>() != null && item.GetComponent<EquipmentBehaviour>().equipmentScriptable.equipmentName == eventData.pointerDrag.GetComponent<EquipmentBehaviour>().equipmentScriptable.equipmentName)
+                                {
+                                    GameObject itemPrefab = item;
+                                    PrepPhaseManager.Instance.characterSelected.equipmentList[i] = itemPrefab;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    foreach (GameObject item in Manager.Instance.playerItemList)
+                    {
+                        if (item != null && (item.name == eventData.pointerDrag.name))
+                        {
+                            Manager.Instance.playerItemList.Remove(item);
+                            break;
+                        }
                     }
                 }
             }
