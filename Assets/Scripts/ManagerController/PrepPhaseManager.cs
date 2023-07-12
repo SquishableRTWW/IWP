@@ -20,6 +20,7 @@ public class PrepPhaseManager : MonoBehaviour
     [SerializeField] FuelBar poolFuelBar;
     [SerializeField] GameObject slotContainer;
 
+    public List<GameObject> itemsInGame;
     [SerializeField] List<ItemSlot> weaponSlots;
     [SerializeField] List<ItemSlot> equipmentSlots;
 
@@ -185,5 +186,10 @@ public class PrepPhaseManager : MonoBehaviour
                 //Debug.Log("Equipment Updated");
             }
         }
+    }
+
+    public void DisplayInventory()
+    {
+
     }
 }

@@ -1511,6 +1511,13 @@ MonoBehaviour:
   characterFuelbar: {fileID: 1409523723}
   poolFuelBar: {fileID: 825816996}
   slotContainer: {fileID: 1168525872}
+  itemsInGame:
+  - {fileID: 2625123074457728180, guid: 0fa7b8ffac65f0e44b34a978a25a4163, type: 3}
+  - {fileID: 1202266208708811728, guid: 7a2a78215fcf49c46b6deedd224d6ffc, type: 3}
+  - {fileID: 4887933816371469328, guid: 97916113d2bed6d4ca625a7602124889, type: 3}
+  - {fileID: 4683432593260380843, guid: b4107d631b66bbe41959bd0da1ff217a, type: 3}
+  - {fileID: 1202266208708811728, guid: 2274adbb621120a41800899b66a53472, type: 3}
+  - {fileID: 1202266208708811728, guid: 78b22cc2755b0d44eaa8497a3cdbe2a9, type: 3}
   weaponSlots:
   - {fileID: 1840181728}
   - {fileID: 749618020}
