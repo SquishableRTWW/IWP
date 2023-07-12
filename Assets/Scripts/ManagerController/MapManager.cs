@@ -16,6 +16,7 @@ public class MapManager : MonoBehaviour
     public Dictionary<Vector2Int, OverlayTileBehaviour> map;
     public List<OverlayTileBehaviour> allTiles;
 
+    public List<CharacterBehaviour> characterList;
     public List<CharacterBehaviour> playerCharacters;
     public List<EnemyBehaviour> enemyList;
     public List<EnemyBehaviour> enemies;

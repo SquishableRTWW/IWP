@@ -433,6 +433,7 @@ MonoBehaviour:
   normalSprite: {fileID: 21300000, guid: f558541d590ba5245833fbd661947918, type: 3}
   reverseSprite: {fileID: 21300000, guid: 58d122f9798bcde41be805df8fb3f084, type: 3}
   gridLocation: {x: -5, y: 2, z: 2}
+  ogPosition: {x: -5, y: 2}
   activeTile: {fileID: 0}
 --- !u!61 &8041033709081620668
 BoxCollider2D:

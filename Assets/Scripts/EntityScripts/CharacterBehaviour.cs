@@ -34,6 +34,7 @@ public class CharacterBehaviour : MonoBehaviour
     // Location on the gridmap
     public Vector3Int gridLocation;
     public Vector2Int grid2DLocation { get { return new Vector2Int(gridLocation.x, gridLocation.y); } }
+    public Vector2Int ogPosition;
     public OverlayTileBehaviour activeTile;
 
 
