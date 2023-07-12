@@ -1436,6 +1436,7 @@ GameObject:
   - component: {fileID: 226394952}
   - component: {fileID: 226394951}
   - component: {fileID: 226394953}
+  - component: {fileID: 226394954}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1528,6 +1529,19 @@ MonoBehaviour:
   - {fileID: 749618020}
   equipmentSlots:
   - {fileID: 1562190955}
+  inventorySlots: []
+--- !u!114 &226394954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226394950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1630b7a59716594daac1bbd20fc1896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &277501621
 GameObject:
   m_ObjectHideFlags: 0
@@ -10192,6 +10206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  inRangeTiles: []
   characterPrefab: {fileID: 6249990382705574353, guid: c28e9839759f3bb4387b5323455173d3, type: 3}
   character: {fileID: 0}
   moveButton: {fileID: 1050614134}

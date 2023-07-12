@@ -87,7 +87,6 @@ public class Manager : MonoBehaviour
         // Check to see if there are any enemies left
         if (MapManager.Instance.enemyList.Count <= 0)
         {
-            Debug.Log("Level Ended");
             // If there are no enemies left, end the level
             if (MapManager.Instance.level % 3 != 0)
             {
@@ -106,6 +105,7 @@ public class Manager : MonoBehaviour
             {
                 Destroy(tileChild.gameObject);
             }
+
             MapManager.Instance.ReloadMap();
             timeLimit = originalTime;
             mouseController.inRangeTiles.Clear();
@@ -120,6 +120,7 @@ public class Manager : MonoBehaviour
                 character.ResetHealthBars();
             }
 
+            // NOTE: CHANGE THE BOOL IN THE PREP PHASE SO ITS GAME->EVENT->PREP
             isInCombat = false;
             fuelPool = maxfuelPool;
             PrepPhaseManager.Instance.ResetBars();
