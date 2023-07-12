@@ -45,7 +45,22 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
+        int characterCount = 0;
+
         ReloadMap();
+        // Add characters to map:
+        for (int i = 0; i < allTiles.Count; i++)
+        {
+            if (characterCount < playerCharacters.Count && playerCharacters[characterCount].grid2DLocation == allTiles[i].grid2DLocation)
+            {
+                playerCharacters[characterCount] = Instantiate(playerCharacters[characterCount]);
+                PositionCharacter(playerCharacters[characterCount], allTiles[i]);
+                playerCharacters[characterCount].activeTile.hasCharacter = true;
+                //playerCharacters.Remove(playerCharacters[characterCount]);
+                characterCount++;
+                i = 0;
+            }
+        }
     }
 
     public List<OverlayTileBehaviour> GetNeighbourTiles(OverlayTileBehaviour currentOverlayTile, List<OverlayTileBehaviour> searchableTiles)
@@ -202,10 +217,6 @@ public class MapManager : MonoBehaviour
         BoundsInt bounds = tilemap.cellBounds;
         map = new Dictionary<Vector2Int, OverlayTileBehaviour>();
         allTiles = new List<OverlayTileBehaviour>();
-        level = 1;
-
-        int characterCount = 0;
-
 
         // Loop through all the tiles on the map
         for (int z = bounds.max.z; z > bounds.min.z; z--)
@@ -240,15 +251,14 @@ public class MapManager : MonoBehaviour
             }
         }
 
-        // Add characters to map:
+        int characterCount = 0;
+        // Reposition characters
         for (int i = 0; i < allTiles.Count; i++)
         {
             if (characterCount < playerCharacters.Count && playerCharacters[characterCount].grid2DLocation == allTiles[i].grid2DLocation)
             {
-                playerCharacters[characterCount] = Instantiate(playerCharacters[characterCount]);
                 PositionCharacter(playerCharacters[characterCount], allTiles[i]);
                 playerCharacters[characterCount].activeTile.hasCharacter = true;
-                //playerCharacters.Remove(playerCharacters[characterCount]);
                 characterCount++;
                 i = 0;
             }

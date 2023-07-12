@@ -352,7 +352,7 @@ public class MouseController : MonoBehaviour
                 tilesWithCharacters.Add(attackTiles[i]);
             }
         }
-        Debug.Log("Enemies to hit: " + tilesWithCharacters.Count);
+        //Debug.Log("Enemies to hit: " + tilesWithCharacters.Count);
         for (int i = 0; i < tilesWithCharacters.Count; i++)
         {
             if (MapManager.Instance.enemyList[affectedCount] == null)

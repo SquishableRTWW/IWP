@@ -39,6 +39,8 @@ public class Manager : MonoBehaviour
     private MoveRangeFinder moveRangeFinder;
     public List<List<OverlayTileBehaviour>> enemyPath;
     public new CameraController camera;
+    public GameObject gridMap;
+    public GameObject tileContainer;
 
     // List of weapons and equipment player owns:
     public List<GameObject> playerItemList;
@@ -85,9 +87,8 @@ public class Manager : MonoBehaviour
         // Check to see if there are any enemies left
         if (MapManager.Instance.enemyList.Count <= 0)
         {
+            Debug.Log("Level Ended");
             // If there are no enemies left, end the level
-            isInCombat = false;
-            fuelPool = maxfuelPool;
             if (MapManager.Instance.level % 3 != 0)
             {
                 MapManager.Instance.level++;
@@ -96,6 +97,14 @@ public class Manager : MonoBehaviour
             {
                 MapManager.Instance.levelTier++;
                 MapManager.Instance.level = 1;
+            }
+            foreach (Transform map in gridMap.transform)
+            {
+                Destroy(map.gameObject);
+            }
+            foreach (Transform tileChild in tileContainer.transform)
+            {
+                Destroy(tileChild.gameObject);
             }
             MapManager.Instance.ReloadMap();
             timeLimit = originalTime;
@@ -106,7 +115,13 @@ public class Manager : MonoBehaviour
             foreach (CharacterBehaviour character in MapManager.Instance.playerCharacters)
             {
                 character.currentFuel = 0;
+                character.HP = character.maxHP;
+                character.ResetHealthBars();
             }
+
+            isInCombat = false;
+            fuelPool = maxfuelPool;
+            PrepPhaseManager.Instance.ResetBars();
         }
 
         // If statement to update the enemy paths when new enemies are made or destroyed

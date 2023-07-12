@@ -141,7 +141,7 @@ public class EnemyBehaviour : MonoBehaviour
                 break;
         }
 
-        Debug.Log("Target not in Sight");
+        //Debug.Log("Target not in Sight");
         return false;
     }
 }

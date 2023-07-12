@@ -19,6 +19,7 @@ public class PrepPhaseManager : MonoBehaviour
     [SerializeField] FuelBar characterFuelbar;
     [SerializeField] FuelBar poolFuelBar;
     [SerializeField] GameObject slotContainer;
+    public TextMeshProUGUI levelText;
 
     public List<GameObject> itemsInGame;
     [SerializeField] List<ItemSlot> weaponSlots;
@@ -66,6 +67,7 @@ public class PrepPhaseManager : MonoBehaviour
         {
             prepCanvas.gameObject.SetActive(true);
         }
+        levelText.text = "LV:" + MapManager.Instance.levelTier + "-" + MapManager.Instance.level;
     }
 
     public void ChangeSelectedCharacter(int i)
@@ -192,6 +194,12 @@ public class PrepPhaseManager : MonoBehaviour
                 //Debug.Log("Equipment Updated");
             }
         }
+    }
+
+    public void ResetBars()
+    {
+        characterSelected = null;
+        poolFuelBar.SetFuel(Manager.Instance.fuelPool);
     }
 
     public void DisplayInventory()

@@ -137,4 +137,9 @@ public class CharacterBehaviour : MonoBehaviour
             Destroy(prefab);
         }
     }
+
+    public void ResetHealthBars()
+    {
+        healthBar.SetHealth(HP);
+    }
 }
