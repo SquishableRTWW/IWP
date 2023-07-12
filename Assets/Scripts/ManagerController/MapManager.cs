@@ -199,7 +199,7 @@ public class MapManager : MonoBehaviour
             case 1:
                 pre_tilemap = Instantiate(tier1Maps[randomLevel].GetComponent<Tilemap>());
                 pre_tilemap.transform.SetParent(this.gameObject.transform);
-                tilemap = gameObject.GetComponentInChildren<Tilemap>();
+                tilemap = pre_tilemap;
                 break;
             case 2:
                 pre_tilemap = Instantiate(tier2Maps[randomLevel].GetComponent<Tilemap>());
@@ -209,7 +209,7 @@ public class MapManager : MonoBehaviour
             default:
                 pre_tilemap = Instantiate(tier1Maps[randomLevel].GetComponent<Tilemap>());
                 pre_tilemap.transform.SetParent(this.gameObject.transform);
-                tilemap = gameObject.GetComponentInChildren<Tilemap>();
+                tilemap = pre_tilemap;
                 break;
         }
 
@@ -236,16 +236,9 @@ public class MapManager : MonoBehaviour
                         overlayTile.transform.position = new Vector3(cellworldPosition.x, cellworldPosition.y, cellworldPosition.z + 1);
                         overlayTile.GetComponent<SpriteRenderer>().sortingOrder = tilemap.GetComponent<TilemapRenderer>().sortingOrder;
                         overlayTile.gridLocation = tileLocation;
+                        overlayTile.level = level;
                         map.Add(tileKey, overlayTile);
                         allTiles.Add(overlayTile);
-
-                        //if (characterCount < playerCharacters.Count && playerCharacters[characterCount].grid2DLocation == overlayTile.grid2DLocation)
-                        //{
-                        //    playerCharacters[characterCount] = Instantiate(playerCharacters[characterCount]);
-                        //    PositionCharacter(playerCharacters[characterCount], overlayTile);
-                        //    //playerCharacters.Remove(playerCharacters[characterCount]);
-                        //    characterCount++;
-                        //}
                     }
                 }
             }

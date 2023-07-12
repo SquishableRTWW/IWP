@@ -11,7 +11,7 @@ public class MouseController : MonoBehaviour
     // List of tiles for character's movement path
     private List<OverlayTileBehaviour> path = new List<OverlayTileBehaviour>();
     // List of tiles for character's in-range tiles
-    private List<OverlayTileBehaviour> inRangeTiles = new List<OverlayTileBehaviour>();
+    public List<OverlayTileBehaviour> inRangeTiles = new List<OverlayTileBehaviour>();
     // List of tiles that are part of the attack path
     private List<OverlayTileBehaviour> attackTiles = new List<OverlayTileBehaviour>();
 
@@ -161,11 +161,6 @@ public class MouseController : MonoBehaviour
                         DeselectAction();
                     }
                 }
-
-                // OLD CHARACTER SPAWNING CODE (For reference)
-                //character = Instantiate(characterPrefab).GetComponent<CharacterBehaviour>();
-                //PositionCharacter(overlayTile);
-                //GetInRangeTiles();
 
                 // Check to see if clicked on a character:
                 Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

@@ -1475,7 +1475,8 @@ MonoBehaviour:
   camera: {fileID: 519420033}
   gridMap: {fileID: 1695049025}
   tileContainer: {fileID: 972327430}
-  playerItemList: []
+  playerItemList:
+  - {fileID: 4683432593260380843, guid: b4107d631b66bbe41959bd0da1ff217a, type: 3}
 --- !u!4 &226394952
 Transform:
   m_ObjectHideFlags: 0

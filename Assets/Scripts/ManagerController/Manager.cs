@@ -108,6 +108,7 @@ public class Manager : MonoBehaviour
             }
             MapManager.Instance.ReloadMap();
             timeLimit = originalTime;
+            mouseController.inRangeTiles.Clear();
             // And move on to either event or preparation phase
             combatCanvas.gameObject.SetActive(false);
 

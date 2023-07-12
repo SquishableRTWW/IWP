@@ -24,6 +24,7 @@ public class PrepPhaseManager : MonoBehaviour
     public List<GameObject> itemsInGame;
     [SerializeField] List<ItemSlot> weaponSlots;
     [SerializeField] List<ItemSlot> equipmentSlots;
+    [SerializeField] List<GameObject> inventorySlots;
 
     private void Awake()
     {
@@ -46,6 +47,16 @@ public class PrepPhaseManager : MonoBehaviour
             changeButtons[i].GetComponent<Image>().sprite = MapManager.Instance.playerCharacters[i].GetComponent<SpriteRenderer>().sprite;
             changeButtons[i].GetComponent<Image>().color = new Color(1, 1, 1, 0.6f);
         }
+
+        // Fill up inventory List
+        foreach (Transform slotChild in slotContainer.transform)
+        {
+            if (slotChild.gameObject.GetComponent<ItemSlot>().slotType == "Item")
+            {
+                inventorySlots.Add(slotChild.gameObject);
+            }
+        }
+        DisplayInventoryItems();
 
         //ChangeSelectedCharacter(0);
         //// Set stats
@@ -88,6 +99,15 @@ public class PrepPhaseManager : MonoBehaviour
             characterFuelbar.SetBarLimit(characterSelected.maxFuel);
             characterFuelbar.SetFuel(characterSelected.currentFuel);
             UpdateEquipSlots();
+
+            if (characterSelected.weaponsEquipped.Count < 2)
+            {
+                weaponSlots[1].gameObject.SetActive(false);
+            }
+            else
+            {
+                weaponSlots[1].gameObject.SetActive(true);
+            }
         }
     }
 
@@ -202,8 +222,57 @@ public class PrepPhaseManager : MonoBehaviour
         poolFuelBar.SetFuel(Manager.Instance.fuelPool);
     }
 
-    public void DisplayInventory()
+    public void DisplayInventoryItems()
     {
+        foreach (Transform item in slotContainer.transform)
+        {
+            if (item.gameObject.GetComponent<WeaponBehaviour>() || item.gameObject.GetComponent<EquipmentBehaviour>())
+            {
+                if (!item.gameObject.GetComponent<WeaponBehaviour>().isInInventory)
+                {
+                    Destroy(item.gameObject);
+                }
+                else if (!item.gameObject.GetComponent<EquipmentBehaviour>().isInInventory)
+                {
+                    Destroy(item.gameObject);
+                }
+            }
+        }
 
+        for (int i = 0; i < Manager.Instance.playerItemList.Count; i++)
+        {
+            if (Manager.Instance.playerItemList[i] != null)
+            {
+                GameObject item = Instantiate(Manager.Instance.playerItemList[i], inventorySlots[i].transform.position, Quaternion.identity);
+                item.transform.SetParent(slotContainer.transform);
+                item.GetComponent<RectTransform>().anchoredPosition = inventorySlots[i].GetComponent<RectTransform>().anchoredPosition;
+                item.GetComponent<DragDrop>().prevSlot = inventorySlots[i];
+                if (item.GetComponent<WeaponBehaviour>())
+                {
+                    item.GetComponent<WeaponBehaviour>().isInInventory = true;
+                }
+                else
+                {
+                    item.GetComponent<EquipmentBehaviour>().isInInventory = true;
+                }
+            }
+        }
     }
+    //public void HideInventoryItems()
+    //{
+    //    foreach(Transform item in slotContainer.transform)
+    //    {
+    //        if (item.gameObject.GetComponent<WeaponBehaviour>() || item.gameObject.GetComponent<EquipmentBehaviour>())
+    //        {
+    //            if (!item.gameObject.GetComponent<WeaponBehaviour>().isInInventory)
+    //            {
+    //                Destroy(item.gameObject);
+    //            }
+    //            else if (!item.gameObject.GetComponent<EquipmentBehaviour>().isInInventory)
+    //            {
+    //                Destroy(item.gameObject);
+    //            }
+    //        }
+    //    }
+    //}
 }
