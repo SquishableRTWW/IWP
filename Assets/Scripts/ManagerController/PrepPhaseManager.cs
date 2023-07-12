@@ -51,9 +51,9 @@ public class PrepPhaseManager : MonoBehaviour
         //characterImage.sprite = characterSelected.GetComponent<SpriteRenderer>().sprite;
         //characterName.text = characterSelected.characterName;
         //characterFuelbar.SetBarLimit(characterSelected.maxFuel);
-        //poolFuelBar.SetBarLimit(Manager.Instance.fuelPool);
+        poolFuelBar.SetBarLimit(Manager.Instance.maxfuelPool);
         ////characterFuelbar.SetFuel(characterSelected.currentFuel);
-        //poolFuelBar.SetFuel(Manager.Instance.fuelPool);
+        poolFuelBar.SetFuel(Manager.Instance.fuelPool);
         //UpdateEquipSlots();
     }
     private void Update()
@@ -117,24 +117,30 @@ public class PrepPhaseManager : MonoBehaviour
     {
         if (characterSelected != null)
         {
-            characterSelected.currentFuel = characterSelected.maxFuel;
-            Manager.Instance.fuelPool -= characterSelected.maxFuel;
-            characterFuelbar.SetFuel(characterSelected.currentFuel);
-            poolFuelBar.SetFuel(Manager.Instance.fuelPool);
+            if (Manager.Instance.fuelPool >= characterSelected.maxFuel)
+            {
+                characterSelected.currentFuel = characterSelected.maxFuel;
+                Manager.Instance.fuelPool -= characterSelected.maxFuel;
+                characterFuelbar.SetFuel(characterSelected.currentFuel);
+                poolFuelBar.SetFuel(Manager.Instance.fuelPool);
+            }
+            else
+            {
+                characterSelected.currentFuel += Manager.Instance.fuelPool;
+                Manager.Instance.fuelPool = 0;
+                characterFuelbar.SetFuel(characterSelected.currentFuel);
+                poolFuelBar.SetFuel(Manager.Instance.fuelPool);
+            }
         }
     }
     public void MaxDeassignFuel()
     {
         if (characterSelected != null)
         {
-            int difference = 0 - characterSelected.currentFuel;
-            if (Manager.Instance.fuelPool <= Manager.Instance.maxfuelPool - characterSelected.currentFuel)
+            Manager.Instance.fuelPool += characterSelected.currentFuel;
+            if (Manager.Instance.fuelPool > Manager.Instance.maxfuelPool)
             {
-                Manager.Instance.fuelPool += difference;
-            }
-            else
-            {
-                Manager.Instance.fuelPool += Manager.Instance.maxfuelPool - characterSelected.currentFuel;
+                Manager.Instance.fuelPool = Manager.Instance.maxfuelPool;
             }
 
             characterSelected.currentFuel = 0;
