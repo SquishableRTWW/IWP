@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Manager : MonoBehaviour
     [SerializeField] TextMeshProUGUI CPText;
     public Canvas CPUIField;
     public Canvas combatCanvas;
+    public Canvas prepCanvas;
 
     [SerializeField] Image CPUI;
     [SerializeField] float timeLimit;
@@ -85,6 +87,18 @@ public class Manager : MonoBehaviour
         {
             // If there are no enemies left, end the level
             isInCombat = false;
+            fuelPool = maxfuelPool;
+            if (MapManager.Instance.level % 3 != 0)
+            {
+                MapManager.Instance.level++;
+            }
+            else
+            {
+                MapManager.Instance.levelTier++;
+                MapManager.Instance.level = 1;
+            }
+            MapManager.Instance.ReloadMap();
+            timeLimit = originalTime;
             // And move on to either event or preparation phase
             combatCanvas.gameObject.SetActive(false);
 
@@ -105,6 +119,7 @@ public class Manager : MonoBehaviour
         if (isInCombat)
         {
             combatCanvas.gameObject.SetActive(true);
+            prepCanvas.gameObject.SetActive(false);
             if (playerTurn)
             {
                 timeLimit -= Time.deltaTime;
@@ -239,6 +254,9 @@ public class Manager : MonoBehaviour
             if (nearestCharacterTile == null)
             {
                 // A check can be inserted here to see if all the characters are dead
+                // If no characters left, lose.
+                isInCombat = false;
+                SceneManager.LoadScene("MainMenu");
             }
 
             // Find the path towards the decided target if not in range
@@ -282,6 +300,7 @@ public class Manager : MonoBehaviour
     {
         isInCombat = true;
         playerTurn = true;
+        Debug.Log("Level start");
     }
 
     public void ChangeCP(int amount)

@@ -45,6 +45,138 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
+        ReloadMap();
+    }
+
+    public List<OverlayTileBehaviour> GetNeighbourTiles(OverlayTileBehaviour currentOverlayTile, List<OverlayTileBehaviour> searchableTiles)
+    {
+        Dictionary<Vector2Int, OverlayTileBehaviour> tileToSearch = new Dictionary<Vector2Int, OverlayTileBehaviour>();
+
+        if (searchableTiles.Count > 0)
+        {
+            foreach(var tile in searchableTiles)
+            {
+                tileToSearch.Add(tile.grid2DLocation, tile);
+            }
+        }
+        else
+        {
+            tileToSearch = map;
+        }
+
+        List<OverlayTileBehaviour> neighbours = new List<OverlayTileBehaviour>();
+
+        // Top neighbour
+        Vector2Int locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x, currentOverlayTile.gridLocation.y + 1);
+        if (tileToSearch.ContainsKey(locationToCheck))
+        {
+            if (Mathf.Abs(currentOverlayTile.gridLocation.z - tileToSearch[locationToCheck].gridLocation.z) <= 1)
+            {
+                neighbours.Add(tileToSearch[locationToCheck]);
+            }
+        }
+        // Bottom neighbour
+        locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x, currentOverlayTile.gridLocation.y - 1);
+        if (tileToSearch.ContainsKey(locationToCheck))
+        {
+            if (Mathf.Abs(currentOverlayTile.gridLocation.z - tileToSearch[locationToCheck].gridLocation.z) <= 1)
+            {
+                neighbours.Add(tileToSearch[locationToCheck]);
+            }
+        }
+        // Left neighbour
+        locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x - 1, currentOverlayTile.gridLocation.y);
+        if (tileToSearch.ContainsKey(locationToCheck))
+        {
+            if (Mathf.Abs(currentOverlayTile.gridLocation.z - tileToSearch[locationToCheck].gridLocation.z) <= 1)
+            {
+                neighbours.Add(tileToSearch[locationToCheck]);
+            }
+        }
+        // Right neighbour
+        locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x + 1, currentOverlayTile.gridLocation.y);
+        if (tileToSearch.ContainsKey(locationToCheck))
+        {
+            if (Mathf.Abs(currentOverlayTile.gridLocation.z - tileToSearch[locationToCheck].gridLocation.z) <= 1)
+            {
+                neighbours.Add(tileToSearch[locationToCheck]);
+            }
+        }
+
+        return neighbours;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // Display Message to tell if all characters have moved
+        //InfoText.text = ".......";
+        // Check if all characters have moved
+        foreach (var item in playerCharacters)
+        {
+            if (item.finishedMove == false && Manager.Instance.playerTurn)
+            {
+                InfoText.text = "YOUR TURN";
+                break;
+            }
+        }
+
+        for (int i = 0; i < playerCharacters.Count; i++)
+        {
+            if (!playerCharacters[i].finishedMove)
+            {
+                break;
+            }
+            else
+            {
+                if (i == playerCharacters.Count - 1)
+                {
+                    InfoText.text = "ALL UNITS MOVED!";
+                }
+            }
+        }
+
+        if (Manager.Instance.GetCP() <= 0 && Manager.Instance.playerTurn == true)
+        {
+            InfoText.text = "NO MORE CP";
+        }
+
+        if (Manager.Instance.playerTurn == false)
+        {
+            InfoText.text = "ENEMIES's TURN";
+        }
+    }
+
+    private void PositionCharacter(CharacterBehaviour character, OverlayTileBehaviour overlayTile)
+    {
+        character.transform.position = new Vector3(overlayTile.transform.position.x, overlayTile.transform.position.y + 0.0001f, overlayTile.transform.position.z);
+        character.GetComponent<SpriteRenderer>().sortingOrder = overlayTile.GetComponent<SpriteRenderer>().sortingOrder + 1;
+        character.activeTile = overlayTile;
+    }
+    private void PositionCharacter(EnemyBehaviour enemy, OverlayTileBehaviour overlayTile)
+    {
+        enemy.transform.position = new Vector3(overlayTile.transform.position.x, overlayTile.transform.position.y + 0.0001f, overlayTile.transform.position.z);
+        enemy.GetComponent<SpriteRenderer>().sortingOrder = overlayTile.GetComponent<SpriteRenderer>().sortingOrder + 1;
+        enemy.activeTile = overlayTile;
+    }
+
+    public void turnEnded()
+    {
+        Manager.Instance.playerTurn = false;
+        foreach (var item in playerCharacters)
+        {
+            item.finishedMove = false;
+            item.isOverheated = false;
+        }
+
+        InfoText.text = "Turn Ended!";
+
+        //Temp code for swapping turns
+
+    }
+
+    public void ReloadMap()
+    {
         // Randomly generate a map based on tier
         int randomLevel = Random.Range(0, 2);
         switch (levelTier)
@@ -65,12 +197,12 @@ public class MapManager : MonoBehaviour
                 tilemap = gameObject.GetComponentInChildren<Tilemap>();
                 break;
         }
-        
+
 
         BoundsInt bounds = tilemap.cellBounds;
         map = new Dictionary<Vector2Int, OverlayTileBehaviour>();
         allTiles = new List<OverlayTileBehaviour>();
-        level = 2;
+        level = 1;
 
         int characterCount = 0;
 
@@ -220,132 +352,5 @@ public class MapManager : MonoBehaviour
                     break;
             }
         }
-    }
-
-    public List<OverlayTileBehaviour> GetNeighbourTiles(OverlayTileBehaviour currentOverlayTile, List<OverlayTileBehaviour> searchableTiles)
-    {
-        Dictionary<Vector2Int, OverlayTileBehaviour> tileToSearch = new Dictionary<Vector2Int, OverlayTileBehaviour>();
-
-        if (searchableTiles.Count > 0)
-        {
-            foreach(var tile in searchableTiles)
-            {
-                tileToSearch.Add(tile.grid2DLocation, tile);
-            }
-        }
-        else
-        {
-            tileToSearch = map;
-        }
-
-        List<OverlayTileBehaviour> neighbours = new List<OverlayTileBehaviour>();
-
-        // Top neighbour
-        Vector2Int locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x, currentOverlayTile.gridLocation.y + 1);
-        if (tileToSearch.ContainsKey(locationToCheck))
-        {
-            if (Mathf.Abs(currentOverlayTile.gridLocation.z - tileToSearch[locationToCheck].gridLocation.z) <= 1)
-            {
-                neighbours.Add(tileToSearch[locationToCheck]);
-            }
-        }
-        // Bottom neighbour
-        locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x, currentOverlayTile.gridLocation.y - 1);
-        if (tileToSearch.ContainsKey(locationToCheck))
-        {
-            if (Mathf.Abs(currentOverlayTile.gridLocation.z - tileToSearch[locationToCheck].gridLocation.z) <= 1)
-            {
-                neighbours.Add(tileToSearch[locationToCheck]);
-            }
-        }
-        // Left neighbour
-        locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x - 1, currentOverlayTile.gridLocation.y);
-        if (tileToSearch.ContainsKey(locationToCheck))
-        {
-            if (Mathf.Abs(currentOverlayTile.gridLocation.z - tileToSearch[locationToCheck].gridLocation.z) <= 1)
-            {
-                neighbours.Add(tileToSearch[locationToCheck]);
-            }
-        }
-        // Right neighbour
-        locationToCheck = new Vector2Int(currentOverlayTile.gridLocation.x + 1, currentOverlayTile.gridLocation.y);
-        if (tileToSearch.ContainsKey(locationToCheck))
-        {
-            if (Mathf.Abs(currentOverlayTile.gridLocation.z - tileToSearch[locationToCheck].gridLocation.z) <= 1)
-            {
-                neighbours.Add(tileToSearch[locationToCheck]);
-            }
-        }
-
-        return neighbours;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // Display Message to tell if all characters have moved
-        //InfoText.text = ".......";
-        // Check if all characters have moved
-        foreach (var item in playerCharacters)
-        {
-            if (item.finishedMove == false && Manager.Instance.playerTurn)
-            {
-                InfoText.text = "YOUR TURN";
-                break;
-            }
-        }
-
-        for (int i = 0; i < playerCharacters.Count; i++)
-        {
-            if (!playerCharacters[i].finishedMove)
-            {
-                break;
-            }
-            else
-            {
-                if (i == playerCharacters.Count - 1)
-                {
-                    InfoText.text = "ALL UNITS MOVED!";
-                }
-            }
-        }
-
-        if (Manager.Instance.GetCP() <= 0 && Manager.Instance.playerTurn == true)
-        {
-            InfoText.text = "NO MORE CP";
-        }
-
-        if (Manager.Instance.playerTurn == false)
-        {
-            InfoText.text = "ENEMIES's TURN";
-        }
-    }
-
-    private void PositionCharacter(CharacterBehaviour character, OverlayTileBehaviour overlayTile)
-    {
-        character.transform.position = new Vector3(overlayTile.transform.position.x, overlayTile.transform.position.y + 0.0001f, overlayTile.transform.position.z);
-        character.GetComponent<SpriteRenderer>().sortingOrder = overlayTile.GetComponent<SpriteRenderer>().sortingOrder + 1;
-        character.activeTile = overlayTile;
-    }
-    private void PositionCharacter(EnemyBehaviour enemy, OverlayTileBehaviour overlayTile)
-    {
-        enemy.transform.position = new Vector3(overlayTile.transform.position.x, overlayTile.transform.position.y + 0.0001f, overlayTile.transform.position.z);
-        enemy.GetComponent<SpriteRenderer>().sortingOrder = overlayTile.GetComponent<SpriteRenderer>().sortingOrder + 1;
-        enemy.activeTile = overlayTile;
-    }
-
-    public void turnEnded()
-    {
-        Manager.Instance.playerTurn = false;
-        foreach (var item in playerCharacters)
-        {
-            item.finishedMove = false;
-            item.isOverheated = false;
-        }
-
-        InfoText.text = "Turn Ended!";
-
-        //Temp code for swapping turns
-
     }
 }
