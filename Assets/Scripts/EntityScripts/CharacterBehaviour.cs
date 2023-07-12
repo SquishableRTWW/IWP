@@ -143,4 +143,9 @@ public class CharacterBehaviour : MonoBehaviour
     {
         healthBar.SetHealth(HP);
     }
+
+    public void ResetPosition()
+    {
+        gridLocation = new Vector3Int(ogPosition.x, ogPosition.y, gridLocation.z);
+    }
 }

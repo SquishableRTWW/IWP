@@ -25,6 +25,7 @@ public class PrepPhaseManager : MonoBehaviour
     [SerializeField] List<ItemSlot> weaponSlots;
     [SerializeField] List<ItemSlot> equipmentSlots;
     [SerializeField] List<GameObject> inventorySlots;
+    [SerializeField] List<Button> characterSelectButtons;
 
     private void Awake()
     {
@@ -57,6 +58,7 @@ public class PrepPhaseManager : MonoBehaviour
             }
         }
         DisplayInventoryItems();
+        UpdateCharacterButtons();
 
         //ChangeSelectedCharacter(0);
         //// Set stats
@@ -258,21 +260,16 @@ public class PrepPhaseManager : MonoBehaviour
             }
         }
     }
-    //public void HideInventoryItems()
-    //{
-    //    foreach(Transform item in slotContainer.transform)
-    //    {
-    //        if (item.gameObject.GetComponent<WeaponBehaviour>() || item.gameObject.GetComponent<EquipmentBehaviour>())
-    //        {
-    //            if (!item.gameObject.GetComponent<WeaponBehaviour>().isInInventory)
-    //            {
-    //                Destroy(item.gameObject);
-    //            }
-    //            else if (!item.gameObject.GetComponent<EquipmentBehaviour>().isInInventory)
-    //            {
-    //                Destroy(item.gameObject);
-    //            }
-    //        }
-    //    }
-    //}
+
+    public void UpdateCharacterButtons()
+    {
+        for (int i = 0; i < characterSelectButtons.Count; i++)
+        {
+            characterSelectButtons[i].gameObject.SetActive(false);
+        }
+        for (int i = 0; i < MapManager.Instance.playerCharacters.Count; i++)
+       {
+            characterSelectButtons[i].gameObject.SetActive(true);
+       }
+    }
 }

@@ -118,12 +118,14 @@ public class Manager : MonoBehaviour
                 character.currentFuel = 0;
                 character.HP = character.maxHP;
                 character.ResetHealthBars();
+                //character.ResetPosition();
             }
 
             // NOTE: CHANGE THE BOOL IN THE PREP PHASE SO ITS GAME->EVENT->PREP
             isInCombat = false;
             fuelPool = maxfuelPool;
             PrepPhaseManager.Instance.ResetBars();
+            PrepPhaseManager.Instance.UpdateCharacterButtons();
         }
 
         // If statement to update the enemy paths when new enemies are made or destroyed

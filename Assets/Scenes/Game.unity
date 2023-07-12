@@ -1530,6 +1530,10 @@ MonoBehaviour:
   equipmentSlots:
   - {fileID: 1562190955}
   inventorySlots: []
+  characterSelectButtons:
+  - {fileID: 3686885}
+  - {fileID: 1780328948}
+  - {fileID: 312714531}
 --- !u!114 &226394954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1543,7 +1547,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomEventNumber: 0
-  eventType: 
 --- !u!1 &277501621
 GameObject:
   m_ObjectHideFlags: 0
@@ -8476,6 +8479,10 @@ MonoBehaviour:
   overlayTilePrefab: {fileID: 143268114319186055, guid: 4375e4c65e10c30478244c5717a1c371, type: 3}
   overlayContainer: {fileID: 972327430}
   allTiles: []
+  characterList:
+  - {fileID: 662111912407306559, guid: c28e9839759f3bb4387b5323455173d3, type: 3}
+  - {fileID: 662111912407306559, guid: fe2fb311dffa19c4a8858aa7cac4842a, type: 3}
+  - {fileID: 662111912407306559, guid: 3d81ed8f245b5f241afba6bc1f40d5a4, type: 3}
   playerCharacters:
   - {fileID: 662111912407306559, guid: c28e9839759f3bb4387b5323455173d3, type: 3}
   - {fileID: 662111912407306559, guid: fe2fb311dffa19c4a8858aa7cac4842a, type: 3}
