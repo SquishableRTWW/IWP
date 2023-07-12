@@ -102,11 +102,15 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                 {
                     if (PrepPhaseManager.Instance.characterSelected.equipmentList[i] == null)
                     {
-                        GameObject equipmentToEquip = new GameObject();
-                        equipmentToEquip.AddComponent<EquipmentBehaviour>();
-                        equipmentToEquip.GetComponent<EquipmentBehaviour>().equipmentScriptable = eventData.pointerDrag.GetComponent<EquipmentBehaviour>().equipmentScriptable;
-
-                        PrepPhaseManager.Instance.characterSelected.equipmentList[i] = equipmentToEquip;
+                        foreach (GameObject item in PrepPhaseManager.Instance.itemsInGame)
+                        {
+                            if (item.GetComponent<EquipmentBehaviour>() != null && item.GetComponent<EquipmentBehaviour>().equipmentScriptable.equipmentName == eventData.pointerDrag.GetComponent<EquipmentBehaviour>().equipmentScriptable.equipmentName)
+                            {
+                                GameObject itemPrefab = item;
+                                PrepPhaseManager.Instance.characterSelected.equipmentList[i] = itemPrefab;
+                                break;
+                            }
+                        }
                     }
                 }
                 foreach (GameObject item in Manager.Instance.playerItemList)
