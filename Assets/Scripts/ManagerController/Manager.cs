@@ -118,7 +118,7 @@ public class Manager : MonoBehaviour
                 character.currentFuel = 0;
                 character.HP = character.maxHP;
                 character.ResetHealthBars();
-                //character.ResetPosition();
+                character.ResetPosition();
             }
 
             // NOTE: CHANGE THE BOOL IN THE PREP PHASE SO ITS GAME->EVENT->PREP

@@ -146,6 +146,22 @@ public class CharacterBehaviour : MonoBehaviour
 
     public void ResetPosition()
     {
-        gridLocation = new Vector3Int(ogPosition.x, ogPosition.y, gridLocation.z);
+        foreach(var tile in MapManager.Instance.allTiles)
+        {
+            if (tile.grid2DLocation == ogPosition)
+            {
+                PositionCharacter(tile);
+                break;
+            }
+        }
+    }
+
+    private void PositionCharacter(OverlayTileBehaviour overlayTile)
+    {
+        transform.position = new Vector3(overlayTile.transform.position.x, overlayTile.transform.position.y + 0.0001f, overlayTile.transform.position.z);
+        GetComponent<SpriteRenderer>().sortingOrder = overlayTile.GetComponent<SpriteRenderer>().sortingOrder + 1;
+        activeTile = overlayTile;
+        activeTile.hasCharacter = true;
+        gridLocation = (activeTile.gridLocation);
     }
 }
