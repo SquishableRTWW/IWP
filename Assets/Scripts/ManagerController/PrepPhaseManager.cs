@@ -253,7 +253,7 @@ public class PrepPhaseManager : MonoBehaviour
                 {
                     item.GetComponent<WeaponBehaviour>().isInInventory = true;
                 }
-                else
+                else if (item.GetComponent<EquipmentBehaviour>())
                 {
                     item.GetComponent<EquipmentBehaviour>().isInInventory = true;
                 }
