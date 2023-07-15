@@ -16,6 +16,7 @@ public class PrepPhaseManager : MonoBehaviour
     [SerializeField] List<Button> changeButtons;
     [SerializeField] Image characterImage;
     [SerializeField] TextMeshProUGUI characterName;
+    [SerializeField] TextMeshProUGUI fuelPoolText;
     [SerializeField] FuelBar characterFuelbar;
     [SerializeField] FuelBar poolFuelBar;
     [SerializeField] GameObject slotContainer;
