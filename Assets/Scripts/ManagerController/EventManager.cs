@@ -311,6 +311,7 @@ public class EventManager : MonoBehaviour
         eventCanvas.gameObject.SetActive(false);
         prepCanvas.gameObject.SetActive(true);
         Manager.Instance.isInEvent = false;
+        PrepPhaseManager.Instance.DisplayInventoryItems();
         Debug.Log("Moving to prep");
 
         Manager.Instance.fuelPool = Manager.Instance.maxfuelPool;
