@@ -69,13 +69,12 @@ public class Manager : MonoBehaviour
         maxfuelPool = 15;
         fuelPool = maxfuelPool;
 
-        int CPUIOffset = 0;
+        int CPUIOffset = 70;
         for (int i = 0; i < CP; i++)
         {
             Image CPImage = Instantiate(CPUI);
             CPImage.transform.SetParent(CPUIField.transform);
-            CPImage.transform.position = new Vector3(CPUIField.transform.position.x + CPUIOffset, CPUIField.transform.position.y, 0);
-            CPUIOffset -= 70;
+            CPImage.transform.position = new Vector3(CPUIField.transform.position.x + 75f + (i * CPUIOffset), CPUIField.transform.position.y, 0);
         }
 
         isInCombat = false;
@@ -345,20 +344,31 @@ public class Manager : MonoBehaviour
     {
         for (int i = 0; i < CPImageCount; i++)
         {
-            GameObject toDestroy = CPUIField.transform.GetChild(i).gameObject;
+            int highestChildIndex = CPUIField.transform.childCount - 1;
+            GameObject toDestroy = CPUIField.transform.GetChild(highestChildIndex).gameObject;
             Destroy(toDestroy);
         }
     }
     public void AddCPImage()
     {
         int amount = maxCP - CP;
-        int CPUIOffset = 0;
+        int CPUIOffset = 70;
         for (int i = 0; i < amount; i++)
         {
             Image CPImage = Instantiate(CPUI);
             CPImage.transform.SetParent(CPUIField.transform);
-            CPImage.transform.position = new Vector3(CPUIField.transform.position.x + CPUIOffset - 200f, CPUIField.transform.position.y, 0);
-            CPUIOffset += 70;
+            CPImage.transform.position = new Vector3(CPUIField.transform.position.x + 75f + (i * CPUIOffset), CPUIField.transform.position.y, 0);
+        }
+    }
+    public void AddAmountedCPImage(int number)
+    {
+        int amount = number;
+        int CPUIOffset = 70;
+        for (int i = 0; i < amount; i++)
+        {
+            Image CPImage = Instantiate(CPUI);
+            CPImage.transform.SetParent(CPUIField.transform);
+            CPImage.transform.position = new Vector3(CPUIField.transform.position.x + 75f + (i * CPUIOffset), CPUIField.transform.position.y, 0);
         }
     }
 
@@ -399,5 +409,23 @@ public class Manager : MonoBehaviour
         character.activeTile = overlayTile;
         character.activeTile.hasEnemy = true;
         character.gridLocation = (character.activeTile.gridLocation);
+    }
+
+    public Transform GetLowestChild(Transform parent)
+    {
+        Transform lowestChild = null;
+        float lowestY = float.MaxValue;
+
+        for (int i = 0; i < parent.childCount; i++)
+        {
+            Transform child = parent.GetChild(i);
+            if (child.position.y < lowestY)
+            {
+                lowestY = child.position.y;
+                lowestChild = child;
+            }
+        }
+
+        return lowestChild;
     }
 }
