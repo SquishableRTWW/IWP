@@ -126,6 +126,7 @@ public class Manager : MonoBehaviour
             fuelPool = maxfuelPool;
             PrepPhaseManager.Instance.ResetBars();
             PrepPhaseManager.Instance.UpdateCharacterButtons();
+            PrepPhaseManager.Instance.ChangeSelectedCharacter(0);
         }
 
         // If statement to update the enemy paths when new enemies are made or destroyed

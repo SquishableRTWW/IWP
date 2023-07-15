@@ -70,6 +70,7 @@ public class PrepPhaseManager : MonoBehaviour
         ////characterFuelbar.SetFuel(characterSelected.currentFuel);
         poolFuelBar.SetFuel(Manager.Instance.fuelPool);
         //UpdateEquipSlots();
+        ChangeSelectedCharacter(0);
     }
     private void Update()
     {
@@ -197,12 +198,15 @@ public class PrepPhaseManager : MonoBehaviour
         // Show all weapons equipped on character
         for (int i = 0; i < characterSelected.weaponsEquipped.Count; i++)
         {
-            GameObject weapon = Instantiate(characterSelected.weaponsEquipped[i], weaponSlots[i].transform.position, Quaternion.identity);
-            weapon.transform.SetParent(slotContainer.transform);
-            weapon.GetComponent<RectTransform>().anchoredPosition = weaponSlots[i].GetComponent<RectTransform>().anchoredPosition;
-            weapon.GetComponent<DragDrop>().prevSlot = weaponSlots[i].gameObject;
-            weapon.GetComponent<WeaponBehaviour>().isInInventory = false;
-            //Debug.Log("Weapon Updated");
+            if (characterSelected.weaponsEquipped[i] != null)
+            {
+                GameObject weapon = Instantiate(characterSelected.weaponsEquipped[i], weaponSlots[i].transform.position, Quaternion.identity);
+                weapon.transform.SetParent(slotContainer.transform);
+                weapon.GetComponent<RectTransform>().anchoredPosition = weaponSlots[i].GetComponent<RectTransform>().anchoredPosition;
+                weapon.GetComponent<DragDrop>().prevSlot = weaponSlots[i].gameObject;
+                weapon.GetComponent<WeaponBehaviour>().isInInventory = false;
+                //Debug.Log("Weapon Updated");
+            }
         }
         // Show all equipment equipped on character
         for (int i = 0; i < characterSelected.equipmentList.Count; i++)
