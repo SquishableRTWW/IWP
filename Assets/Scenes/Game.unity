@@ -1548,6 +1548,7 @@ MonoBehaviour:
   CP: 2
   maxCP: 0
   isInCombat: 1
+  isInEvent: 0
   playerTurn: 1
   TimerSlider: {fileID: 1957878056}
   camera: {fileID: 519420033}
@@ -12489,8 +12490,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Attention commander! The team has found some supplies in the debris. We
-    don't have much time, we need to choose one and quickly move out...
+  m_text: Attention commander! The team have some intel for you. We don't have much
+    time, we need to choose one to act on and quickly move out...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 68dcb07545c0f2447a6ba0025b9de917, type: 2}
   m_sharedMaterial: {fileID: 7281514120160273051, guid: 68dcb07545c0f2447a6ba0025b9de917, type: 2}
