@@ -23,6 +23,8 @@ public class PrepPhaseManager : MonoBehaviour
     public TextMeshProUGUI levelText;
 
     public List<GameObject> itemsInGame;
+    public List<GameObject> weaponsInGame;
+    public List<GameObject> equipmentInGame;
     [SerializeField] List<ItemSlot> weaponSlots;
     [SerializeField] List<ItemSlot> equipmentSlots;
     [SerializeField] List<GameObject> inventorySlots;
@@ -77,10 +79,6 @@ public class PrepPhaseManager : MonoBehaviour
         if (Manager.Instance.isInCombat)
         {
             prepCanvas.gameObject.SetActive(false);
-        }
-        else
-        {
-            prepCanvas.gameObject.SetActive(true);
         }
         levelText.text = "LV:" + MapManager.Instance.levelTier + "-" + MapManager.Instance.level;
     }

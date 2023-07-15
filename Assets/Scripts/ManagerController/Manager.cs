@@ -19,6 +19,7 @@ public class Manager : MonoBehaviour
     public Canvas CPUIField;
     public Canvas combatCanvas;
     public Canvas prepCanvas;
+    public Canvas eventCanvas;
 
     [SerializeField] Image CPUI;
     [SerializeField] float timeLimit;
@@ -26,11 +27,12 @@ public class Manager : MonoBehaviour
     public int maxfuelPool;
     public int fuelPool;
     public int CP;
-    [SerializeField] int maxCP;
+    public int maxCP;
 
     // Booleans for phases of the game; Might be referenced outside of Manager like
     // in the prep phase manager.
     public bool isInCombat = true;
+    public bool isInEvent = false;
     public bool playerTurn = true;
 
     [SerializeField] TimerBar TimerSlider;
@@ -108,8 +110,6 @@ public class Manager : MonoBehaviour
             MapManager.Instance.ReloadMap();
             timeLimit = originalTime;
             mouseController.inRangeTiles.Clear();
-            // And move on to either event or preparation phase
-            combatCanvas.gameObject.SetActive(false);
 
             //Empty all the fuel in characters:
             foreach (CharacterBehaviour character in MapManager.Instance.playerCharacters)
@@ -120,12 +120,14 @@ public class Manager : MonoBehaviour
                 character.ResetPosition();
             }
 
-            // NOTE: CHANGE THE BOOL IN THE PREP PHASE SO ITS GAME->EVENT->PREP
-            isInCombat = false;
-            fuelPool = maxfuelPool;
-            PrepPhaseManager.Instance.ResetBars();
-            PrepPhaseManager.Instance.UpdateCharacterButtons();
-            PrepPhaseManager.Instance.ChangeSelectedCharacter(0);
+            // And move on to Event Phase
+            combatCanvas.gameObject.SetActive(false);
+            prepCanvas.gameObject.SetActive(false);
+            eventCanvas.gameObject.SetActive(true);
+            Instance.isInCombat = false;
+            isInEvent = true;
+            EventManager.Instance.RandomiseEvent();
+            // NOTE: All logic to move to prep phase has been moved to eventManager.
         }
 
         // If statement to update the enemy paths when new enemies are made or destroyed
@@ -137,8 +139,11 @@ public class Manager : MonoBehaviour
         // Game logic for when level is being played
         if (isInCombat)
         {
+            // Off all other canvas, On combat canvas
             combatCanvas.gameObject.SetActive(true);
             prepCanvas.gameObject.SetActive(false);
+            eventCanvas.gameObject.SetActive(false);
+            // Game logic
             if (playerTurn)
             {
                 timeLimit -= Time.deltaTime;
@@ -151,12 +156,6 @@ public class Manager : MonoBehaviour
             timerText.text = string.Format("{0:0.00}", timeLimit);
             CPText.text = "CP Left: " + CP.ToString();
             TimerSlider.SetTime(timeLimit);
-        }
-        // Game logic for during the event phase (if any)
-        // Game logic for during the preparation phase
-        else
-        {
-
         }
 
         // If level time limit is over?
