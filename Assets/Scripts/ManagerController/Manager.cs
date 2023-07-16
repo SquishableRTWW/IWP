@@ -127,7 +127,7 @@ public class Manager : MonoBehaviour
             Instance.isInCombat = false;
             isInEvent = true;
             EventManager.Instance.RandomiseEvent();
-            // NOTE: All logic to move to prep phase has been moved to eventManager.
+            // NOTE: All logic to move from prep phase has been moved to eventManager.
         }
 
         // If statement to update the enemy paths when new enemies are made or destroyed

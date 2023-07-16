@@ -224,25 +224,33 @@ public class PrepPhaseManager : MonoBehaviour
     public void ResetBars()
     {
         characterSelected = null;
-        poolFuelBar.SetFuel(Manager.Instance.fuelPool);
+        poolFuelBar.SetMaxFuel(Manager.Instance.fuelPool);
     }
 
     public void DisplayInventoryItems()
     {
         foreach (Transform item in slotContainer.transform)
         {
-            if (item.gameObject.GetComponent<WeaponBehaviour>() || item.gameObject.GetComponent<EquipmentBehaviour>())
+            if (item.gameObject.GetComponent<WeaponBehaviour>())
             {
-                if (!item.gameObject.GetComponent<WeaponBehaviour>().isInInventory)
-                {
-                    Destroy(item.gameObject);
-                }
-                else if (!item.gameObject.GetComponent<EquipmentBehaviour>().isInInventory)
+                if (item.gameObject.GetComponent<WeaponBehaviour>().isInInventory)
                 {
                     Destroy(item.gameObject);
                 }
             }
+            else if(item.gameObject.GetComponent<EquipmentBehaviour>())
+            {
+                if (item.gameObject.GetComponent<EquipmentBehaviour>().isInInventory)
+                {
+                    Destroy(item.gameObject);
+                }
+            }
+            else
+            {
+                continue;
+            }
         }
+
 
         for (int i = 0; i < Manager.Instance.playerItemList.Count; i++)
         {

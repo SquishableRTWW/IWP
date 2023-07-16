@@ -88,7 +88,7 @@ public class EventManager : MonoBehaviour
             {
                 decidedLeftEvent = GetRandomEnumValue<eventNo>(0, 4);
             }
-            else if (rng > 50 && rng <= 90)
+            else if ((rng > 50 && rng <= 90) || MapManager.Instance.playerCharacters.Count >= 3)
             {
                 decidedLeftEvent = GetRandomEnumValue<eventNo>(5, 6);
             }
@@ -104,7 +104,7 @@ public class EventManager : MonoBehaviour
             {
                 decidedRightEvent = GetRandomEnumValue<eventNo>(0, 4);
             }
-            else if (rng > 50 && rng <= 90)
+            else if ((rng > 50 && rng <= 90) || MapManager.Instance.playerCharacters.Count >= 3)
             {
                 decidedRightEvent = GetRandomEnumValue<eventNo>(5, 6);
             }
@@ -149,6 +149,7 @@ public class EventManager : MonoBehaviour
                 leftEvent.itemsToAdd = new List<GameObject>();
                 // Choose random weapon;
                 int randomItem = UnityEngine.Random.Range(0, PrepPhaseManager.Instance.weaponsInGame.Count);
+                Debug.Log(randomItem);
                 leftEvent.itemsToAdd.Add(PrepPhaseManager.Instance.weaponsInGame[randomItem]);
                 break;
             case eventNo.AddEquipment:
@@ -158,6 +159,7 @@ public class EventManager : MonoBehaviour
                 leftEvent.itemsToAdd = new List<GameObject>();
                 // Choose random weapon;
                 randomItem = UnityEngine.Random.Range(0, PrepPhaseManager.Instance.equipmentInGame.Count);
+                Debug.Log(randomItem);
                 leftEvent.itemsToAdd.Add(PrepPhaseManager.Instance.equipmentInGame[randomItem]);
                 break;
             case eventNo.AddSupplyDrop:
@@ -170,8 +172,15 @@ public class EventManager : MonoBehaviour
                 for (int i = 0; i < itemCount; i++)
                 {
                     randomItem = UnityEngine.Random.Range(0, PrepPhaseManager.Instance.itemsInGame.Count);
+                    Debug.Log(randomItem);
                     leftEvent.itemsToAdd.Add(PrepPhaseManager.Instance.itemsInGame[randomItem]);
                 }
+                break;
+            case eventNo.Add2CP:
+                leftEvent.eventName = "Add2CP";
+                leftEvent.eventType = "Add cp";
+                leftEvent.eventMessage = "We found some comms equipment in mint condition. This could allow you to give us many more commands.";
+                leftEvent.amount = 2;
                 break;
             case eventNo.AddCharacter:
                 leftEvent.eventName = "AddCharacter";
@@ -208,30 +217,33 @@ public class EventManager : MonoBehaviour
                 rightEvent.eventName = "AddWeapon";
                 rightEvent.eventType = "Add item";
                 rightEvent.eventMessage = "The team thinks some of the enemy's weapons can be reused, we could use more guns.";
-                leftEvent.itemsToAdd = new List<GameObject>();
+                rightEvent.itemsToAdd = new List<GameObject>();
                 // Choose random weapon;
                 int randomItem = UnityEngine.Random.Range(0, PrepPhaseManager.Instance.weaponsInGame.Count);
+                Debug.Log(randomItem);
                 rightEvent.itemsToAdd.Add(PrepPhaseManager.Instance.weaponsInGame[randomItem]);
                 break;
             case eventNo.AddEquipment:
                 rightEvent.eventName = "AddEquipment";
                 rightEvent.eventType = "Add item";
                 rightEvent.eventMessage = "The enemy has some useful equipment that we could utilise in future skirmishes...";
-                leftEvent.itemsToAdd = new List<GameObject>();
+                rightEvent.itemsToAdd = new List<GameObject>();
                 // Choose random weapon;
                 randomItem = UnityEngine.Random.Range(0, PrepPhaseManager.Instance.equipmentInGame.Count);
+                Debug.Log(randomItem);
                 rightEvent.itemsToAdd.Add(PrepPhaseManager.Instance.equipmentInGame[randomItem]);
                 break;
             case eventNo.AddSupplyDrop:
                 rightEvent.eventName = "AddSupplyDrop";
                 rightEvent.eventType = "Add item";
                 rightEvent.eventMessage = "Theres an enemy supply drop further from the battlefield. Could hold multiple useful items";
-                leftEvent.itemsToAdd = new List<GameObject>();
+                rightEvent.itemsToAdd = new List<GameObject>();
                 // Choose random weapon;
                 int itemCount = UnityEngine.Random.Range(1, 3);
                 for (int i = 0; i < itemCount; i++)
                 {
                     randomItem = UnityEngine.Random.Range(0, PrepPhaseManager.Instance.itemsInGame.Count);
+                    Debug.Log(randomItem);
                     rightEvent.itemsToAdd.Add(PrepPhaseManager.Instance.itemsInGame[randomItem]);
                 }
                 break;
@@ -307,6 +319,10 @@ public class EventManager : MonoBehaviour
 
     public void TransitionToPrep()
     {
+        Manager.Instance.fuelPool = Manager.Instance.maxfuelPool;
+        PrepPhaseManager.Instance.ResetBars();
+        PrepPhaseManager.Instance.UpdateCharacterButtons();
+        PrepPhaseManager.Instance.ChangeSelectedCharacter(0);
 
         eventCanvas.gameObject.SetActive(false);
         prepCanvas.gameObject.SetActive(true);
@@ -314,10 +330,7 @@ public class EventManager : MonoBehaviour
         PrepPhaseManager.Instance.DisplayInventoryItems();
         Debug.Log("Moving to prep");
 
-        Manager.Instance.fuelPool = Manager.Instance.maxfuelPool;
-        PrepPhaseManager.Instance.ResetBars();
-        PrepPhaseManager.Instance.UpdateCharacterButtons();
-        PrepPhaseManager.Instance.ChangeSelectedCharacter(0);
+
     }
 
     public static T GetRandomEnumValue<T>(int start, int end)
