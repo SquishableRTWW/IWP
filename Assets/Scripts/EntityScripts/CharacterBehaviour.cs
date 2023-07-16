@@ -150,6 +150,7 @@ public class CharacterBehaviour : MonoBehaviour
         {
             if (tile.grid2DLocation == ogPosition)
             {
+                tile.hasCharacter = false;
                 PositionCharacter(tile);
                 break;
             }
