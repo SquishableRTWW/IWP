@@ -332,11 +332,13 @@ public class Manager : MonoBehaviour
 
     public void DeleteCPImage(int CPImageCount)
     {
+        int imageCountReal = CPUIField.transform.childCount;
         for (int i = 0; i < CPImageCount; i++)
         {
-            int highestChildIndex = CPUIField.transform.childCount - 1;
+            int highestChildIndex = imageCountReal - 1;
             GameObject toDestroy = CPUIField.transform.GetChild(highestChildIndex).gameObject;
             Destroy(toDestroy);
+            imageCountReal--;
         }
     }
     public void AddCPImage()
