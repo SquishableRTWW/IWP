@@ -319,16 +319,28 @@ public class EventManager : MonoBehaviour
 
     public void TransitionToPrep()
     {
-        Manager.Instance.fuelPool = Manager.Instance.maxfuelPool;
-        PrepPhaseManager.Instance.ResetBars();
-        PrepPhaseManager.Instance.UpdateCharacterButtons();
-        PrepPhaseManager.Instance.ChangeSelectedCharacter(0);
 
         eventCanvas.gameObject.SetActive(false);
         prepCanvas.gameObject.SetActive(true);
         Manager.Instance.isInEvent = false;
         PrepPhaseManager.Instance.DisplayInventoryItems();
-        Debug.Log("Moving to prep");
+
+        MapManager.Instance.SetOGPosition();
+        //Reset all characters:
+        foreach (CharacterBehaviour character in MapManager.Instance.playerCharacters)
+        {
+            character.currentFuel = 0;
+            character.HP = character.maxHP;
+            character.ResetHealthBars();
+            character.ResetPosition();
+        }
+
+        Manager.Instance.fuelPool = Manager.Instance.maxfuelPool;
+        PrepPhaseManager.Instance.ResetBars();
+        PrepPhaseManager.Instance.UpdateCharacterButtons();
+        PrepPhaseManager.Instance.ChangeSelectedCharacter(0);
+
+        //Debug.Log("Moving to prep");
 
 
     }

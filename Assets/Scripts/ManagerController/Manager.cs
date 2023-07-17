@@ -111,15 +111,6 @@ public class Manager : MonoBehaviour
             timeLimit = originalTime;
             mouseController.inRangeTiles.Clear();
 
-            //Empty all the fuel in characters:
-            foreach (CharacterBehaviour character in MapManager.Instance.playerCharacters)
-            {
-                character.currentFuel = 0;
-                character.HP = character.maxHP;
-                character.ResetHealthBars();
-                character.ResetPosition();
-            }
-
             // And move on to Event Phase
             combatCanvas.gameObject.SetActive(false);
             prepCanvas.gameObject.SetActive(false);

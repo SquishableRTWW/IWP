@@ -412,7 +412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Bulwark
   maxFuel: 10
-  currentFuel: 0
+  currentFuel: 10
   overheatAmount: 3
   HP: 40
   maxHP: 40
@@ -422,8 +422,8 @@ MonoBehaviour:
   finishedMove: 0
   isOverheated: 0
   weaponsEquipped:
-  - {fileID: 4887933816371469328, guid: 97916113d2bed6d4ca625a7602124889, type: 3}
-  - {fileID: 1202266208708811728, guid: 7a2a78215fcf49c46b6deedd224d6ffc, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   equipmentList:
   - {fileID: 1202266208708811728, guid: 78b22cc2755b0d44eaa8497a3cdbe2a9, type: 3}
   healthBar: {fileID: 4478707585213457633}
@@ -433,8 +433,8 @@ MonoBehaviour:
   floatingTextPrefab: {fileID: 2314985102620632716, guid: 8e3446554d1108b4fb78d1ff4405697b, type: 3}
   normalSprite: {fileID: 21300000, guid: 3aa41215ddb0b104abd2babd691d51b9, type: 3}
   reverseSprite: {fileID: 21300000, guid: 5a824fa236b26a64aa35f2d24a259777, type: 3}
-  gridLocation: {x: -8, y: 3, z: 1}
-  ogPosition: {x: -8, y: 3}
+  gridLocation: {x: 0, y: 0, z: 1}
+  ogPosition: {x: 0, y: 0, z: 1}
   activeTile: {fileID: 0}
 --- !u!61 &2466153948806981081
 BoxCollider2D:

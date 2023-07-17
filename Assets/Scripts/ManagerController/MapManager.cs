@@ -20,6 +20,7 @@ public class MapManager : MonoBehaviour
     public List<CharacterBehaviour> playerCharacters;
     public List<EnemyBehaviour> enemyList;
     public List<EnemyBehaviour> enemies;
+    public List<Vector3Int> characterPositions;
     // List of levels
     public List<GameObject> tier1Maps;
     public List<GameObject> tier2Maps;
@@ -50,18 +51,21 @@ public class MapManager : MonoBehaviour
 
         ReloadMap();
         // Add characters to map:
+        int j = 0;
         for (int i = 0; i < allTiles.Count; i++)
         {
-            if (characterCount < playerCharacters.Count && playerCharacters[characterCount].grid2DLocation == allTiles[i].grid2DLocation)
+            if (characterCount < playerCharacters.Count && characterPositions[j] == allTiles[i].gridLocation)
             {
                 playerCharacters[characterCount] = Instantiate(playerCharacters[characterCount]);
+                playerCharacters[characterCount].ogPosition = allTiles[i].gridLocation;
                 PositionCharacter(playerCharacters[characterCount], allTiles[i]);
                 playerCharacters[characterCount].activeTile.hasCharacter = true;
-                //playerCharacters.Remove(playerCharacters[characterCount]);
                 characterCount++;
                 i = 0;
+                j++;
             }
         }
+        
     }
 
     public List<OverlayTileBehaviour> GetNeighbourTiles(OverlayTileBehaviour currentOverlayTile, List<OverlayTileBehaviour> searchableTiles)
@@ -335,9 +339,7 @@ public class MapManager : MonoBehaviour
 
                     Vector3Int enemyLocation = new Vector3Int(enemyX, enemyY, 2);
                     enemyList[i].gridLocation = enemyLocation;
-                    //enemyList[i] = Instantiate(enemyList[i]);
-                    //PositionCharacter(enemyList[i], allTiles[i]);
-                    //enemyList[i].activeTile.hasCharacter = true;
+
                     for (int k = 0; k < allTiles.Count; k++)
                     {
                         if (i < enemyList.Count && enemyList[i].grid2DLocation == allTiles[k].grid2DLocation)
@@ -345,9 +347,7 @@ public class MapManager : MonoBehaviour
                             enemyList[i] = Instantiate(enemyList[i]);
                             PositionCharacter(enemyList[i], allTiles[k]);
                             enemyList[i].activeTile.hasEnemy = true;
-                            //playerCharacters.Remove(playerCharacters[characterCount]);
-                            //i++;
-                            //k = 0;
+
                         }
                     }
                     break;
@@ -357,4 +357,23 @@ public class MapManager : MonoBehaviour
             }
         }
     }
+
+    public void SetOGPosition()
+    {
+        int characterCount = 0;
+        int j = 0;
+        for (int i = 0; i < allTiles.Count; i++)
+        {
+            if (characterCount < playerCharacters.Count && characterPositions[j] == allTiles[i].gridLocation)
+            {
+                playerCharacters[characterCount].ogPosition = allTiles[i].gridLocation;
+                PositionCharacter(playerCharacters[characterCount], allTiles[i]);
+                playerCharacters[characterCount].activeTile.hasCharacter = true;
+                characterCount++;
+                i = 0;
+                j++;
+            }
+        }
+    }
+
 }

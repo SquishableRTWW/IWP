@@ -34,7 +34,7 @@ public class CharacterBehaviour : MonoBehaviour
     // Location on the gridmap
     public Vector3Int gridLocation;
     public Vector2Int grid2DLocation { get { return new Vector2Int(gridLocation.x, gridLocation.y); } }
-    public Vector2Int ogPosition;
+    public Vector3Int ogPosition;
     public OverlayTileBehaviour activeTile;
 
 
@@ -148,9 +148,9 @@ public class CharacterBehaviour : MonoBehaviour
     {
         foreach(var tile in MapManager.Instance.allTiles)
         {
-            if (tile.grid2DLocation == ogPosition)
+            if (tile.gridLocation == ogPosition)
             {
-                tile.hasCharacter = false;
+                activeTile.hasCharacter = false;
                 PositionCharacter(tile);
                 break;
             }
