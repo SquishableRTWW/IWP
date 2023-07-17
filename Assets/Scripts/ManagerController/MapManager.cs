@@ -245,18 +245,18 @@ public class MapManager : MonoBehaviour
             }
         }
 
-        int characterCount = 0;
+        //int characterCount = 0;
         // Reposition characters
-        for (int i = 0; i < allTiles.Count; i++)
-        {
-            if (characterCount < playerCharacters.Count && playerCharacters[characterCount].grid2DLocation == allTiles[i].grid2DLocation)
-            {
-                PositionCharacter(playerCharacters[characterCount], allTiles[i]);
-                playerCharacters[characterCount].activeTile.hasCharacter = true;
-                characterCount++;
-                i = 0;
-            }
-        }
+        //for (int i = 0; i < allTiles.Count; i++)
+        //{
+        //    if (characterCount < playerCharacters.Count && playerCharacters[characterCount].grid2DLocation == allTiles[i].grid2DLocation)
+        //    {
+        //        PositionCharacter(playerCharacters[characterCount], allTiles[i]);
+        //        playerCharacters[characterCount].activeTile.hasCharacter = true;
+        //        characterCount++;
+        //        i = 0;
+        //    }
+        //}
 
         // Randomly adding enemies to the map depending on the level:
         for (int i = 0; i < 1 + level; i++)
