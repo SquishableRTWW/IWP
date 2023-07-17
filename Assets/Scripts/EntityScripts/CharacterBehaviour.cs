@@ -9,6 +9,7 @@ public class CharacterBehaviour : MonoBehaviour
     public int maxFuel;
     public int currentFuel;
     public int overheatAmount;
+    public int currentHeat;
     public int HP;
     public int maxHP;
     public int defence;

@@ -56,7 +56,7 @@ public class MouseController : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().sortingOrder = overlayTile.GetComponent<SpriteRenderer>().sortingOrder;
 
             // Logic to pathfind and show tiles should the character be able to move
-            if (character != null && inRangeTiles.Contains(overlayTile) && !isMoving && !character.finishedMove)
+            if (character != null && inRangeTiles.Contains(overlayTile) && !isMoving && !character.isOverheated)
             {
                 if (movementSelected == true)
                 {
@@ -183,18 +183,24 @@ public class MouseController : MonoBehaviour
                             // Zoom into character
                             StartCoroutine(sceneCameraController.ZoomAtCharacter(character.transform.position));
                             // Logic for showing UI stuffs
-                            if (character.finishedMove == false)
+                            if (character.isOverheated == false)
                             {
                                 moveButton.gameObject.SetActive(true);
                             }
                             if (character.isOverheated == false)
                             {
                                 attack1Button.gameObject.SetActive(true);
-                                attack1Button.gameObject.GetComponent<Image>().sprite = character.weaponsEquipped[0].GetComponent<WeaponBehaviour>().GetAttackSprite();
+                                if (character.weaponsEquipped[0] != null)
+                                {
+                                    attack1Button.gameObject.GetComponent<Image>().sprite = character.weaponsEquipped[0].GetComponent<WeaponBehaviour>().GetAttackSprite();
+                                }
                                 if (character.weaponsEquipped.Count > 1 && character.weaponsEquipped[1] != null)
                                 {
                                     attack2Button.gameObject.SetActive(true);
-                                    attack2Button.gameObject.GetComponent<Image>().sprite = character.weaponsEquipped[1].GetComponent<WeaponBehaviour>().GetAttackSprite();
+                                    if (character.weaponsEquipped[1] != null)
+                                    {
+                                        attack2Button.gameObject.GetComponent<Image>().sprite = character.weaponsEquipped[1].GetComponent<WeaponBehaviour>().GetAttackSprite();
+                                    }
                                 }
                                 else
                                 {
@@ -274,7 +280,7 @@ public class MouseController : MonoBehaviour
 
         foreach (var tile in inRangeTiles)
         {
-            if (inRangeTiles.IndexOf(tile) < (4 + Mathf.Pow(character.overheatAmount, 2)))
+            if (inRangeTiles.IndexOf(tile) < (Mathf.Pow((character.overheatAmount - character.currentHeat), 2)))
             {
                 tile.ShowTile();
             }
@@ -320,6 +326,11 @@ public class MouseController : MonoBehaviour
             PositionCharacter(path[0]);
             path.RemoveAt(0);
             character.currentFuel -= 1;
+            character.currentHeat++;
+        }
+        if (character.currentHeat >= character.overheatAmount)
+        {
+            character.isOverheated = true;
         }
 
         if (path.Count == 0)
