@@ -189,18 +189,15 @@ public class MouseController : MonoBehaviour
                             }
                             if (character.isOverheated == false)
                             {
-                                attack1Button.gameObject.SetActive(true);
                                 if (character.weaponsEquipped[0] != null)
                                 {
+                                    attack1Button.gameObject.SetActive(true);
                                     attack1Button.gameObject.GetComponent<Image>().sprite = character.weaponsEquipped[0].GetComponent<WeaponBehaviour>().GetAttackSprite();
                                 }
                                 if (character.weaponsEquipped.Count > 1 && character.weaponsEquipped[1] != null)
                                 {
                                     attack2Button.gameObject.SetActive(true);
-                                    if (character.weaponsEquipped[1] != null)
-                                    {
-                                        attack2Button.gameObject.GetComponent<Image>().sprite = character.weaponsEquipped[1].GetComponent<WeaponBehaviour>().GetAttackSprite();
-                                    }
+                                    attack2Button.gameObject.GetComponent<Image>().sprite = character.weaponsEquipped[1].GetComponent<WeaponBehaviour>().GetAttackSprite();
                                 }
                                 else
                                 {
@@ -219,38 +216,40 @@ public class MouseController : MonoBehaviour
                             // Change tool tip message for each weapon
                             for (int w = 0; w < character.weaponsEquipped.Count; w++)
                             {
-                                Button AB;
-                                if (w == 0)
+                                if (character.weaponsEquipped[w] != null)
                                 {
-                                    AB = attack1Button;
+                                    Button AB;
+                                    if (w == 0)
+                                    {
+                                        AB = attack1Button;
+                                    }
+                                    else if (w == 1)
+                                    {
+                                        AB = attack2Button;
+                                    }
+                                    else
+                                    {
+                                        AB = attack1Button;
+                                    }
+                                    switch (character.weaponsEquipped[w].GetComponent<WeaponBehaviour>().GetWeaponName())
+                                    {
+                                        case "Bolter":
+                                            AB.GetComponent<ToolTip>().message = "A short range weapon that fires in a row of 3\n" + "DMG: 2\n" + "CP: 1";
+                                            break;
+                                        case "Grenade Launcher":
+                                            AB.GetComponent<ToolTip>().message = "A long range weapon that bombards a large area\n" + "DMG: 4\n" + "CP: 2";
+                                            break;
+                                        case "Smoothbore":
+                                            AB.GetComponent<ToolTip>().message = "A long range weapon that shoots in a straight line. Hits only first target.\n" + "DMG: 3\n" + "CP: 1";
+                                            break;
+                                        case "Laser Cannon":
+                                            AB.GetComponent<ToolTip>().message = "A medium range weapon that straight down a line, hitting all targets.\n" + "DMG: 4\n" + "CP: 2";
+                                            break;
+                                        default:
+                                            AB.GetComponent<ToolTip>().message = "Weapon error";
+                                            break;
+                                    }
                                 }
-                                else if (w == 1)
-                                {
-                                    AB = attack2Button;
-                                }
-                                else
-                                {
-                                    AB = attack1Button;
-                                }
-                                switch (character.weaponsEquipped[w].GetComponent<WeaponBehaviour>().GetWeaponName())
-                                {
-                                    case "Bolter":
-                                        AB.GetComponent<ToolTip>().message = "A short range weapon that fires in a row of 3\n" + "DMG: 2\n" + "CP: 1";
-                                        break;
-                                    case "Grenade Launcher":
-                                        AB.GetComponent<ToolTip>().message = "A long range weapon that bombards a large area\n" + "DMG: 4\n" + "CP: 2";
-                                        break;
-                                    case "Smoothbore":
-                                        AB.GetComponent<ToolTip>().message = "A long range weapon that shoots in a straight line. Hits only first target.\n" + "DMG: 3\n" + "CP: 1";
-                                        break;
-                                    case "Laser Cannon":
-                                        AB.GetComponent<ToolTip>().message = "A medium range weapon that straight down a line, hitting all targets.\n" + "DMG: 4\n" + "CP: 2";
-                                        break;
-                                    default:
-                                        AB.GetComponent<ToolTip>().message = "Weapon error";
-                                        break;
-                                }
-
                             }
                         }
                     }
@@ -280,7 +279,7 @@ public class MouseController : MonoBehaviour
 
         foreach (var tile in inRangeTiles)
         {
-            if (inRangeTiles.IndexOf(tile) < (Mathf.Pow((character.overheatAmount - character.currentHeat), 2)))
+            if (inRangeTiles.IndexOf(tile) < (4 + Mathf.Pow((character.overheatAmount - character.currentHeat), 2)))
             {
                 tile.ShowTile();
             }
