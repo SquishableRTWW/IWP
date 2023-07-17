@@ -187,6 +187,7 @@ public class MapManager : MonoBehaviour
         {
             item.finishedMove = false;
             item.isOverheated = false;
+            item.currentHeat = 0;
         }
 
         InfoText.text = "Turn Ended!";

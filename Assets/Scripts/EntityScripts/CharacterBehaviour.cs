@@ -69,7 +69,12 @@ public class CharacterBehaviour : MonoBehaviour
                     case "Pop Shells":
                         attackIncrease = 1;
                         break;
+                    case "Fuel Tank":
+                        maxFuel = maxFuel + 7;
+                        break;
                     default:
+                        defence = 0;
+                        attackIncrease = 0;
                         break;
                 }
 
