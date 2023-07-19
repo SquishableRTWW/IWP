@@ -428,8 +428,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000040054, y: 74}
-  m_SizeDelta: {x: 1089.6791, y: 446.3876}
+  m_AnchoredPosition: {x: -0, y: 75.3}
+  m_SizeDelta: {x: 1083.0812, y: 587.54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &43755110
 MonoBehaviour:
@@ -580,7 +580,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000076294, y: 389}
+  m_AnchoredPosition: {x: 0.000076294, y: 441.24}
   m_SizeDelta: {x: 601.1165, y: 85.766}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &526243300
@@ -763,7 +763,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 830869681}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1253121377}
+        m_TargetAssemblyTypeName: TutorialManager, Assembly-CSharp
+        m_MethodName: NextImage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &830869681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -885,7 +897,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 980669511}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1253121377}
+        m_TargetAssemblyTypeName: TutorialManager, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &980669511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -959,7 +983,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000049591, y: -265}
+  m_AnchoredPosition: {x: -0.000049591, y: -318}
   m_SizeDelta: {x: 1475.3328, y: 163.9655}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1017730758
@@ -1469,7 +1493,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1110851977}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1253121377}
+        m_TargetAssemblyTypeName: TutorialManager, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1110851977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1537,8 +1573,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c79f16891059d234b8c6d1188eb082b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialImageList: []
+  tutorialImageList:
+  - {fileID: 21300000, guid: 9a17d7004a1eb144b8ed291ca5a0084d, type: 3}
+  - {fileID: 21300000, guid: 004aee161b87d09439391041450b252b, type: 3}
+  - {fileID: 21300000, guid: 9ce923b62e24f504e85b699a98b734b8, type: 3}
+  - {fileID: 21300000, guid: 021ae94953a83e141ba791925806432f, type: 3}
+  textList:
+  - Prepare your mechs with weapons, armour and fuel before a level. Fuel is needed
+    to move, assign it wisely
+  - Move your characters to engage the enemy
+  - Defeat all enemy units to move onto the next level
+  - Get new items and mechs between each level during events.
   imageNumber: 0
+  tutorialText: {fileID: 1017730758}
+  tutorialImage: {fileID: 43755110}
+  nextButton: {fileID: 830869680}
+  previousButton: {fileID: 1588335649}
+  startButton: {fileID: 1110851976}
 --- !u!4 &1253121378
 Transform:
   m_ObjectHideFlags: 0
@@ -1637,7 +1688,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1588335650}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1253121377}
+        m_TargetAssemblyTypeName: TutorialManager, Assembly-CSharp
+        m_MethodName: PreviousImage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1588335650
 MonoBehaviour:
   m_ObjectHideFlags: 0
