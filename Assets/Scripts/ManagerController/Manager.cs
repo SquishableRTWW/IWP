@@ -98,14 +98,6 @@ public class Manager : MonoBehaviour
                 MapManager.Instance.levelTier++;
                 MapManager.Instance.level = 1;
             }
-            foreach (Transform map in gridMap.transform)
-            {
-                Destroy(map.gameObject);
-            }
-            foreach (Transform tileChild in tileContainer.transform)
-            {
-                Destroy(tileChild.gameObject);
-            }
 
             MapManager.Instance.ReloadMap();
             timeLimit = originalTime;
@@ -118,7 +110,6 @@ public class Manager : MonoBehaviour
             Instance.isInCombat = false;
             isInEvent = true;
             EventManager.Instance.RandomiseEvent();
-            // NOTE: All logic to move from prep phase has been moved to eventManager.
         }
 
         // If statement to update the enemy paths when new enemies are made or destroyed
@@ -426,5 +417,17 @@ public class Manager : MonoBehaviour
         }
 
         return lowestChild;
+    }
+
+    public void DestroyTiles()
+    {
+        foreach (Transform map in gridMap.transform)
+        {
+            Destroy(map.gameObject);
+        }
+        foreach (Transform tileChild in tileContainer.transform)
+        {
+            Destroy(tileChild.gameObject);
+        }
     }
 }

@@ -198,6 +198,7 @@ public class MapManager : MonoBehaviour
 
     public void ReloadMap()
     {
+        Manager.Instance.DestroyTiles();
         // Randomly generate a map based on tier
         int randomLevel = Random.Range(0, 2);
         switch (levelTier)

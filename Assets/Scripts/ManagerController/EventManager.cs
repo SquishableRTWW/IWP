@@ -82,6 +82,11 @@ public class EventManager : MonoBehaviour
     public void RandomiseEvent()
     {
         // Randomise for left side
+        if (MapManager.Instance.level == 3)
+        {
+            decidedLeftEvent = eventNo.AddCharacter;
+        }
+        else
         {
             rng = UnityEngine.Random.Range(0, 100);
             if (rng <= 50)
@@ -149,7 +154,6 @@ public class EventManager : MonoBehaviour
                 leftEvent.itemsToAdd = new List<GameObject>();
                 // Choose random weapon;
                 int randomItem = UnityEngine.Random.Range(0, PrepPhaseManager.Instance.weaponsInGame.Count);
-                Debug.Log(randomItem);
                 leftEvent.itemsToAdd.Add(PrepPhaseManager.Instance.weaponsInGame[randomItem]);
                 break;
             case eventNo.AddEquipment:
@@ -159,7 +163,6 @@ public class EventManager : MonoBehaviour
                 leftEvent.itemsToAdd = new List<GameObject>();
                 // Choose random weapon;
                 randomItem = UnityEngine.Random.Range(0, PrepPhaseManager.Instance.equipmentInGame.Count);
-                Debug.Log(randomItem);
                 leftEvent.itemsToAdd.Add(PrepPhaseManager.Instance.equipmentInGame[randomItem]);
                 break;
             case eventNo.AddSupplyDrop:
@@ -172,7 +175,6 @@ public class EventManager : MonoBehaviour
                 for (int i = 0; i < itemCount; i++)
                 {
                     randomItem = UnityEngine.Random.Range(0, PrepPhaseManager.Instance.itemsInGame.Count);
-                    Debug.Log(randomItem);
                     leftEvent.itemsToAdd.Add(PrepPhaseManager.Instance.itemsInGame[randomItem]);
                 }
                 break;
@@ -220,7 +222,6 @@ public class EventManager : MonoBehaviour
                 rightEvent.itemsToAdd = new List<GameObject>();
                 // Choose random weapon;
                 int randomItem = UnityEngine.Random.Range(0, PrepPhaseManager.Instance.weaponsInGame.Count);
-                Debug.Log(randomItem);
                 rightEvent.itemsToAdd.Add(PrepPhaseManager.Instance.weaponsInGame[randomItem]);
                 break;
             case eventNo.AddEquipment:
@@ -230,7 +231,6 @@ public class EventManager : MonoBehaviour
                 rightEvent.itemsToAdd = new List<GameObject>();
                 // Choose random weapon;
                 randomItem = UnityEngine.Random.Range(0, PrepPhaseManager.Instance.equipmentInGame.Count);
-                Debug.Log(randomItem);
                 rightEvent.itemsToAdd.Add(PrepPhaseManager.Instance.equipmentInGame[randomItem]);
                 break;
             case eventNo.AddSupplyDrop:
@@ -243,7 +243,6 @@ public class EventManager : MonoBehaviour
                 for (int i = 0; i < itemCount; i++)
                 {
                     randomItem = UnityEngine.Random.Range(0, PrepPhaseManager.Instance.itemsInGame.Count);
-                    Debug.Log(randomItem);
                     rightEvent.itemsToAdd.Add(PrepPhaseManager.Instance.itemsInGame[randomItem]);
                 }
                 break;
@@ -282,7 +281,10 @@ public class EventManager : MonoBehaviour
                 }
                 break;
             case "Add character":
+                int count = MapManager.Instance.playerCharacters.Count;
                 MapManager.Instance.playerCharacters.Add(leftEvent.characterToAdd);
+                MapManager.Instance.playerCharacters[count] = Instantiate(MapManager.Instance.playerCharacters[count]);
+                MapManager.Instance.SetOGPosition();
                 break;
             default:
                 Debug.Log("Event activation error...");
@@ -308,7 +310,10 @@ public class EventManager : MonoBehaviour
                 }
                 break;
             case "Add character":
+                int count = MapManager.Instance.playerCharacters.Count;
                 MapManager.Instance.playerCharacters.Add(rightEvent.characterToAdd);
+                MapManager.Instance.playerCharacters[count] = Instantiate(MapManager.Instance.playerCharacters[count]);
+                MapManager.Instance.SetOGPosition();
                 break;
             default:
                 Debug.Log("Event activation error...");
@@ -319,7 +324,7 @@ public class EventManager : MonoBehaviour
 
     public void TransitionToPrep()
     {
-
+        //MapManager.Instance.ReloadMap();
         eventCanvas.gameObject.SetActive(false);
         prepCanvas.gameObject.SetActive(true);
         Manager.Instance.isInEvent = false;
