@@ -211,7 +211,7 @@ public class MapManager : MonoBehaviour
             case 2:
                 pre_tilemap = Instantiate(tier2Maps[randomLevel].GetComponent<Tilemap>());
                 pre_tilemap.transform.SetParent(this.gameObject.transform);
-                tilemap = gameObject.GetComponentInChildren<Tilemap>();
+                tilemap = pre_tilemap;
                 break;
             default:
                 pre_tilemap = Instantiate(tier1Maps[randomLevel].GetComponent<Tilemap>());
