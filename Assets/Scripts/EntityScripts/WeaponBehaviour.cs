@@ -6,6 +6,8 @@ public class WeaponBehaviour : MonoBehaviour
 {
     public WeaponScriptable weaponScriptable;
     public bool isInInventory;
+    public bool isInstantiated;
+
     // Start is called before the first frame update
     void Start()
     {

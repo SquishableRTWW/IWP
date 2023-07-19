@@ -210,6 +210,7 @@ public class PrepPhaseManager : MonoBehaviour
                 weapon.GetComponent<RectTransform>().anchoredPosition = weaponSlots[i].GetComponent<RectTransform>().anchoredPosition;
                 weapon.GetComponent<DragDrop>().prevSlot = weaponSlots[i].gameObject;
                 weapon.GetComponent<WeaponBehaviour>().isInInventory = false;
+                weapon.GetComponent<WeaponBehaviour>().isInstantiated = true;
                 //Debug.Log("Weapon Updated");
             }
         }
@@ -223,6 +224,7 @@ public class PrepPhaseManager : MonoBehaviour
                 equipment.GetComponent<RectTransform>().anchoredPosition = equipmentSlots[i].GetComponent<RectTransform>().anchoredPosition;
                 equipment.GetComponent<DragDrop>().prevSlot = equipmentSlots[i].gameObject;
                 equipment.GetComponent<EquipmentBehaviour>().isInInventory = false;
+                equipment.GetComponent<EquipmentBehaviour>().isInstantiated = true;
                 //Debug.Log("Equipment Updated");
             }
         }
@@ -245,7 +247,7 @@ public class PrepPhaseManager : MonoBehaviour
         //            Destroy(item.gameObject);
         //        }
         //    }
-        //    else if(item.gameObject.GetComponent<EquipmentBehaviour>())
+        //    else if (item.gameObject.GetComponent<EquipmentBehaviour>())
         //    {
         //        //if (item.gameObject.GetComponent<EquipmentBehaviour>().isInInventory)
         //        {
@@ -263,19 +265,30 @@ public class PrepPhaseManager : MonoBehaviour
         {
             if (Manager.Instance.playerItemList[i] != null)
             {
-                if (!Manager.Instance.playerItemList[i].activeSelf)
+                if (Manager.Instance.playerItemList[i].GetComponent<WeaponBehaviour>())
                 {
-                    GameObject item = Instantiate(Manager.Instance.playerItemList[i], inventorySlots[i].transform.position, Quaternion.identity);
-                    item.transform.SetParent(slotContainer.transform);
-                    item.GetComponent<RectTransform>().anchoredPosition = inventorySlots[i].GetComponent<RectTransform>().anchoredPosition;
-                    item.GetComponent<DragDrop>().prevSlot = inventorySlots[i];
-                    if (item.GetComponent<WeaponBehaviour>())
+                    if (!Manager.Instance.playerItemList[i].GetComponent<WeaponBehaviour>().isInstantiated)
                     {
+                        GameObject item = Instantiate(Manager.Instance.playerItemList[i], inventorySlots[i].transform.position, Quaternion.identity);
+                        Manager.Instance.playerItemList[i] = item;
+                        item.transform.SetParent(slotContainer.transform);
+                        item.GetComponent<RectTransform>().anchoredPosition = inventorySlots[i].GetComponent<RectTransform>().anchoredPosition;
+                        item.GetComponent<DragDrop>().prevSlot = inventorySlots[i];
                         item.GetComponent<WeaponBehaviour>().isInInventory = true;
+                        item.GetComponent<WeaponBehaviour>().isInstantiated = true;
                     }
-                    else if (item.GetComponent<EquipmentBehaviour>())
+                }
+                else if (Manager.Instance.playerItemList[i].GetComponent<EquipmentBehaviour>())
+                {
+                    if (!Manager.Instance.playerItemList[i].GetComponent<EquipmentBehaviour>().isInstantiated)
                     {
+                        GameObject item = Instantiate(Manager.Instance.playerItemList[i], inventorySlots[i].transform.position, Quaternion.identity);
+                        Manager.Instance.playerItemList[i] = item;
+                        item.transform.SetParent(slotContainer.transform);
+                        item.GetComponent<RectTransform>().anchoredPosition = inventorySlots[i].GetComponent<RectTransform>().anchoredPosition;
+                        item.GetComponent<DragDrop>().prevSlot = inventorySlots[i];
                         item.GetComponent<EquipmentBehaviour>().isInInventory = true;
+                        item.GetComponent<EquipmentBehaviour>().isInstantiated = true;
                     }
                 }
             }
