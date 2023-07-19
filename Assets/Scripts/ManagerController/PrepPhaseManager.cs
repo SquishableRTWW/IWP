@@ -57,9 +57,12 @@ public class PrepPhaseManager : MonoBehaviour
         // Fill up inventory List
         foreach (Transform slotChild in slotContainer.transform)
         {
-            if (slotChild.gameObject.GetComponent<ItemSlot>().slotType == "Item")
+            if (slotChild.gameObject.GetComponent<ItemSlot>() != null)
             {
-                inventorySlots.Add(slotChild.gameObject);
+                if (slotChild.gameObject.GetComponent<ItemSlot>().slotType == "Item")
+                {
+                    inventorySlots.Add(slotChild.gameObject);
+                }
             }
         }
         DisplayInventoryItems();

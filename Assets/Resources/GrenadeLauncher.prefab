@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 1165878959751514834}
   - component: {fileID: 5740446516016526263}
   - component: {fileID: 5510584025606317847}
+  - component: {fileID: 5620789391884637694}
+  - component: {fileID: 1660266606588331262}
   m_Layer: 0
   m_Name: GrenadeLauncher
   m_TagString: Untagged
@@ -54,6 +56,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponScriptable: {fileID: 11400000, guid: f3f0c5729678b854690dafb9c7f7afaf, type: 2}
+  isInInventory: 0
 --- !u!222 &6208192315579817052
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -107,6 +110,7 @@ MonoBehaviour:
   ogItemPos: {x: 0, y: 0}
   isInSlot: 0
   itemType: Weapon
+  prevSlot: {fileID: 0}
 --- !u!225 &5510584025606317847
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -119,3 +123,62 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &5620789391884637694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4887933816371469328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5c0647824c76bd4995413fcef47c697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: 
+--- !u!114 &1660266606588331262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4887933816371469328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5620789391884637694}
+          m_TargetAssemblyTypeName: prepTT, Assembly-CSharp
+          m_MethodName: ShowItemToolTip
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: A long range weapon dealing 3 damage to a large area.
+              Costs 2 CP
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5620789391884637694}
+          m_TargetAssemblyTypeName: prepTT, Assembly-CSharp
+          m_MethodName: HideItemToolTip
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

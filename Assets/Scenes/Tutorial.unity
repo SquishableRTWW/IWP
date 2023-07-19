@@ -1581,7 +1581,8 @@ MonoBehaviour:
   textList:
   - Prepare your mechs with weapons, armour and fuel before a level. Fuel is needed
     to move, assign it wisely
-  - Move your characters to engage the enemy
+  - Move your characters to engage the enemy. Beware not to overheat your mechs by
+    moving too far
   - Defeat all enemy units to move onto the next level
   - Get new items and mechs between each level during events.
   imageNumber: 0

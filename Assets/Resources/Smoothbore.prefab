@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 325419256932987155}
   - component: {fileID: -2758152871231786500}
   - component: {fileID: 847153715507035854}
-  - component: {fileID: 8434042998646437959}
+  - component: {fileID: 940666723954892013}
   - component: {fileID: 2270555833223974186}
   m_Layer: 0
   m_Name: Smoothbore
@@ -56,6 +56,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponScriptable: {fileID: 11400000, guid: 39996bf070d748646a43a47a04a69a7f, type: 2}
+  isInInventory: 0
 --- !u!222 &1230906477339490465
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -109,6 +110,7 @@ MonoBehaviour:
   ogItemPos: {x: 0, y: 0}
   isInSlot: 0
   itemType: Weapon
+  prevSlot: {fileID: 0}
 --- !u!225 &847153715507035854
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -121,7 +123,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &8434042998646437959
+--- !u!114 &940666723954892013
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,10 +132,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4683432593260380843}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5869cd2b93545e439cd17db22fb63dc, type: 3}
+  m_Script: {fileID: 11500000, guid: d5c0647824c76bd4995413fcef47c697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  message: test\ntest
+  message: 
 --- !u!114 &2270555833223974186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,8 +153,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8434042998646437959}
-          m_TargetAssemblyTypeName: ToolTip, Assembly-CSharp
+        - m_Target: {fileID: 940666723954892013}
+          m_TargetAssemblyTypeName: prepTT, Assembly-CSharp
           m_MethodName: ShowItemToolTip
           m_Mode: 5
           m_Arguments:
@@ -160,15 +162,16 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Testing
+            m_StringArgument: Medium ranged weapon that deals 4 damage to the first
+              enemy in its path. Costs 1CP
             m_BoolArgument: 0
           m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8434042998646437959}
-          m_TargetAssemblyTypeName: ToolTip, Assembly-CSharp
+        - m_Target: {fileID: 940666723954892013}
+          m_TargetAssemblyTypeName: prepTT, Assembly-CSharp
           m_MethodName: HideItemToolTip
           m_Mode: 1
           m_Arguments:

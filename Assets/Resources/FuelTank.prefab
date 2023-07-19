@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 7524049892999039626}
   - component: {fileID: 5965667530923865432}
   - component: {fileID: 6884534859487015853}
+  - component: {fileID: 474407412152107501}
+  - component: {fileID: 4007782391294428894}
   m_Layer: 0
   m_Name: FuelTank
   m_TagString: Untagged
@@ -121,3 +123,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipmentScriptable: {fileID: 11400000, guid: fec40e32818d7d344829d616e47f799e, type: 2}
   isInInventory: 0
+--- !u!114 &474407412152107501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202266208708811728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5c0647824c76bd4995413fcef47c697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: 
+--- !u!114 &4007782391294428894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202266208708811728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 474407412152107501}
+          m_TargetAssemblyTypeName: prepTT, Assembly-CSharp
+          m_MethodName: ShowItemToolTip
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Increases the maximum fuel capacity of the mech by
+              15
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 474407412152107501}
+          m_TargetAssemblyTypeName: prepTT, Assembly-CSharp
+          m_MethodName: HideItemToolTip
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
