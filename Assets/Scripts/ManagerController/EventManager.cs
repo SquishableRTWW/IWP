@@ -285,6 +285,11 @@ public class EventManager : MonoBehaviour
                 MapManager.Instance.playerCharacters.Add(leftEvent.characterToAdd);
                 MapManager.Instance.playerCharacters[count] = Instantiate(MapManager.Instance.playerCharacters[count]);
                 MapManager.Instance.SetOGPosition();
+                for (int i = 0; i < MapManager.Instance.playerCharacters.Count; i++)
+                {
+                    PrepPhaseManager.Instance.changeButtons[i].GetComponent<Image>().sprite = MapManager.Instance.playerCharacters[i].GetComponent<SpriteRenderer>().sprite;
+                    PrepPhaseManager.Instance.changeButtons[i].GetComponent<Image>().color = new Color(1, 1, 1, 0.6f);
+                }
                 break;
             default:
                 Debug.Log("Event activation error...");
@@ -314,6 +319,11 @@ public class EventManager : MonoBehaviour
                 MapManager.Instance.playerCharacters.Add(rightEvent.characterToAdd);
                 MapManager.Instance.playerCharacters[count] = Instantiate(MapManager.Instance.playerCharacters[count]);
                 MapManager.Instance.SetOGPosition();
+                for (int i = 0; i < MapManager.Instance.playerCharacters.Count; i++)
+                {
+                    PrepPhaseManager.Instance.changeButtons[i].GetComponent<Image>().sprite = MapManager.Instance.playerCharacters[i].GetComponent<SpriteRenderer>().sprite;
+                    PrepPhaseManager.Instance.changeButtons[i].GetComponent<Image>().color = new Color(1, 1, 1, 0.6f);
+                }
                 break;
             default:
                 Debug.Log("Event activation error...");

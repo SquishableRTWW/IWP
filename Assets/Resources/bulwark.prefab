@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.035513878, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -338,7 +338,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6249990382705574353}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.5, y: -0.7499, z: 2}
+  m_LocalPosition: {x: -4, y: -1.4999, z: 2}
   m_LocalScale: {x: 0.425, y: 0.425, z: 0.425}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -414,6 +414,7 @@ MonoBehaviour:
   maxFuel: 10
   currentFuel: 10
   overheatAmount: 3
+  currentHeat: 0
   HP: 40
   maxHP: 40
   defence: 0
@@ -422,8 +423,8 @@ MonoBehaviour:
   finishedMove: 0
   isOverheated: 0
   weaponsEquipped:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4887933816371469328, guid: 97916113d2bed6d4ca625a7602124889, type: 3}
+  - {fileID: 4887933816371469328, guid: 97916113d2bed6d4ca625a7602124889, type: 3}
   equipmentList:
   - {fileID: 1202266208708811728, guid: 78b22cc2755b0d44eaa8497a3cdbe2a9, type: 3}
   healthBar: {fileID: 4478707585213457633}
@@ -433,8 +434,8 @@ MonoBehaviour:
   floatingTextPrefab: {fileID: 2314985102620632716, guid: 8e3446554d1108b4fb78d1ff4405697b, type: 3}
   normalSprite: {fileID: 21300000, guid: 3aa41215ddb0b104abd2babd691d51b9, type: 3}
   reverseSprite: {fileID: 21300000, guid: 5a824fa236b26a64aa35f2d24a259777, type: 3}
-  gridLocation: {x: 0, y: 0, z: 1}
-  ogPosition: {x: 0, y: 0, z: 1}
+  gridLocation: {x: -8, y: 0, z: 1}
+  ogPosition: {x: -8, y: 0, z: 1}
   activeTile: {fileID: 0}
 --- !u!61 &2466153948806981081
 BoxCollider2D:

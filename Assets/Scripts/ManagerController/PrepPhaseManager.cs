@@ -13,7 +13,7 @@ public class PrepPhaseManager : MonoBehaviour
 
     // GUI Components
     [SerializeField] Canvas prepCanvas;
-    [SerializeField] List<Button> changeButtons;
+    public List<Button> changeButtons;
     [SerializeField] List<Button> fuelButtons;
     [SerializeField] Image characterImage;
     [SerializeField] TextMeshProUGUI characterName;
