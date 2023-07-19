@@ -279,7 +279,7 @@ public class MouseController : MonoBehaviour
 
         foreach (var tile in inRangeTiles)
         {
-            if (inRangeTiles.IndexOf(tile) < (4 + Mathf.Pow((character.overheatAmount - character.currentHeat), 2)))
+            if (inRangeTiles.IndexOf(tile) < (Mathf.Pow((character.overheatAmount - character.currentHeat), 2)))
             {
                 tile.ShowTile();
             }
