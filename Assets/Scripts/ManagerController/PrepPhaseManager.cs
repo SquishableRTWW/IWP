@@ -14,9 +14,11 @@ public class PrepPhaseManager : MonoBehaviour
     // GUI Components
     [SerializeField] Canvas prepCanvas;
     [SerializeField] List<Button> changeButtons;
+    [SerializeField] List<Button> fuelButtons;
     [SerializeField] Image characterImage;
     [SerializeField] TextMeshProUGUI characterName;
     [SerializeField] TextMeshProUGUI fuelPoolText;
+    [SerializeField] TextMeshProUGUI reminderText;
     [SerializeField] FuelBar characterFuelbar;
     [SerializeField] FuelBar poolFuelBar;
     [SerializeField] GameObject slotContainer;
@@ -72,7 +74,7 @@ public class PrepPhaseManager : MonoBehaviour
         ////characterFuelbar.SetFuel(characterSelected.currentFuel);
         poolFuelBar.SetFuel(Manager.Instance.fuelPool);
         //UpdateEquipSlots();
-        ChangeSelectedCharacter(0);
+        //ChangeSelectedCharacter(0);
     }
     private void Update()
     {
@@ -89,6 +91,7 @@ public class PrepPhaseManager : MonoBehaviour
         {
             characterSelected = MapManager.Instance.playerCharacters[i];
 
+            ShowCharacterPrep();
             // Re-highlight button pressed
             foreach (Button button in changeButtons)
             {
@@ -101,6 +104,7 @@ public class PrepPhaseManager : MonoBehaviour
             characterFuelbar.SetBarLimit(characterSelected.maxFuel);
             characterFuelbar.SetFuel(characterSelected.currentFuel);
             UpdateEquipSlots();
+            ShowCharacterPrep();
 
             if (characterSelected.weaponsEquipped.Count < 2)
             {
@@ -233,14 +237,14 @@ public class PrepPhaseManager : MonoBehaviour
         {
             if (item.gameObject.GetComponent<WeaponBehaviour>())
             {
-                if (item.gameObject.GetComponent<WeaponBehaviour>().isInInventory)
+                //if (item.gameObject.GetComponent<WeaponBehaviour>().isInInventory)
                 {
                     Destroy(item.gameObject);
                 }
             }
             else if(item.gameObject.GetComponent<EquipmentBehaviour>())
             {
-                if (item.gameObject.GetComponent<EquipmentBehaviour>().isInInventory)
+                //if (item.gameObject.GetComponent<EquipmentBehaviour>().isInInventory)
                 {
                     Destroy(item.gameObject);
                 }
@@ -282,5 +286,44 @@ public class PrepPhaseManager : MonoBehaviour
        {
             characterSelectButtons[i].gameObject.SetActive(true);
        }
+    }
+
+    public void ShowCharacterPrep()
+    {
+        reminderText.gameObject.SetActive(false);
+        characterFuelbar.gameObject.SetActive(true);
+        characterName.gameObject.SetActive(true);
+        characterImage.gameObject.SetActive(true);
+        foreach (var slot in equipmentSlots)
+        {
+            slot.gameObject.SetActive(true);
+        }
+        foreach (var slot in weaponSlots)
+        {
+            slot.gameObject.SetActive(true);
+        }
+        foreach (var button in fuelButtons)
+        {
+            button.gameObject.SetActive(true);
+        }
+    }
+    public void HideCharacterPrep()
+    {
+        reminderText.gameObject.SetActive(true);
+        characterFuelbar.gameObject.SetActive(false);
+        characterName.gameObject.SetActive(false);
+        characterImage.gameObject.SetActive(false);
+        foreach (var slot in equipmentSlots)
+        {
+            slot.gameObject.SetActive(false);
+        }
+        foreach (var slot in weaponSlots)
+        {
+            slot.gameObject.SetActive(false);
+        }
+        foreach (var button in fuelButtons)
+        {
+            button.gameObject.SetActive(false);
+        }
     }
 }

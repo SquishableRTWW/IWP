@@ -323,6 +323,7 @@ public class EventManager : MonoBehaviour
         eventCanvas.gameObject.SetActive(false);
         prepCanvas.gameObject.SetActive(true);
         Manager.Instance.isInEvent = false;
+        PrepPhaseManager.Instance.HideCharacterPrep();
         PrepPhaseManager.Instance.DisplayInventoryItems();
 
         MapManager.Instance.SetOGPosition();
@@ -338,8 +339,7 @@ public class EventManager : MonoBehaviour
         Manager.Instance.fuelPool = Manager.Instance.maxfuelPool;
         PrepPhaseManager.Instance.ResetBars();
         PrepPhaseManager.Instance.UpdateCharacterButtons();
-        PrepPhaseManager.Instance.ChangeSelectedCharacter(0);
-
+        //PrepPhaseManager.Instance.ChangeSelectedCharacter(0);
         //Debug.Log("Moving to prep");
 
 

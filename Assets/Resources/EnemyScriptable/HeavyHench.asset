@@ -16,3 +16,5 @@ MonoBehaviour:
   enemyName: Heavy Hench
   movementRange: 3
   weapon: {fileID: 5634200892605953027, guid: b4107d631b66bbe41959bd0da1ff217a, type: 3}
+  attackRange: 4
+  damage: 2

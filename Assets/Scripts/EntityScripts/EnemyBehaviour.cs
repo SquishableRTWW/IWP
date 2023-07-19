@@ -120,7 +120,7 @@ public class EnemyBehaviour : MonoBehaviour
         switch (enemyScriptable.weapon.GetShotType())
         {
             case "Linear":
-                List<OverlayTileBehaviour> targetTiles = rangeFinder.GetTilesInAttackRange(activeTile, enemyScriptable.weapon.GetWeaponRange());
+                List<OverlayTileBehaviour> targetTiles = rangeFinder.GetTilesInAttackRange(activeTile, enemyScriptable.attackRange);
                 if (targetTiles.Count > 1)
                 {
                     //Debug.Log("Target is in sight");

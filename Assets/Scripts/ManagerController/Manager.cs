@@ -157,6 +157,10 @@ public class Manager : MonoBehaviour
             timeLimit = originalTime;
             //Give back the CP
             AddCPImage();
+            foreach (var character in MapManager.Instance.playerCharacters)
+            {
+                character.currentFuel++;
+            }
         }
 
         // NOTE FOR ME:
@@ -218,8 +222,8 @@ public class Manager : MonoBehaviour
                         if (character.grid2DLocation == MapManager.Instance.enemyList[i].targetTile.grid2DLocation && !MapManager.Instance.enemyList[i].hasAttacked)
                         {
                             StartCoroutine(MapManager.Instance.enemyList[i].DoAttackAnimation());
-                            DoDamageToCharacter(character, MapManager.Instance.enemyList[i].enemyScriptable.weapon.GetWeaponDamage());
-                            StartCoroutine(character.ShowDamage(MapManager.Instance.enemyList[i].enemyScriptable.weapon.GetWeaponDamage().ToString()));
+                            DoDamageToCharacter(character, MapManager.Instance.enemyList[i].enemyScriptable.damage);
+                            StartCoroutine(character.ShowDamage(MapManager.Instance.enemyList[i].enemyScriptable.damage.ToString()));
                             MapManager.Instance.enemyList[i].hasAttacked = true;
                             MapManager.Instance.enemyList[i].shouldAttack = false;
                         }
@@ -292,7 +296,7 @@ public class Manager : MonoBehaviour
             }
         }
         AddCPImage();
-        CP = 2;
+        CP = maxCP;
         timeLimit = originalTime;
     }
 
@@ -302,7 +306,10 @@ public class Manager : MonoBehaviour
         playerTurn = false;
         TempEnemyTurn();
         //Give back the CP
-        
+        foreach (var character in MapManager.Instance.playerCharacters)
+        {
+            character.currentFuel++;
+        }
     }
 
     public void StartCombat()

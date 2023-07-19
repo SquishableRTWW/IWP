@@ -9,4 +9,6 @@ public class EnemyScriptable : ScriptableObject
     public string enemyName;
     public int movementRange;
     public WeaponBehaviour weapon;
+    public int attackRange;
+    public int damage;
 }
