@@ -236,44 +236,47 @@ public class PrepPhaseManager : MonoBehaviour
 
     public void DisplayInventoryItems()
     {
-        foreach (Transform item in slotContainer.transform)
-        {
-            if (item.gameObject.GetComponent<WeaponBehaviour>())
-            {
-                //if (item.gameObject.GetComponent<WeaponBehaviour>().isInInventory)
-                {
-                    Destroy(item.gameObject);
-                }
-            }
-            else if(item.gameObject.GetComponent<EquipmentBehaviour>())
-            {
-                //if (item.gameObject.GetComponent<EquipmentBehaviour>().isInInventory)
-                {
-                    Destroy(item.gameObject);
-                }
-            }
-            else
-            {
-                continue;
-            }
-        }
+        //foreach (Transform item in slotContainer.transform)
+        //{
+        //    if (item.gameObject.GetComponent<WeaponBehaviour>())
+        //    {
+        //        //if (item.gameObject.GetComponent<WeaponBehaviour>().isInInventory)
+        //        {
+        //            Destroy(item.gameObject);
+        //        }
+        //    }
+        //    else if(item.gameObject.GetComponent<EquipmentBehaviour>())
+        //    {
+        //        //if (item.gameObject.GetComponent<EquipmentBehaviour>().isInInventory)
+        //        {
+        //            Destroy(item.gameObject);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        continue;
+        //    }
+        //}
 
 
         for (int i = 0; i < Manager.Instance.playerItemList.Count; i++)
         {
             if (Manager.Instance.playerItemList[i] != null)
             {
-                GameObject item = Instantiate(Manager.Instance.playerItemList[i], inventorySlots[i].transform.position, Quaternion.identity);
-                item.transform.SetParent(slotContainer.transform);
-                item.GetComponent<RectTransform>().anchoredPosition = inventorySlots[i].GetComponent<RectTransform>().anchoredPosition;
-                item.GetComponent<DragDrop>().prevSlot = inventorySlots[i];
-                if (item.GetComponent<WeaponBehaviour>())
+                if (!Manager.Instance.playerItemList[i].activeSelf)
                 {
-                    item.GetComponent<WeaponBehaviour>().isInInventory = true;
-                }
-                else if (item.GetComponent<EquipmentBehaviour>())
-                {
-                    item.GetComponent<EquipmentBehaviour>().isInInventory = true;
+                    GameObject item = Instantiate(Manager.Instance.playerItemList[i], inventorySlots[i].transform.position, Quaternion.identity);
+                    item.transform.SetParent(slotContainer.transform);
+                    item.GetComponent<RectTransform>().anchoredPosition = inventorySlots[i].GetComponent<RectTransform>().anchoredPosition;
+                    item.GetComponent<DragDrop>().prevSlot = inventorySlots[i];
+                    if (item.GetComponent<WeaponBehaviour>())
+                    {
+                        item.GetComponent<WeaponBehaviour>().isInInventory = true;
+                    }
+                    else if (item.GetComponent<EquipmentBehaviour>())
+                    {
+                        item.GetComponent<EquipmentBehaviour>().isInInventory = true;
+                    }
                 }
             }
         }
@@ -329,4 +332,25 @@ public class PrepPhaseManager : MonoBehaviour
             button.gameObject.SetActive(false);
         }
     }
+
+    //public void HideItemsTemp()
+    //{
+    //    foreach (Transform item in slotContainer.transform)
+    //    {
+    //        if (item.GetComponent<WeaponBehaviour>())
+    //        {
+    //            if (!item.GetComponent<WeaponBehaviour>().isInInventory)
+    //            {
+    //                item.gameObject.SetActive(false);
+    //            }
+    //        }
+    //        else if (item.GetComponent<EquipmentBehaviour>())
+    //        {
+    //            if (!item.GetComponent<EquipmentBehaviour>().isInInventory)
+    //            {
+    //                item.gameObject.SetActive(false);
+    //            }
+    //        }
+    //    }
+    //}
 }
