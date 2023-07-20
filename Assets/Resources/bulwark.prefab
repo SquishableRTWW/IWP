@@ -415,8 +415,8 @@ MonoBehaviour:
   currentFuel: 10
   overheatAmount: 3
   currentHeat: 0
-  HP: 40
-  maxHP: 40
+  HP: 25
+  maxHP: 25
   defence: 0
   attackIncrease: 0
   directionIndicator: 0
@@ -424,7 +424,7 @@ MonoBehaviour:
   isOverheated: 0
   weaponsEquipped:
   - {fileID: 4887933816371469328, guid: 97916113d2bed6d4ca625a7602124889, type: 3}
-  - {fileID: 4887933816371469328, guid: 97916113d2bed6d4ca625a7602124889, type: 3}
+  - {fileID: 0}
   equipmentList:
   - {fileID: 1202266208708811728, guid: 78b22cc2755b0d44eaa8497a3cdbe2a9, type: 3}
   healthBar: {fileID: 4478707585213457633}

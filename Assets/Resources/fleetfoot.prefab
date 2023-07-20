@@ -357,8 +357,8 @@ MonoBehaviour:
   currentFuel: 5
   overheatAmount: 6
   currentHeat: 0
-  HP: 20
-  maxHP: 20
+  HP: 15
+  maxHP: 15
   defence: 0
   attackIncrease: 0
   directionIndicator: 0
