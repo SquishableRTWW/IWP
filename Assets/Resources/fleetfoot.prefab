@@ -365,7 +365,7 @@ MonoBehaviour:
   finishedMove: 0
   isOverheated: 0
   weaponsEquipped:
-  - {fileID: 4887933816371469328, guid: 97916113d2bed6d4ca625a7602124889, type: 3}
+  - {fileID: 4683432593260380843, guid: b4107d631b66bbe41959bd0da1ff217a, type: 3}
   equipmentList:
   - {fileID: 0}
   healthBar: {fileID: 2788597774748779722}
