@@ -21,7 +21,7 @@ public class PrepPhaseManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI characterName;
     [SerializeField] TextMeshProUGUI fuelPoolText;
     [SerializeField] TextMeshProUGUI reminderText;
-    [SerializeField] FuelBar characterFuelbar;
+    public FuelBar characterFuelbar;
     [SerializeField] FuelBar poolFuelBar;
     [SerializeField] GameObject slotContainer;
     public TextMeshProUGUI levelText;

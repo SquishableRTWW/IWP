@@ -115,7 +115,7 @@ public class CharacterBehaviour : MonoBehaviour
         if (floatingTextPrefab)
         {
             GameObject prefab = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
-            prefab.GetComponentInChildren<TextMesh>().color = new Color(0f, 1f, 0f, 1f);
+            prefab.GetComponentInChildren<TextMesh>().color = new Color(1f, 0f, 0f, 1f);
             prefab.GetComponentInChildren<TextMesh>().text = text;
 
             yield return new WaitForSeconds(0.6f);

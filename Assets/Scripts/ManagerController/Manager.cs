@@ -150,7 +150,10 @@ public class Manager : MonoBehaviour
             AddCPImage();
             foreach (var character in MapManager.Instance.playerCharacters)
             {
-                character.currentFuel++;
+                if (character.currentFuel < character.maxFuel)
+                {
+                    character.currentFuel++;
+                }
             }
         }
 
@@ -447,7 +450,8 @@ public class Manager : MonoBehaviour
                 break;
             case "Fuel Tank":
                 character.maxFuel += 15;
-                character.currentFuel += 15;
+                PrepPhaseManager.Instance.characterFuelbar.SetBarLimit(character.maxFuel);
+                PrepPhaseManager.Instance.characterFuelbar.SetFuel(character.currentFuel);
                 break;
             default:
                 Debug.Log("Equipment buff error");
@@ -466,7 +470,8 @@ public class Manager : MonoBehaviour
                 break;
             case "Fuel Tank":
                 character.maxFuel -= 15;
-                character.currentFuel -= 15;
+                PrepPhaseManager.Instance.characterFuelbar.SetBarLimit(character.maxFuel);
+                PrepPhaseManager.Instance.characterFuelbar.SetFuel(character.currentFuel);
                 break;
             default:
                 Debug.Log("Equipment buff error");
