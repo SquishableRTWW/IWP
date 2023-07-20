@@ -312,7 +312,7 @@ public class EventManager : MonoBehaviour
             case "Add fuel":
                 Manager.Instance.maxfuelPool = Manager.Instance.maxfuelPool + rightEvent.amount;
                 break;
-            case "Add CP":
+            case "Add cp":
                 Manager.Instance.maxCP = Manager.Instance.maxCP + rightEvent.amount;
                 Debug.Log(Manager.Instance.maxCP);
                 break;
