@@ -246,6 +246,12 @@ public class EventManager : MonoBehaviour
                     rightEvent.itemsToAdd.Add(PrepPhaseManager.Instance.itemsInGame[randomItem]);
                 }
                 break;
+            case eventNo.Add2CP:
+                rightEvent.eventName = "Add2CP";
+                rightEvent.eventType = "Add cp";
+                rightEvent.eventMessage = "We found some comms equipment in mint condition. This could allow you to give us many more commands.";
+                rightEvent.amount = 2;
+                break;
             case eventNo.AddCharacter:
                 rightEvent.eventName = "AddCharacter";
                 rightEvent.eventType = "Add character";
@@ -273,6 +279,7 @@ public class EventManager : MonoBehaviour
                 break;
             case "Add cp":
                 Manager.Instance.maxCP = Manager.Instance.maxCP + leftEvent.amount;
+                Debug.Log(Manager.Instance.maxCP);
                 break;
             case "Add item":
                 for (int i = 0; i < leftEvent.itemsToAdd.Count; i++)
@@ -307,6 +314,7 @@ public class EventManager : MonoBehaviour
                 break;
             case "Add CP":
                 Manager.Instance.maxCP = Manager.Instance.maxCP + rightEvent.amount;
+                Debug.Log(Manager.Instance.maxCP);
                 break;
             case "Add item":
                 for (int i = 0; i < rightEvent.itemsToAdd.Count; i++)

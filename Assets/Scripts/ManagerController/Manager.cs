@@ -307,6 +307,7 @@ public class Manager : MonoBehaviour
     {
         isInCombat = true;
         playerTurn = true;
+        CP = maxCP;
         Debug.Log("Level start");
     }
 
