@@ -51,35 +51,13 @@ public class CharacterBehaviour : MonoBehaviour
         realExplosion = null;
         directionIndicator = 1;
         currentFuel = 0;
+
+        Manager.Instance.GiveEquipmentBuff(this, equipmentList[0].GetComponent<EquipmentBehaviour>());
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Equipment check for stat buffs
-        if (equipmentList[0] != null)
-        {
-            foreach (GameObject equipment in equipmentList)
-            {
-                switch (equipment.GetComponent<EquipmentBehaviour>().equipmentScriptable.equipmentName)
-                {
-                    case "Steel Plating":
-                        defence = 1;
-                        break;
-                    case "Pop Shells":
-                        attackIncrease = 1;
-                        break;
-                    case "Fuel Tank":
-                        maxFuel = maxFuel + 7;
-                        break;
-                    default:
-                        defence = 0;
-                        attackIncrease = 0;
-                        break;
-                }
-
-            }
-        }
 
         if (HP <= 0)
         {

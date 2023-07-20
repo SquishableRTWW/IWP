@@ -214,7 +214,7 @@ public class Manager : MonoBehaviour
                         {
                             StartCoroutine(MapManager.Instance.enemyList[i].DoAttackAnimation());
                             DoDamageToCharacter(character, MapManager.Instance.enemyList[i].enemyScriptable.damage);
-                            StartCoroutine(character.ShowDamage(MapManager.Instance.enemyList[i].enemyScriptable.damage.ToString()));
+                            StartCoroutine(character.ShowDamage((MapManager.Instance.enemyList[i].enemyScriptable.damage - character.defence).ToString()));
                             MapManager.Instance.enemyList[i].hasAttacked = true;
                             MapManager.Instance.enemyList[i].shouldAttack = false;
                         }
@@ -365,7 +365,9 @@ public class Manager : MonoBehaviour
 
     public void DoDamageToCharacter(CharacterBehaviour character, int damage)
     {
+        Debug.Log(damage);
         character.HP -= damage - character.defence;
+        Debug.Log(damage - character.defence);
         character.healthBar.SetHealth(character.HP);
         camera.CameraShake();
     }
@@ -429,6 +431,46 @@ public class Manager : MonoBehaviour
         foreach (Transform tileChild in tileContainer.transform)
         {
             Destroy(tileChild.gameObject);
+        }
+    }
+
+    // Methods for giving the equipment buffs
+    public void GiveEquipmentBuff(CharacterBehaviour character, EquipmentBehaviour equipment)
+    {
+        switch (equipment.equipmentScriptable.equipmentName)
+        {
+            case "Pop Shells":
+                character.attackIncrease += 1;
+                break;
+            case "Steel Plating":
+                character.defence += 1;
+                break;
+            case "Fuel Tank":
+                character.maxFuel += 15;
+                character.currentFuel += 15;
+                break;
+            default:
+                Debug.Log("Equipment buff error");
+                break;
+        }
+    }
+    public void RemoveEquipmentBuff(CharacterBehaviour character, EquipmentBehaviour equipment)
+    {
+        switch (equipment.equipmentScriptable.equipmentName)
+        {
+            case "Pop Shells":
+                character.attackIncrease -= 1;
+                break;
+            case "Steel Plating":
+                character.defence -= 1;
+                break;
+            case "Fuel Tank":
+                character.maxFuel -= 15;
+                character.currentFuel -= 15;
+                break;
+            default:
+                Debug.Log("Equipment buff error");
+                break;
         }
     }
 }

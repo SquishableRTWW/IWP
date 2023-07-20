@@ -72,6 +72,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                 {
                     eventData.pointerDrag.GetComponent<DragDrop>().prevSlot.transform.GetChild(0).gameObject.SetActive(true);
                 }
+                Manager.Instance.RemoveEquipmentBuff(PrepPhaseManager.Instance.characterSelected, eventData.pointerDrag.GetComponent<EquipmentBehaviour>());
             }
             //==================================================================================================================================================================
             // If item is going into weapon or equipment slot
@@ -146,6 +147,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                     {
                         gameObject.transform.GetChild(0).gameObject.SetActive(false);
                     }
+                    Manager.Instance.GiveEquipmentBuff(PrepPhaseManager.Instance.characterSelected, eventData.pointerDrag.GetComponent<EquipmentBehaviour>());
                 }
             }
 
