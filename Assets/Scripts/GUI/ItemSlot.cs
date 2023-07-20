@@ -2,15 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class ItemSlot : MonoBehaviour, IDropHandler
 {
     public string slotType;
     public GameObject itemInside;
 
+    public void Start()
+    {
+        if (slotType == "Weapon" || slotType == "Equipment")
+        {
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        }
+    }
+
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("Dropped in");
         // NOTE: Pointer Drag refers to the gameObject
         if (eventData.pointerDrag != null)
         {
@@ -33,7 +41,6 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             // If item is going into inventory==============================================================================================================================
             if (slotType == "Item" && eventData.pointerDrag.GetComponent<DragDrop>().prevSlot.GetComponent<ItemSlot>().slotType != "Item" && eventData.pointerDrag.GetComponent<WeaponBehaviour>())
             {
-                Debug.Log("Shit");
                 Manager.Instance.playerItemList.Add(eventData.pointerDrag);
                 eventData.pointerDrag.GetComponent<WeaponBehaviour>().isInInventory = true;
                 for (int i = 0; i < PrepPhaseManager.Instance.characterSelected.weaponsEquipped.Count; i++)
@@ -44,8 +51,12 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                         break;
                     }
                 }
+                if (eventData.pointerDrag.GetComponent<DragDrop>().prevSlot.GetComponent<ItemSlot>().slotType == "Weapon" || eventData.pointerDrag.GetComponent<DragDrop>().prevSlot.GetComponent<ItemSlot>().slotType == "Equipment")
+                {
+                    eventData.pointerDrag.GetComponent<DragDrop>().prevSlot.transform.GetChild(0).gameObject.SetActive(true);
+                }
             }
-            if (slotType == "Item" && eventData.pointerDrag.GetComponent<DragDrop>().prevSlot.GetComponent<ItemSlot>().slotType != "Item" && eventData.pointerDrag.GetComponent<EquipmentBehaviour>())
+            else if (slotType == "Item" && eventData.pointerDrag.GetComponent<DragDrop>().prevSlot.GetComponent<ItemSlot>().slotType != "Item" && eventData.pointerDrag.GetComponent<EquipmentBehaviour>())
             {
                 Manager.Instance.playerItemList.Add(eventData.pointerDrag);
                 eventData.pointerDrag.GetComponent<EquipmentBehaviour>().isInInventory = true;
@@ -57,10 +68,14 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                         break;
                     }
                 }
+                if (eventData.pointerDrag.GetComponent<DragDrop>().prevSlot.GetComponent<ItemSlot>().slotType == "Weapon" || eventData.pointerDrag.GetComponent<DragDrop>().prevSlot.GetComponent<ItemSlot>().slotType == "Equipment")
+                {
+                    eventData.pointerDrag.GetComponent<DragDrop>().prevSlot.transform.GetChild(0).gameObject.SetActive(true);
+                }
             }
             //==================================================================================================================================================================
             // If item is going into weapon or equipment slot
-            if (eventData.pointerDrag.GetComponent<DragDrop>().prevSlot != this)
+            else if (eventData.pointerDrag.GetComponent<DragDrop>().prevSlot != this)
             {
                 if (eventData.pointerDrag.GetComponent<WeaponBehaviour>() != null && slotType == "Weapon")
                 {
@@ -95,6 +110,10 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                             break;
                         }
                     }
+                    if (slotType == "Weapon" || slotType == "Equipment")
+                    {
+                        gameObject.transform.GetChild(0).gameObject.SetActive(false);
+                    }
                 }
                 if (eventData.pointerDrag.GetComponent<EquipmentBehaviour>() != null && slotType == "Equipment")
                 {
@@ -122,6 +141,10 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                             Manager.Instance.playerItemList.Remove(item);
                             break;
                         }
+                    }
+                    if (slotType == "Weapon" || slotType == "Equipment")
+                    {
+                        gameObject.transform.GetChild(0).gameObject.SetActive(false);
                     }
                 }
             }
