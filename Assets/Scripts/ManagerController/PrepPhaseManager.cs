@@ -86,6 +86,7 @@ public class PrepPhaseManager : MonoBehaviour
             prepCanvas.gameObject.SetActive(false);
         }
         levelText.text = "LV:" + MapManager.Instance.levelTier + "-" + MapManager.Instance.level;
+        fuelPoolText.text = "FUEL POOL: " + Manager.Instance.fuelPool + "/" + Manager.Instance.maxfuelPool;
     }
 
     public void ChangeSelectedCharacter(int i)

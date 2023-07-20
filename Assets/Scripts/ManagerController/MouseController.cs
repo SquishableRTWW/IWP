@@ -208,7 +208,7 @@ public class MouseController : MonoBehaviour
                             characterSheet.gameObject.SetActive(true);
                             characterSheet.gameObject.transform.Find("SpriteImage").GetComponent<Image>().sprite = character.GetComponent<SpriteRenderer>().sprite;
                             characterSheet.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = character.characterName + "\n\nHP " + "          " + character.HP + "/" + character.maxHP
-                                + "\nFUEL " + "      " + character.currentFuel + "/" + character.maxFuel;
+                                + "\n\nFUEL " + "      " + character.currentFuel + "/" + character.maxFuel;
                             characterSheetHealthbar.SetHealth(character.HP);
                             characterSheetFuelbar.SetMaxFuel(character.maxFuel);
                             characterSheetFuelbar.SetFuel(character.currentFuel);
