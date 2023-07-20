@@ -13,6 +13,8 @@ public class PrepPhaseManager : MonoBehaviour
 
     // GUI Components
     [SerializeField] Canvas prepCanvas;
+    [SerializeField] Canvas eventCanvas;
+    [SerializeField] Canvas CombatCanvas;
     public List<Button> changeButtons;
     [SerializeField] List<Button> fuelButtons;
     [SerializeField] Image characterImage;
@@ -347,24 +349,68 @@ public class PrepPhaseManager : MonoBehaviour
         }
     }
 
-    //public void HideItemsTemp()
-    //{
-    //    foreach (Transform item in slotContainer.transform)
-    //    {
-    //        if (item.GetComponent<WeaponBehaviour>())
-    //        {
-    //            if (!item.GetComponent<WeaponBehaviour>().isInInventory)
-    //            {
-    //                item.gameObject.SetActive(false);
-    //            }
-    //        }
-    //        else if (item.GetComponent<EquipmentBehaviour>())
-    //        {
-    //            if (!item.GetComponent<EquipmentBehaviour>().isInInventory)
-    //            {
-    //                item.gameObject.SetActive(false);
-    //            }
-    //        }
-    //    }
-    //}
+    public void ShowBattleField()
+    {
+        // Hide all the canvases stuff except the return button
+        foreach (Transform child in prepCanvas.transform)
+        {
+            if (child.gameObject.name != "Button_HideLevel")
+            {
+                child.gameObject.SetActive(false);
+            }
+            else
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+        foreach (Transform child in eventCanvas.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+        foreach (Transform child in CombatCanvas.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+    }
+    public void HideBattleField()
+    {
+        // Show all the canvases again and hide the ShowBattleField() Button
+        foreach (Transform child in CombatCanvas.transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+        foreach (Transform child in eventCanvas.transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+        foreach (Transform child in prepCanvas.transform)
+        {
+            if (child.gameObject.name != "Button_HideLevel" && child.gameObject.name != "Text_SelectionReminder")
+            {
+                child.gameObject.SetActive(true);
+            }
+            else
+            {
+                child.gameObject.SetActive(false);
+            }
+            if (characterSelected == null)
+            {
+                if (child.gameObject.name != "Button_HideLevel" && child.gameObject.name != "Image_CharacterSelected" && child.gameObject.name != "Button_AF" && child.gameObject.name != "Button_DF"
+                && child.gameObject.name != "Button_MAX" && child.gameObject.name != "Button_MIN" && child.gameObject.name != "PrepFuelBar")
+                {
+                    child.gameObject.SetActive(true);
+                }
+                else
+                {
+                    child.gameObject.SetActive(false);
+                }
+                if (child.gameObject.name == "Text_SelectionReminder")
+                {
+                    child.gameObject.SetActive(true);
+                }
+                
+            }
+        }
+        UpdateCharacterButtons();
+    }
 }
