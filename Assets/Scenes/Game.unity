@@ -1459,7 +1459,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -699.25, y: 26.72}
+  m_AnchoredPosition: {x: -645.2, y: 26.72}
   m_SizeDelta: {x: 366.5, y: 326}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &146452065
@@ -1484,8 +1484,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Select one of characters below to prepare them for the next sorty
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 68dcb07545c0f2447a6ba0025b9de917, type: 2}
+  m_sharedMaterial: {fileID: 7281514120160273051, guid: 68dcb07545c0f2447a6ba0025b9de917, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10473,7 +10473,7 @@ MonoBehaviour:
   enemyList: []
   enemies:
   - {fileID: 2190785381938542591, guid: 36e00a5e38356bf45924c160d6a33b37, type: 3}
-  - {fileID: 2190785381938542591, guid: ab8aef02986254a4f83b0c7f2df3dc1a, type: 3}
+  - {fileID: 2190785381938542591, guid: 36e00a5e38356bf45924c160d6a33b37, type: 3}
   characterPositions:
   - {x: -8, y: 4, z: 1}
   - {x: -8, y: 0, z: 1}

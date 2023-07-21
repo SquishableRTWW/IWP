@@ -16,5 +16,5 @@ MonoBehaviour:
   enemyName: Dronoid
   movementRange: 6
   weapon: {fileID: 3220143395159419079, guid: 0fa7b8ffac65f0e44b34a978a25a4163, type: 3}
-  attackRange: 2
+  attackRange: 4
   damage: 3

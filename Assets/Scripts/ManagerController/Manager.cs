@@ -400,9 +400,7 @@ public class Manager : MonoBehaviour
 
     public void DoDamageToCharacter(CharacterBehaviour character, int damage)
     {
-        Debug.Log(damage);
         character.HP -= damage - character.defence;
-        Debug.Log(damage - character.defence);
         character.healthBar.SetHealth(character.HP);
         camera.CameraShake();
     }
