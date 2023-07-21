@@ -1675,6 +1675,7 @@ MonoBehaviour:
   combatCanvas: {fileID: 314789680}
   prepCanvas: {fileID: 1964238436}
   eventCanvas: {fileID: 305232937}
+  endTurnButton: {fileID: 1697824200}
   CPUI: {fileID: 276184333839186212, guid: eb662d5e59bdd594ebd3676072877ef3, type: 3}
   timeLimit: 20
   originalTime: 40
