@@ -1574,16 +1574,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialImageList:
-  - {fileID: 21300000, guid: 9a17d7004a1eb144b8ed291ca5a0084d, type: 3}
+  - {fileID: 21300000, guid: 020b82d0d05746942b51eca7240cb49e, type: 3}
   - {fileID: 21300000, guid: 004aee161b87d09439391041450b252b, type: 3}
   - {fileID: 21300000, guid: 9ce923b62e24f504e85b699a98b734b8, type: 3}
   - {fileID: 21300000, guid: 021ae94953a83e141ba791925806432f, type: 3}
   textList:
   - Prepare your mechs with weapons, armour and fuel before a level. Fuel is needed
-    to move, assign it wisely
+    to move, be sure to assign it and assign it wisely
   - Move your characters to engage the enemy. Beware not to overheat your mechs by
     moving too far. Right click and hold to scroll around
-  - Defeat all enemy units to move onto the next level
+  - Defeat all enemy units to move onto the next level. Commanding mechs to attack
+    takes command points shown on the top of the screen
   - Get new items and mechs between each level during events.
   imageNumber: 0
   tutorialText: {fileID: 1017730758}
