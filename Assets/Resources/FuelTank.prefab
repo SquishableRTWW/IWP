@@ -123,6 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipmentScriptable: {fileID: 11400000, guid: fec40e32818d7d344829d616e47f799e, type: 2}
   isInInventory: 0
+  isInstantiated: 0
 --- !u!114 &474407412152107501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,8 +163,8 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Increases the maximum fuel capacity of the mech by
-              15
+            m_StringArgument: FUEL TANK, EQUIPMENT. Increases the maximum fuel capacity
+              of the mech by 15
             m_BoolArgument: 0
           m_CallState: 2
   - eventID: 1

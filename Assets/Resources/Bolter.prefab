@@ -57,6 +57,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponScriptable: {fileID: 11400000, guid: ae584407c06ab944aa826caf38eef713, type: 2}
   isInInventory: 0
+  isInstantiated: 0
 --- !u!222 &4536678743967674216
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -162,8 +163,8 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Short Range weapon that deals 2 damage to 3 enemies
-              in a row. Costs 1 CP
+            m_StringArgument: BOLTER, WEAPON. Short Range weapon that deals 2 damage
+              to 3 enemies in a row. Costs 1 CP
             m_BoolArgument: 0
           m_CallState: 2
   - eventID: 1

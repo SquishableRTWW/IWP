@@ -57,6 +57,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponScriptable: {fileID: 11400000, guid: f3f0c5729678b854690dafb9c7f7afaf, type: 2}
   isInInventory: 0
+  isInstantiated: 0
 --- !u!222 &6208192315579817052
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -162,8 +163,8 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: A long range weapon dealing 3 damage to a large area.
-              Costs 2 CP
+            m_StringArgument: GRENADE LAUNCHER, WEAPON. A long range weapon dealing
+              3 damage to a large area. Costs 2 CP
             m_BoolArgument: 0
           m_CallState: 2
   - eventID: 1

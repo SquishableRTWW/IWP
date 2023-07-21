@@ -57,6 +57,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponScriptable: {fileID: 11400000, guid: 1562a0d9d4334f741b43375d9fcedf51, type: 2}
   isInInventory: 0
+  isInstantiated: 0
 --- !u!222 &5272528640095515402
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -162,8 +163,8 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: A long range weapon that deals 4 damage to all enemies
-              in its path. Costs 2 CP
+            m_StringArgument: LASER CANNON, WEAPON. A long range weapon that deals
+              4 damage to all enemies in its path. Costs 2 CP
             m_BoolArgument: 0
           m_CallState: 2
   - eventID: 1

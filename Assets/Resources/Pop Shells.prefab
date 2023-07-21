@@ -123,6 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipmentScriptable: {fileID: 11400000, guid: c66e21bdaa7025e448e95761c5ee65ba, type: 2}
   isInInventory: 0
+  isInstantiated: 0
 --- !u!114 &2108049213621363212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,8 +163,8 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: This equipment increases all damage dealt by your mech
-              by 1
+            m_StringArgument: POP SHELLS, EQUIPMENT. This equipment increases all
+              damage dealt by your mech by 1
             m_BoolArgument: 0
           m_CallState: 2
   - eventID: 1

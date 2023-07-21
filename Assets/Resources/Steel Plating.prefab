@@ -123,6 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipmentScriptable: {fileID: 11400000, guid: 69f026e0c387ca5419af4c2d51174c18, type: 2}
   isInInventory: 0
+  isInstantiated: 0
 --- !u!114 &1009715065571938009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,7 +163,8 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Reduces all damage dealt to the mech by 1
+            m_StringArgument: STEEL PLATING, EQUIPMENT. Reduces all damage dealt
+              to the mech by 1
             m_BoolArgument: 0
           m_CallState: 2
   - eventID: 1
