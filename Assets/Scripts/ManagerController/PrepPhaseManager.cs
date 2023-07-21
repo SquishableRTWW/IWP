@@ -411,6 +411,7 @@ public class PrepPhaseManager : MonoBehaviour
                 
             }
         }
+        Manager.Instance.warningGUI.SetActive(false);
         UpdateCharacterButtons();
     }
 }

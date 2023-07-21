@@ -21,6 +21,7 @@ public class Manager : MonoBehaviour
     public Canvas prepCanvas;
     public Canvas eventCanvas;
     public Button endTurnButton;
+    public GameObject warningGUI;
 
     [SerializeField] Image CPUI;
     [SerializeField] float timeLimit;
@@ -69,7 +70,7 @@ public class Manager : MonoBehaviour
         TimerSlider.SetMaxTime(timeLimit);
         CP = 2;
         maxCP = 2;
-        maxfuelPool = 15;
+        maxfuelPool = 20;
         fuelPool = maxfuelPool;
 
         int CPUIOffset = 70;
@@ -317,12 +318,34 @@ public class Manager : MonoBehaviour
 
     public void StartCombat()
     {
+        foreach (var character in MapManager.Instance.playerCharacters)
+        {
+            if (character.currentFuel <= 0)
+            {
+                warningGUI.SetActive(true);
+                return;
+            }
+        }
+
         isInCombat = true;
         playerTurn = true;
         CP = maxCP;
         AddAmountedCPImage(maxCP);
         Debug.Log("Level start");
     }
+    public void ConfirmStart()
+    {
+        isInCombat = true;
+        playerTurn = true;
+        CP = maxCP;
+        AddAmountedCPImage(maxCP);
+        Debug.Log("Level confirm start");
+    }
+    public void CancelStart()
+    {
+        warningGUI.SetActive(false);
+    }
+    
 
     public void ChangeCP(int amount)
     {
