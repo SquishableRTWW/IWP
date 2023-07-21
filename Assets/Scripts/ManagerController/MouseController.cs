@@ -27,6 +27,7 @@ public class MouseController : MonoBehaviour
     [SerializeField] private Canvas characterSheet;
     [SerializeField] private Button attack1Button;
     [SerializeField] private Button attack2Button;
+    public Button turnEndButton;
     [SerializeField] CameraController sceneCameraController;
     public HealthBar characterSheetHealthbar;
     public FuelBar characterSheetFuelbar;
@@ -172,7 +173,7 @@ public class MouseController : MonoBehaviour
                     GameObject objectHit = hit.collider.gameObject;
 
                     // Check if the collider is a trigger
-                    if (hit.collider.isTrigger && !attackSelected && !movementSelected)
+                    if (hit.collider.isTrigger && !attackSelected && !movementSelected && Manager.Instance.isInCombat)
                     {
                        
                         if (objectHit.CompareTag("Character"))
@@ -263,7 +264,7 @@ public class MouseController : MonoBehaviour
 
         if (path.Count > 0 && isMoving)
         {
-
+            turnEndButton.gameObject.SetActive(false);
             MoveAlongPath();
         }
     }
@@ -342,6 +343,7 @@ public class MouseController : MonoBehaviour
             isMoving = false;
             DeselectAction();
             character = null;
+            turnEndButton.gameObject.SetActive(true);
         }
     }
 

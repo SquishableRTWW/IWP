@@ -307,7 +307,10 @@ public class Manager : MonoBehaviour
         //Give back the CP
         foreach (var character in MapManager.Instance.playerCharacters)
         {
-            character.currentFuel++;
+            if (character.currentFuel < character.maxFuel)
+            {
+                character.currentFuel++;
+            }
         }
         endTurnButton.gameObject.SetActive(false);
     }
@@ -317,6 +320,7 @@ public class Manager : MonoBehaviour
         isInCombat = true;
         playerTurn = true;
         CP = maxCP;
+        AddAmountedCPImage(maxCP);
         Debug.Log("Level start");
     }
 

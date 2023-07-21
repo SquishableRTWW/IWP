@@ -269,93 +269,94 @@ public class MapManager : MonoBehaviour
         {
             int enemyTypeToSpawn = Random.Range(0, enemies.Count);
             int enemyX = 0, enemyY = 0;
-
+            bool Checking = true;
+            bool noTileError = true;
 
             switch (enemyTypeToSpawn)
             {
                 case 0:
-                    bool Checking = true;
-                    bool noTileError = true;
                     enemyList.Add(enemies[0]);
-
-                    while (Checking)
-                    {
-                        enemyX = Random.Range(6, 7);
-                        enemyY = Random.Range(-7, 7);
-                        int childCount = 0;
-
-                        // Check x and y coords coincides with an overlay tile
-                        foreach (Transform child in overlayContainer.transform)
-                        {
-                            if (child.gameObject.GetComponent<OverlayTileBehaviour>().grid2DLocation == new Vector2Int(enemyX, enemyY))
-                            {
-                                break;
-                            }
-                            childCount++;
-                            if (childCount + 1 == allTiles.Count)
-                            {
-                                noTileError = false;
-                            }
-                            else
-                            {
-                                noTileError = true;
-                            }
-                        }
-
-                        // Check no clash with player's characters
-                        for (int j = 0; j < playerCharacters.Count; j++)
-                        {
-                            if (playerCharacters[j].grid2DLocation == new Vector2Int(enemyX, enemyY))
-                            {
-                                noTileError = false;
-                                Debug.Log("Spawn clash; resetting");
-                            }
-                            else if (j + 1 == enemyList.Count)
-                            {
-                                noTileError = true;
-                                break;
-                            }
-                        }
-
-                        // Check no clash with other enemies
-                        for (int j = 0; j < enemyList.Count; j++)
-                        {
-                            if (enemyList[j].grid2DLocation == new Vector2Int(enemyX, enemyY))
-                            {
-                                noTileError = false;
-                                Debug.Log("Spawn clash; resetting");
-                                break;
-                            }
-                            else if (j + 1 == enemyList.Count)
-                            {
-                                noTileError = true;
-                            }
-                        }
-
-                        // If no error then ok
-                        if (noTileError == true)
-                        {
-                            Checking = false;
-                        }
-                    }
-
-                    Vector3Int enemyLocation = new Vector3Int(enemyX, enemyY, 2);
-                    enemyList[i].gridLocation = enemyLocation;
-
-                    for (int k = 0; k < allTiles.Count; k++)
-                    {
-                        if (i < enemyList.Count && enemyList[i].grid2DLocation == allTiles[k].grid2DLocation)
-                        {
-                            enemyList[i] = Instantiate(enemyList[i]);
-                            PositionCharacter(enemyList[i], allTiles[k]);
-                            enemyList[i].activeTile.hasEnemy = true;
-
-                        }
-                    }
                     break;
-
+                case 1:
+                    enemyList.Add(enemies[1]);
+                    break;
                 default:
                     break;
+            }
+
+            while (Checking)
+            {
+                enemyX = Random.Range(6, 7);
+                enemyY = Random.Range(-7, 7);
+                int childCount = 0;
+
+                // Check x and y coords coincides with an overlay tile
+                foreach (Transform child in overlayContainer.transform)
+                {
+                    if (child.gameObject.GetComponent<OverlayTileBehaviour>().grid2DLocation == new Vector2Int(enemyX, enemyY))
+                    {
+                        break;
+                    }
+                    childCount++;
+                    if (childCount + 1 == allTiles.Count)
+                    {
+                        noTileError = false;
+                    }
+                    else
+                    {
+                        noTileError = true;
+                    }
+                }
+
+                // Check no clash with player's characters
+                for (int j = 0; j < playerCharacters.Count; j++)
+                {
+                    if (playerCharacters[j].grid2DLocation == new Vector2Int(enemyX, enemyY))
+                    {
+                        noTileError = false;
+                        Debug.Log("Spawn clash; resetting");
+                    }
+                    else if (j + 1 == enemyList.Count)
+                    {
+                        noTileError = true;
+                        break;
+                    }
+                }
+
+                // Check no clash with other enemies
+                for (int j = 0; j < enemyList.Count; j++)
+                {
+                    if (enemyList[j].grid2DLocation == new Vector2Int(enemyX, enemyY))
+                    {
+                        noTileError = false;
+                        Debug.Log("Spawn clash; resetting");
+                        break;
+                    }
+                    else if (j + 1 == enemyList.Count)
+                    {
+                        noTileError = true;
+                    }
+                }
+
+                // If no error then ok
+                if (noTileError == true)
+                {
+                    Checking = false;
+                }
+            }
+
+            Vector3Int enemyLocation = new Vector3Int(enemyX, enemyY, 2);
+            enemyList[i].gridLocation = enemyLocation;
+
+            for (int k = 0; k < allTiles.Count; k++)
+            {
+                if (i < enemyList.Count && enemyList[i].grid2DLocation == allTiles[k].grid2DLocation)
+                {
+                    enemyList[i] = Instantiate(enemyList[i]);
+                    PositionCharacter(enemyList[i], allTiles[k]);
+                    enemyList[i].activeTile.hasEnemy = true;
+
+                }
             }
         }
     }

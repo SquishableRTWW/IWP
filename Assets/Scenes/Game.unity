@@ -10166,6 +10166,7 @@ MonoBehaviour:
   enemyList: []
   enemies:
   - {fileID: 2190785381938542591, guid: 36e00a5e38356bf45924c160d6a33b37, type: 3}
+  - {fileID: 2190785381938542591, guid: ab8aef02986254a4f83b0c7f2df3dc1a, type: 3}
   characterPositions:
   - {x: -8, y: 4, z: 1}
   - {x: -8, y: 0, z: 1}
@@ -12213,6 +12214,7 @@ MonoBehaviour:
   characterSheet: {fileID: 1758484539}
   attack1Button: {fileID: 1430441362}
   attack2Button: {fileID: 124695955}
+  turnEndButton: {fileID: 1697824200}
   sceneCameraController: {fileID: 519420033}
   characterSheetHealthbar: {fileID: 740255107}
   characterSheetFuelbar: {fileID: 1311821906}
