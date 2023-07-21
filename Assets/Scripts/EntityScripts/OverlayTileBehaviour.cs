@@ -37,6 +37,10 @@ public class OverlayTileBehaviour : MonoBehaviour
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.55f, 0.10f, 0.80f);
     }
+    public void ShowWarningTile()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.0f, 1f, 0.80f);
+    }
 
     public void ShowAttackTile()
     {

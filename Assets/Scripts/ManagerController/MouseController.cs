@@ -80,7 +80,14 @@ public class MouseController : MonoBehaviour
 
                     for (int i = 0; i < path.Count; i++)
                     {
-                        path[i].ShowTileInPath();
+                        if (path.Count >= character.overheatAmount)
+                        {
+                            path[i].ShowWarningTile();
+                        }
+                        else
+                        {
+                            path[i].ShowTileInPath();
+                        }
                     }
                 }
             }
