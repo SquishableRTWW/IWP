@@ -182,7 +182,7 @@ public class MouseController : MonoBehaviour
                             DeselectAction();
                             character = objectHit.GetComponent<CharacterBehaviour>();
                             // Zoom into character
-                            StartCoroutine(sceneCameraController.ZoomAtCharacter(character.transform.position));
+                            //StartCoroutine(sceneCameraController.ZoomAtCharacter(character.transform.position));
                             // Logic for showing UI stuffs
                             if (character.isOverheated == false)
                             {
