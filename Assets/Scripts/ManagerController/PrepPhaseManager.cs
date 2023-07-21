@@ -377,7 +377,15 @@ public class PrepPhaseManager : MonoBehaviour
         // Show all the canvases again and hide the ShowBattleField() Button
         foreach (Transform child in CombatCanvas.transform)
         {
-            child.gameObject.SetActive(true);
+            if (child.gameObject.name == "Button_move" || child.gameObject.name == "Button_Cancel" || child.gameObject.name == "Canvas_CharacterInfo" ||
+                child.gameObject.name == "Button_Attack1" || child.gameObject.name == "Button_Attack2")
+            {
+                child.gameObject.SetActive(false);
+            }
+            else
+            {
+                child.gameObject.SetActive(true);
+            }
         }
         foreach (Transform child in eventCanvas.transform)
         {

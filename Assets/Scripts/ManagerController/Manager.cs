@@ -15,12 +15,12 @@ public class Manager : MonoBehaviour
     public MouseController mouseController;
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] TextMeshProUGUI infoText;
-    [SerializeField] TextMeshProUGUI CPText;
     public Canvas CPUIField;
     public Canvas combatCanvas;
     public Canvas prepCanvas;
     public Canvas eventCanvas;
     public Button endTurnButton;
+
     public GameObject warningGUI;
 
     [SerializeField] Image CPUI;
@@ -138,7 +138,6 @@ public class Manager : MonoBehaviour
                 }
             }
             timerText.text = string.Format("{0:0.00}", timeLimit);
-            CPText.text = "CP Left: " + CP.ToString();
             TimerSlider.SetTime(timeLimit);
         }
 
@@ -331,7 +330,7 @@ public class Manager : MonoBehaviour
         playerTurn = true;
         CP = maxCP;
         AddAmountedCPImage(maxCP);
-        Debug.Log("Level start");
+        //Debug.Log("Level start");
     }
     public void ConfirmStart()
     {
@@ -339,7 +338,7 @@ public class Manager : MonoBehaviour
         playerTurn = true;
         CP = maxCP;
         AddAmountedCPImage(maxCP);
-        Debug.Log("Level confirm start");
+        //Debug.Log("Level confirm start");
     }
     public void CancelStart()
     {
