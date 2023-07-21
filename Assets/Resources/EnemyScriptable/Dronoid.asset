@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4392287566880544dbf9d33c8028dd72, type: 3}
   m_Name: Dronoid
   m_EditorClassIdentifier: 
-  HP: 0
-  enemyName: 
-  movementRange: 0
-  weapon: {fileID: 0}
-  attackRange: 0
-  damage: 0
+  HP: 3
+  enemyName: Dronoid
+  movementRange: 6
+  weapon: {fileID: 3220143395159419079, guid: 0fa7b8ffac65f0e44b34a978a25a4163, type: 3}
+  attackRange: 2
+  damage: 1
