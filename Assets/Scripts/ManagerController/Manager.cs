@@ -20,6 +20,7 @@ public class Manager : MonoBehaviour
     public Canvas combatCanvas;
     public Canvas prepCanvas;
     public Canvas eventCanvas;
+    public Button endTurnButton;
 
     [SerializeField] Image CPUI;
     [SerializeField] float timeLimit;
@@ -167,6 +168,10 @@ public class Manager : MonoBehaviour
         {
             StartMovingEnemies();
         }
+         if (playerTurn)
+        {
+            endTurnButton.gameObject.SetActive(true);
+        }
     }
 
     private void StartMovingEnemies()
@@ -304,6 +309,7 @@ public class Manager : MonoBehaviour
         {
             character.currentFuel++;
         }
+        endTurnButton.gameObject.SetActive(false);
     }
 
     public void StartCombat()
