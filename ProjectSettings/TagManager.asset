@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Character
   - OverlayTile
+  - Enemy
+  - Rock
   layers:
   - Default
   - TransparentFX

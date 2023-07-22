@@ -367,10 +367,7 @@ public class PrepPhaseManager : MonoBehaviour
         {
             child.gameObject.SetActive(false);
         }
-        foreach (Transform child in CombatCanvas.transform)
-        {
-            child.gameObject.SetActive(false);
-        }
+        CombatCanvas.gameObject.SetActive(false);
     }
     public void HideBattleField()
     {
