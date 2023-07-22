@@ -58,6 +58,7 @@ public class MapManager : MonoBehaviour
             {
                 playerCharacters[characterCount] = Instantiate(playerCharacters[characterCount]);
                 playerCharacters[characterCount].ogPosition = allTiles[i].gridLocation;
+                playerCharacters[characterCount].gridLocation = allTiles[i].gridLocation;
                 PositionCharacter(playerCharacters[characterCount], allTiles[i]);
                 playerCharacters[characterCount].activeTile.hasCharacter = true;
                 characterCount++;

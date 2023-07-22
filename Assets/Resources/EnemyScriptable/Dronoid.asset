@@ -15,6 +15,6 @@ MonoBehaviour:
   HP: 3
   enemyName: Dronoid
   movementRange: 6
-  weapon: {fileID: 3220143395159419079, guid: 0fa7b8ffac65f0e44b34a978a25a4163, type: 3}
+  weapon: {fileID: 5634200892605953027, guid: b4107d631b66bbe41959bd0da1ff217a, type: 3}
   attackRange: 4
   damage: 3

@@ -26,7 +26,7 @@ public class TutorialManager : MonoBehaviour
 
         textList = new List<string>();
         textList.Add("Prepare your mechs with weapons, equipment and fuel before a level. Fuel is NEEDED to move, be sure to assign it and assign it wisely.");
-        textList.Add("Left click to select your characters.\n Move your characters to engage the enemy. Beware not to OVERHEAT your mechs by moving too far as it will leave it useless for the rest of the turn.\n" +
+        textList.Add("Left click to select your characters.\n Move your characters to engage the enemy. Moving your mech too far will OVERHEAT it, leaving it useless for the rest of the turn.\n" +
             " Right click and hold to scroll around.");
         textList.Add("Defeat all enemy units to move onto the next level by using your weapons' attacks.\n Commanding mechs to attack takes command points shown on the top of the screen.");
         textList.Add("Get new items and mechs between each level during events. Read carefully what each event could give you.");
