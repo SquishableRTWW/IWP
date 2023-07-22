@@ -331,6 +331,14 @@ public class Manager : MonoBehaviour
                 warningGUI.SetActive(true);
                 return;
             }
+            foreach (var weapon in character.weaponsEquipped)
+            {
+                if (weapon == null)
+                {
+                    warningGUI.SetActive(true);
+                    return;
+                }
+            }
         }
 
         isInCombat = true;

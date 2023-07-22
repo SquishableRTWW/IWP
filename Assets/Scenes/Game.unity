@@ -13682,8 +13682,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'WARNING: At least one of your mechs have 0 fuel in them. Are you sure
-    you want to start?'
+  m_text: 'WARNING: At least one of your mechs have 0 fuel or no weapons. Are you
+    sure you want to start?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 68dcb07545c0f2447a6ba0025b9de917, type: 2}
   m_sharedMaterial: {fileID: 7281514120160273051, guid: 68dcb07545c0f2447a6ba0025b9de917, type: 2}
