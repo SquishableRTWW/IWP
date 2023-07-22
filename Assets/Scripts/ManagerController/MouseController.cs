@@ -112,6 +112,10 @@ public class MouseController : MonoBehaviour
                             attackTiles = pathfinder.FindAcrossAttackPath(character.activeTile, overlayTile, (int)character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetAttackPattern().x,
                                 character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetWeaponRange(), inRangeTiles);
                             break;
+                        case "Single":
+                            attackTiles = pathfinder.FindSingleAttackPath(character.activeTile, overlayTile, (int)character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetAttackPattern().x,
+                                character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetWeaponRange(), inRangeTiles);
+                            break;
                         default:
                             attackTiles = pathfinder.FindLinearAttackPath(character.activeTile, overlayTile, character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetWeaponRange(), inRangeTiles);
                             break;
@@ -148,11 +152,16 @@ public class MouseController : MonoBehaviour
                     }
 
                     bool hasEnemy = false;
+                    bool hasCharacter = false;
                     foreach (OverlayTileBehaviour tile in attackTiles)
                     {
                         if (tile.hasEnemy)
                         {
                             hasEnemy = true;
+                        }
+                        if (tile.hasCharacter)
+                        {
+                            hasCharacter = true;
                         }
                     }
                     if (hasEnemy)
@@ -161,6 +170,15 @@ public class MouseController : MonoBehaviour
                         character.shootingEffect = character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetAnimation();
                         StartCoroutine(character.DoAttackAnimation(character.shootingEffect));
                         DoDamage();
+                        Manager.Instance.ChangeCP(character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetCPCost());
+                        Manager.Instance.DeleteCPImage(character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetCPCost());
+                    }
+                    else if (hasCharacter)
+                    {
+                        // Play attack animation
+                        character.shootingEffect = character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetAnimation();
+                        StartCoroutine(character.DoAttackAnimation(character.shootingEffect));
+                        DoHeal();
                         Manager.Instance.ChangeCP(character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetCPCost());
                         Manager.Instance.DeleteCPImage(character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetCPCost());
                     }
@@ -252,6 +270,9 @@ public class MouseController : MonoBehaviour
                                             break;
                                         case "Laser Cannon":
                                             AB.GetComponent<ToolTip>().message = "A medium range weapon that straight down a line, hitting all targets.\n" + "DMG: 4\n" + "CP: 2";
+                                            break;
+                                        case "Aider":
+                                            AB.GetComponent<ToolTip>().message = "A medium range weapon that heals target.\n" + "HEAL: 2\n" + "CP: 1";
                                             break;
                                         default:
                                             AB.GetComponent<ToolTip>().message = "Weapon error";
@@ -384,6 +405,51 @@ public class MouseController : MonoBehaviour
                 MapManager.Instance.enemyList[affectedCount].HP -= damageDealt;
                 MapManager.Instance.enemyList[affectedCount].healthBar.SetHealth(MapManager.Instance.enemyList[affectedCount].HP);
                 StartCoroutine(MapManager.Instance.enemyList[affectedCount].ShowDamage(damageDealt.ToString()));
+                affectedCount = 0;
+                tilesWithCharacters.Remove(tilesWithCharacters[i]);
+                //sceneCameraController.CameraShake();
+                i = -1;
+            }
+            else
+            {
+                affectedCount++;
+                i = -1;
+            }
+        }
+        DeselectAction();
+    }
+
+    public void DoHeal()
+    {
+        List<OverlayTileBehaviour> tilesWithCharacters = new List<OverlayTileBehaviour>();
+        int affectedCount = 0;
+        for (int i = 0; i < attackTiles.Count; i++)
+        {
+            if (attackTiles[i].hasCharacter)
+            {
+                tilesWithCharacters.Add(attackTiles[i]);
+            }
+        }
+        for (int i = 0; i < tilesWithCharacters.Count; i++)
+        {
+            if (MapManager.Instance.playerCharacters[affectedCount] == null)
+            {
+                i = -1;
+                continue;
+            }
+            if (MapManager.Instance.playerCharacters[affectedCount].grid2DLocation == tilesWithCharacters[i].grid2DLocation)
+            {
+                int damageDealt = character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetWeaponDamage() + character.attackIncrease;
+                if (MapManager.Instance.playerCharacters[affectedCount].HP + damageDealt > MapManager.Instance.playerCharacters[affectedCount].maxHP)
+                {
+                    MapManager.Instance.playerCharacters[affectedCount].HP = MapManager.Instance.playerCharacters[affectedCount].maxHP;
+                }
+                else
+                {
+                    MapManager.Instance.playerCharacters[affectedCount].HP += damageDealt;
+                }
+                MapManager.Instance.playerCharacters[affectedCount].healthBar.SetHealth(MapManager.Instance.playerCharacters[affectedCount].HP);
+                StartCoroutine(MapManager.Instance.playerCharacters[affectedCount].ShowHeal(damageDealt.ToString()));
                 affectedCount = 0;
                 tilesWithCharacters.Remove(tilesWithCharacters[i]);
                 //sceneCameraController.CameraShake();

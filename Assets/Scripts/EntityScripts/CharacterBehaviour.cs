@@ -133,6 +133,19 @@ public class CharacterBehaviour : MonoBehaviour
         }
     }
 
+    public IEnumerator ShowHeal(string text)
+    {
+        if (floatingTextPrefab)
+        {
+            GameObject prefab = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
+            prefab.GetComponentInChildren<TextMesh>().color = new Color(0f, 1f, 0f, 1f);
+            prefab.GetComponentInChildren<TextMesh>().text = text;
+
+            yield return new WaitForSeconds(0.6f);
+            Destroy(prefab);
+        }
+    }
+
     public void ResetHealthBars()
     {
         healthBar.SetHealth(HP);

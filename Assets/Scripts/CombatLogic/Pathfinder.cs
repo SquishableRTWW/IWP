@@ -277,6 +277,40 @@ public class Pathfinder
         }
         return finalList;
     }
+    public List<OverlayTileBehaviour> FindSingleAttackPath(OverlayTileBehaviour characterTile, OverlayTileBehaviour mousedTile, int AOERange, int attackRange, List<OverlayTileBehaviour> searchableTiles)
+    {
+        int rangeCount = 0;
+        List<OverlayTileBehaviour> preFinalList = new List<OverlayTileBehaviour>();
+        List<OverlayTileBehaviour> finalList = new List<OverlayTileBehaviour>();
+        var tileForPreviouStep = new List<OverlayTileBehaviour>();
+        tileForPreviouStep.Add(mousedTile);
+
+        int x = (characterTile.grid2DLocation.x - mousedTile.grid2DLocation.x);
+        int y = (characterTile.grid2DLocation.y - mousedTile.grid2DLocation.y);
+
+        Vector2 direction = new Vector2(x, y).normalized;
+
+        //Debug.Log((attackRange / 4));
+
+        while (rangeCount < (AOERange - 1))
+        {
+            var surroundingTiles = new List<OverlayTileBehaviour>();
+            preFinalList.AddRange(surroundingTiles);
+            tileForPreviouStep = surroundingTiles.Distinct().ToList();
+
+            rangeCount++;
+        }
+
+        preFinalList.Add(mousedTile);
+        foreach (var tile in preFinalList)
+        {
+            if (searchableTiles.Contains(tile))
+            {
+                finalList.Add(tile);
+            }
+        }
+        return finalList;
+    }
 
     private List<OverlayTileBehaviour> GetFinishedList(OverlayTileBehaviour start, OverlayTileBehaviour end)
     {
