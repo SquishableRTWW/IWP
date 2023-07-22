@@ -287,7 +287,11 @@ public class MouseController : MonoBehaviour
 
         foreach (var tile in inRangeTiles)
         {
-            if (inRangeTiles.IndexOf(tile) < (Mathf.Pow((character.overheatAmount - character.currentHeat), 2)))
+            if (tile.isBlocked)
+            {
+                tile.ShowVoidTilePath();
+            }
+            else if (inRangeTiles.IndexOf(tile) < (Mathf.Pow((character.overheatAmount - character.currentHeat), 2)))
             {
                 tile.ShowTile();
             }

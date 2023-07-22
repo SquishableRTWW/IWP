@@ -95,6 +95,13 @@ public class Pathfinder
                 {
                     continue;
                 }
+                if (neighbour.entity != null)
+                {
+                    if (neighbour.entity.entityScriptable.type == "Obstacle")
+                    {
+                        continue;
+                    }
+                }
 
                 neighbour.G = GetManhattenDistance(start, neighbour);
                 neighbour.H = GetManhattenDistance(end, neighbour);

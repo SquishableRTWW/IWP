@@ -211,7 +211,7 @@ public class MapManager : MonoBehaviour
 
         Manager.Instance.DestroyTiles();
         // Randomly generate a map based on tier
-        int randomLevel = Random.Range(0, 2);
+        int randomLevel = Random.Range(0, 3);
         switch (levelTier)
         {
             case 1:
@@ -237,7 +237,7 @@ public class MapManager : MonoBehaviour
         allTiles = new List<OverlayTileBehaviour>();
 
         // Loop through all the tiles on the map
-        for (int z = bounds.max.z; z > bounds.min.z; z--)
+        for (int z = bounds.min.z; z < bounds.max.z; z++)
         {
             for (int y = bounds.min.y; y < bounds.max.y; y++)
             {
@@ -255,6 +255,15 @@ public class MapManager : MonoBehaviour
                         overlayTile.GetComponent<SpriteRenderer>().sortingOrder = tilemap.GetComponent<TilemapRenderer>().sortingOrder;
                         overlayTile.gridLocation = tileLocation;
                         overlayTile.level = level;
+
+                        if (tileLocation.z == 0)
+                        {
+                            overlayTile.isBlocked = true;
+                        }
+                        else
+                        {
+                            overlayTile.isBlocked = false;
+                        }
                         map.Add(tileKey, overlayTile);
                         allTiles.Add(overlayTile);
                     }
@@ -366,7 +375,7 @@ public class MapManager : MonoBehaviour
             Vector2Int randomLocation = new Vector2Int(Random.Range(-bounds.x, bounds.x), Random.Range(-bounds.y, bounds.y));
             foreach (var tile in allTiles)
             {
-                if (randomLocation == tile.grid2DLocation && !tile.hasCharacter && !tile.hasEnemy)
+                if (randomLocation == tile.grid2DLocation && !tile.hasCharacter && !tile.hasEnemy && !tile.isBlocked)
                 {
                     var rock = Instantiate(entitiesInGame[0]);
                     rock.PositionEntity(rock, tile);
