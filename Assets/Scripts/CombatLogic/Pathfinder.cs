@@ -76,7 +76,7 @@ public class Pathfinder
                 tempList = GetFinishedList(start, end);
                 for (int i = 0; i < movementRange; i++)
                 {
-                    if (tempList.Count >= movementRange)
+                    if (tempList.Count >= movementRange && !tempList[i].hasEnemy)
                     {
                         enemyPathToSend.Add(tempList[i]);
                     }
