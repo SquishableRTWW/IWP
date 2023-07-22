@@ -19,6 +19,7 @@ public class MapManager : MonoBehaviour
     public List<CharacterBehaviour> characterList;
     public List<CharacterBehaviour> playerCharacters;
     public List<EnemyBehaviour> enemyList;
+    public List<EntityBehaviour> entitiesInGame;
     public List<EnemyBehaviour> enemies;
     public List<Vector3Int> characterPositions;
     // List of levels
@@ -199,6 +200,15 @@ public class MapManager : MonoBehaviour
 
     public void ReloadMap()
     {
+        // Destroy all non-necessary entities:
+        foreach (var tile in allTiles)
+        {
+            if (tile.entity != null)
+            {
+                Destroy(tile.entity.gameObject);
+            }
+        }
+
         Manager.Instance.DestroyTiles();
         // Randomly generate a map based on tier
         int randomLevel = Random.Range(0, 2);
@@ -252,18 +262,22 @@ public class MapManager : MonoBehaviour
             }
         }
 
-        //int characterCount = 0;
-        // Reposition characters
-        //for (int i = 0; i < allTiles.Count; i++)
-        //{
-        //    if (characterCount < playerCharacters.Count && playerCharacters[characterCount].grid2DLocation == allTiles[i].grid2DLocation)
-        //    {
-        //        PositionCharacter(playerCharacters[characterCount], allTiles[i]);
-        //        playerCharacters[characterCount].activeTile.hasCharacter = true;
-        //        characterCount++;
-        //        i = 0;
-        //    }
-        //}
+        // Randomly add a few Rocks to the map:
+        int randomRocks = Random.Range(1, 5);
+        for (int i = 0; i < randomRocks; i++)
+        {
+            Vector2Int randomLocation = new Vector2Int(Random.Range(-bounds.x, bounds.x), Random.Range(-bounds.y, bounds.y));
+            foreach (var tile in allTiles)
+            {
+                if (randomLocation == tile.grid2DLocation)
+                {
+                    var rock = Instantiate(entitiesInGame[0]);
+                    rock.PositionEntity(rock, tile);
+                    tile.entity = rock;
+                    break;
+                }
+            }
+        }
 
         // Randomly adding enemies to the map depending on the level:
         for (int i = 0; i < 1 + level; i++)
