@@ -82,7 +82,7 @@ public class MouseController : MonoBehaviour
                     {
                         if (path.Count >= (character.overheatAmount - character.currentHeat))
                         {
-                            path[i].ShowWarningTile();
+                            path[i].ShowOverheatTile();
                         }
                         else
                         {
@@ -312,13 +312,13 @@ public class MouseController : MonoBehaviour
             {
                 tile.ShowVoidTilePath();
             }
-            else if (inRangeTiles.IndexOf(tile) < (Mathf.Pow((character.overheatAmount - character.currentHeat), 2)))
-            {
-                tile.ShowTile();
-            }
+            //else if (inRangeTiles.IndexOf(tile) < (Mathf.Pow((character.overheatAmount - character.currentHeat), 2)))
+            //{
+            //    tile.ShowTile();
+            //}
             else
             {
-                tile.ShowOverheatTile();
+                tile.ShowTile();
             }
         }
     }
