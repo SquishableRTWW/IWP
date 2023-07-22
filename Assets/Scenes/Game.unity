@@ -10375,7 +10375,6 @@ MonoBehaviour:
   enemyList: []
   enemies:
   - {fileID: 2190785381938542591, guid: 36e00a5e38356bf45924c160d6a33b37, type: 3}
-  - {fileID: 2190785381938542591, guid: 36e00a5e38356bf45924c160d6a33b37, type: 3}
   characterPositions:
   - {x: -8, y: 4, z: 1}
   - {x: -8, y: 0, z: 1}
