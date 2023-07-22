@@ -378,7 +378,7 @@ public class PrepPhaseManager : MonoBehaviour
         foreach (Transform child in CombatCanvas.transform)
         {
             if (child.gameObject.name == "Button_move" || child.gameObject.name == "Button_Cancel" || child.gameObject.name == "Canvas_CharacterInfo" ||
-                child.gameObject.name == "Button_Attack1" || child.gameObject.name == "Button_Attack2")
+                child.gameObject.name == "Button_Attack1" || child.gameObject.name == "Button_Attack2" || child.gameObject.name == "ToolTipBox")
             {
                 child.gameObject.SetActive(false);
             }
