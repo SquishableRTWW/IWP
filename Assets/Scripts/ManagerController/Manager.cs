@@ -22,8 +22,10 @@ public class Manager : MonoBehaviour
     public Button endTurnButton;
 
     public GameObject warningGUI;
+    int CPUIOffset;
 
     [SerializeField] Image CPUI;
+    public Image CPBarIcon;
     [SerializeField] float timeLimit;
     [SerializeField] float originalTime;
     public int maxfuelPool;
@@ -72,14 +74,10 @@ public class Manager : MonoBehaviour
         maxCP = 2;
         maxfuelPool = 20;
         fuelPool = maxfuelPool;
+        CPUIOffset = 55;
 
-        int CPUIOffset = 70;
-        for (int i = 0; i < CP; i++)
-        {
-            Image CPImage = Instantiate(CPUI);
-            CPImage.transform.SetParent(CPUIField.transform);
-            CPImage.transform.position = new Vector3(CPUIField.transform.position.x + 75f + (i * CPUIOffset), CPUIField.transform.position.y, 0);
-        }
+
+
 
         isInCombat = false;
     }
@@ -168,9 +166,18 @@ public class Manager : MonoBehaviour
         {
             StartMovingEnemies();
         }
-         if (playerTurn)
+        if (playerTurn)
         {
             endTurnButton.gameObject.SetActive(true);
+        }
+
+        if (CP <= 0)
+        {
+            CPBarIcon.color = new Color(1f, 0f, 0f, 0.7f);
+        }
+        else
+        {
+            CPBarIcon.color = new Color(1f, 1f, 1f, 1f);
         }
     }
 
@@ -378,23 +385,21 @@ public class Manager : MonoBehaviour
     public void AddCPImage()
     {
         int amount = maxCP - CP;
-        int CPUIOffset = 70;
         for (int i = 0; i < amount; i++)
         {
             Image CPImage = Instantiate(CPUI);
             CPImage.transform.SetParent(CPUIField.transform);
-            CPImage.transform.position = new Vector3(CPUIField.transform.position.x + 75f + (i * CPUIOffset), CPUIField.transform.position.y, 0);
+            CPImage.transform.position = new Vector3(CPUIField.transform.position.x + 80f + (i * CPUIOffset), CPUIField.transform.position.y, 0);
         }
     }
     public void AddAmountedCPImage(int number)
     {
         int amount = number;
-        int CPUIOffset = 70;
         for (int i = 0; i < amount; i++)
         {
             Image CPImage = Instantiate(CPUI);
             CPImage.transform.SetParent(CPUIField.transform);
-            CPImage.transform.position = new Vector3(CPUIField.transform.position.x + 75f + (i * CPUIOffset), CPUIField.transform.position.y, 0);
+            CPImage.transform.position = new Vector3(CPUIField.transform.position.x + 80f + (i * CPUIOffset), CPUIField.transform.position.y, 0);
         }
     }
 
