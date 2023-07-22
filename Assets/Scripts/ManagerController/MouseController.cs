@@ -170,7 +170,7 @@ public class MouseController : MonoBehaviour
                     }
                 }
 
-                // Check to see if clicked on a character:
+                // Check to see if clicked on a character, enemy, entity etc:
                 Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector2 mousePos2d = new Vector2(mousePos.x, mousePos.y);
 
