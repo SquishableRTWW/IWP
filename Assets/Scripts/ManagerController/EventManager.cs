@@ -111,6 +111,7 @@ public class EventManager : MonoBehaviour
         }
         // Randomise for right side
         {
+
             rng = UnityEngine.Random.Range(0, 100);
             if (rng <= 50)
             {
@@ -122,7 +123,39 @@ public class EventManager : MonoBehaviour
             }
             else
             {
-                decidedRightEvent = GetRandomEnumValue<eventNo>(7, 7);
+                if (MapManager.Instance.playerCharacters.Count < 3)
+                {
+                    decidedRightEvent = GetRandomEnumValue<eventNo>(7, 7);
+                }
+                else
+                {
+                    decidedRightEvent = GetRandomEnumValue<eventNo>(2, 6);
+                }
+            }
+
+            // Re-run the randomizer if the events are the same
+            while (decidedLeftEvent == decidedRightEvent)
+            {
+                rng = UnityEngine.Random.Range(0, 100);
+                if (rng <= 50)
+                {
+                    decidedRightEvent = GetRandomEnumValue<eventNo>(0, 4);
+                }
+                else if ((rng > 50 && rng <= 90) || MapManager.Instance.playerCharacters.Count >= 3)
+                {
+                    decidedRightEvent = GetRandomEnumValue<eventNo>(5, 6);
+                }
+                else
+                {
+                    if (MapManager.Instance.playerCharacters.Count < 3)
+                    {
+                        decidedRightEvent = GetRandomEnumValue<eventNo>(7, 7);
+                    }
+                    else
+                    {
+                        decidedRightEvent = GetRandomEnumValue<eventNo>(2, 6);
+                    }
+                }
             }
         }
 
