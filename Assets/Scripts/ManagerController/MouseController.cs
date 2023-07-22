@@ -234,6 +234,8 @@ public class MouseController : MonoBehaviour
                             }
                             // Update Character sheet UI
                             characterSheet.gameObject.SetActive(true);
+                            characterSheet.gameObject.transform.Find("CharacterSheet_FuelBar").gameObject.SetActive(true);
+                            characterSheet.gameObject.transform.Find("CharacterSheet_HPBar").gameObject.SetActive(true);
                             Manager.Instance.sheetHPBar.SetBarLimit(character.maxHP); Manager.Instance.sheetFuelBar.SetBarLimit(character.maxFuel);
                             characterSheet.gameObject.transform.Find("SpriteImage").GetComponent<Image>().sprite = character.GetComponent<SpriteRenderer>().sprite;
                             characterSheet.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = character.characterName + "\n\nHP " + "          " + character.HP + "/" + character.maxHP
@@ -283,6 +285,40 @@ public class MouseController : MonoBehaviour
                                     }
                                 }
                             }
+                        }
+                        else if (objectHit.CompareTag("Enemy") && !attackSelected)
+                        {
+                            var enemy = objectHit.GetComponent<EnemyBehaviour>();
+                            // Set selected character as the clicked one
+                            DeselectCharacter();
+
+                            // Update info sheet UI
+                            characterSheet.gameObject.SetActive(true);
+                            characterSheet.gameObject.transform.Find("CharacterSheet_FuelBar").gameObject.SetActive(false);
+                            characterSheet.gameObject.transform.Find("CharacterSheet_HPBar").gameObject.SetActive(true);
+                            Manager.Instance.sheetHPBar.SetBarLimit(enemy.maxHP);
+                            characterSheet.gameObject.transform.Find("SpriteImage").GetComponent<Image>().sprite = enemy.GetComponent<SpriteRenderer>().sprite;
+                            characterSheet.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = enemy.characterName + ", Enemy";
+                            characterSheetHealthbar.SetHealth(enemy.HP);
+
+                            // Show enemy's attack range
+                            List<OverlayTileBehaviour> tilesInRange = moveRangeFinder.GetTilesInAttackRange(enemy.activeTile, enemy.enemyScriptable.attackRange);
+                            foreach (var tile in tilesInRange)
+                            {
+                                tile.ShowAttackTile();
+                            }
+                        }
+                        else if (objectHit.CompareTag("Rock"))
+                        {
+                            var rock = objectHit.GetComponent<EntityBehaviour>();
+                            // Set selected character as the clicked one
+                            DeselectCharacter();
+
+                            characterSheet.gameObject.SetActive(true);
+                            characterSheet.gameObject.transform.Find("CharacterSheet_FuelBar").gameObject.SetActive(false);
+                            characterSheet.gameObject.transform.Find("CharacterSheet_HPBar").gameObject.SetActive(false);
+                            characterSheet.gameObject.transform.Find("SpriteImage").GetComponent<Image>().sprite = rock.GetComponent<SpriteRenderer>().sprite;
+                            characterSheet.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = rock.entityScriptable.entityName + ": " + rock.entityScriptable.description;
                         }
                     }
                     else
@@ -506,7 +542,10 @@ public class MouseController : MonoBehaviour
     {
         // Reset the booleans
         movementSelected = false;
-        attackSelected = false;
+        if (attackSelected)
+        {
+            attackSelected = false;
+        }
         // Make buttons disappear
         moveButton.gameObject.SetActive(false);
         cancelButton.gameObject.SetActive(false);
@@ -521,6 +560,40 @@ public class MouseController : MonoBehaviour
         foreach (var item in inRangeTiles)
         {
             item.HideTile();
+        }
+        foreach (var tile in MapManager.Instance.allTiles)
+        {
+            tile.HideTile();
+        }
+
+        // Clear the A* path of any remnants
+        path.Clear();
+
+        //Hide the character sheet
+        characterSheet.gameObject.SetActive(false);
+    }
+    public void DeselectCharacter()
+    {
+        // Reset the booleans
+        movementSelected = false;
+        // Make buttons disappear
+        moveButton.gameObject.SetActive(false);
+        cancelButton.gameObject.SetActive(false);
+        attack1Button.GetComponent<Image>().color = new Color(attack1Button.GetComponent<Image>().color.r, attack1Button.GetComponent<Image>().color.g
+        , attack1Button.GetComponent<Image>().color.b, 0.5f);
+        attack2Button.GetComponent<Image>().color = new Color(attack1Button.GetComponent<Image>().color.r, attack1Button.GetComponent<Image>().color.g
+        , attack1Button.GetComponent<Image>().color.b, 0.5f);
+        attack1Button.gameObject.SetActive(false);
+        attack2Button.gameObject.SetActive(false);
+
+        // Hide all the tiles (If not they will be stuck)
+        foreach (var item in inRangeTiles)
+        {
+            item.HideTile();
+        }
+        foreach (var tile in MapManager.Instance.allTiles)
+        {
+            tile.HideTile();
         }
 
         // Clear the A* path of any remnants
