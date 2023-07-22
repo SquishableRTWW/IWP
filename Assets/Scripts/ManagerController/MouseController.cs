@@ -24,7 +24,9 @@ public class MouseController : MonoBehaviour
     // GUI Elements
     [SerializeField] private Button moveButton;
     [SerializeField] private Button cancelButton;
+
     [SerializeField] private Canvas characterSheet;
+
     [SerializeField] private Button attack1Button;
     [SerializeField] private Button attack2Button;
     public Button turnEndButton;
@@ -232,6 +234,7 @@ public class MouseController : MonoBehaviour
                             }
                             // Update Character sheet UI
                             characterSheet.gameObject.SetActive(true);
+                            Manager.Instance.sheetHPBar.SetBarLimit(character.maxHP); Manager.Instance.sheetFuelBar.SetBarLimit(character.maxFuel);
                             characterSheet.gameObject.transform.Find("SpriteImage").GetComponent<Image>().sprite = character.GetComponent<SpriteRenderer>().sprite;
                             characterSheet.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = character.characterName + "\n\nHP " + "          " + character.HP + "/" + character.maxHP
                                 + "\n\nFUEL " + "      " + character.currentFuel + "/" + character.maxFuel;

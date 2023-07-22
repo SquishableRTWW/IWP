@@ -20,6 +20,8 @@ public class Manager : MonoBehaviour
     public Canvas prepCanvas;
     public Canvas eventCanvas;
     public Button endTurnButton;
+    public HealthBar sheetHPBar;
+    public FuelBar sheetFuelBar;
 
     public GameObject warningGUI;
     int CPUIOffset;

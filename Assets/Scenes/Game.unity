@@ -1573,6 +1573,8 @@ MonoBehaviour:
   prepCanvas: {fileID: 1964238436}
   eventCanvas: {fileID: 305232937}
   endTurnButton: {fileID: 1697824200}
+  sheetHPBar: {fileID: 740255107}
+  sheetFuelBar: {fileID: 1311821906}
   warningGUI: {fileID: 928558280}
   CPUI: {fileID: 276184333839186212, guid: eb662d5e59bdd594ebd3676072877ef3, type: 3}
   CPBarIcon: {fileID: 2019165816}
@@ -12425,6 +12427,8 @@ MonoBehaviour:
   moveButton: {fileID: 1050614134}
   cancelButton: {fileID: 1918347219}
   characterSheet: {fileID: 1758484539}
+  sheetHPBar: {fileID: 740255107}
+  sheetFuelBar: {fileID: 1311821906}
   attack1Button: {fileID: 1430441362}
   attack2Button: {fileID: 124695955}
   turnEndButton: {fileID: 1697824200}

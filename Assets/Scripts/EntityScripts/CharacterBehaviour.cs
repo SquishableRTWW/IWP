@@ -129,6 +129,7 @@ public class CharacterBehaviour : MonoBehaviour
             prefab.GetComponentInChildren<TextMesh>().text = text;
 
             yield return new WaitForSeconds(0.6f);
+            Manager.Instance.sheetHPBar.SetHealth(HP);
             Destroy(prefab);
         }
     }
