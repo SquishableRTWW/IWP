@@ -262,23 +262,6 @@ public class MapManager : MonoBehaviour
             }
         }
 
-        // Randomly add a few Rocks to the map:
-        int randomRocks = Random.Range(1, 5);
-        for (int i = 0; i < randomRocks; i++)
-        {
-            Vector2Int randomLocation = new Vector2Int(Random.Range(-bounds.x, bounds.x), Random.Range(-bounds.y, bounds.y));
-            foreach (var tile in allTiles)
-            {
-                if (randomLocation == tile.grid2DLocation)
-                {
-                    var rock = Instantiate(entitiesInGame[0]);
-                    rock.PositionEntity(rock, tile);
-                    tile.entity = rock;
-                    break;
-                }
-            }
-        }
-
         // Randomly adding enemies to the map depending on the level:
         for (int i = 0; i < 1 + level; i++)
         {
@@ -371,6 +354,24 @@ public class MapManager : MonoBehaviour
                     PositionCharacter(enemyList[i], allTiles[k]);
                     enemyList[i].activeTile.hasEnemy = true;
 
+                }
+            }
+
+        }
+
+        // Randomly add a few Rocks to the map:
+        int randomRocks = Random.Range(1, 5);
+        for (int i = 0; i < randomRocks; i++)
+        {
+            Vector2Int randomLocation = new Vector2Int(Random.Range(-bounds.x, bounds.x), Random.Range(-bounds.y, bounds.y));
+            foreach (var tile in allTiles)
+            {
+                if (randomLocation == tile.grid2DLocation && !tile.hasCharacter && !tile.hasEnemy)
+                {
+                    var rock = Instantiate(entitiesInGame[0]);
+                    rock.PositionEntity(rock, tile);
+                    tile.entity = rock;
+                    break;
                 }
             }
         }

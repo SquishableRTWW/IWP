@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityName: Rock
   type: Obstacle
-  description: Just a rock :) Can't shoot through it straight though
+  description: Just a rock :) Can't shoot or walk straight through it though...
   durability: 0

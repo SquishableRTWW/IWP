@@ -34,6 +34,14 @@ public class Pathfinder
                     continue;
                 }
 
+                if (neighbour.entity != null)
+                {
+                    if (neighbour.entity.entityScriptable.type == "Obstacle")
+                    {
+                        continue;
+                    }
+                }
+
                 neighbour.G = GetManhattenDistance(start, neighbour);
                 neighbour.H = GetManhattenDistance(end, neighbour);
                 neighbour.previous = currentOverlayTile;
@@ -130,6 +138,13 @@ public class Pathfinder
                 if (searchableTiles[i].hasEnemy)
                 {
                     break;
+                }
+                if (searchableTiles[i].entity != null)
+                {
+                    if (searchableTiles[i].entity.entityScriptable.type == "Obstacle")
+                    {
+                        break;
+                    }
                 }
             }
             if (vector2IntList.Count < 1)
