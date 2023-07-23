@@ -200,10 +200,10 @@ public class MouseController : MonoBehaviour
                     GameObject objectHit = hit.collider.gameObject;
 
                     // Check if the collider is a trigger
-                    if (hit.collider.isTrigger && !attackSelected && !movementSelected && Manager.Instance.isInCombat)
+                    if (hit.collider.isTrigger && !movementSelected && Manager.Instance.isInCombat)
                     {
                        
-                        if (objectHit.CompareTag("Character"))
+                        if (objectHit.CompareTag("Character") && !attackSelected)
                         {
                             // Set selected character as the clicked one
                             DeselectAction();
@@ -286,7 +286,7 @@ public class MouseController : MonoBehaviour
                                 }
                             }
                         }
-                        else if (objectHit.CompareTag("Enemy") && !attackSelected)
+                        else if (objectHit.CompareTag("Enemy"))
                         {
                             var enemy = objectHit.GetComponent<EnemyBehaviour>();
                             // Set selected character as the clicked one
@@ -311,6 +311,11 @@ public class MouseController : MonoBehaviour
                             foreach (var tile in tilesInRange)
                             {
                                 tile.ShowAttackTile();
+                            }
+
+                            if (attackSelected)
+                            {
+                                DeselectAction();
                             }
                         }
                         else if (objectHit.CompareTag("Rock"))
@@ -460,7 +465,7 @@ public class MouseController : MonoBehaviour
                 i = -1;
             }
         }
-        DeselectAction();
+        DeselectCharacter();
     }
 
     public void DoHeal()
