@@ -19,7 +19,7 @@ public class MouseController : MonoBehaviour
     private MoveRangeFinder moveRangeFinder;
 
     public GameObject characterPrefab;
-    [SerializeField] private CharacterBehaviour character;
+    public CharacterBehaviour character;
 
     // GUI Elements
     [SerializeField] private Button moveButton;
@@ -35,7 +35,7 @@ public class MouseController : MonoBehaviour
     public FuelBar characterSheetFuelbar;
 
     private bool isMoving = false;
-    private int WeaponSelected = 0;
+    public int WeaponSelected = 0;
     public bool movementSelected = false;
     public bool attackSelected = false;
     public LayerMask layerMask;

@@ -181,6 +181,32 @@ public class Manager : MonoBehaviour
         {
             CPBarIcon.color = new Color(1f, 1f, 1f, 1f);
         }
+
+        // For CP Fade in and fade out
+        if (mouseController.attackSelected)
+        {
+            int imageCountReal = CPUIField.transform.childCount;
+            if (mouseController.character.weaponsEquipped[mouseController.WeaponSelected].GetComponent<WeaponBehaviour>().GetCPCost() <= 1)
+            {
+                int highestChildIndex = imageCountReal - 1;
+                CPUIField.transform.GetChild(highestChildIndex).gameObject.GetComponent<CPPipBehaviour>().onFade = true;
+            }
+            else
+            {
+                for (int i = mouseController.character.weaponsEquipped[mouseController.WeaponSelected].GetComponent<WeaponBehaviour>().GetCPCost() - 1; i >= 0; i--)
+                {
+                    CPUIField.transform.GetChild(i).gameObject.GetComponent<CPPipBehaviour>().onFade = true;
+                }
+            }
+        }
+        else
+        {
+            foreach (Transform child in CPUIField.transform)
+            {
+                child.gameObject.GetComponent<CPPipBehaviour>().onFade = false;
+                child.gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            }
+        }
     }
 
     private void StartMovingEnemies()
