@@ -217,12 +217,12 @@ public class MouseController : MonoBehaviour
                             }
                             if (character.isOverheated == false)
                             {
-                                if (character.weaponsEquipped[0] != null)
+                                if (character.weaponsEquipped[0] != null && Manager.Instance.CP >= character.weaponsEquipped[0].GetComponent<WeaponBehaviour>().GetCPCost())
                                 {
                                     attack1Button.gameObject.SetActive(true);
                                     attack1Button.gameObject.GetComponent<Image>().sprite = character.weaponsEquipped[0].GetComponent<WeaponBehaviour>().GetAttackSprite();
                                 }
-                                if (character.weaponsEquipped.Count > 1 && character.weaponsEquipped[1] != null)
+                                if (character.weaponsEquipped.Count > 1 && character.weaponsEquipped[1] != null && Manager.Instance.CP >= character.weaponsEquipped[1].GetComponent<WeaponBehaviour>().GetCPCost())
                                 {
                                     attack2Button.gameObject.SetActive(true);
                                     attack2Button.gameObject.GetComponent<Image>().sprite = character.weaponsEquipped[1].GetComponent<WeaponBehaviour>().GetAttackSprite();
@@ -317,7 +317,7 @@ public class MouseController : MonoBehaviour
                         {
                             var rock = objectHit.GetComponent<EntityBehaviour>();
                             // Set selected character as the clicked one
-                            DeselectCharacter();
+                            DeselectAction();
 
                             characterSheet.gameObject.SetActive(true);
                             characterSheet.gameObject.transform.Find("CharacterSheet_FuelBar").gameObject.SetActive(false);
