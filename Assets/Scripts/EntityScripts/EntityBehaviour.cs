@@ -31,7 +31,7 @@ public class EntityBehaviour : MonoBehaviour
             case "Obstacle":
                 break;
             case "Crate":
-                int itemCount = UnityEngine.Random.Range(1, 3);
+                int itemCount = Random.Range(1, 2);
                 for (int i = 0; i < itemCount; i++)
                 {
                     int randomItem = Random.Range(0, PrepPhaseManager.Instance.itemsInGame.Count);
