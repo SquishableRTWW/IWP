@@ -195,6 +195,10 @@ public class MouseController : MonoBehaviour
                 Vector2 mousePos2d = new Vector2(mousePos.x, mousePos.y);
 
                 RaycastHit2D[] hits = Physics2D.RaycastAll(mousePos2d, Vector2.zero);
+                if (hits.Count() == 1 && !movementSelected)
+                {
+                    DeselectAction();
+                }
                 foreach (RaycastHit2D hit in hits)
                 {
                     GameObject objectHit = hit.collider.gameObject;
