@@ -82,7 +82,7 @@ public class EventManager : MonoBehaviour
     public void RandomiseEvent()
     {
         // Randomise for left side
-        if (MapManager.Instance.level == 3 && MapManager.Instance.playerCharacters.Count < 3)
+        if (MapManager.Instance.level == 4 && MapManager.Instance.playerCharacters.Count < 3)
         {
             decidedLeftEvent = eventNo.AddCharacter;
         }

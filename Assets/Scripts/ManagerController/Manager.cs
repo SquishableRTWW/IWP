@@ -91,7 +91,7 @@ public class Manager : MonoBehaviour
         if (MapManager.Instance.enemyList.Count <= 0)
         {
             // If there are no enemies left, end the level
-            if (MapManager.Instance.level % 3 != 0)
+            if (MapManager.Instance.level % 4 != 0)
             {
                 MapManager.Instance.level++;
             }

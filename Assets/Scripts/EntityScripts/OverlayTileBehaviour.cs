@@ -37,20 +37,24 @@ public class OverlayTileBehaviour : MonoBehaviour
 
     public void ShowVoidTilePath()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0.5f);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(0.4f, 0.4f, 0.4f, 0.8f);
+    }
+    public void ShowEnemyMoveTile()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f, 1f);
     }
 
     public void ShowOverheatTile()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.55f, 0.10f, 0.80f);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.55f, 0.10f, 0.1f);
     }
     public void ShowWarningTile()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.0f, 1f, 0.80f);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.0f, 1f, 0.1f);
     }
 
     public void ShowAttackTile()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.0f, 0.0f, 0.8f);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.0f, 0.0f, 1f);
     }
 }

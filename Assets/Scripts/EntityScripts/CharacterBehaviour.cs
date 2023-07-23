@@ -80,7 +80,7 @@ public class CharacterBehaviour : MonoBehaviour
         // Temp way to show character is overheated
         if (isOverheated)
         {
-            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0.7f, 0.1f, 0.7f);
+            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0.7f, 0.1f, 1f);
         }
         else
         {

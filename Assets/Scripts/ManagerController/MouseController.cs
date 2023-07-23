@@ -301,7 +301,12 @@ public class MouseController : MonoBehaviour
                             characterSheet.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = enemy.characterName + ", Enemy";
                             characterSheetHealthbar.SetHealth(enemy.HP);
 
-                            // Show enemy's attack range
+                            // Show enemy's attack range and movement range
+                            List<OverlayTileBehaviour> movementRangeTiles = moveRangeFinder.GetTilesInRange(enemy.activeTile, enemy.enemyScriptable.movementRange);
+                            foreach (var tile in movementRangeTiles)
+                            {
+                                tile.ShowEnemyMoveTile();
+                            }
                             List<OverlayTileBehaviour> tilesInRange = moveRangeFinder.GetTilesInAttackRange(enemy.activeTile, enemy.enemyScriptable.attackRange);
                             foreach (var tile in tilesInRange)
                             {
