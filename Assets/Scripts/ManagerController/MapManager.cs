@@ -400,6 +400,22 @@ public class MapManager : MonoBehaviour
                 }
             }
         }
+        // Randomly add barrels to map
+        int randomBarrels = Random.Range(2, 3);
+        for (int i = 0; i < randomBarrels; i++)
+        {
+            Vector2Int randomLocation = new Vector2Int(Random.Range(-bounds.x, bounds.x), Random.Range(-bounds.y, bounds.y));
+            foreach (var tile in allTiles)
+            {
+                if (randomLocation == tile.grid2DLocation && !tile.hasCharacter && !tile.hasEnemy && !tile.isBlocked && tile.entity == null)
+                {
+                    var crate = Instantiate(entitiesInGame[2]);
+                    crate.PositionEntity(crate, tile);
+                    tile.entity = crate;
+                    break;
+                }
+            }
+        }
     }
 
     public void SetOGPosition()
@@ -420,4 +436,59 @@ public class MapManager : MonoBehaviour
         }
     }
 
+    public List<OverlayTileBehaviour> Get8DirectionTiles(OverlayTileBehaviour selectedTile, int radius)
+    {
+        List<OverlayTileBehaviour> surroundingTiles = new List<OverlayTileBehaviour>();
+        Vector2Int selectedGridLocation = selectedTile.grid2DLocation;
+
+        for (int x = selectedGridLocation.x - radius; x <= selectedGridLocation.x + radius; x++)
+        {
+            for (int y = selectedGridLocation.y - radius; y <= selectedGridLocation.y + radius; y++)
+            {
+                Vector2Int tileGridLocation = new Vector2Int(x, y);
+                if (Vector2Int.Distance(selectedGridLocation, tileGridLocation) <= radius)
+                {
+                    // Assuming you have a method to get the OverlayTileBehaviour at a given grid location
+                    OverlayTileBehaviour tile = GetOverlayTileAt(tileGridLocation);
+                    if (tile != null)
+                    {
+                        surroundingTiles.Add(tile);
+                    }
+                }
+            }
+        }
+
+        return surroundingTiles;
+    }
+
+    public OverlayTileBehaviour GetOverlayTileAt(Vector2Int gridLocation)
+    {
+        foreach (var tile in allTiles)
+        {
+            if (tile.grid2DLocation == gridLocation)
+            {
+                return tile;
+            }
+        }
+        return null;
+    }
+    public EnemyBehaviour GetEnemyAt(OverlayTileBehaviour tile)
+    {
+        foreach (var enemy in enemyList)
+        {
+            if (enemy.grid2DLocation == tile.grid2DLocation)
+            {
+                return enemy;
+            }
+        }
+        return null;
+    }
+
+    public void HideAllTiles()
+    {
+        foreach (var tile in allTiles)
+        {
+            tile.HideTile();
+        }
+    }
 }

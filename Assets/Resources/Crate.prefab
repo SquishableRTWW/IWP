@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 649150313581292120}
   m_Layer: 0
   m_Name: Crate
-  m_TagString: Rock
+  m_TagString: Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,6 +102,7 @@ MonoBehaviour:
   grid2dLocation: {x: 0, y: 0}
   activeTile: {fileID: 0}
   entityScriptable: {fileID: 11400000, guid: 1e83ee85b8d467448989bc65bdebb928, type: 2}
+  explosionEffect: {fileID: 0}
 --- !u!61 &649150313581292120
 BoxCollider2D:
   m_ObjectHideFlags: 0

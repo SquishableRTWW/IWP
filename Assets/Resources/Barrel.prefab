@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7767747726170646441}
   - component: {fileID: 649150313581292120}
   m_Layer: 0
-  m_Name: Rock
+  m_Name: Barrel
   m_TagString: Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1787863220713309687}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 99d420583d213ef46abadfd550617e25, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f4adf629b66c2bf4e8e1a83eb088bc27, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   gridLocation: {x: 0, y: 0, z: 0}
   grid2dLocation: {x: 0, y: 0}
   activeTile: {fileID: 0}
-  entityScriptable: {fileID: 11400000, guid: 713ce92abc17d954ea113ebe099a5391, type: 2}
+  entityScriptable: {fileID: 11400000, guid: dcb6365ad1858804298ffe4c4d458402, type: 2}
   explosionEffect: {fileID: 0}
 --- !u!61 &649150313581292120
 BoxCollider2D:
@@ -120,7 +120,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.4}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 1.8125, y: 1.90625}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

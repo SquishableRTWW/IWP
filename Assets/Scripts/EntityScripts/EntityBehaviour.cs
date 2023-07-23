@@ -10,12 +10,14 @@ public class EntityBehaviour : MonoBehaviour
     public OverlayTileBehaviour activeTile;
     public EntityScriptable entityScriptable;
     // GUI components
-
+    [SerializeField] GameObject explosionEffect;
+    private GameObject realExplosion;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        explosionEffect = entityScriptable.destroyEffect;
+        realExplosion = null;
     }
 
     // Update is called once per frame
@@ -40,6 +42,24 @@ public class EntityBehaviour : MonoBehaviour
                 Destroy(gameObject);
                 break;
             case "Barrel":
+                List<OverlayTileBehaviour> damageTiles = MapManager.Instance.Get8DirectionTiles(activeTile, 3);
+                foreach(var tile in damageTiles)
+                {
+                    if (MapManager.Instance.GetEnemyAt(tile) != null)
+                    {
+                        var enemy = MapManager.Instance.GetEnemyAt(tile);
+                        int damageDealt = 4;
+                        enemy.HP -= damageDealt;
+                        enemy.healthBar.SetHealth(enemy.HP);
+                        StartCoroutine(enemy.ShowDamage(damageDealt.ToString()));
+                    }
+                }
+                if (realExplosion == null)
+                {
+                    realExplosion = Instantiate(explosionEffect, gameObject.transform.position, Quaternion.identity);
+                    realExplosion.GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + 1;
+                }
+                StartCoroutine(DestroyEntity());
                 break;
             default:
                 Debug.Log("Entity Error");
@@ -52,5 +72,13 @@ public class EntityBehaviour : MonoBehaviour
         character.transform.position = new Vector3(overlayTile.transform.position.x, overlayTile.transform.position.y + 0.0001f, overlayTile.transform.position.z);
         character.GetComponent<SpriteRenderer>().sortingOrder = overlayTile.GetComponent<SpriteRenderer>().sortingOrder + 1;
         character.activeTile = overlayTile;
+    }
+
+    private IEnumerator DestroyEntity()
+    {
+        activeTile.hasCharacter = false;
+        yield return new WaitForSeconds(0.4f);
+        Destroy(realExplosion);
+        Destroy(gameObject);
     }
 }

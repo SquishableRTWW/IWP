@@ -157,7 +157,7 @@ public class MouseController : MonoBehaviour
                     bool hasCharacter = false;
                     foreach (OverlayTileBehaviour tile in attackTiles)
                     {
-                        if (tile.hasEnemy)
+                        if (tile.hasEnemy || tile.entity != null)
                         {
                             hasEnemy = true;
                         }
@@ -322,7 +322,7 @@ public class MouseController : MonoBehaviour
                                 DeselectAction();
                             }
                         }
-                        else if (objectHit.CompareTag("Rock"))
+                        else if (objectHit.CompareTag("Entity"))
                         {
                             var rock = objectHit.GetComponent<EntityBehaviour>();
                             // Set selected character as the clicked one
@@ -333,6 +333,15 @@ public class MouseController : MonoBehaviour
                             characterSheet.gameObject.transform.Find("CharacterSheet_HPBar").gameObject.SetActive(false);
                             characterSheet.gameObject.transform.Find("SpriteImage").GetComponent<Image>().sprite = rock.GetComponent<SpriteRenderer>().sprite;
                             characterSheet.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = rock.entityScriptable.entityName + ": " + rock.entityScriptable.description;
+
+                            if (rock.entityScriptable.type == "Barrel")
+                            {
+                                List<OverlayTileBehaviour> tilesInRange = MapManager.Instance.Get8DirectionTiles(rock.activeTile, 3);
+                                foreach (var tile in tilesInRange)
+                                {
+                                    tile.ShowAttackTile();
+                                }
+                            }
                         }
                     }
                     else
@@ -446,6 +455,7 @@ public class MouseController : MonoBehaviour
     public void DoDamage()
     {
         List<OverlayTileBehaviour> tilesWithCharacters = new List<OverlayTileBehaviour>();
+        List<OverlayTileBehaviour> tilesWithEntities = new List<OverlayTileBehaviour>();
         int affectedCount = 0;
         for (int i = 0; i < attackTiles.Count; i++)
         {
@@ -453,8 +463,12 @@ public class MouseController : MonoBehaviour
             {
                 tilesWithCharacters.Add(attackTiles[i]);
             }
+            if (attackTiles[i].entity != null)
+            {
+                tilesWithEntities.Add(attackTiles[i]);
+            }
         }
-        //Debug.Log("Enemies to hit: " + tilesWithCharacters.Count);
+        // Handle enemy Damage
         for (int i = 0; i < tilesWithCharacters.Count; i++)
         {
             if (MapManager.Instance.enemyList[affectedCount] == null)
@@ -479,6 +493,15 @@ public class MouseController : MonoBehaviour
                 i = -1;
             }
         }
+        // Handle Entity activation
+        for (int i = 0; i < tilesWithEntities.Count; i++)
+        {
+            if (tilesWithEntities[i].entity.entityScriptable.type == "Barrel")
+            {
+                tilesWithEntities[i].entity.ActivateEntity();
+            }
+        }
+        MapManager.Instance.HideAllTiles();
         DeselectCharacter();
     }
 

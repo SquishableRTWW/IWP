@@ -104,7 +104,7 @@ public class EnemyBehaviour : MonoBehaviour
     // Method to show the floating damage text.
     public IEnumerator ShowDamage(string text)
     {
-        if (floatingTextPrefab)
+        if (floatingTextPrefab && int.Parse(text) < HP)
         {
             GameObject prefab = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
             prefab.GetComponentInChildren<TextMesh>().text = text;

@@ -8,6 +8,7 @@ TagManager:
   - OverlayTile
   - Enemy
   - Rock
+  - Entity
   layers:
   - Default
   - TransparentFX

@@ -9,5 +9,5 @@ public class EntityScriptable : ScriptableObject
     public string type;
     public string description;
     public int durability;
-
+    public GameObject destroyEffect;
 }
