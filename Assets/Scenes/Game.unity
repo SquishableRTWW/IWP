@@ -10379,6 +10379,7 @@ MonoBehaviour:
   enemyList: []
   entitiesInGame:
   - {fileID: 7767747726170646441, guid: 14d35223914a55a4dbd3df1b14bf976e, type: 3}
+  - {fileID: 7767747726170646441, guid: 536d7264f563bcc4293055443017824a, type: 3}
   enemies:
   - {fileID: 2190785381938542591, guid: 36e00a5e38356bf45924c160d6a33b37, type: 3}
   - {fileID: 2190785381938542591, guid: ab8aef02986254a4f83b0c7f2df3dc1a, type: 3}
@@ -12433,6 +12434,7 @@ MonoBehaviour:
   sceneCameraController: {fileID: 519420033}
   characterSheetHealthbar: {fileID: 740255107}
   characterSheetFuelbar: {fileID: 1311821906}
+  WeaponSelected: 0
   movementSelected: 0
   attackSelected: 0
   layerMask:

@@ -409,6 +409,16 @@ public class MouseController : MonoBehaviour
         if (Vector2.Distance(character.transform.position, path[0].transform.position) < 0.001f && character.currentFuel > 0)
         {
             PositionCharacter(path[0]);
+
+            // Check for entities to activate
+            if (path[0].entity != null)
+            {
+                if (path[0].entity.entityScriptable.type == "Crate")
+                {
+                    path[0].entity.ActivateEntity();
+                }
+            }
+
             path.RemoveAt(0);
             character.currentFuel -= 1;
             character.currentHeat++;

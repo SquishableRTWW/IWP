@@ -384,6 +384,22 @@ public class MapManager : MonoBehaviour
                 }
             }
         }
+        // Randomly add item crates to map
+        int randomCrates = Random.Range(2, 3);
+        for (int i = 0; i < randomCrates; i++)
+        {
+            Vector2Int randomLocation = new Vector2Int(Random.Range(-bounds.x, bounds.x), Random.Range(-bounds.y, bounds.y));
+            foreach (var tile in allTiles)
+            {
+                if (randomLocation == tile.grid2DLocation && !tile.hasCharacter && !tile.hasEnemy && !tile.isBlocked && tile.entity == null)
+                {
+                    var crate = Instantiate(entitiesInGame[1]);
+                    crate.PositionEntity(crate, tile);
+                    tile.entity = crate;
+                    break;
+                }
+            }
+        }
     }
 
     public void SetOGPosition()

@@ -211,7 +211,7 @@ public class EventManager : MonoBehaviour
                 leftEvent.eventMessage = "Theres an enemy supply drop further from the battlefield. Could hold multiple useful items";
                 leftEvent.itemsToAdd = new List<GameObject>();
                 // Choose random weapon;
-                int itemCount = UnityEngine.Random.Range(1, 3);
+                int itemCount = UnityEngine.Random.Range(1, 4);
                 for (int i = 0; i < itemCount; i++)
                 {
                     randomItem = UnityEngine.Random.Range(0, PrepPhaseManager.Instance.itemsInGame.Count);
@@ -279,7 +279,7 @@ public class EventManager : MonoBehaviour
                 rightEvent.eventMessage = "Theres an enemy supply drop further from the battlefield. Could hold multiple useful items";
                 rightEvent.itemsToAdd = new List<GameObject>();
                 // Choose random weapon;
-                int itemCount = UnityEngine.Random.Range(1, 3);
+                int itemCount = UnityEngine.Random.Range(1, 4);
                 for (int i = 0; i < itemCount; i++)
                 {
                     randomItem = UnityEngine.Random.Range(0, PrepPhaseManager.Instance.itemsInGame.Count);
