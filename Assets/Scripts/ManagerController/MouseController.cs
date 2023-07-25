@@ -166,7 +166,13 @@ public class MouseController : MonoBehaviour
                             hasCharacter = true;
                         }
                     }
-                    if (hasEnemy)
+                    if (character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetWeaponName() == "Barreler" && !overlayTile.hasCharacter && !overlayTile.hasEnemy)
+                    {
+                        SpawnEntity(MapManager.Instance.entitiesInGame[2], overlayTile);
+                        Manager.Instance.ChangeCP(character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetCPCost());
+                        Manager.Instance.DeleteCPImage(character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetCPCost());
+                    }
+                    else if (hasEnemy)
                     {
                         // Play attack animation
                         character.shootingEffect = character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetAnimation();
@@ -681,5 +687,12 @@ public class MouseController : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void SpawnEntity(EntityBehaviour Entity, OverlayTileBehaviour focusedTile)
+    {
+        var barrel = Instantiate(Entity);
+        barrel.PositionEntity(barrel, focusedTile);
+        DeselectAction();
     }
 }
