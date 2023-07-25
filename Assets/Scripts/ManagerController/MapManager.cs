@@ -385,7 +385,7 @@ public class MapManager : MonoBehaviour
             }
         }
         // Randomly add item crates to map
-        int randomCrates = Random.Range(2, 3);
+        int randomCrates = Random.Range(1, 2);
         for (int i = 0; i < randomCrates; i++)
         {
             Vector2Int randomLocation = new Vector2Int(Random.Range(-bounds.x, bounds.x), Random.Range(-bounds.y, bounds.y));
