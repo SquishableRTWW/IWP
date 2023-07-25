@@ -578,8 +578,8 @@ public class Manager : MonoBehaviour
         {
             case 0:
                 nextTutorial.transform.SetParent(prepCanvas.transform);
-                nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(0f, 0f, 0f);
-                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "My name is Jeff. Let Jeff show you how to prepare your team before each mission.";
+                nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(-465f, 0f, 0f);
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "My name is Jeff. Let Jeff show you how to prepare your team before each mission.\n Right-CLICK at any time to skip the tutorial";
                 break;
             case 1:
                 nextTutorial.transform.SetParent(prepCanvas.transform);

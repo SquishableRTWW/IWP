@@ -16,11 +16,26 @@ public class TTTextBoxBehaviour : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && Manager.Instance.playerTurn)
         {
-            if (Manager.Instance.isInTutorial)
+            if (Manager.Instance.isInTutorial && Manager.Instance.tutorialNumber < 7)
             {
                 Manager.Instance.tutorialNumber++;
                 Manager.Instance.SpawnNextTutorial(Manager.Instance.tutorialNumber);
+                Destroy(gameObject);
             }
+            else if (Manager.Instance.tutorialNumber >= 7)
+            {
+                if (!Manager.Instance.prepCanvas.gameObject.activeInHierarchy)
+                {
+                    Manager.Instance.tutorialNumber++;
+                    Manager.Instance.SpawnNextTutorial(Manager.Instance.tutorialNumber);
+                    Destroy(gameObject);
+                }
+            }
+        }
+        else if (Input.GetMouseButtonDown(1) && Manager.Instance.playerTurn)
+        {
+            Manager.Instance.isInTutorial = false;
+
             Destroy(gameObject);
         }
     }
