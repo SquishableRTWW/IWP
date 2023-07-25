@@ -292,6 +292,9 @@ public class MouseController : MonoBehaviour
                                         case "Barreler":
                                             AB.GetComponent<ToolTip>().message = "A short range weapon that spawns a barrel at location.\n" + "\n" + "CP: 2";
                                             break;
+                                        case "Refueller":
+                                            AB.GetComponent<ToolTip>().message = "A short range weapon that gives fuel to target ally.\n" + "REFUEL: 3\n" + "CP: 1";
+                                            break;
                                         default:
                                             AB.GetComponent<ToolTip>().message = "Weapon error";
                                             break;
@@ -534,21 +537,38 @@ public class MouseController : MonoBehaviour
             }
             if (MapManager.Instance.playerCharacters[affectedCount].grid2DLocation == tilesWithCharacters[i].grid2DLocation)
             {
-                int damageDealt = character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetWeaponDamage() + character.attackIncrease;
-                if (MapManager.Instance.playerCharacters[affectedCount].HP + damageDealt > MapManager.Instance.playerCharacters[affectedCount].maxHP)
+                int damageDealt = character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetWeaponDamage();
+                if (character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetWeaponName() == "Aider")
                 {
-                    MapManager.Instance.playerCharacters[affectedCount].HP = MapManager.Instance.playerCharacters[affectedCount].maxHP;
+                    if (MapManager.Instance.playerCharacters[affectedCount].HP + damageDealt > MapManager.Instance.playerCharacters[affectedCount].maxHP)
+                    {
+                        MapManager.Instance.playerCharacters[affectedCount].HP = MapManager.Instance.playerCharacters[affectedCount].maxHP;
+                    }
+                    else
+                    {
+                        MapManager.Instance.playerCharacters[affectedCount].HP += damageDealt;
+                    }
+                    MapManager.Instance.playerCharacters[affectedCount].healthBar.SetHealth(MapManager.Instance.playerCharacters[affectedCount].HP);
+                    StartCoroutine(MapManager.Instance.playerCharacters[affectedCount].ShowHeal(damageDealt.ToString()));
+                    affectedCount = 0;
+                    tilesWithCharacters.Remove(tilesWithCharacters[i]);
+                    i = -1;
                 }
-                else
+                else if (character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetWeaponName() == "Refueller")
                 {
-                    MapManager.Instance.playerCharacters[affectedCount].HP += damageDealt;
+                    if (MapManager.Instance.playerCharacters[affectedCount].currentFuel + damageDealt > MapManager.Instance.playerCharacters[affectedCount].maxFuel)
+                    {
+                        MapManager.Instance.playerCharacters[affectedCount].currentFuel = MapManager.Instance.playerCharacters[affectedCount].maxFuel;
+                    }
+                    else
+                    {
+                        MapManager.Instance.playerCharacters[affectedCount].currentFuel += damageDealt;
+                    }
+                    StartCoroutine(MapManager.Instance.playerCharacters[affectedCount].ShowRefuel(damageDealt.ToString()));
+                    affectedCount = 0;
+                    tilesWithCharacters.Remove(tilesWithCharacters[i]);
+                    i = -1;
                 }
-                MapManager.Instance.playerCharacters[affectedCount].healthBar.SetHealth(MapManager.Instance.playerCharacters[affectedCount].HP);
-                StartCoroutine(MapManager.Instance.playerCharacters[affectedCount].ShowHeal(damageDealt.ToString()));
-                affectedCount = 0;
-                tilesWithCharacters.Remove(tilesWithCharacters[i]);
-                //sceneCameraController.CameraShake();
-                i = -1;
             }
             else
             {
