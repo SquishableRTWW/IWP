@@ -1576,10 +1576,15 @@ MonoBehaviour:
   sheetHPBar: {fileID: 740255107}
   sheetFuelBar: {fileID: 1311821906}
   warningGUI: {fileID: 928558280}
+  tutorialBox: {fileID: 5235374788513541787, guid: 9e468e59cf88ca64a8db73e76232e8de, type: 3}
+  ttTextList: []
+  tutorialNumber: 0
+  maxTutorial: 0
+  isInTutorial: 0
   CPUI: {fileID: 276184333839186212, guid: eb662d5e59bdd594ebd3676072877ef3, type: 3}
   CPBarIcon: {fileID: 2019165816}
   timeLimit: 20
-  originalTime: 40
+  originalTime: 60
   maxfuelPool: 0
   fuelPool: 15
   CP: 2

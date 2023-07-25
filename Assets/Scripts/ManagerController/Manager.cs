@@ -24,6 +24,13 @@ public class Manager : MonoBehaviour
     public FuelBar sheetFuelBar;
 
     public GameObject warningGUI;
+    public GameObject tutorialBox;
+    public List<string> ttTextList;
+    public int tutorialNumber;
+    public int maxTutorial;
+    public bool isInTutorial;
+    public bool tempTutorialPause;
+
     int CPUIOffset;
 
     [SerializeField] Image CPUI;
@@ -78,7 +85,15 @@ public class Manager : MonoBehaviour
         fuelPool = maxfuelPool;
         CPUIOffset = 55;
 
+        // Tutorial Set-Up
+        tutorialNumber = 0;
+        maxTutorial = 16;
+        isInTutorial = true;
+        ttTextList = new List<string>();
+        // Tutorial text List adding
 
+        // Start tutorial
+        SpawnNextTutorial(tutorialNumber);
 
 
         isInCombat = false;
@@ -118,6 +133,12 @@ public class Manager : MonoBehaviour
         if (enemyPath.Count < MapManager.Instance.enemyList.Count)
         {
             enemyPath.Add(new List<OverlayTileBehaviour>());
+        }
+
+        // Tutorial check
+        if (tutorialNumber >= maxTutorial || MapManager.Instance.level > 1)
+        {
+            isInTutorial = false;
         }
 
         // Game logic for when level is being played
@@ -546,6 +567,97 @@ public class Manager : MonoBehaviour
                 break;
             default:
                 Debug.Log("Equipment buff error");
+                break;
+        }
+    }
+
+    public void SpawnNextTutorial(int number)
+    {
+        GameObject nextTutorial = Instantiate(tutorialBox);
+        switch(number)
+        {
+            case 0:
+                nextTutorial.transform.SetParent(prepCanvas.transform);
+                nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(0f, 0f, 0f);
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "My name is Jeff. Let Jeff show you how to prepare your team before each mission.";
+                break;
+            case 1:
+                nextTutorial.transform.SetParent(prepCanvas.transform);
+                nextTutorial.transform.position = PrepPhaseManager.Instance.changeButtons[0].transform.position;
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "Left click on your mech(s) here to select and customize them.";
+                break;
+            case 2:
+                nextTutorial.transform.SetParent(prepCanvas.transform);
+                nextTutorial.transform.position = PrepPhaseManager.Instance.weaponSlots[0].transform.position;
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "You will be given FUEL each mission to fuel your mechs.";
+                break;
+            case 3:
+                nextTutorial.transform.SetParent(prepCanvas.transform);
+                nextTutorial.transform.position = PrepPhaseManager.Instance.fuelButtons[0].transform.position;
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "Mechs need fuel to move on the battlefield. Use these 4 buttons to assign it to them. REMEMBER AH.";
+                break;
+            case 4:
+                nextTutorial.transform.SetParent(prepCanvas.transform);
+                nextTutorial.transform.position = PrepPhaseManager.Instance.weaponSlots[0].transform.position;
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "As you collect items in your inventory, you can swap out your mech's gear via drag and drop.";
+                break;
+            case 5:
+                nextTutorial.transform.SetParent(prepCanvas.transform);
+                nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(0f, 0f, 0f);
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "You can press the 'Show-Level' button to scout out how the level will look like.";
+                break;
+            case 6:
+                nextTutorial.transform.SetParent(prepCanvas.transform);
+                nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(0f, 0f, 0f);
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "Once you're done prepping your team, press START to begin the level";
+                break;
+            case 7:
+                nextTutorial.transform.SetParent(combatCanvas.transform);
+                nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(-465f, -500f, 0f);
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "You can L-Click objects to view them. Left click your mech on the battlefield.";
+                break;
+            case 8:
+                nextTutorial.transform.SetParent(combatCanvas.transform);
+                nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(-465f, -500f, 0f);
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "On the left are move and attack buttons. Click MOVE to see where your character can move.";
+                break;
+            case 9:
+                nextTutorial.transform.SetParent(combatCanvas.transform);
+                nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(-465f, -500f, 0f);
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "GREEN = ok, ORANGE = mech is OVERHEATED. L-CLICK to move onto any white tile. Fuel is consumed equal to movement amount.";
+                break;
+            case 10:
+                nextTutorial.transform.SetParent(combatCanvas.transform);
+                nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(-465f, -500f, 0f);
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "OVERHEATED mechs have an orange hue. They can't move/attack for the rest of the turn. 1 Fuel point is regained each turn.";
+                break;
+            case 11:
+                nextTutorial.transform.SetParent(combatCanvas.transform);
+                nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(-465f, -500f, 0f);
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "If your mech is OVERHEATED, you will not see the option to attack. End the turn first and let the enemy move";
+                break;
+            case 12:
+                nextTutorial.transform.SetParent(combatCanvas.transform);
+                nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(-465f, -500f, 0f);
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "When its your turn, click on your mech again and hover over your ATTACK button to read about the attack";
+                break;
+            case 13:
+                nextTutorial.transform.SetParent(combatCanvas.transform);
+                nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(-465f, -500f, 0f);
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "Select the ATTACK to see its range. If an enemy is in range, click on them to attack them. If not just cancel it. You'll gettem later.";
+                break;
+            case 14:
+                nextTutorial.transform.SetParent(combatCanvas.transform);
+                nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(-465f, -500f, 0f);
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "Attacks cost COMMAND POINTS (CP), shown on the top of your screen in yellow bars. You start with 2 and they reset each turn.";
+                break;
+            case 15:
+                nextTutorial.transform.SetParent(combatCanvas.transform);
+                nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(-465f, -500f, 0f);
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "You are on your own now. Do what it takes to destroy all the enemies. Good luck!";
+                break;
+            default:
+                Debug.Log("Tutorial Ended.");
                 break;
         }
     }

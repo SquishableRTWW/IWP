@@ -72,6 +72,7 @@ public class TutorialManager : MonoBehaviour
     
     public void StartGame()
     {
+        Manager.Instance.isInTutorial = true;
         ChangeScene("Game");
     }
 

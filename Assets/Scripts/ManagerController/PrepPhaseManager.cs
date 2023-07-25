@@ -16,20 +16,20 @@ public class PrepPhaseManager : MonoBehaviour
     [SerializeField] Canvas eventCanvas;
     [SerializeField] Canvas CombatCanvas;
     public List<Button> changeButtons;
-    [SerializeField] List<Button> fuelButtons;
-    [SerializeField] Image characterImage;
-    [SerializeField] TextMeshProUGUI characterName;
+    public List<Button> fuelButtons;
+    public Image characterImage;
+    public TextMeshProUGUI characterName;
     [SerializeField] TextMeshProUGUI fuelPoolText;
     [SerializeField] TextMeshProUGUI reminderText;
     public FuelBar characterFuelbar;
-    [SerializeField] FuelBar poolFuelBar;
+    public FuelBar poolFuelBar;
     [SerializeField] GameObject slotContainer;
     public TextMeshProUGUI levelText;
 
     public List<GameObject> itemsInGame;
     public List<GameObject> weaponsInGame;
     public List<GameObject> equipmentInGame;
-    [SerializeField] List<ItemSlot> weaponSlots;
+    public List<ItemSlot> weaponSlots;
     [SerializeField] List<ItemSlot> equipmentSlots;
     [SerializeField] List<GameObject> inventorySlots;
     [SerializeField] List<Button> characterSelectButtons;
