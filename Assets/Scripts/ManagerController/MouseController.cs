@@ -289,6 +289,9 @@ public class MouseController : MonoBehaviour
                                         case "Aider":
                                             AB.GetComponent<ToolTip>().message = "A medium range weapon that heals target.\n" + "HEAL: 2\n" + "CP: 1";
                                             break;
+                                        case "Barreler":
+                                            AB.GetComponent<ToolTip>().message = "A short range weapon that spawns a barrel at location.\n" + "\n" + "CP: 2";
+                                            break;
                                         default:
                                             AB.GetComponent<ToolTip>().message = "Weapon error";
                                             break;
