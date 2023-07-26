@@ -135,12 +135,6 @@ public class Manager : MonoBehaviour
             enemyPath.Add(new List<OverlayTileBehaviour>());
         }
 
-        // Tutorial check
-        if (tutorialNumber >= maxTutorial || MapManager.Instance.level > 1)
-        {
-            isInTutorial = false;
-        }
-
         // Game logic for when level is being played
         if (isInCombat)
         {
@@ -226,6 +220,19 @@ public class Manager : MonoBehaviour
             {
                 child.gameObject.GetComponent<CPPipBehaviour>().onFade = false;
                 child.gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            }
+        }
+
+        // Tutorial check
+        if (tutorialNumber >= maxTutorial || MapManager.Instance.level > 1)
+        {
+            isInTutorial = false;
+        }
+        if (isInTutorial && isInCombat)
+        {
+            if (tutorialNumber < 11)
+            {
+                endTurnButton.gameObject.SetActive(false);
             }
         }
     }

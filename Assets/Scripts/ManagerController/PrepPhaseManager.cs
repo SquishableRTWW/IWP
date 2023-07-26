@@ -93,6 +93,18 @@ public class PrepPhaseManager : MonoBehaviour
 
     public void ChangeSelectedCharacter(int i)
     {
+        // For tutorial purposes
+        if (Manager.Instance.isInTutorial && Manager.Instance.tutorialNumber == 1)
+        {
+            Manager.Instance.tutorialNumber++;
+            TTTextBoxBehaviour firstGameObject = FindObjectOfType<TTTextBoxBehaviour>();
+            if (firstGameObject != null)
+            {
+                Destroy(firstGameObject.gameObject);
+            }
+            Manager.Instance.SpawnNextTutorial(Manager.Instance.tutorialNumber);
+        }
+
         if (MapManager.Instance.playerCharacters.Count > i)
         {
             characterSelected = MapManager.Instance.playerCharacters[i];

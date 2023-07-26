@@ -607,6 +607,18 @@ public class MouseController : MonoBehaviour
     //Method to on the movement selection
     public void SelectMovement()
     {
+        // For tutorial purposes
+        if (Manager.Instance.isInTutorial && Manager.Instance.tutorialNumber == 8)
+        {
+            Manager.Instance.tutorialNumber++;
+            TTTextBoxBehaviour firstGameObject = FindObjectOfType<TTTextBoxBehaviour>();
+            if (firstGameObject != null)
+            {
+                Destroy(firstGameObject.gameObject);
+            }
+            Manager.Instance.SpawnNextTutorial(Manager.Instance.tutorialNumber);
+        }
+
         movementSelected = true;
         cancelButton.gameObject.SetActive(true);
         attack1Button.gameObject.SetActive(false);

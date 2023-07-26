@@ -18,12 +18,7 @@ public class TTTextBoxBehaviour : MonoBehaviour
         {
             if (Manager.Instance.isInTutorial && Manager.Instance.tutorialNumber == 1)
             {
-                if (PrepPhaseManager.Instance.characterSelected != null)
-                {
-                    Manager.Instance.tutorialNumber++;
-                    Manager.Instance.SpawnNextTutorial(Manager.Instance.tutorialNumber);
-                    Destroy(gameObject);
-                }
+
             }
             else if (Manager.Instance.isInTutorial && Manager.Instance.tutorialNumber < 7)
             {
@@ -40,7 +35,11 @@ public class TTTextBoxBehaviour : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
-            else if (Manager.Instance.tutorialNumber > 7)
+            else if (Manager.Instance.isInTutorial && Manager.Instance.tutorialNumber == 8)
+            {
+
+            }
+            else if (Manager.Instance.tutorialNumber > 8)
             {
                 if (!Manager.Instance.prepCanvas.gameObject.activeInHierarchy)
                 {
@@ -50,11 +49,11 @@ public class TTTextBoxBehaviour : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetMouseButtonDown(1) && Manager.Instance.playerTurn)
-        {
-            Manager.Instance.isInTutorial = false;
+        //else if (Input.GetMouseButtonDown(1) && Manager.Instance.playerTurn)
+        //{
+        //    Manager.Instance.isInTutorial = false;
 
-            Destroy(gameObject);
-        }
+        //    Destroy(gameObject);
+        //}
     }
 }
