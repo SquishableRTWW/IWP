@@ -16,7 +16,16 @@ public class TTTextBoxBehaviour : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && Manager.Instance.playerTurn)
         {
-            if (Manager.Instance.isInTutorial && Manager.Instance.tutorialNumber < 7)
+            if (Manager.Instance.isInTutorial && Manager.Instance.tutorialNumber == 1)
+            {
+                if (PrepPhaseManager.Instance.characterSelected != null)
+                {
+                    Manager.Instance.tutorialNumber++;
+                    Manager.Instance.SpawnNextTutorial(Manager.Instance.tutorialNumber);
+                    Destroy(gameObject);
+                }
+            }
+            else if (Manager.Instance.isInTutorial && Manager.Instance.tutorialNumber < 7)
             {
                 Manager.Instance.tutorialNumber++;
                 Manager.Instance.SpawnNextTutorial(Manager.Instance.tutorialNumber);
