@@ -37,8 +37,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.03, y: 1.03}
-  m_SizeDelta: {x: 175.635, y: 45.476}
+  m_AnchoredPosition: {x: 0.02, y: 1.25}
+  m_SizeDelta: {x: 202.708, y: 34.651}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &759943446481798505
 Canvas:
@@ -188,9 +188,9 @@ GameObject:
   - component: {fileID: 1587329778981351207}
   - component: {fileID: 6914955582804530655}
   - component: {fileID: 2190785381938542591}
-  - component: {fileID: 9166022858298041392}
+  - component: {fileID: 7099030279281601468}
   m_Layer: 0
-  m_Name: Dronoid
+  m_Name: U-Haul
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,7 +205,7 @@ Transform:
   m_GameObject: {fileID: 7090396504453142996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5001, z: 1}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8878052872048746437}
@@ -253,7 +253,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ff2418985c22a8545a1e0afb525b221c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ef783dc6dac59f34ba38caf0d33b46c6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -276,24 +276,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57ecc7fc885d3e54787583a838dc0da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Dronoid
-  enemyScriptable: {fileID: 11400000, guid: 8d8ff571a5996284c9efd8548a24a054, type: 2}
+  characterName: U-Haul
+  enemyScriptable: {fileID: 11400000, guid: a223b21a12ddf964ebf8f2829d38aca4, type: 2}
   HP: 0
   maxHP: 0
   movementRange: 0
   healthBar: {fileID: 5264619940248768502}
   explosionEffect: {fileID: 5382249522824878518, guid: 2081e722bab54e4479758e91d6b6afaf, type: 3}
-  normalSprite: {fileID: 21300000, guid: ff2418985c22a8545a1e0afb525b221c, type: 3}
-  reverseSprite: {fileID: 21300000, guid: 2d0429c331e36ad4c865f09123b35cb1, type: 3}
+  normalSprite: {fileID: 21300000, guid: ef783dc6dac59f34ba38caf0d33b46c6, type: 3}
+  reverseSprite: {fileID: 21300000, guid: 248bd03b6a31aa848b94a0c3cfab0283, type: 3}
   floatingTextPrefab: {fileID: 2314985102620632716, guid: 8e3446554d1108b4fb78d1ff4405697b, type: 3}
   targetTile: {fileID: 0}
   shootingEffect: {fileID: 5382249522824878518, guid: 7f0b9a85958198348b827626e6b702c3, type: 3}
   directionIndicator: 0
   shouldAttack: 0
   hasAttacked: 0
-  gridLocation: {x: 2, y: -7, z: 2}
+  gridLocation: {x: 6, y: 1, z: 2}
   activeTile: {fileID: 0}
---- !u!61 &9166022858298041392
+--- !u!61 &7099030279281601468
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -306,7 +306,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.01999998}
+  m_Offset: {x: 0, y: 0.007499993}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.49}
@@ -356,8 +356,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00000035763, y: 0.00000047684}
-  m_SizeDelta: {x: 158.7, y: 26.5}
+  m_AnchoredPosition: {x: 0.0010072, y: 0.000011804}
+  m_SizeDelta: {x: 202.71, y: 34.651}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7902089224873859884
 MonoBehaviour:

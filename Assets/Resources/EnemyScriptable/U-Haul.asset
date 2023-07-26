@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4392287566880544dbf9d33c8028dd72, type: 3}
+  m_Name: U-Haul
+  m_EditorClassIdentifier: 
+  HP: 10
+  enemyName: U-Haul
+  movementRange: 2
+  weapon: {fileID: 5634200892605953027, guid: b4107d631b66bbe41959bd0da1ff217a, type: 3}
+  attackRange: 9
+  damage: 3

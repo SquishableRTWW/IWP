@@ -601,7 +601,7 @@ public class Manager : MonoBehaviour
             case 3:
                 nextTutorial.transform.SetParent(prepCanvas.transform);
                 nextTutorial.transform.position = PrepPhaseManager.Instance.fuelButtons[0].transform.position;
-                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "Mechs need fuel to move on the battlefield. Use these 4 buttons to assign it to them. REMEMBER AH.";
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "Mechs NEED FUEL to move on the battlefield. Use these 4 buttons to assign it to them. REMEMBER AH.";
                 break;
             case 4:
                 nextTutorial.transform.SetParent(prepCanvas.transform);

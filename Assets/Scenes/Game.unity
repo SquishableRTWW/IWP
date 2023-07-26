@@ -10392,6 +10392,7 @@ MonoBehaviour:
   enemies:
   - {fileID: 2190785381938542591, guid: 36e00a5e38356bf45924c160d6a33b37, type: 3}
   - {fileID: 2190785381938542591, guid: ab8aef02986254a4f83b0c7f2df3dc1a, type: 3}
+  - {fileID: 2190785381938542591, guid: 8572a8230d5d8e443b3bc00bf245ae17, type: 3}
   characterPositions:
   - {x: -8, y: 4, z: 1}
   - {x: -8, y: 0, z: 1}

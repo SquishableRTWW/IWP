@@ -287,6 +287,9 @@ public class MapManager : MonoBehaviour
                 case 1:
                     enemyList.Add(enemies[1]);
                     break;
+                case 2:
+                    enemyList.Add(enemies[2]);
+                    break;
                 default:
                     break;
             }
