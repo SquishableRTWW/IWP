@@ -31,7 +31,16 @@ public class TTTextBoxBehaviour : MonoBehaviour
                 Manager.Instance.SpawnNextTutorial(Manager.Instance.tutorialNumber);
                 Destroy(gameObject);
             }
-            else if (Manager.Instance.tutorialNumber >= 7)
+            else if (Manager.Instance.isInTutorial && Manager.Instance.tutorialNumber == 7)
+            {
+                if (Manager.Instance.mouseController.character != null)
+                {
+                    Manager.Instance.tutorialNumber++;
+                    Manager.Instance.SpawnNextTutorial(Manager.Instance.tutorialNumber);
+                    Destroy(gameObject);
+                }
+            }
+            else if (Manager.Instance.tutorialNumber > 7)
             {
                 if (!Manager.Instance.prepCanvas.gameObject.activeInHierarchy)
                 {
