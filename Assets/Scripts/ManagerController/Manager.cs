@@ -58,6 +58,7 @@ public class Manager : MonoBehaviour
 
     // List of weapons and equipment player owns:
     public List<GameObject> playerItemList;
+    public List<AudioClip> soundList;
 
     private void Awake()
     {
