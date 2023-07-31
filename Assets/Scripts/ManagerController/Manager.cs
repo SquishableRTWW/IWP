@@ -28,7 +28,6 @@ public class Manager : MonoBehaviour
     public List<string> ttTextList;
     public int tutorialNumber;
     public int maxTutorial;
-    public bool isInTutorial;
     public bool tempTutorialPause;
 
     int CPUIOffset;
@@ -88,12 +87,12 @@ public class Manager : MonoBehaviour
         // Tutorial Set-Up
         tutorialNumber = 0;
         maxTutorial = 16;
-        isInTutorial = true;
         ttTextList = new List<string>();
-        // Tutorial text List adding
-
-        // Start tutorial
-        SpawnNextTutorial(tutorialNumber);
+        if (StateNameController.isInTutorial)
+        {
+            // Start tutorial
+            SpawnNextTutorial(tutorialNumber);
+        }
 
 
         isInCombat = false;
@@ -226,9 +225,9 @@ public class Manager : MonoBehaviour
         // Tutorial check
         if (tutorialNumber >= maxTutorial || MapManager.Instance.level > 1)
         {
-            isInTutorial = false;
+            StateNameController.isInTutorial = false;
         }
-        if (isInTutorial && isInCombat)
+        if (StateNameController.isInTutorial && isInCombat)
         {
             if (tutorialNumber < 11)
             {

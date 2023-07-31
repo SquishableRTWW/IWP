@@ -16,17 +16,17 @@ public class TTTextBoxBehaviour : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && Manager.Instance.playerTurn)
         {
-            if (Manager.Instance.isInTutorial && Manager.Instance.tutorialNumber == 1)
+            if (StateNameController.isInTutorial && Manager.Instance.tutorialNumber == 1)
             {
 
             }
-            else if (Manager.Instance.isInTutorial && Manager.Instance.tutorialNumber < 7)
+            else if (StateNameController.isInTutorial && Manager.Instance.tutorialNumber < 7)
             {
                 Manager.Instance.tutorialNumber++;
                 Manager.Instance.SpawnNextTutorial(Manager.Instance.tutorialNumber);
                 Destroy(gameObject);
             }
-            else if (Manager.Instance.isInTutorial && Manager.Instance.tutorialNumber == 7)
+            else if (StateNameController.isInTutorial && Manager.Instance.tutorialNumber == 7)
             {
                 if (Manager.Instance.mouseController.character != null)
                 {
@@ -35,7 +35,7 @@ public class TTTextBoxBehaviour : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
-            else if (Manager.Instance.isInTutorial && Manager.Instance.tutorialNumber == 8)
+            else if (StateNameController.isInTutorial && Manager.Instance.tutorialNumber == 8)
             {
 
             }

@@ -94,7 +94,7 @@ public class PrepPhaseManager : MonoBehaviour
     public void ChangeSelectedCharacter(int i)
     {
         // For tutorial purposes
-        if (Manager.Instance.isInTutorial && Manager.Instance.tutorialNumber == 1)
+        if (StateNameController.isInTutorial && Manager.Instance.tutorialNumber == 1)
         {
             Manager.Instance.tutorialNumber++;
             TTTextBoxBehaviour firstGameObject = FindObjectOfType<TTTextBoxBehaviour>();

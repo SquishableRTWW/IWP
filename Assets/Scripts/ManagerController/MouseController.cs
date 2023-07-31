@@ -608,7 +608,7 @@ public class MouseController : MonoBehaviour
     public void SelectMovement()
     {
         // For tutorial purposes
-        if (Manager.Instance.isInTutorial && Manager.Instance.tutorialNumber == 8)
+        if (StateNameController.isInTutorial && Manager.Instance.tutorialNumber == 8)
         {
             Manager.Instance.tutorialNumber++;
             TTTextBoxBehaviour firstGameObject = FindObjectOfType<TTTextBoxBehaviour>();
