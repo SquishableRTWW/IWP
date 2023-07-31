@@ -58,7 +58,6 @@ public class Manager : MonoBehaviour
 
     // List of weapons and equipment player owns:
     public List<GameObject> playerItemList;
-    public List<AudioClip> soundList;
 
     private void Awake()
     {
@@ -380,6 +379,7 @@ public class Manager : MonoBehaviour
 
     public void StartCombat()
     {
+        SoundManager.Instance.PlaySound(SoundManager.Sound.ButtonClick);
         foreach (var character in MapManager.Instance.playerCharacters)
         {
             if (character.currentFuel <= 0)

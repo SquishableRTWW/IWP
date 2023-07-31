@@ -93,10 +93,11 @@ public class PrepPhaseManager : MonoBehaviour
 
     public void ChangeSelectedCharacter(int i)
     {
-        SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
+        SoundManager.Instance.PlaySound(SoundManager.Sound.ButtonClick);
         // For tutorial purposes
         if (StateNameController.isInTutorial && Manager.Instance.tutorialNumber == 1)
         {
+            SoundManager.Instance.PlaySound(SoundManager.Sound.TutorialClick);
             Manager.Instance.tutorialNumber++;
             TTTextBoxBehaviour firstGameObject = FindObjectOfType<TTTextBoxBehaviour>();
             if (firstGameObject != null)
@@ -140,7 +141,7 @@ public class PrepPhaseManager : MonoBehaviour
     {
         if (characterSelected != null && characterSelected.currentFuel < characterSelected.maxFuel && Manager.Instance.fuelPool > 0)
         {
-            SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
+            SoundManager.Instance.PlaySound(SoundManager.Sound.ButtonClick);
             characterSelected.currentFuel += amount;
             Manager.Instance.fuelPool -= amount;
             characterFuelbar.SetFuel(characterSelected.currentFuel);
@@ -151,7 +152,7 @@ public class PrepPhaseManager : MonoBehaviour
     {
         if (characterSelected != null && characterSelected.currentFuel > 0)
         {
-            SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
+            SoundManager.Instance.PlaySound(SoundManager.Sound.ButtonClick);
             characterSelected.currentFuel -= amount;
             if (Manager.Instance.fuelPool < Manager.Instance.maxfuelPool)
             {
@@ -166,7 +167,7 @@ public class PrepPhaseManager : MonoBehaviour
     {
         if (characterSelected != null)
         {
-            SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
+            SoundManager.Instance.PlaySound(SoundManager.Sound.ButtonClick);
             if (Manager.Instance.fuelPool >= characterSelected.maxFuel)
             {
                 characterSelected.currentFuel = characterSelected.maxFuel;
@@ -187,7 +188,7 @@ public class PrepPhaseManager : MonoBehaviour
     {
         if (characterSelected != null)
         {
-            SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
+            SoundManager.Instance.PlaySound(SoundManager.Sound.ButtonClick);
             Manager.Instance.fuelPool += characterSelected.currentFuel;
             if (Manager.Instance.fuelPool > Manager.Instance.maxfuelPool)
             {
@@ -368,7 +369,7 @@ public class PrepPhaseManager : MonoBehaviour
 
     public void ShowBattleField()
     {
-        SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
+        SoundManager.Instance.PlaySound(SoundManager.Sound.ButtonClick);
         // Hide all the canvases stuff except the return button
         foreach (Transform child in prepCanvas.transform)
         {
@@ -389,7 +390,7 @@ public class PrepPhaseManager : MonoBehaviour
     }
     public void HideBattleField()
     {
-        SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
+        SoundManager.Instance.PlaySound(SoundManager.Sound.ButtonClick);
         // Show all the canvases again and hide the ShowBattleField() Button
         foreach (Transform child in CombatCanvas.transform)
         {

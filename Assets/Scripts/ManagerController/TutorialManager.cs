@@ -33,11 +33,13 @@ public class TutorialManager : MonoBehaviour
     
     public void StartGame()
     {
+        SoundManager.Instance.PlaySound(SoundManager.Sound.ButtonClick);
         StateNameController.isInTutorial = true;
         ChangeScene("Game");
     }
     public void StartGameNoTutorial()
     {
+        SoundManager.Instance.PlaySound(SoundManager.Sound.ButtonClick);
         StateNameController.isInTutorial = false;
         ChangeScene("Game");
     }

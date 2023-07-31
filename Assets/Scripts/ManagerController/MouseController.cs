@@ -466,6 +466,7 @@ public class MouseController : MonoBehaviour
     // Logic for doing damage
     public void DoDamage()
     {
+        SoundManager.Instance.PlaySound(character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().weaponScriptable.soundEnum);
         List<OverlayTileBehaviour> tilesWithCharacters = new List<OverlayTileBehaviour>();
         List<OverlayTileBehaviour> tilesWithEntities = new List<OverlayTileBehaviour>();
         int affectedCount = 0;
@@ -510,6 +511,7 @@ public class MouseController : MonoBehaviour
         {
             if (tilesWithEntities[i].entity.entityScriptable.type == "Barrel")
             {
+                SoundManager.Instance.PlaySound(SoundManager.Sound.DieSFX);
                 tilesWithEntities[i].entity.ActivateEntity();
             }
         }
@@ -519,6 +521,7 @@ public class MouseController : MonoBehaviour
 
     public void DoHeal()
     {
+        SoundManager.Instance.PlaySound(character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().weaponScriptable.soundEnum);
         List<OverlayTileBehaviour> tilesWithCharacters = new List<OverlayTileBehaviour>();
         int affectedCount = 0;
         for (int i = 0; i < attackTiles.Count; i++)
@@ -607,9 +610,11 @@ public class MouseController : MonoBehaviour
     //Method to on the movement selection
     public void SelectMovement()
     {
+        SoundManager.Instance.PlaySound(SoundManager.Sound.DragDropSFX);
         // For tutorial purposes
         if (StateNameController.isInTutorial && Manager.Instance.tutorialNumber == 8)
         {
+            SoundManager.Instance.PlaySound(SoundManager.Sound.TutorialClick);
             Manager.Instance.tutorialNumber++;
             TTTextBoxBehaviour firstGameObject = FindObjectOfType<TTTextBoxBehaviour>();
             if (firstGameObject != null)
@@ -696,6 +701,7 @@ public class MouseController : MonoBehaviour
         WeaponSelected = weaponNumber;
         if (character != null && Manager.Instance.GetCP() >= character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetCPCost())
         {
+            SoundManager.Instance.PlaySound(SoundManager.Sound.DragDropSFX);
             attackSelected = true;
             moveButton.gameObject.SetActive(false);
             cancelButton.gameObject.SetActive(true);

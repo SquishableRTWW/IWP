@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class SoundManager
+public class SoundManager : MonoBehaviour
 {
-
+    public static SoundManager Instance;
+    [SerializeField] AudioSource musicSource, effectSource;
+    public List<AudioClip> soundList;
     public enum Sound
-    { 
+    {
         CalmBGM,
         CombatBGM,
         TutorialClick,
@@ -17,14 +19,26 @@ public static class SoundManager
         BolterSFX,
         GrenadeLauncherSFX,
         LaserSFX,
-        DragDropSFX
+        DragDropSFX,
+        DieSFX
     }
 
 
-    public static void PlaySound(Sound sound)
+    private void Awake()
     {
-        GameObject soundGameObject = new GameObject("Sound");
-        AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
-        audioSource.PlayOneShot(Manager.Instance.soundList[(int)sound]);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void PlaySound(Sound sound)
+    {
+        effectSource.PlayOneShot(soundList[(int)sound]);
     }
 }

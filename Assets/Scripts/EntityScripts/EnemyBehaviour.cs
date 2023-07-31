@@ -71,6 +71,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private IEnumerator DestroyCharacter()
     {
+        SoundManager.Instance.PlaySound(SoundManager.Sound.DieSFX);
         activeTile.hasEnemy = false;
         yield return new WaitForSeconds(0.4f);
         Destroy(realExplosion);

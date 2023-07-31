@@ -22,6 +22,7 @@ public class TTTextBoxBehaviour : MonoBehaviour
             }
             else if (StateNameController.isInTutorial && Manager.Instance.tutorialNumber < 7)
             {
+                SoundManager.Instance.PlaySound(SoundManager.Sound.TutorialClick);
                 Manager.Instance.tutorialNumber++;
                 Manager.Instance.SpawnNextTutorial(Manager.Instance.tutorialNumber);
                 Destroy(gameObject);
@@ -30,6 +31,7 @@ public class TTTextBoxBehaviour : MonoBehaviour
             {
                 if (Manager.Instance.mouseController.character != null)
                 {
+                    SoundManager.Instance.PlaySound(SoundManager.Sound.TutorialClick);
                     Manager.Instance.tutorialNumber++;
                     Manager.Instance.SpawnNextTutorial(Manager.Instance.tutorialNumber);
                     Destroy(gameObject);
@@ -43,6 +45,7 @@ public class TTTextBoxBehaviour : MonoBehaviour
             {
                 if (!Manager.Instance.prepCanvas.gameObject.activeInHierarchy)
                 {
+                    SoundManager.Instance.PlaySound(SoundManager.Sound.TutorialClick);
                     Manager.Instance.tutorialNumber++;
                     Manager.Instance.SpawnNextTutorial(Manager.Instance.tutorialNumber);
                     Destroy(gameObject);

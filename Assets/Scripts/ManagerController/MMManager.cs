@@ -19,6 +19,7 @@ public class MMManager : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
+        SoundManager.Instance.PlaySound(SoundManager.Sound.ButtonClick);
         SceneManager.LoadScene(sceneName);
     }
 }

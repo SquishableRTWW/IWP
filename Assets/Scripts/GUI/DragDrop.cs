@@ -23,7 +23,6 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     // At the start of the drag
     public void OnBeginDrag(PointerEventData eventData)
     {
-        SoundManager.PlaySound(SoundManager.Sound.DragDropSFX);
         //Check if it was in a slot
         if (isInSlot)
         {
@@ -49,7 +48,6 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     // After drag ends
     public void OnEndDrag(PointerEventData eventData)
     {
-        SoundManager.PlaySound(SoundManager.Sound.DragDropSFX);
         //Debug.Log("Stopped drag");
 
         // Check if it landed in an item slot

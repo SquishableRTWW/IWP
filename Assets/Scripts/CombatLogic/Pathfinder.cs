@@ -36,7 +36,7 @@ public class Pathfinder
 
                 if (neighbour.entity != null)
                 {
-                    if (neighbour.entity.entityScriptable.type == "Obstacle" || neighbour.entity.entityScriptable.type == "Crate" || neighbour.entity.entityScriptable.type == "Barrel")
+                    if (neighbour.entity.entityScriptable.type == "Obstacle"|| neighbour.entity.entityScriptable.type == "Barrel")
                     {
                         continue;
                     }
@@ -97,7 +97,7 @@ public class Pathfinder
                 }
                 if (neighbour.entity != null)
                 {
-                    if (neighbour.entity.entityScriptable.type == "Obstacle")
+                    if (neighbour.entity.entityScriptable.type == "Obstacle" || neighbour.entity.entityScriptable.type == "Crate" || neighbour.entity.entityScriptable.type == "Barrel")
                     {
                         continue;
                     }

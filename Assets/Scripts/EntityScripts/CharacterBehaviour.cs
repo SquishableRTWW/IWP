@@ -90,6 +90,7 @@ public class CharacterBehaviour : MonoBehaviour
 
     private IEnumerator DestroyCharacter()
     {
+        SoundManager.Instance.PlaySound(SoundManager.Sound.DieSFX);
         activeTile.hasCharacter = false;
         yield return new WaitForSeconds(0.4f);
         Destroy(realExplosion);
