@@ -57,4 +57,9 @@ public class WeaponBehaviour : MonoBehaviour
     {
         return weaponScriptable.animation;
     }
+
+    public SoundManager.Sound GetSoundEnum()
+    {
+        return weaponScriptable.soundEnum;
+    }
 }
