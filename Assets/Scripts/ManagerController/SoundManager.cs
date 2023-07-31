@@ -17,6 +17,7 @@ public static class SoundManager
         BolterSFX,
         GrenadeLauncherSFX,
         LaserSFX,
+        DragDropSFX
     }
 
 
