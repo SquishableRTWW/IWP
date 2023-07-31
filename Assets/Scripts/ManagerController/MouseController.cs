@@ -466,7 +466,6 @@ public class MouseController : MonoBehaviour
     // Logic for doing damage
     public void DoDamage()
     {
-        SoundManager.PlaySound(character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetSoundEnum());
         List<OverlayTileBehaviour> tilesWithCharacters = new List<OverlayTileBehaviour>();
         List<OverlayTileBehaviour> tilesWithEntities = new List<OverlayTileBehaviour>();
         int affectedCount = 0;
@@ -520,7 +519,6 @@ public class MouseController : MonoBehaviour
 
     public void DoHeal()
     {
-        SoundManager.PlaySound(character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetSoundEnum());
         List<OverlayTileBehaviour> tilesWithCharacters = new List<OverlayTileBehaviour>();
         int affectedCount = 0;
         for (int i = 0; i < attackTiles.Count; i++)

@@ -21,4 +21,3 @@ MonoBehaviour:
   attackSprite: {fileID: 21300000, guid: 4245e0afedf2d414d96374e2f75edc20, type: 3}
   weaponSprite: {fileID: 21300000, guid: b9a3d9ad0566df048bf0c3e084b58d08, type: 3}
   animation: {fileID: 5382249522824878518, guid: c2082d3606117314989981c48781dc28, type: 3}
-  soundEnum: 8

@@ -17,6 +17,4 @@ public class WeaponScriptable : ScriptableObject
     public Sprite weaponSprite;
 
     public GameObject animation;
-
-    public SoundManager.Sound soundEnum;
 }
