@@ -366,6 +366,7 @@ public class MouseController : MonoBehaviour
 
         if (path.Count > 0 && isMoving)
         {
+            //SoundManager.Instance.PlaySound(SoundManager.Sound.CharacterMove1);
             turnEndButton.gameObject.SetActive(false);
             MoveAlongPath();
         }

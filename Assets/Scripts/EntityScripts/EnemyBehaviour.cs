@@ -90,6 +90,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (realShooting == null && shootingEffect != null)
         {
+            SoundManager.Instance.PlaySound(enemyScriptable.weapon.GetComponent<WeaponBehaviour>().weaponScriptable.soundEnum);
             realShooting = Instantiate(shootingEffect,
             new Vector3(gameObject.transform.position.x + (0.3f * directionIndicator), gameObject.transform.position.y + 0.2f, gameObject.transform.position.z),
             Quaternion.identity);
