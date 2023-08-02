@@ -180,6 +180,7 @@ public class MouseController : MonoBehaviour
                         DoDamage();
                         Manager.Instance.ChangeCP(character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetCPCost());
                         Manager.Instance.DeleteCPImage(character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetCPCost());
+                        DeselectAction();
                     }
                     else if (hasCharacter)
                     {

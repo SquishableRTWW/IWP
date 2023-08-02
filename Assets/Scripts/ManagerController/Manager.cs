@@ -589,7 +589,7 @@ public class Manager : MonoBehaviour
             case 0:
                 nextTutorial.transform.SetParent(prepCanvas.transform);
                 nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(-465f, 0f, 0f);
-                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "My name is Jeff. Let Jeff show you how to prepare your team before each mission.\n Right-CLICK at any time to skip the tutorial";
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "My name is Jeff. Let Jeff show you how to prepare your team before each mission. What you see here is the preparation menu.";
                 break;
             case 1:
                 nextTutorial.transform.SetParent(prepCanvas.transform);
@@ -599,17 +599,17 @@ public class Manager : MonoBehaviour
             case 2:
                 nextTutorial.transform.SetParent(prepCanvas.transform);
                 nextTutorial.transform.position = PrepPhaseManager.Instance.weaponSlots[0].transform.position;
-                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "You will be given FUEL each mission to fuel your mechs.";
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "You will be given FUEL each mission shown in the bar on the top right. You must assign fuel among your mechs";
                 break;
             case 3:
                 nextTutorial.transform.SetParent(prepCanvas.transform);
                 nextTutorial.transform.position = PrepPhaseManager.Instance.fuelButtons[0].transform.position;
-                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "Mechs NEED FUEL to move on the battlefield. Use these 4 buttons to assign it to them. REMEMBER AH.";
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "Mechs NEED FUEL to move on the battlefield. Use these 4 small grey buttons to assign it to them. REMEMBER AH.";
                 break;
             case 4:
                 nextTutorial.transform.SetParent(prepCanvas.transform);
                 nextTutorial.transform.position = PrepPhaseManager.Instance.weaponSlots[0].transform.position;
-                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "As you collect items in your inventory, you can swap out your mech's gear via drag and drop.";
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "Hover over your mech's weapons and equipment to see their details. As you collect items in your inventory, you can swap out your mech's gear via drag and drop.";
                 break;
             case 5:
                 nextTutorial.transform.SetParent(prepCanvas.transform);
@@ -619,7 +619,7 @@ public class Manager : MonoBehaviour
             case 6:
                 nextTutorial.transform.SetParent(prepCanvas.transform);
                 nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(0f, 0f, 0f);
-                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "Once you're done prepping your team, press START to begin the level";
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "Take your time to explore the preparation menu. Once you're done prepping your team with fuel, press START to begin the level";
                 break;
             case 7:
                 nextTutorial.transform.SetParent(combatCanvas.transform);
@@ -644,12 +644,12 @@ public class Manager : MonoBehaviour
             case 11:
                 nextTutorial.transform.SetParent(combatCanvas.transform);
                 nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(-465f, -500f, 0f);
-                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "If your mech is OVERHEATED, you will not see the option to attack. End the turn first and let the enemy move";
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "If your mech is OVERHEATED, you will not see the option to attack/move. Regardless, END the turn first and let the enemy move";
                 break;
             case 12:
                 nextTutorial.transform.SetParent(combatCanvas.transform);
                 nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(-465f, -500f, 0f);
-                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "When its your turn, click on your mech again and hover over your ATTACK button to read about the attack";
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "When its your turn, click on your mech again and HOVER over your ATTACK button to read about the attack";
                 break;
             case 13:
                 nextTutorial.transform.SetParent(combatCanvas.transform);
@@ -659,7 +659,7 @@ public class Manager : MonoBehaviour
             case 14:
                 nextTutorial.transform.SetParent(combatCanvas.transform);
                 nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(-465f, -500f, 0f);
-                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "Attacks cost COMMAND POINTS (CP), shown on the top of your screen in yellow bars. You start with 2 and they reset each turn.";
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "Attacks cost COMMAND POINTS (CP), shown on the TOP of your screen in yellow bars. You start with 2 and they replenish each turn.";
                 break;
             case 15:
                 nextTutorial.transform.SetParent(combatCanvas.transform);

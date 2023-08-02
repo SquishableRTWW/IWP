@@ -51,6 +51,20 @@ public class TTTextBoxBehaviour : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
+            else if (StateNameController.isInTutorial && Manager.Instance.tutorialNumber == 11)
+            {
+
+            }
+            else if (Manager.Instance.tutorialNumber > 11)
+            {
+                if (!Manager.Instance.prepCanvas.gameObject.activeInHierarchy)
+                {
+                    SoundManager.Instance.PlaySound(SoundManager.Sound.TutorialClick);
+                    Manager.Instance.tutorialNumber++;
+                    Manager.Instance.SpawnNextTutorial(Manager.Instance.tutorialNumber);
+                    Destroy(gameObject);
+                }
+            }
         }
         //else if (Input.GetMouseButtonDown(1) && Manager.Instance.playerTurn)
         //{
