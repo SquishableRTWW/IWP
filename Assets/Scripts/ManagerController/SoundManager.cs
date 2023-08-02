@@ -41,4 +41,18 @@ public class SoundManager : MonoBehaviour
     {
         effectSource.PlayOneShot(soundList[(int)sound]);
     }
+
+    public void ChangeMasterVolume(float value)
+    {
+        AudioListener.volume = value;
+    }
+
+    public void ToggleEffects()
+    {
+        effectSource.mute = !effectSource.mute;
+    }
+    public void ToggleMusic()
+    {
+        musicSource.mute = !musicSource.mute;
+    }
 }
