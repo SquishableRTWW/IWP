@@ -105,6 +105,7 @@ public class Manager : MonoBehaviour
         if (MapManager.Instance.enemyList.Count <= 0)
         {
             // If there are no enemies left, end the level
+            SoundManager.Instance.ChangeMusic(SoundManager.Sound.CalmBGM);
             if (MapManager.Instance.level % 4 != 0)
             {
                 MapManager.Instance.level++;
@@ -402,6 +403,7 @@ public class Manager : MonoBehaviour
         CP = maxCP;
         AddAmountedCPImage(maxCP);
         //Debug.Log("Level start");
+        SoundManager.Instance.ChangeMusic(SoundManager.Sound.CombatBGM);
     }
     public void ConfirmStart()
     {
@@ -410,6 +412,7 @@ public class Manager : MonoBehaviour
         CP = maxCP;
         AddAmountedCPImage(maxCP);
         //Debug.Log("Level confirm start");
+        SoundManager.Instance.ChangeMusic(SoundManager.Sound.CombatBGM);
     }
     public void CancelStart()
     {
