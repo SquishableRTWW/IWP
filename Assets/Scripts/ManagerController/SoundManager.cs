@@ -23,6 +23,7 @@ public class SoundManager : MonoBehaviour
         DieSFX
     }
 
+    private static Dictionary<Sound, float> soundTimerDictionary;
 
     private void Awake()
     {
@@ -35,11 +36,90 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        soundTimerDictionary = new Dictionary<Sound, float>();
+        soundTimerDictionary[Sound.CharacterMove1] = 0f;
+        soundTimerDictionary[Sound.CharacterMove2] = 0f;
+        soundTimerDictionary[Sound.DieSFX] = 0f;
     }
 
     public void PlaySound(Sound sound)
     {
-        effectSource.PlayOneShot(soundList[(int)sound]);
+        if (CanPlaySound(sound))
+        {
+            effectSource.PlayOneShot(soundList[(int)sound]);
+        }
+    }
+    public void StopSound()
+    {
+        effectSource.Stop();
+    }
+
+    private static bool CanPlaySound(Sound sound)
+    {
+        switch (sound)
+        {
+            default:
+                return true;
+            case Sound.CharacterMove1:
+                if (soundTimerDictionary.ContainsKey(sound))
+                {
+                    float lastTimePlayed = soundTimerDictionary[sound];
+                    float playerMoveTimerMax = 8f;
+                    if (lastTimePlayed + playerMoveTimerMax < Time.time)
+                    {
+                        soundTimerDictionary[sound] = Time.time;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            case Sound.CharacterMove2:
+                if (soundTimerDictionary.ContainsKey(sound))
+                {
+                    float lastTimePlayed = soundTimerDictionary[sound];
+                    float playerMoveTimerMax = 1f;
+                    if (lastTimePlayed + playerMoveTimerMax < Time.time)
+                    {
+                        soundTimerDictionary[sound] = Time.time;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            case Sound.DieSFX:
+                if (soundTimerDictionary.ContainsKey(sound))
+                {
+                    float lastTimePlayed = soundTimerDictionary[sound];
+                    float playerMoveTimerMax = 2f;
+                    if (lastTimePlayed + playerMoveTimerMax < Time.time)
+                    {
+                        soundTimerDictionary[sound] = Time.time;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+                //break;
+        }
     }
 
     public void ChangeMusic(Sound sound)

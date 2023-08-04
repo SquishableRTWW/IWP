@@ -367,7 +367,7 @@ public class MouseController : MonoBehaviour
 
         if (path.Count > 0 && isMoving)
         {
-            //SoundManager.Instance.PlaySound(SoundManager.Sound.CharacterMove1);
+            SoundManager.Instance.PlaySound(SoundManager.Sound.CharacterMove2);
             turnEndButton.gameObject.SetActive(false);
             MoveAlongPath();
         }
@@ -453,6 +453,7 @@ public class MouseController : MonoBehaviour
 
         if (path.Count == 0)
         {
+            SoundManager.Instance.StopSound();
             character.finishedMove = true;
             foreach (var tile in inRangeTiles)
             {
