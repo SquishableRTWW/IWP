@@ -278,7 +278,7 @@ public class MapManager : MonoBehaviour
         }
 
         // Randomly adding enemies to the map depending on the level:
-        for (int i = 0; i < 1 + level; i++)
+        for (int i = 0; i < 1 + level + (levelTier - 1); i++)
         {
             int enemyTypeToSpawn = Random.Range(0, enemies.Count);
             int enemyX = 0, enemyY = 0;
