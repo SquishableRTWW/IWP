@@ -25,6 +25,7 @@ public class MapManager : MonoBehaviour
     // List of levels
     public List<GameObject> tier1Maps;
     public List<GameObject> tier2Maps;
+    public List<GameObject> tier3Maps;
 
     public int level;
     public int levelTier;
@@ -221,6 +222,11 @@ public class MapManager : MonoBehaviour
                 break;
             case 2:
                 pre_tilemap = Instantiate(tier2Maps[randomLevel].GetComponent<Tilemap>());
+                pre_tilemap.transform.SetParent(this.gameObject.transform);
+                tilemap = pre_tilemap;
+                break;
+            case 3:
+                pre_tilemap = Instantiate(tier3Maps[randomLevel].GetComponent<Tilemap>());
                 pre_tilemap.transform.SetParent(this.gameObject.transform);
                 tilemap = pre_tilemap;
                 break;

@@ -49,9 +49,13 @@ public class SoundManager : MonoBehaviour
         musicSource.loop = true;
     }
 
-    public void ChangeMasterVolume(float value)
+    public void ChangeMusicVolume(float value)
     {
-        AudioListener.volume = value;
+        musicSource.volume = value;
+    }
+    public void ChangeEffectsVolume(float value)
+    {
+        effectSource.volume = value;
     }
 
     public void ToggleEffects()
