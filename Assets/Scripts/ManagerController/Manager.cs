@@ -116,6 +116,12 @@ public class Manager : MonoBehaviour
                 MapManager.Instance.level = 1;
             }
 
+            // Ading more difficult enemy on tier 2
+            if (MapManager.Instance.levelTier >= 2)
+            {
+                MapManager.Instance.possibleEnemies.Add(MapManager.Instance.enemies[2]);
+            }
+
             MapManager.Instance.ReloadMap();
             timeLimit = originalTime;
             mouseController.inRangeTiles.Clear();
@@ -600,7 +606,7 @@ public class Manager : MonoBehaviour
             case 2:
                 nextTutorial.transform.SetParent(prepCanvas.transform);
                 nextTutorial.transform.position = PrepPhaseManager.Instance.weaponSlots[0].transform.position;
-                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "You will be given FUEL each mission shown in the bar on the top right. You must assign fuel among your mechs";
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "You will be given FUEL each mission shown in the bar on the top left. You must assign fuel among your mechs before each mission";
                 break;
             case 3:
                 nextTutorial.transform.SetParent(prepCanvas.transform);

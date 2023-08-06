@@ -51,8 +51,10 @@ public class CharacterBehaviour : MonoBehaviour
         realExplosion = null;
         directionIndicator = 1;
         currentFuel = 0;
-
-        Manager.Instance.GiveEquipmentBuff(this, equipmentList[0].GetComponent<EquipmentBehaviour>());
+        if (equipmentList.Count > 0)
+        {
+            Manager.Instance.GiveEquipmentBuff(this, equipmentList[0].GetComponent<EquipmentBehaviour>());
+        }
     }
 
     // Update is called once per frame

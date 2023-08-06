@@ -21,6 +21,7 @@ public class MapManager : MonoBehaviour
     public List<EnemyBehaviour> enemyList;
     public List<EntityBehaviour> entitiesInGame;
     public List<EnemyBehaviour> enemies;
+    public List<EnemyBehaviour> possibleEnemies;
     public List<Vector3Int> characterPositions;
     // List of levels
     public List<GameObject> tier1Maps;
@@ -280,7 +281,7 @@ public class MapManager : MonoBehaviour
         // Randomly adding enemies to the map depending on the level:
         for (int i = 0; i < 1 + level + (levelTier - 1); i++)
         {
-            int enemyTypeToSpawn = Random.Range(0, enemies.Count);
+            int enemyTypeToSpawn = Random.Range(0, possibleEnemies.Count);
             int enemyX = 0, enemyY = 0;
             bool Checking = true;
             bool noTileError = true;
@@ -288,13 +289,13 @@ public class MapManager : MonoBehaviour
             switch (enemyTypeToSpawn)
             {
                 case 0:
-                    enemyList.Add(enemies[0]);
+                    enemyList.Add(possibleEnemies[0]);
                     break;
                 case 1:
-                    enemyList.Add(enemies[1]);
+                    enemyList.Add(possibleEnemies[1]);
                     break;
                 case 2:
-                    enemyList.Add(enemies[2]);
+                    enemyList.Add(possibleEnemies[2]);
                     break;
                 default:
                     break;
