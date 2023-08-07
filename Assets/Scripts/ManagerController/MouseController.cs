@@ -164,9 +164,6 @@ public class MouseController : MonoBehaviour
                         }
                         if (tile.hasCharacter)
                         {
-                            // Play healing animation
-                            character.shootingEffect = character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetAnimation();
-                            StartCoroutine(MapManager.Instance.GetCharacterAt(tile).DoAttackAnimation(character.shootingEffect));
                             hasCharacter = true;
                         }
                     }
@@ -187,6 +184,9 @@ public class MouseController : MonoBehaviour
                     }
                     else if (hasCharacter)
                     {
+                        // Play attack animation
+                        character.shootingEffect = character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetAnimation();
+                        StartCoroutine(character.DoAttackAnimation(character.shootingEffect));
                         DoHeal();
                         Manager.Instance.ChangeCP(character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetCPCost());
                         Manager.Instance.DeleteCPImage(character.weaponsEquipped[WeaponSelected].GetComponent<WeaponBehaviour>().GetCPCost());
