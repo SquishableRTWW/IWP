@@ -39,6 +39,7 @@ public class MouseController : MonoBehaviour
     public bool movementSelected = false;
     public bool attackSelected = false;
     public LayerMask layerMask;
+    public bool attackJustSelected;
 
     private void Start()
     {
@@ -345,9 +346,10 @@ public class MouseController : MonoBehaviour
                                 }
                             }
 
-                            if (attackSelected)
+                            if (attackJustSelected)
                             {
                                 DeselectAction();
+                                attackJustSelected = false;
                             }
                         }
                         else if (objectHit.CompareTag("Entity"))
@@ -369,6 +371,12 @@ public class MouseController : MonoBehaviour
                                 {
                                     tile.ShowAttackTile();
                                 }
+                            }
+
+                            if (attackJustSelected)
+                            {
+                                DeselectAction();
+                                attackJustSelected = false;
                             }
                         }
                     }
@@ -536,6 +544,7 @@ public class MouseController : MonoBehaviour
         
         DeselectAction();
         MapManager.Instance.HideAllTiles();
+        attackJustSelected = true;
     }
 
     public void DoHeal()
@@ -599,6 +608,7 @@ public class MouseController : MonoBehaviour
             }
         }
         DeselectAction();
+        attackJustSelected = true;
     }
 
 
@@ -751,6 +761,7 @@ public class MouseController : MonoBehaviour
 
     public void SpawnEntity(EntityBehaviour Entity, OverlayTileBehaviour focusedTile)
     {
+        SoundManager.Instance.PlaySound(SoundManager.Sound.DragDropSFX);
         var barrel = Instantiate(Entity);
         barrel.PositionEntity(barrel, focusedTile);
         DeselectAction();
