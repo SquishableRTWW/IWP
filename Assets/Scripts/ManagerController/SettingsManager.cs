@@ -49,6 +49,7 @@ public class SettingsManager : MonoBehaviour
     public void QuitThisGame()
     {
         SoundManager.Instance.PlaySound(SoundManager.Sound.ButtonClick);
+        SoundManager.Instance.ChangeMusic(SoundManager.Sound.CalmBGM);
         SceneManager.LoadScene("MainMenu");
     }
 }
