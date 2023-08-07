@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -43,5 +44,11 @@ public class SettingsManager : MonoBehaviour
     public void HideSettings()
     {
         settingsCanvas.gameObject.SetActive(false);
+    }
+
+    public void QuitThisGame()
+    {
+        SoundManager.Instance.PlaySound(SoundManager.Sound.ButtonClick);
+        SceneManager.LoadScene("MainMenu");
     }
 }

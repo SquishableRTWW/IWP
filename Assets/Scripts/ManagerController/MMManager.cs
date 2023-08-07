@@ -22,4 +22,9 @@ public class MMManager : MonoBehaviour
         SoundManager.Instance.PlaySound(SoundManager.Sound.ButtonClick);
         SceneManager.LoadScene(sceneName);
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
