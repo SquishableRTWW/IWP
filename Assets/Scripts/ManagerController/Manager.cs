@@ -101,6 +101,17 @@ public class Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Check to see if player lost all mechs
+        if (MapManager.Instance.playerCharacters.Count <= 0)
+        {
+            // End the game and send them to the losing screen
+            isInCombat = false;
+            StateNameController.gameResult = "You Lose.";
+            SoundManager.Instance.ChangeMusic(SoundManager.Sound.CalmBGM);
+            SceneManager.LoadScene("WinLose");
+
+        }
+
         // Check to see if there are any enemies left
         if (MapManager.Instance.enemyList.Count <= 0)
         {
@@ -116,10 +127,19 @@ public class Manager : MonoBehaviour
                 MapManager.Instance.level = 1;
             }
 
-            // Ading more difficult enemy on tier 2
+            // Adding more difficult enemy on tier 2
             if (MapManager.Instance.levelTier >= 2)
             {
                 MapManager.Instance.possibleEnemies.Add(MapManager.Instance.enemies[2]);
+            }
+            // Winning the game if its tier 4 level 1
+            if (MapManager.Instance.levelTier == 4)
+            {
+                // End the game and send them to the winning screen
+                isInCombat = false;
+                StateNameController.gameResult = "You Win!";
+                SoundManager.Instance.ChangeMusic(SoundManager.Sound.CalmBGM);
+                SceneManager.LoadScene("WinLose");
             }
 
             MapManager.Instance.ReloadMap();
