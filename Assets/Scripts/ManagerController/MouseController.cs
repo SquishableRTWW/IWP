@@ -318,15 +318,31 @@ public class MouseController : MonoBehaviour
                             characterSheetHealthbar.SetHealth(enemy.HP);
 
                             // Show enemy's attack range and movement range
-                            List<OverlayTileBehaviour> movementRangeTiles = moveRangeFinder.GetTilesInRange(enemy.activeTile, enemy.enemyScriptable.movementRange);
-                            foreach (var tile in movementRangeTiles)
+                            if (enemy.enemyScriptable.movementRange > enemy.enemyScriptable.attackRange)
                             {
-                                tile.ShowEnemyMoveTile();
+                                List<OverlayTileBehaviour> movementRangeTiles = moveRangeFinder.GetTilesInRange(enemy.activeTile, enemy.enemyScriptable.movementRange);
+                                foreach (var tile in movementRangeTiles)
+                                {
+                                    tile.ShowEnemyMoveTile();
+                                }
+                                List<OverlayTileBehaviour> tilesInRange = moveRangeFinder.GetTilesInAttackRange(enemy.activeTile, enemy.enemyScriptable.attackRange);
+                                foreach (var tile in tilesInRange)
+                                {
+                                    tile.ShowAttackTile();
+                                }
                             }
-                            List<OverlayTileBehaviour> tilesInRange = moveRangeFinder.GetTilesInAttackRange(enemy.activeTile, enemy.enemyScriptable.attackRange);
-                            foreach (var tile in tilesInRange)
+                            else
                             {
-                                tile.ShowAttackTile();
+                                List<OverlayTileBehaviour> tilesInRange = moveRangeFinder.GetTilesInAttackRange(enemy.activeTile, enemy.enemyScriptable.attackRange);
+                                foreach (var tile in tilesInRange)
+                                {
+                                    tile.ShowAttackTile();
+                                }
+                                List<OverlayTileBehaviour> movementRangeTiles = moveRangeFinder.GetTilesInRange(enemy.activeTile, enemy.enemyScriptable.movementRange);
+                                foreach (var tile in movementRangeTiles)
+                                {
+                                    tile.ShowEnemyMoveTile();
+                                }
                             }
 
                             if (attackSelected)
