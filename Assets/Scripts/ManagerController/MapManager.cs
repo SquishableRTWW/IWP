@@ -493,6 +493,17 @@ public class MapManager : MonoBehaviour
         }
         return null;
     }
+    public CharacterBehaviour GetCharacterAt(OverlayTileBehaviour tile)
+    {
+        foreach (var enemy in playerCharacters)
+        {
+            if (enemy.grid2DLocation == tile.grid2DLocation)
+            {
+                return enemy;
+            }
+        }
+        return null;
+    }
 
     public void HideAllTiles()
     {

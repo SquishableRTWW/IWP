@@ -10383,6 +10383,7 @@ MonoBehaviour:
   - {fileID: 662111912407306559, guid: 3d81ed8f245b5f241afba6bc1f40d5a4, type: 3}
   playerCharacters:
   - {fileID: 662111912407306559, guid: c28e9839759f3bb4387b5323455173d3, type: 3}
+  - {fileID: 662111912407306559, guid: c28e9839759f3bb4387b5323455173d3, type: 3}
   enemyList: []
   entitiesInGame:
   - {fileID: 7767747726170646441, guid: 14d35223914a55a4dbd3df1b14bf976e, type: 3}
@@ -12456,6 +12457,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 64
+  attackJustSelected: 0
 --- !u!212 &1946225444
 SpriteRenderer:
   m_ObjectHideFlags: 0
