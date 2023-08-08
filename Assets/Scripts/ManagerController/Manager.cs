@@ -284,7 +284,7 @@ public class Manager : MonoBehaviour
                 {
                     while (path.Count > 0 && MapManager.Instance.enemyList[i].shouldAttack == false)
                     {
-                        SoundManager.Instance.PlaySound(SoundManager.Sound.CharacterMove2);
+                        SoundManager.Instance.PlaySound(SoundManager.Sound.CharacterMove1);
                         OverlayTileBehaviour nextTile = path[0];
                         MoveAlongEnemyPath(enemy, nextTile);
                         yield return new WaitUntil(() => Vector2.Distance(enemy.transform.position, nextTile.transform.position) <= 0.0f);
