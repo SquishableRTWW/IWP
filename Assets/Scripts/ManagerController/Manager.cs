@@ -686,7 +686,7 @@ public class Manager : MonoBehaviour
             case 14:
                 nextTutorial.transform.SetParent(combatCanvas.transform);
                 nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(-465f, -500f, 0f);
-                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "Attacks cost COMMAND POINTS (CP), shown on the TOP of your screen in yellow bars. You start with 2 and they replenish each turn.";
+                nextTutorial.GetComponentInChildren<TextMeshProUGUI>().text = "Attacks cost COMMAND POINTS (CP), shown on the TOP of your screen in yellow bars, notice the bars that flash are the ones that you will consume. You start with 2 and they replenish each turn.";
                 break;
             case 15:
                 nextTutorial.transform.SetParent(combatCanvas.transform);
