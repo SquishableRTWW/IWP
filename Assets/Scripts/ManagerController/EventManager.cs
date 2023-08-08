@@ -172,25 +172,25 @@ public class EventManager : MonoBehaviour
             case eventNo.AddSmallFuel:
                 leftEvent.eventName = "AddSmallFuel";
                 leftEvent.eventType = "Add fuel";
-                leftEvent.eventMessage = "We spotted a few cans of fuel left by the enemy. They could slightly increase our fuel pool.";
+                leftEvent.eventMessage = "FUEL BARRELS SPOTTED.\n Add 10 to your total fuel permanently.";
                 leftEvent.amount = 10;
                 break;
             case eventNo.AddMediumFuel:
                 leftEvent.eventName = "AddMediumFuel";
                 leftEvent.eventType = "Add fuel";
-                leftEvent.eventMessage = "We found a gas station to the North of the battlefield. Could hold a lot of fuel...";
+                leftEvent.eventMessage = "GAS STATION SPOTTED.\n Add 20 to your total fuel permanently.";
                 leftEvent.amount = 20;
                 break;
             case eventNo.AddCP:
                 leftEvent.eventName = "AddCP";
                 leftEvent.eventType = "Add cp";
-                leftEvent.eventMessage = "We found some comms equipment that could be salvaged. This could allow you to give us more commands.";
+                leftEvent.eventMessage = "ABANDONED COMMS.\n Increase your Max command points by 1.";
                 leftEvent.amount = 1;
                 break;
             case eventNo.AddWeapon:
                 leftEvent.eventName = "AddWeapon";
                 leftEvent.eventType = "Add item";
-                leftEvent.eventMessage = "The team thinks some of the enemy's weapons can be reused, we could use more guns.";
+                leftEvent.eventMessage = "WEAPON CRATE.\n Add 1 weapon to your inventory.";
                 leftEvent.itemsToAdd = new List<GameObject>();
                 // Choose random weapon;
                 int randomItem = UnityEngine.Random.Range(0, PrepPhaseManager.Instance.weaponsInGame.Count);
@@ -199,7 +199,7 @@ public class EventManager : MonoBehaviour
             case eventNo.AddEquipment:
                 leftEvent.eventName = "AddEquipment";
                 leftEvent.eventType = "Add item";
-                leftEvent.eventMessage = "The enemy has some useful equipment that we could utilise in future skirmishes...";
+                leftEvent.eventMessage = "EQUIPMENT CRATE.\n Add 1 equipment to your inventory.";
                 leftEvent.itemsToAdd = new List<GameObject>();
                 // Choose random weapon;
                 randomItem = UnityEngine.Random.Range(0, PrepPhaseManager.Instance.equipmentInGame.Count);
@@ -208,7 +208,7 @@ public class EventManager : MonoBehaviour
             case eventNo.AddSupplyDrop:
                 leftEvent.eventName = "AddSupplyDrop";
                 leftEvent.eventType = "Add item";
-                leftEvent.eventMessage = "Theres an enemy supply drop further from the battlefield. Could hold multiple useful items";
+                leftEvent.eventMessage = "SUPPLY DROP.\n Add 1-3 weapons/equipment to your inventory at random.";
                 leftEvent.itemsToAdd = new List<GameObject>();
                 // Choose random weapon;
                 int itemCount = UnityEngine.Random.Range(1, 4);
@@ -221,13 +221,13 @@ public class EventManager : MonoBehaviour
             case eventNo.Add2CP:
                 leftEvent.eventName = "Add2CP";
                 leftEvent.eventType = "Add cp";
-                leftEvent.eventMessage = "We found some comms equipment in mint condition. This could allow you to give us many more commands.";
+                leftEvent.eventMessage = "SALVAGABLE SATELLITE.\n Increase your Max command points by 2.";
                 leftEvent.amount = 2;
                 break;
             case eventNo.AddCharacter:
                 leftEvent.eventName = "AddCharacter";
                 leftEvent.eventType = "Add character";
-                leftEvent.eventMessage = "Theres an emergency smoke signal in the distance. Could be a survivor and a salvagable mech to use.";
+                leftEvent.eventMessage = "EMERGENCY SMOKE SIGNAL.\n Add a random mech to your squad.";
                 int randomChar = UnityEngine.Random.Range(0, MapManager.Instance.characterList.Count);
                 leftEvent.characterToAdd = MapManager.Instance.characterList[randomChar];
                 break;
@@ -240,25 +240,25 @@ public class EventManager : MonoBehaviour
             case eventNo.AddSmallFuel:
                 rightEvent.eventName = "AddSmallFuel";
                 rightEvent.eventType = "Add fuel";
-                rightEvent.eventMessage = "We spotted a few cans of fuel left by the enemy. They could slightly increase our fuel pool.";
+                rightEvent.eventMessage = "FUEL BARRELS SPOTTED.\n Add 10 to your total fuel permanently.";
                 rightEvent.amount = 10;
                 break;
             case eventNo.AddMediumFuel:
                 rightEvent.eventName = "AddMediumFuel";
                 rightEvent.eventType = "Add fuel";
-                rightEvent.eventMessage = "We found a gas station to the North of the battlefield. Could hold a lot of fuel...";
+                rightEvent.eventMessage = "GAS STATION SPOTTED.\n Add 20 to your total fuel permanently.";
                 rightEvent.amount = 20;
                 break;
             case eventNo.AddCP:
                 rightEvent.eventName = "AddCP";
                 rightEvent.eventType = "Add cp";
-                rightEvent.eventMessage = "We found some comms equipment that could be salvaged. This could allow you to give us more commands.";
+                rightEvent.eventMessage = "ABANDONED COMMS.\n Increase your Max command points by 1.";
                 rightEvent.amount = 1;
                 break;
             case eventNo.AddWeapon:
                 rightEvent.eventName = "AddWeapon";
                 rightEvent.eventType = "Add item";
-                rightEvent.eventMessage = "The team thinks some of the enemy's weapons can be reused, we could use more guns.";
+                rightEvent.eventMessage = "WEAPON CRATE.\n Add 1 weapon to your inventory.";
                 rightEvent.itemsToAdd = new List<GameObject>();
                 // Choose random weapon;
                 int randomItem = UnityEngine.Random.Range(0, PrepPhaseManager.Instance.weaponsInGame.Count);
@@ -267,7 +267,7 @@ public class EventManager : MonoBehaviour
             case eventNo.AddEquipment:
                 rightEvent.eventName = "AddEquipment";
                 rightEvent.eventType = "Add item";
-                rightEvent.eventMessage = "The enemy has some useful equipment that we could utilise in future skirmishes...";
+                rightEvent.eventMessage = "EQUIPMENT CRATE.\n Add 1 equipment to your inventory.";
                 rightEvent.itemsToAdd = new List<GameObject>();
                 // Choose random weapon;
                 randomItem = UnityEngine.Random.Range(0, PrepPhaseManager.Instance.equipmentInGame.Count);
@@ -276,7 +276,7 @@ public class EventManager : MonoBehaviour
             case eventNo.AddSupplyDrop:
                 rightEvent.eventName = "AddSupplyDrop";
                 rightEvent.eventType = "Add item";
-                rightEvent.eventMessage = "Theres an enemy supply drop further from the battlefield. Could hold multiple useful items";
+                rightEvent.eventMessage = "SUPPLY DROP.\n Add 1-3 weapons/equipment to your inventory at random.";
                 rightEvent.itemsToAdd = new List<GameObject>();
                 // Choose random weapon;
                 int itemCount = UnityEngine.Random.Range(1, 4);
@@ -289,13 +289,13 @@ public class EventManager : MonoBehaviour
             case eventNo.Add2CP:
                 rightEvent.eventName = "Add2CP";
                 rightEvent.eventType = "Add cp";
-                rightEvent.eventMessage = "We found some comms equipment in mint condition. This could allow you to give us many more commands.";
+                rightEvent.eventMessage = "SALVAGABLE SATELLITE.\n Increase your Max command points by 2.";
                 rightEvent.amount = 2;
                 break;
             case eventNo.AddCharacter:
                 rightEvent.eventName = "AddCharacter";
                 rightEvent.eventType = "Add character";
-                rightEvent.eventMessage = "Theres an emergency smoke signal in the distance. Could be a survivor and a salvagable mech to use.";
+                rightEvent.eventMessage = "EMERGENCY SMOKE SIGNAL.\n Add a random mech to your squad.";
                 int randomChar = UnityEngine.Random.Range(0, MapManager.Instance.characterList.Count);
                 rightEvent.characterToAdd = MapManager.Instance.characterList[randomChar];
                 break;
