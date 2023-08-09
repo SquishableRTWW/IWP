@@ -128,7 +128,7 @@ public class Manager : MonoBehaviour
             }
 
             // Adding more difficult enemy on tier 2
-            if (MapManager.Instance.levelTier >= 2)
+            if (MapManager.Instance.level >= 2)
             {
                 MapManager.Instance.possibleEnemies.Add(MapManager.Instance.enemies[2]);
             }
